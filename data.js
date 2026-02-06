@@ -4,15 +4,15 @@
 const chinhKhoa = [
     { 
         id: 'tk10', title: 'Tin học 10', icon: 'monitor', color: 'blue', dataPath: 'tin10.js',
-        description: 'Chương trình tin học lớp 10 theo bộ sách mới, trọng tâm về tư duy máy tính và lập trình cơ bản.'
+        description: 'Chương trình tin học lớp 10 (Chân trời sáng tạo), trọng tâm kiến thức về tư duy máy tính và lập trình cơ bản.'
     },
     { 
         id: 'tk11', title: 'Tin học 11', icon: 'server', color: 'blue', dataPath: 'tin11.js',
-        description: 'Kiến thức về hệ điều hành, mạng máy tính và cơ sở dữ liệu cho học sinh khối 11.'
+        description: 'Chương trình tin học lớp 11 (Chân trời sáng tạo). trọng tâm kiến thức về hệ điều hành, mạng máy tính và cơ sở dữ liệu.'
     },
     { 
         id: 'tk12', title: 'Tin học 12', icon: 'globe', color: 'blue', dataPath: 'tin12.js',
-        description: 'Ứng dụng tin học trong định hướng nghề nghiệp và các công nghệ hiện đại.'
+        description: 'Chương trình tin học lớp 12 (Chân trời sáng tạo). Trọng tâm kiến thức về ứng dụng tin học trong định hướng nghề nghiệp và các công nghệ hiện đại.'
     }
 ];
 
@@ -56,3 +56,4 @@ window.courses = {
     chuyenDe: chuyenDe,
     khac: khac
 };
+
