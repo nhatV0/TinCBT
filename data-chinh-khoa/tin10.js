@@ -1,5 +1,5 @@
-// FILE DỮ LIỆU BÀI HỌC TIN HỌC 10 (Cập nhật đường dẫn tài liệu mẫu)
-// Cấu trúc: window.courseContent là biến bắt buộc để index.html có thể đọc được dữ liệu.
+// FILE DỮ LIỆU BÀI HỌC TIN HỌC 10 (Phiên bản hỗ trợ nhiều hoạt động)
+// Thầy có thể thêm mục 'activities' vào bất kỳ bài học nào để hiển thị chi tiết phần thực hành/ghi chú.
 
 window.courseContent = [
     {
@@ -7,25 +7,20 @@ window.courseContent = [
         lessons: [
             { 
                 title: "Bài 1: Thông tin và dữ liệu", 
-                videoId: "", 
+                videoId: "dQw4w9WgXcQ", 
                 desc: "Khái niệm thông tin, dữ liệu và các bước xử lý thông tin.", 
-                downloadUrl: "documents/tin10/Bai1_TaiLieu.pdf" // Ví dụ dẫn vào folder tài liệu
+                downloadUrl: "documents/tin10/Bai1_TaiLieu.pdf",
+                // PHẦN MỞ RỘNG: Thầy có thể thêm các hoạt động vào đây
+                activities: [
+                    { type: "Lý thuyết", content: "Học sinh nắm vững định nghĩa về thông tin, thực thể và dữ liệu số." },
+                    { type: "Thảo luận", content: "Tại sao nói dữ liệu là tài sản quý giá nhất trong kỷ nguyên số?" },
+                    { type: "Thực hành", content: "Quan sát các thiết bị xung quanh và phân loại đâu là thông tin, đâu là dữ liệu." }
+                ]
             },
-            { 
-                title: "Bài 2: Vai trò của thiết bị thông minh và tin học đối với xã hội", 
-                videoId: "", 
-                desc: "Phân loại thiết bị thông minh và tầm ảnh hưởng của tin học.", 
-                downloadUrl: "documents/tin10/Bai2_TaiLieu.pdf" 
-            },
-            { 
-                title: "Bài 3: Một số hướng nghiệp trong ngành Công nghệ thông tin", 
-                videoId: "", 
-                desc: "Tìm hiểu các vị trí việc làm và cơ hội nghề nghiệp trong ngành IT.", 
-                downloadUrl: "documents/tin10/Bai3_TaiLieu.pdf" 
-            }
+            { title: "Bài 2: Vai trò của thiết bị thông minh và tin học đối với xã hội", videoId: "", desc: "Phân loại thiết bị thông minh và tầm ảnh hưởng của tin học.", downloadUrl: "documents/tin10/Bai2_TaiLieu.pdf" },
+            { title: "Bài 3: Một số hướng nghiệp trong ngành Công nghệ thông tin", videoId: "", desc: "Tìm hiểu các vị trí việc làm và cơ hội nghề nghiệp trong ngành IT.", downloadUrl: "documents/tin10/Bai3_TaiLieu.pdf" }
         ]
     },
-    // ... các bài khác giữ nguyên cấu trúc
     {
         chapterName: "Chủ đề 2: Mạng máy tính và Internet",
         lessons: [
@@ -47,7 +42,18 @@ window.courseContent = [
     {
         chapterName: "Chủ đề 4: Thiết kế đồ họa trực quan",
         lessons: [
-            { title: "Bài 12: Phần mềm thiết kế đồ họa", videoId: "", desc: "Làm quen với giao diện và công cụ đồ họa vector.", downloadUrl: "#" },
+            { 
+                title: "Bài 12: Phần mềm thiết kế đồ họa", 
+                videoId: "", 
+                desc: "Làm quen với giao diện và công cụ đồ họa vector.", 
+                downloadUrl: "#",
+                activities: [
+                    { type: "Chuẩn bị", content: "Cài đặt phần mềm Inkscape hoặc Adobe Illustrator." },
+                    { type: "Thực hành 1", content: "Sử dụng công cụ Rectangle Tool để vẽ các hình khối cơ bản." },
+                    { type: "Thực hành 2", content: "Thực hiện tô màu và căn chỉnh (Align) các đối tượng đã vẽ." },
+                    { type: "Bài tập", content: "Thiết kế logo hình vuông đơn giản có chữ cái tên của em." }
+                ]
+            },
             { title: "Bài 13: Bổ sung các đối tượng đồ họa", videoId: "", desc: "Cách tạo và quản lý các hình khối cơ bản.", downloadUrl: "#" },
             { title: "Bài 14: Làm việc với đối tượng đường và văn bản", videoId: "", desc: "Kỹ thuật vẽ đường cong và chèn văn bản nghệ thuật.", downloadUrl: "#" },
             { title: "Bài 15: Hoàn thiện hình ảnh đồ họa", videoId: "", desc: "Xuất bản và tối ưu hóa file đồ họa.", downloadUrl: "#" }
