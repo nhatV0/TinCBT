@@ -1,85 +1,81 @@
-// FILE NÀY QUẢN LÝ ĐƯỜNG DẪN ĐẾN CÁC THƯ MỤC CON
-
-const chinhKhoa = [
-    { 
-        id: 'tk10', title: 'Tin học 10', icon: 'monitor', color: 'blue', 
-        dataPath: 'data-chinh-khoa/tin10.js', // Thêm tên folder vào trước
-        description: 'Chương trình tin học lớp 10 theo bộ sách mới, trọng tâm về tư duy máy tính và lập trình cơ bản.'
-    },
-    { 
-        id: 'tk11', title: 'Tin học 11', icon: 'server', color: 'blue', 
-        dataPath: 'data-chinh-khoa/tin11.js',
-        description: 'Kiến thức về hệ điều hành, mạng máy tính và cơ sở dữ liệu cho học sinh khối 11.'
-    },
-    { 
-        id: 'tk12', title: 'Tin học 12', icon: 'globe', color: 'blue', 
-        dataPath: 'data-chinh-khoa/tin12.js',
-        description: 'Ứng dụng tin học trong định hướng nghề nghiệp và các công nghệ hiện đại.'
-    }
-];
-
-const chuyenTin = [
-    { 
-        id: 'cp10', title: 'Giải thuật C++ (Lớp 10)', icon: 'terminal', color: 'purple', 
-        dataPath: 'data-chuyen-tin/cpp10.js',
-        description: 'Nền tảng lập trình C++, các thuật toán cơ bản, kỹ thuật đệ quy và quy hoạch động cơ bản.'
-    },
-    { 
-        id: 'cp11', title: 'Cấu trúc dữ liệu và đồ thị (Lớp 11)', icon: 'share-2', color: 'purple', 
-        dataPath: 'data-chuyen-tin/ctdl.js',
-        description: 'Đi sâu vào danh sách liên kết, cây, ngăn xếp, hàng đợi và các thuật toán đồ thị nâng cao.'
-    },
-    { 
-        id: 'cp12', title: 'Khoa học máy tính và AI (Lớp 12)', icon: 'brain-circuit', color: 'purple', 
-        dataPath: 'data-chuyen-tin/ai12.js',
-        description: 'Giới thiệu về trí tuệ nhân tạo, học máy và các mô hình tính toán hiện đại.'
-    }
-];
-
-const chuyenDe = [
-    { 
-        id: 'cd1', title: 'Tin học văn phòng', icon: 'file-text', color: 'emerald', 
-        dataPath: 'data-chuyen-de/office.js',
-        description: 'Thành thạo Word, Excel, PowerPoint theo tiêu chuẩn quốc tế MOS.'
-    },
-    { 
-        id: 'cd2', title: 'Thiết kế & Chỉnh sửa đồ họa', icon: 'palette', color: 'emerald', 
-        dataPath: 'data-chuyen-de/design.js',
-        description: 'Kỹ năng sử dụng Photoshop, Illustrator và tư duy thẩm mỹ trong thiết kế.'
-    },
-    { 
-        id: 'cd3', title: 'Quản trị dự án & Máy tính', icon: 'settings', color: 'emerald', 
-        dataPath: 'data-chuyen-de/admin.js',
-        description: 'Kỹ năng quản lý dự án công nghệ, lắp ráp và tối ưu hóa hệ thống máy tính.'
-    }
-];
-
-const khac = [];
-
-window.courses = {
-    chinhKhoa: chinhKhoa,
-    chuyenTin: chuyenTin,
-    chuyenDe: chuyenDe,
-    khac: khac
-};
-// Thông tin giáo viên
+// 1. THÔNG TIN GIÁO VIÊN
+// Thầy thay đổi thông tin cá nhân ở đây để cập nhật toàn hệ thống
 window.teacherInfo = {
-    name: "Tên Của Thầy Ở Đây",
+    name: "Thầy Võ Minh Nhật",
     role: "Giáo viên Tin học - THPT Chuyên Bến Tre",
-    phone: "090x.xxx.xxx",
-    email: "thay@email.com",
-    facebook: "https://facebook.com/duong-dan-cua-thay",
-    zalo: "https://zalo.me/so-dien-thoai",
-    avatar: "https://cdn-icons-png.flaticon.com/512/1995/1995515.png" // Hoặc link ảnh của thầy
+    phone: "094.454.0402",
+    email: "vominhnhat080402@gmail.com",
+    facebook: "https://www.facebook.com/nhat.vo.5030927",
+    zalo: "https://zalo.me/09044540402",
+    avatar: "https://cdn-icons-png.flaticon.com/512/1995/1995515.png" // Thay link ảnh chân dung của thầy tại đây
 };
 
-// Danh sách khóa học (Giữ nguyên phần cũ của thầy, chỉ cần đảm bảo có window.courses)
+// 2. DANH MỤC KHÓA HỌC (Dashboard)
+// Mỗi nhóm (key) tương ứng với một khu vực trên trang chủ. 
+// Nếu nhóm nào không có dữ liệu (mảng rỗng []), khu vực đó sẽ tự ẩn đi.
 window.courses = {
+    // Nhóm 1: Chương trình Chính khóa
     chinhKhoa: [
-        { id: 'tin10', title: 'Tin học 10', icon: 'monitor', dataPath: 'data-chinh-khoa/tin10.js', description: 'Chương trình tin học 10 mới - Kết nối tri thức.' },
-        // ... các khóa học khác
+        { 
+            id: 'tin10', 
+            title: 'Tin học 10', 
+            icon: 'monitor', 
+            dataPath: 'data-chinh-khoa/tin10.js', 
+            description: 'Chương trình Tin học 10 - Bộ sách Kết nối tri thức với cuộc sống.' 
+        },
+        { 
+            id: 'tin11', 
+            title: 'Tin học 11', 
+            icon: 'database', 
+            dataPath: 'data-chinh-khoa/tin11.js', 
+            description: 'Chương trình Tin học 11 - Bộ sách Kết nối tri thức với cuộc sống.' 
+        },
+        { 
+            id: 'tin12', 
+            title: 'Tin học 12', 
+            icon: 'network', 
+            dataPath: 'data-chinh-khoa/tin12.js', 
+            description: 'Chương trình Tin học 12 - Bộ sách Kết nối tri thức với cuộc sống.' 
+        }
     ],
-    chuyenTin: [],
-    chuyenDe: [],
-    khac: []
+
+    // Nhóm 2: Lớp Chuyên Tin 
+    chuyenTin: [
+        { 
+            id: 'cpp-basic', 
+            title: 'Giải thuật C++', 
+            icon: 'terminal', 
+            dataPath: 'data-chuyen-tin/cpp_basic.js', 
+            description: ' chưa có mục tiêu.' 
+        },
+        { 
+            id: 'dsa', 
+            title: 'Cấu trúc dữ liệu & Giải thuật', 
+            icon: 'binary', 
+            dataPath: 'data-chuyen-tin/dsa.js', 
+            description: 'chưa có mục tiêu.' 
+        }
+    ],
+
+    // Nhóm 3: Chuyên đề tự chọn
+    chuyenDe: [
+        { 
+            id: 'web-design', 
+            title: 'Thiết kế Website', 
+            icon: 'layout', 
+            dataPath: 'data-chuyen-de/web.js', 
+            description: 'Hướng dẫn xây dựng website cá nhân với HTML, CSS và JavaScript.' 
+        }
+    ],
+
+    // Nhóm 4: Các nội dung khác (Hướng nghiệp, CLB...)
+    khac: [
+        { 
+            id: 'office-tips', 
+            title: 'Thủ thuật Tin học', 
+            icon: 'mouse-pointer-2', 
+            dataPath: 'data-khac/tips.js', 
+            description: 'Các mẹo hay giúp xử lý công việc văn phòng nhanh chóng và hiệu quả.' 
+        }
+    ]
 };
