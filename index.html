@@ -318,35 +318,34 @@
         }
 
         function playLesson(cIndex, lIndex) {
-            const lesson = activeCourse.content[cIndex].lessons[lIndex];
-            document.getElementById('main-video').src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0`;
-            document.getElementById('current-lesson-title').innerText = lesson.title;
-            document.getElementById('current-lesson-desc').innerText = lesson.desc;
-            
-            const dz = document.getElementById('download-zone');
-            dz.innerHTML = lesson.downloadUrl && lesson.downloadUrl !== "#" ? 
-                `<a href="${lesson.downloadUrl}" target="_blank" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg hover:bg-blue-700 transition-all flex items-center gap-2 italic">
-                    <i data-lucide="download" class="w-4 h-4"></i> Tải tài liệu
-                </a>` : '';
-            
-            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('lesson-active'));
-            const activeEl = document.getElementById(`l-${cIndex}-${lIndex}`);
-            if(activeEl) activeEl.classList.add('lesson-active');
-            
-            lucide.createIcons();
-            
-            let total = 0, current = 0, passed = false;
-            activeCourse.content.forEach((c, ci) => {
-                c.lessons.forEach((l, li) => {
-                    total++;
-                    if(!passed) { 
-                        current++; 
-                        if(ci === cIndex && li === lIndex) passed = true; 
-                    }
-                });
-            });
-            document.getElementById('progress-bar').style.width = Math.round((current/total)*100) + '%';
-        }
+    const lesson = activeCourse.content[cIndex].lessons[lIndex];
+    document.getElementById('main-video').src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0`;
+    document.getElementById('current-lesson-title').innerText = lesson.title;
+    
+    // Hiển thị Mô tả & Hoạt động
+    let descHtml = `<p class="mb-4">${lesson.desc}</p>`;
+    
+    if(lesson.activities && lesson.activities.length > 0) {
+        descHtml += `<div class="mt-6 space-y-4">`;
+        lesson.activities.forEach(act => {
+            descHtml += `
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                    <span class="block text-xs font-bold text-blue-600 uppercase mb-1">${act.type}</span>
+                    <div class="text-slate-700 font-medium">${act.content}</div>
+                </div>`;
+        });
+        descHtml += `</div>`;
+    }
+    
+    document.getElementById('current-lesson-desc').innerHTML = descHtml;
+    
+    // ... (phần code downloadUrl và tiến độ giữ nguyên như cũ)
+}
+
+**Lợi ích của cách làm này:**
+1.  **Tính thẩm mỹ**: Phần thực hành sẽ được đóng khung màu xanh nhạt nhìn rất chuyên nghiệp và dễ phân biệt với lý thuyết.
+2.  **Linh hoạt**: Nếu bài nào không có thực hành, thầy chỉ cần bỏ mục `activities` đi, nó sẽ chỉ hiện phần mô tả `desc` như bình thường.
+3.  **Dễ mở rộng**: Thầy có thể ghi đề bài thực hành trực tiếp vào file `.js` mà không sợ giao diện bị rối.
 
         function toggleSidebar() { 
             document.getElementById('sidebar').classList.toggle('-translate-x-full'); 
