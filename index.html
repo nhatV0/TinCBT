@@ -6,18 +6,19 @@
     <title>Hệ thống học tập - THPT Chuyên Bến Tre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Nạp file trạm trung chuyển dữ liệu -->
     <script src="data.js"></script>
     
     <style>
         :root { 
             --primary: #2563eb; 
             --bg-page: #f8fafc; 
-            --radius: 20px; 
+            --radius: 24px; 
         }
         
         body { 
             background-color: var(--bg-page); 
-            /* Cập nhật Font chữ Comic Sans MS theo yêu cầu của thầy */
+            /* Font chữ yêu thích của thầy */
             font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif; 
             scroll-behavior: smooth;
         }
@@ -67,7 +68,7 @@
         }
         
         .course-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
         }
 
         .course-card:hover .course-desc { opacity: 1; transform: translateY(0); pointer-events: auto; }
@@ -116,24 +117,26 @@
             border-left-width: 6px;
             transition: transform 0.2s ease;
         }
-        .activity-card:hover {
-            transform: translateX(5px);
+        
+        footer {
+            background: linear-gradient(to right, #0f172a, #1e293b);
+            color: white;
         }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden text-slate-800">
-    <!-- Loader -->
+    <!-- Loader hiển thị khi nạp dữ liệu -->
     <div id="loader" class="hidden loading-overlay">
         <div class="flex flex-col items-center gap-4">
             <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
-            <span class="text-lg font-bold text-blue-600 animate-pulse">Đang nạp bài giảng...</span>
+            <span class="text-lg font-bold text-blue-600 animate-pulse uppercase">Đang tải học liệu...</span>
         </div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Thanh điều hướng (Header) -->
     <nav class="h-20 bg-white border-b flex items-center justify-between px-8 shrink-0 z-20 shadow-sm">
         <div class="flex items-center gap-4 cursor-pointer" onclick="showDashboard()">
-            <img src="logo-truong.png" alt="Logo" class="school-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2830/2830312.png'">
+            <img src="BenTreHighSchool.jpg" alt="Logo" class="school-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2830/2830312.png'">
             <div class="flex flex-col">
                 <span class="font-black text-xl md:text-2xl uppercase text-slate-900 leading-none">THPT CHUYÊN</span>
                 <span class="font-bold text-blue-600 text-lg leading-none">BẾN TRE</span>
@@ -141,26 +144,49 @@
         </div>
         <div id="nav-info" class="hidden md:flex items-center gap-4">
             <button onclick="showDashboard()" class="px-6 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-full transition-all font-bold shadow-md hover:shadow-lg flex items-center gap-2">
-                <i data-lucide="home" class="w-4 h-4"></i> Trang chủ
+                <i data-lucide="home" class="w-4 h-4"></i> Quay về Trang chủ
             </button>
         </div>
     </nav>
 
-    <!-- Main Content (Dashboard) -->
+    <!-- Màn hình Dashboard (Trang chính) -->
     <div id="dashboard" class="flex-1 overflow-y-auto">
         <div class="max-w-7xl mx-auto p-8 md:p-16">
             <header class="mb-20 text-center">
                 <h1 class="text-7xl md:text-9xl font-black text-slate-900 mb-4 tracking-tighter italic drop-shadow-sm">TIN HỌC</h1>
                 <div class="inline-flex items-center gap-3 px-8 py-3 bg-slate-900 text-white rounded-full text-sm font-bold uppercase tracking-widest shadow-2xl">
                     <span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span>
-                    Hệ thống học liệu số 4.0
+                    Học liệu số trực tuyến
                 </div>
             </header>
+            
             <div id="dashboard-content" class="space-y-16"></div>
         </div>
+
+        <!-- Thông tin giáo viên (Footer) -->
+        <footer class="mt-20 py-16 px-8 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="flex items-center gap-6">
+                    <img id="t-avatar" src="" class="w-24 h-24 rounded-full border-4 border-white shadow-xl bg-slate-100 object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1995/1995515.png'">
+                    <div>
+                        <h3 id="t-name" class="text-2xl font-black mb-1 italic">Giáo viên</h3>
+                        <p id="t-role" class="text-slate-400 font-bold text-sm uppercase tracking-wider mb-4">Tổ Tin học</p>
+                        <div class="flex gap-4">
+                            <a id="t-fb" href="#" target="_blank" class="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                            <a id="t-zalo" href="#" target="_blank" class="p-2 bg-sky-500 hover:bg-sky-400 rounded-lg transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a>
+                            <a id="t-mail" href="#" class="p-2 bg-rose-500 hover:bg-rose-400 rounded-lg transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right text-slate-400 text-sm">
+                    <p class="font-bold mb-2">© 2026 THPT Chuyên Bến Tre</p>
+                    <p>Môi trường học tập tích cực - Sáng tạo - Kỷ nguyên số.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Learning Screen -->
+    <!-- Màn hình học tập (Learning Screen) -->
     <div id="learning-screen" class="hidden flex flex-1 overflow-hidden">
         <aside class="w-full md:w-80 lg:w-96 bg-white border-r flex flex-col shrink-0 z-10 shadow-xl">
             <div class="p-6 border-b bg-slate-50 flex items-center justify-between">
@@ -172,20 +198,34 @@
                     <i data-lucide="log-out" class="w-5 h-5"></i>
                 </button>
             </div>
-            <div class="overflow-y-auto flex-1 pb-24" id="playlist-container"></div>
+            
+            <!-- Danh sách bài học -->
+            <div class="overflow-y-auto flex-1 pb-10" id="playlist-container"></div>
+            
+            <!-- Thông tin giáo viên nhỏ dưới Sidebar -->
+            <div class="p-4 bg-slate-50 border-t flex items-center gap-3">
+                <img id="t-avatar-small" src="" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1995/1995515.png'">
+                <div class="text-[11px]">
+                    <p class="font-black text-slate-800 uppercase leading-none mb-1" id="t-name-small">GV. Tên Thầy</p>
+                    <p class="text-slate-500 font-bold" id="t-mail-small">Email hỗ trợ</p>
+                </div>
+            </div>
         </aside>
         
         <main class="flex-1 overflow-y-auto bg-[#f1f5f9] p-4 md:p-10">
             <div class="max-w-5xl mx-auto">
+                <!-- Vùng Video -->
                 <div class="video-container mb-10">
                     <iframe id="main-video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
                 
+                <!-- Vùng Nội dung bài học -->
                 <div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-slate-200">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 pb-8 border-b border-slate-100">
-                        <h1 id="current-lesson-title" class="text-3xl font-black text-slate-900 tracking-tight">Tiêu đề bài học</h1>
+                        <h1 id="current-lesson-title" class="text-3xl font-black text-slate-900 tracking-tight leading-tight">Tiêu đề bài học</h1>
                         <div id="download-zone"></div>
                     </div>
+                    <!-- Mô tả và các hoạt động chi tiết -->
                     <div id="current-lesson-desc" class="text-slate-700 text-lg leading-relaxed"></div>
                 </div>
             </div>
@@ -195,7 +235,25 @@
     <script>
         let activeCourse = null;
 
+        // Tự động nạp thông tin giáo viên từ data.js
+        function syncTeacherInfo() {
+            if(!window.teacherInfo) return;
+            const t = window.teacherInfo;
+            // Cập nhật Footer
+            document.getElementById('t-name').innerText = t.name;
+            document.getElementById('t-role').innerText = t.role;
+            document.getElementById('t-fb').href = t.facebook;
+            document.getElementById('t-zalo').href = t.zalo;
+            document.getElementById('t-mail').href = `mailto:${t.email}`;
+            document.getElementById('t-avatar').src = t.avatar;
+            // Cập nhật Sidebar khi học
+            document.getElementById('t-name-small').innerText = "GV. " + t.name;
+            document.getElementById('t-mail-small').innerText = t.email;
+            document.getElementById('t-avatar-small').src = t.avatar;
+        }
+
         function renderDashboard() {
+            syncTeacherInfo();
             const container = document.getElementById('dashboard-content');
             if(!window.courses) return;
             
@@ -207,26 +265,27 @@
             ];
 
             container.innerHTML = sections.map(sec => {
-                if (!window.courses[sec.key] || window.courses[sec.key].length === 0) return '';
+                const list = window.courses[sec.key];
+                if (!list || list.length === 0) return '';
                 return `
                 <section>
                     <div class="flex items-center gap-4 mb-8">
                         <div class="p-3 bg-${sec.color}-600 text-white rounded-2xl shadow-lg shadow-${sec.color}-200">
                             <i data-lucide="${sec.icon}"></i>
                         </div>
-                        <h2 class="text-2xl font-black uppercase text-slate-800 tracking-tight">${sec.label}</h2>
+                        <h2 class="text-2xl font-black uppercase text-slate-800 tracking-tight italic">${sec.label}</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${window.courses[sec.key].map(course => `
+                        ${list.map(course => `
                             <div onclick="selectCourse('${course.id}')" class="course-card bg-white p-8 border border-slate-200 hover:border-${sec.color}-400 hover:shadow-2xl cursor-pointer group">
-                                <div class="course-desc">${course.description || 'Học liệu điện tử môn Tin học.'}</div>
+                                <div class="course-desc font-bold">${course.description || 'Bấm để xem các bài giảng.'}</div>
                                 <div class="w-14 h-14 rounded-2xl bg-${sec.color}-50 text-${sec.color}-600 flex items-center justify-center mb-6 group-hover:bg-${sec.color}-600 group-hover:text-white transition-colors shadow-inner">
                                     <i data-lucide="${course.icon || 'star'}" class="w-7 h-7"></i>
                                 </div>
                                 <h3 class="font-black text-xl text-slate-900 mb-2 leading-tight">${course.title}</h3>
                                 <div class="flex items-center gap-2 text-${sec.color}-600 font-bold text-xs uppercase tracking-widest">
                                     <span>Vào học ngay</span>
-                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </div>
                             </div>
                         `).join('')}
@@ -247,11 +306,12 @@
             if (!found) return;
             document.getElementById('loader').classList.remove('hidden');
 
+            // Xóa script cũ và dữ liệu cũ
             const oldScript = document.getElementById('course-data-script');
             if(oldScript) oldScript.remove();
-
             window.courseContent = null;
 
+            // Nạp file vệ tinh (.js) tương ứng
             const script = document.createElement('script');
             script.id = 'course-data-script';
             script.src = found.dataPath + '?v=' + Date.now();
@@ -266,15 +326,15 @@
                     document.getElementById('nav-info').classList.remove('hidden');
                     document.getElementById('sidebar-course-title').innerText = activeCourse.title;
                     renderPlaylist();
-                    playLesson(0, 0);
+                    playLesson(0, 0); // Tự động mở bài đầu tiên
                 } else {
-                    alert("⚠️ Không tìm thấy dữ liệu: " + found.dataPath);
+                    alert("Lỗi: Không tìm thấy dữ liệu trong file bài giảng!");
                 }
             };
 
             script.onerror = () => {
                 document.getElementById('loader').classList.add('hidden');
-                alert("❌ Lỗi tải dữ liệu. Thầy hãy kiểm tra tên folder/file trên GitHub.");
+                alert("Lỗi: Không thể tải file " + found.dataPath);
             };
         }
 
@@ -282,11 +342,11 @@
             const container = document.getElementById('playlist-container');
             let html = '';
             activeCourse.content.forEach((chapter, cIndex) => {
-                html += `<div class="px-6 py-4 bg-slate-100 border-y text-[11px] font-black text-slate-500 uppercase tracking-[0.15em]">${chapter.chapterName}</div>`;
+                html += `<div class="px-6 py-4 bg-slate-100 border-y text-[11px] font-black text-slate-500 uppercase tracking-[0.15em] italic">${chapter.chapterName}</div>`;
                 chapter.lessons.forEach((lesson, lIndex) => {
                     html += `
                         <div onclick="playLesson(${cIndex}, ${lIndex})" id="l-${cIndex}-${lIndex}" class="flex items-center gap-4 px-6 py-5 cursor-pointer hover:bg-blue-50 border-b text-sm lesson-item transition-all group">
-                            <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-[10px] font-bold text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 ${lIndex + 1}
                             </div>
                             <span class="flex-1 font-bold text-slate-700">${lesson.title}</span>
@@ -302,6 +362,7 @@
             const lesson = activeCourse.content[cIndex].lessons[lIndex];
             const videoFrame = document.getElementById('main-video');
             
+            // Xử lý trình phát video
             if(lesson.videoId) {
                 videoFrame.src = `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0`;
                 videoFrame.parentElement.classList.remove('hidden');
@@ -312,16 +373,16 @@
 
             document.getElementById('current-lesson-title').innerText = lesson.title;
             
-            // Render Mô tả & Hoạt động với style Comic Sans và màu sắc sinh động
+            // Render Mô tả và Hoạt động (Phần thầy đã mở rộng trong các file .js)
             let contentHtml = `<p class="mb-6 font-bold text-slate-600 italic border-l-4 border-slate-200 pl-4">${lesson.desc || ''}</p>`;
             
             if(lesson.activities && lesson.activities.length > 0) {
                 contentHtml += `<div class="mt-8 space-y-6">`;
                 lesson.activities.forEach(act => {
                     contentHtml += `
-                        <div class="activity-card bg-blue-50 border-l-8 border-blue-500 p-6 rounded-r-2xl shadow-sm">
+                        <div class="activity-card bg-blue-50 border-l-8 border-blue-500 p-6 rounded-r-2xl shadow-sm hover:shadow-md transition-shadow">
                             <div class="flex items-center gap-2 mb-2">
-                                <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-blue-600 fill-blue-600"></i>
                                 <span class="text-xs font-black text-blue-600 uppercase tracking-widest">${act.type}</span>
                             </div>
                             <div class="text-slate-800 font-bold text-lg">${act.content}</div>
@@ -332,14 +393,14 @@
             
             document.getElementById('current-lesson-desc').innerHTML = contentHtml;
             
-            // Nút tải tài liệu
+            // Xử lý nút Tài liệu
             const dz = document.getElementById('download-zone');
             dz.innerHTML = (lesson.downloadUrl && lesson.downloadUrl !== "#") ? 
-                `<a href="${lesson.downloadUrl}" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-blue-600 transition-colors shadow-lg">
-                    <i data-lucide="file-down" class="w-5 h-5"></i> Tải Tài Liệu
+                `<a href="${lesson.downloadUrl}" target="_blank" class="bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-black flex items-center gap-2 hover:bg-blue-600 transition-all shadow-lg active:scale-95">
+                    <i data-lucide="download-cloud" class="w-5 h-5"></i> Tải Tài Liệu
                 </a>` : '';
             
-            // Hiệu ứng Active
+            // Highlight bài đang học
             document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('lesson-active'));
             const activeEl = document.getElementById(`l-${cIndex}-${lIndex}`);
             if(activeEl) {
@@ -355,6 +416,7 @@
             document.getElementById('learning-screen').classList.add('hidden');
             document.getElementById('nav-info').classList.add('hidden');
             document.getElementById('main-video').src = '';
+            syncTeacherInfo();
         }
 
         window.onload = renderDashboard;
