@@ -1,15 +1,31 @@
-// FILE DỮ LIỆU BÀI HỌC TIN HỌC 10 (Cập nhật đầy đủ 34 bài)
+// FILE DỮ LIỆU BÀI HỌC TIN HỌC 10 (Cập nhật đường dẫn tài liệu mẫu)
 // Cấu trúc: window.courseContent là biến bắt buộc để index.html có thể đọc được dữ liệu.
 
 window.courseContent = [
     {
         chapterName: "Chủ đề 1: Máy tính và xã hội tri thức",
         lessons: [
-            { title: "Bài 1: Thông tin và dữ liệu", videoId: "", desc: "Khái niệm thông tin, dữ liệu và các bước xử lý thông tin.", downloadUrl: "#" },
-            { title: "Bài 2: Vai trò của thiết bị thông minh và tin học đối với xã hội", videoId: "", desc: "Phân loại thiết bị thông minh và tầm ảnh hưởng của tin học.", downloadUrl: "#" },
-            { title: "Bài 3: Một số hướng nghiệp trong ngành Công nghệ thông tin", videoId: "", desc: "Tìm hiểu các vị trí việc làm và cơ hội nghề nghiệp trong ngành IT.", downloadUrl: "#" }
+            { 
+                title: "Bài 1: Thông tin và dữ liệu", 
+                videoId: "", 
+                desc: "Khái niệm thông tin, dữ liệu và các bước xử lý thông tin.", 
+                downloadUrl: "documents/tin10/Bai1_TaiLieu.pdf" // Ví dụ dẫn vào folder tài liệu
+            },
+            { 
+                title: "Bài 2: Vai trò của thiết bị thông minh và tin học đối với xã hội", 
+                videoId: "", 
+                desc: "Phân loại thiết bị thông minh và tầm ảnh hưởng của tin học.", 
+                downloadUrl: "documents/tin10/Bai2_TaiLieu.pdf" 
+            },
+            { 
+                title: "Bài 3: Một số hướng nghiệp trong ngành Công nghệ thông tin", 
+                videoId: "", 
+                desc: "Tìm hiểu các vị trí việc làm và cơ hội nghề nghiệp trong ngành IT.", 
+                downloadUrl: "documents/tin10/Bai3_TaiLieu.pdf" 
+            }
         ]
     },
+    // ... các bài khác giữ nguyên cấu trúc
     {
         chapterName: "Chủ đề 2: Mạng máy tính và Internet",
         lessons: [
@@ -42,7 +58,7 @@ window.courseContent = [
         lessons: [
             { title: "Bài 16: Ngôn ngữ lập trình bậc cao và Python", videoId: "", desc: "Giới thiệu Python và môi trường lập trình.", downloadUrl: "#" },
             { title: "Bài 17: Biến và lệnh gán", videoId: "", desc: "Cách lưu trữ dữ liệu vào biến trong Python.", downloadUrl: "#" },
-            { title: "Bài 18: Các lệnh vào ra đơn giản", videoId: "", desc: "Sử dụng lệnh input() và print().", downloadUrl: "#" },
+            { title: "Bài 18: Các lệnh vào ra đơn giản", videoId: "", desc: "Sử dụng lệnh input() and print().", downloadUrl: "#" },
             { title: "Bài 19: Câu lệnh rẽ nhánh If", videoId: "", desc: "Kiểm tra điều kiện và điều hướng chương trình.", downloadUrl: "#" },
             { title: "Bài 20: Câu lệnh lặp For", videoId: "", desc: "Vòng lặp với số lần biết trước.", downloadUrl: "#" },
             { title: "Bài 21: Câu lệnh lặp While", videoId: "", desc: "Vòng lặp dựa trên điều kiện.", downloadUrl: "#" },
