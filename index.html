@@ -6,7 +6,6 @@
     <title>Hệ thống học tập - THPT Chuyên Bến Tre</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- GỌI FILE ĐIỀU HƯỚNG -->
     <script src="data.js"></script>
     
     <style>
@@ -22,7 +21,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Hiệu ứng bài học đang chọn */
         .lesson-active { 
             background-color: #eff6ff; 
             color: #2563eb; 
@@ -30,7 +28,6 @@
             font-weight: bold; 
         }
 
-        /* Container Video Youtube */
         .video-container { 
             position: relative; 
             padding-bottom: 56.25%; 
@@ -51,7 +48,6 @@
 
         .hidden { display: none; }
         
-        /* Loading overlay */
         .loading-overlay { 
             position: fixed; 
             inset: 0; 
@@ -62,7 +58,6 @@
             z-index: 100; 
         }
 
-        /* Hiệu ứng Tooltip mô tả khi hover vào khóa học */
         .course-card { position: relative; transition: all 0.3s ease; }
         .course-card:hover .course-desc { opacity: 1; transform: translateY(0); pointer-events: auto; }
         .course-desc { 
@@ -93,15 +88,20 @@
             border-color: #1e293b transparent transparent transparent;
         }
 
-        /* Tùy chỉnh thanh cuộn */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Tối ưu logo */
+        .school-logo {
+            height: 40px; /* Độ cao logo */
+            width: auto;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
-    <!-- Loader -->
     <div id="loader" class="hidden loading-overlay">
         <div class="flex flex-col items-center gap-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -109,12 +109,11 @@
         </div>
     </div>
 
-    <!-- Header / Nav -->
+    <!-- Thanh điều hướng với Logo mới -->
     <nav class="h-16 bg-white border-b flex items-center justify-between px-6 shrink-0 z-20 shadow-sm">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showDashboard()">
-            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
-                <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-            </div>
+            <!-- THAY THẾ ICON BẰNG LOGO TRƯỜNG -->
+            <img src="logo-truong.png" alt="Logo" class="school-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2830/2830312.png'">
             <span class="font-bold text-lg md:text-xl uppercase text-slate-800 tracking-tight">THPT CHUYÊN <span class="text-blue-600">BẾN TRE</span></span>
         </div>
         <div id="nav-info" class="hidden md:flex items-center gap-4 text-sm font-medium text-gray-500">
@@ -128,7 +127,6 @@
         </div>
     </nav>
 
-    <!-- Trang Dashboard (Danh sách khóa học) -->
     <div id="dashboard" class="flex-1 overflow-y-auto">
         <div class="max-w-7xl mx-auto p-6 md:p-12">
             <header class="mb-16 text-center">
@@ -136,11 +134,9 @@
                 <div class="inline-block px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-bold uppercase tracking-widest shadow-lg">Hệ thống quản lý học liệu</div>
             </header>
             
-            <!-- Nơi render các nhóm khóa học -->
             <div id="dashboard-content"></div>
         </div>
 
-        <!-- Footer -->
         <footer class="bg-white border-t py-16 px-6 mt-10">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-sm text-gray-600">
                 <div>
@@ -188,7 +184,6 @@
         </footer>
     </div>
 
-    <!-- Màn hình học tập -->
     <div id="learning-screen" class="hidden flex flex-1 overflow-hidden">
         <aside class="w-full md:w-80 lg:w-96 bg-white border-r flex flex-col shrink-0 z-10" id="sidebar">
             <div class="p-4 border-b bg-gray-50 flex items-center justify-between">
@@ -220,7 +215,6 @@
     </div>
 
     <script>
-        // Hàm render trang chủ dựa trên dữ liệu từ data.js
         function renderDashboard() {
             const container = document.getElementById('dashboard-content');
             if(!window.courses) return;
@@ -238,7 +232,6 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         ${window.courses[sec.key].length > 0 ? window.courses[sec.key].map(course => `
                             <div onclick="selectCourse('${course.id}')" class="course-card bg-white p-8 rounded-3xl border border-slate-100 hover:border-${sec.color}-300 hover:shadow-2xl hover:-translate-y-1 transition-all cursor-pointer group">
-                                <!-- Tooltip mô tả -->
                                 <div class="course-desc">
                                     <div class="font-bold mb-1 border-b border-white/20 pb-1">Tóm tắt khóa học:</div>
                                     ${course.description || 'Chưa có thông tin mô tả chi tiết.'}
@@ -264,7 +257,6 @@
             lucide.createIcons();
         }
 
-        // Hàm xử lý khi chọn một khóa học
         async function selectCourse(courseId) {
             let found = null;
             Object.values(window.courses).forEach(group => {
@@ -275,11 +267,9 @@
             if (!found) return;
             document.getElementById('loader').classList.remove('hidden');
 
-            // Xóa script cũ nếu có
             const oldScript = document.getElementById('course-data-script');
             if(oldScript) oldScript.remove();
 
-            // Nạp file dữ liệu vệ tinh (ví dụ tin10.js)
             const script = document.createElement('script');
             script.id = 'course-data-script';
             script.src = found.dataPath + '?v=' + Date.now();
@@ -345,7 +335,6 @@
             
             lucide.createIcons();
             
-            // Cập nhật thanh tiến độ
             let total = 0, current = 0, passed = false;
             activeCourse.content.forEach((c, ci) => {
                 c.lessons.forEach((l, li) => {
@@ -363,7 +352,6 @@
             document.getElementById('sidebar').classList.toggle('-translate-x-full'); 
         }
 
-        // Khởi tạo trang
         window.onload = renderDashboard;
     </script>
 </body>
