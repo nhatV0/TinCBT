@@ -62,3 +62,24 @@ window.courses = {
     chuyenDe: chuyenDe,
     khac: khac
 };
+// Thông tin giáo viên
+window.teacherInfo = {
+    name: "Tên Của Thầy Ở Đây",
+    role: "Giáo viên Tin học - THPT Chuyên Bến Tre",
+    phone: "090x.xxx.xxx",
+    email: "thay@email.com",
+    facebook: "https://facebook.com/duong-dan-cua-thay",
+    zalo: "https://zalo.me/so-dien-thoai",
+    avatar: "https://cdn-icons-png.flaticon.com/512/1995/1995515.png" // Hoặc link ảnh của thầy
+};
+
+// Danh sách khóa học (Giữ nguyên phần cũ của thầy, chỉ cần đảm bảo có window.courses)
+window.courses = {
+    chinhKhoa: [
+        { id: 'tin10', title: 'Tin học 10', icon: 'monitor', dataPath: 'data-chinh-khoa/tin10.js', description: 'Chương trình tin học 10 mới - Kết nối tri thức.' },
+        // ... các khóa học khác
+    ],
+    chuyenTin: [],
+    chuyenDe: [],
+    khac: []
+};
