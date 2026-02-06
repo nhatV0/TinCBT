@@ -1,0 +1,37 @@
+// Đây là nơi thầy quản lý toàn bộ nội dung. 
+// Chỉ cần sửa file này, website sẽ tự cập nhật theo.
+
+const coursesData = {
+    chinhKhoa: [
+        { 
+            id: 'tk10', 
+            title: 'Tin học 10', 
+            icon: 'monitor', 
+            color: 'blue', 
+            content: [
+                { 
+                    chapterName: "Chương 1: Máy tính & Xã hội", 
+                    lessons: [
+                        { title: "Bài 1: Thông tin và dữ liệu", videoId: "01fCqS8iLTo", desc: "Mô tả bài 1...", downloadUrl: "#" },
+                        { title: "Bài 2: Thiết bị thông minh", videoId: "dQw4w9WgXcQ", desc: "Mô tả bài 2...", downloadUrl: null }
+                    ]
+                }
+            ]
+        },
+        { id: 'tk11', title: 'Tin học 11', icon: 'server', color: 'blue', content: [] },
+        { id: 'tk12', title: 'Tin học 12', icon: 'globe', color: 'blue', content: [] }
+    ],
+    chuyenTin: [
+        { id: 'cp1', title: 'Giải thuật C++ 10', icon: 'terminal', color: 'purple', content: [] },
+        { id: 'cp2', title: 'Cấu trúc dữ liệu', icon: 'share-2', color: 'purple', content: [] },
+        { id: 'cp3', title: 'Olympic Tin học', icon: 'award', color: 'purple', content: [] }
+    ],
+    chuyenDe: [
+        { id: 'cd1', title: 'Thiết kế Web', icon: 'layout', color: 'emerald', content: [] },
+        { id: 'cd2', title: 'Khoa học dữ liệu', icon: 'database', color: 'emerald', content: [] },
+        { id: 'cd3', title: 'Lập trình Game', icon: 'gamepad-2', color: 'emerald', content: [] }
+    ]
+};
+
+// Xuất dữ liệu để index.html có thể đọc được
+window.courses = coursesData;
