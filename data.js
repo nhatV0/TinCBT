@@ -72,13 +72,14 @@ window.courses = {
     khac: [
         { 
             id: 'office-tips', 
-            title: 'Thủ thuật Tin học', 
-            icon: 'mouse-pointer-2', 
+            title: 'Chứng chỉ MOS (Microsoft Office Specialist)', 
+            icon: 'award', 
             dataPath: 'data-khac/tips.js', 
-            description: 'Các mẹo hay giúp xử lý công việc văn phòng nhanh chóng và hiệu quả.' 
+            description: 'Luyện thi chứng chỉ Microsoft Office Specialist (Word, Excel, PPT).' 
         }
     ]
 };
+
 
 
 
