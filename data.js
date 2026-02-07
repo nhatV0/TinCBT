@@ -76,7 +76,7 @@ window.courses = {
             icon: 'mouse-pointer-2', 
             dataPath: 'data-khac/tips.js', 
             description: 'Các mẹo hay giúp xử lý công việc văn phòng nhanh chóng và hiệu quả.' 
-        }
+        },
         { 
             id: 'mos-cert', 
             title: 'Chứng Chỉ MOS', 
@@ -86,4 +86,5 @@ window.courses = {
         }
     ]
 };
+
 
