@@ -48,7 +48,7 @@ window.courseContent = [
             { title: "Bài 18: Thực hành xác định cấu trúc bảng và các trường khoá", videoId: "", desc: "Thiết kế bảng dữ liệu và xác định khóa chính.", downloadUrl: "#" },
             { title: "Bài 19: Thực hành tạo lập cơ sở dữ liệu và các bảng", videoId: "", desc: "Thực thi các lệnh tạo CSDL và Table.", downloadUrl: "#" },
             {     
-                title: "Bài 20: Thực hành tạo lập các bảng có khoá ngoài", 
+                 title: "Bài 20: Thực hành tạo lập các bảng có khoá ngoài", 
                 videoId: "", 
                 desc: "Thiết lập mối quan hệ giữa các bảng thông qua khóa ngoài và chỉ mục.",
                 downloadUrl: "#",
@@ -64,7 +64,7 @@ window.courseContent = [
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                                <p class="font-bold text-blue-700">Kiến thức và kỹ năng:</p>
+                                <p class="font-bold text-blue-700 underline underline-offset-4 decoration-2">Kiến thức và kỹ năng:</p>
                                 <ul class="list-disc ml-5 space-y-2">
                                     <li>Biết cách tạo mới các bảng có khóa ngoài trong hệ quản trị cơ sở dữ liệu.</li>
                                     <li>Hiểu và thực hiện được việc thiết lập các thuộc tính cho trường dữ liệu như $INT$, $VARCHAR$, $AUTO\\_INCREMENT$.</li>
@@ -86,12 +86,12 @@ window.courseContent = [
                                 <div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 italic">
                                     <strong>Khái niệm khóa ngoài:</strong> Là một hoặc một nhóm trường trong một bảng tham chiếu đến khóa chính của một bảng khác, dùng để thiết lập mối liên kết giữa dữ liệu của hai bảng.
                                 </div>
-                                <p class="font-bold text-emerald-800 underline">Quy tắc khai báo khóa ngoài:</p>
+                                <p class="font-bold text-emerald-800 underline underline-offset-4 decoration-2">Quy tắc khai báo khóa ngoài:</p>
                                 <ul class="list-decimal ml-5 space-y-2">
                                     <li>Trường được chọn làm khóa ngoài phải có kiểu dữ liệu <strong>tương thích</strong> với trường khóa chính mà nó tham chiếu đến.</li>
                                     <li>Cần xác định chính xác bảng tham chiếu ($Reference table$) và trường tham chiếu tương ứng.</li>
                                 </ul>
-                                <p class="bg-slate-100 p-3 rounded-lg">
+                                <p class="bg-slate-100 p-3 rounded-lg border-l-4 border-slate-400">
                                     <strong>Khóa chống trùng lặp ($UNIQUE$):</strong> Sử dụng khi một cặp giá trị (ví dụ: $tenBannhac, idNhacsi$) cần duy nhất trong toàn bộ bảng để đảm bảo tính toàn vẹn dữ liệu.
                                 </p>
                             </div>
@@ -113,34 +113,61 @@ window.courseContent = [
                                 </div>
 
                                 <div class="space-y-6">
-                                    <!-- Bước 1 -->
                                     <div class="border-b pb-4">
-                                        <p class="font-bold text-slate-900 mb-2 uppercase text-xs tracking-widest text-orange-600">Bước 1: Khai báo trường dữ liệu</p>
-                                        <ul class="list-disc ml-5 space-y-1">
-                                            <li>Tạo bảng tên: $bannhac$.</li>
-                                            <li>Trường $idBannhac$: Kiểu $INT$, bỏ $Allow NULL$, mặc định $AUTO\\_INCREMENT$.</li>
-                                            <li>Trường $tenBannhac$: Kiểu $VARCHAR$, độ dài $255$, mặc định kí tự rỗng "".</li>
-                                            <li>Dùng $Ctrl+Insert$ để thêm nhanh cột mới.</li>
-                                        </ul>
-                                    </div>
-
-                                    <!-- Bước 2 -->
-                                    <div class="border-b pb-4">
-                                        <p class="font-bold text-slate-900 mb-2 uppercase text-xs tracking-widest text-orange-600">Bước 2: Khai báo các trường khóa</p>
-                                        <div class="space-y-3">
-                                            <p><strong>a) Khóa chính:</strong> Chuột phải vào $idBannhac$ &rarr; $Create new index$ &rarr; $PRIMARY$.</p>
-                                            
-                                            <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-                                                <p><strong>b) Khóa chống trùng lặp (UNIQUE):</strong></p>
-                                                <p class="mb-2">Đánh dấu cả 2 trường $tenBannhac$ và $idNhacsi$ &rarr; $Create new index$ &rarr; $UNIQUE$.</p>
-                                                <p class="text-xs italic text-blue-800"><strong>Giải thích:</strong> Việc chọn đồng thời cả 2 trường giúp hệ thống ngăn chặn việc nhập trùng cùng một bài hát của cùng một nhạc sĩ, trong khi vẫn cho phép một bài hát có thể được sáng tác bởi nhiều nhạc sĩ khác nhau (nếu cần).</p>
+                                        <p class="font-bold text-slate-900 mb-3 uppercase text-xs tracking-widest text-orange-600">Các bước thực hiện khai báo khóa:</p>
+                                        <div class="space-y-4">
+                                            <!-- Bước a -->
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">a</div>
+                                                <div>
+                                                    <p class="font-bold text-slate-800">Khai báo khóa chính:</p>
+                                                    <p class="text-slate-600">Nháy nút phải chuột vào ô $idBannhac$, chọn <span class="text-blue-600 font-semibold">Create new index</span>, chọn <span class="text-blue-600 font-semibold">PRIMARY</span>.</p>
+                                                </div>
                                             </div>
 
-                                            <p><strong>c) Khóa ngoài:</strong> Chọn thẻ $Foreign Key$ &rarr; Chọn $idNhacsi$ &rarr; Tham chiếu đến bảng $nhacsi$.</p>
+                                            <!-- Bước b -->
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">b</div>
+                                                <div class="w-full">
+                                                    <p class="font-bold text-slate-800">Khai báo khóa chống trùng lặp ($UNIQUE$):</p>
+                                                    <p class="text-slate-600 mb-2">Đánh dấu cả hai trường $tenBannhac$ và $idNhacsi$, nháy nút phải chuột vào vùng đánh dấu, chọn <span class="text-blue-600 font-semibold">Create new index</span>, chọn <span class="text-blue-600 font-semibold">UNIQUE</span>.</p>
+                                                    <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400 text-xs italic text-blue-800">
+                                                        <strong>Lưu ý quan trọng:</strong> Ta phải chọn cả 2 trường này để tạo khóa $UNIQUE$ (thay vì từng trường riêng lẻ) vì trong thực tế, nhiều nhạc sĩ có thể cùng có bài hát trùng tên nhau. Việc gộp chung đảm bảo tính duy nhất của bài hát gắn liền với nhạc sĩ đó.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Bước c -->
+                                            <div class="flex items-start gap-3">
+                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">c</div>
+                                                <div>
+                                                    <p class="font-bold text-slate-800">Khai báo khóa ngoài:</p>
+                                                    <p class="text-slate-600">Chọn thẻ <span class="text-blue-600 font-semibold">Foreign Key</span>. Chọn trường tham chiếu $idNhacsi$ trong bảng $nhacsi$ để thiết lập liên kết.</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-center font-bold text-green-600 italic">Nhấn "Lưu" để hoàn tất!</p>
+
+                                <!-- Bổ sung Luyện tập & Vận dụng -->
+                                <div class="mt-8 space-y-4">
+                                    <div class="p-4 bg-slate-900 text-white rounded-xl shadow-md">
+                                        <div class="flex items-center gap-2 mb-2 text-orange-400">
+                                            <i data-lucide="dumbbell" class="w-5 h-5"></i>
+                                            <span class="font-black uppercase tracking-tighter">LUYỆN TẬP</span>
+                                        </div>
+                                        <p class="text-sm">Hãy thực hiện các bước tương tự để tạo lập bảng <code class="text-blue-300">banthuam</code> với các thuộc tính khóa phù hợp.</p>
+                                    </div>
+
+                                    <div class="p-4 bg-indigo-900 text-white rounded-xl shadow-md">
+                                        <div class="flex items-center gap-2 mb-2 text-indigo-300">
+                                            <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                                            <span class="font-black uppercase tracking-tighter">VẬN DỤNG</span>
+                                        </div>
+                                        <p class="text-sm">Hãy thiết lập bảng <strong>Quận/Huyện</strong> trong một CSDL quản lý hành chính. Bảng này cần lưu trữ tên Quận/Huyện và liên kết với bảng <strong>Tỉnh/Thành phố</strong> thông qua khóa ngoài.</p>
+                                    </div>
+                                </div>
+                                <p class="text-center font-bold text-green-600 italic mt-4">Nhấn "Lưu" để hoàn tất toàn bộ thao tác!</p>
                             </div>
                         </details>
 
