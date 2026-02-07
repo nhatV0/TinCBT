@@ -255,7 +255,7 @@ window.courseContent = [
                                     
                                     <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500">
                                         <p class="font-bold text-amber-800">[Phòng tránh lặp vô hạn]</p>
-                                        <p class="text-amber-900 italic">Để tránh lỗi lặp vô hạn, bên trong $<khối lệnh>$ cần có ít nhất một câu lệnh làm thay đổi giá trị của các biến trong $<điều kiện>$ sao cho đến một thời điểm nào đó $<điều kiện>$ sẽ trở thành $False$.</p>
+                                        <p class="text-amber-900 italic">Để tránh lỗi lặp vô hạn, bên trong $ <khối lệnh> $ cần có ít nhất một câu lệnh làm thay đổi giá trị của các biến trong $ <điều kiện> $ sao cho đến một thời điểm nào đó $ <điều kiện> $ sẽ trở thành $False$.</p>
                                     </div>
             
                                     <div class="bg-red-50 p-4 rounded-xl border-l-4 border-red-500">
