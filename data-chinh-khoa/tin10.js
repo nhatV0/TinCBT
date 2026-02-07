@@ -211,7 +211,7 @@ window.courseContent = [
             {
                 title: "Bài 21: Câu lệnh lặp While",
                 videoId: "", 
-                desc: "Tìm hiểu cấu trúc lặp với số lần chưa biết trước và lệnh break trong Python.",
+                desc: "Tìm hiểu cấu trúc lặp với số lần chưa biết trước, lệnh break và các cấu trúc lập trình cơ bản.",
                 downloadUrl: "#",
                 contentHtml: `
                     <div class="space-y-6 mt-4 text-left">
@@ -225,10 +225,9 @@ window.courseContent = [
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                                <ul class="list-disc ml-5 space-y-2">
+                                <ul class="list-disc ml-5 space-y-2 font-medium">
                                     <li>Biết và thực hành giải các bài toán sử dụng lệnh lặp $while$ với số lần không biết trước.</li>
                                     <li>Biết ba cấu trúc lập trình cơ bản: tuần tự, rẽ nhánh, lặp.</li>
-                                    <li>Hiểu cách sử dụng lệnh $break$ để điều khiển vòng lặp linh hoạt.</li>
                                 </ul>
                             </div>
                         </details>
@@ -242,28 +241,49 @@ window.courseContent = [
                                 </div>
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+                                <!-- Lệnh WHILE -->
+                                <div class="space-y-3">
+                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Lệnh $WHILE$
+                                    </p>
+                                    <p>Lệnh lặp $while$ thực hiện khối lệnh với số lần lặp không biết trước. Khối lệnh được thực hiện cho đến khi $<điều kiện> = False$.</p>
+                                    <div class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono shadow-inner">
+                                        <p class="text-orange-400">while <span class="text-emerald-400"><điều kiện></span>:</p>
+                                        <p class="ml-8 text-slate-300"><khối lệnh></p>
+                                    </div>
+                                    
+                                    <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500">
+                                        <p class="font-bold text-amber-800">[Phòng tránh lặp vô hạn]</p>
+                                        <p class="text-amber-900 italic">Để tránh lỗi lặp vô hạn, bên trong $<khối lệnh>$ cần có ít nhất một câu lệnh làm thay đổi giá trị của các biến trong $<điều kiện>$ sao cho đến một thời điểm nào đó $<điều kiện>$ sẽ trở thành $False$.</p>
+                                    </div>
+            
+                                    <div class="bg-red-50 p-4 rounded-xl border-l-4 border-red-500">
+                                        <p class="font-bold text-red-800">[Lệnh break]</p>
+                                        <p class="text-red-900">Lệnh $break$ được dùng để kết thúc (thoát khỏi) vòng lặp ngay lập tức mà không cần đợi điều kiện của vòng lặp trở thành $False$. Thường dùng để dừng vòng lặp $while \ True$ khi gặp một điều kiện dừng cụ thể.</p>
+                                    </div>
+                                </div>
+            
+                                <!-- Cấu trúc lập trình -->
                                 <div class="space-y-4">
-                                    <div>
-                                        <p class="font-bold text-emerald-700">1. Lệnh $WHILE$</p>
-                                        <p>Thực hiện khối lệnh khi $<điều kiện>$ còn đúng ($True$).</p>
-                                        <pre class="bg-slate-100 p-3 rounded-lg font-mono text-xs md:text-sm mt-2">
-            while <điều kiện>:
-                <khối lệnh></pre>
-                                        <p class="text-red-600 italic text-xs mt-1">* Lưu ý: Cần có lệnh thay đổi biến điều kiện để tránh lặp vô hạn.</p>
+                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Cấu trúc lập trình cơ bản
+                                    </p>
+                                    <div class="space-y-3">
+                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                            <div class="font-bold text-blue-600 min-w-[100px]">Tuần tự:</div>
+                                            <div>Khối lệnh thực hiện từ trên xuống dưới (gán giá trị, nhập/xuất dữ liệu).</div>
+                                        </div>
+                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                            <div class="font-bold text-orange-600 min-w-[100px]">Rẽ nhánh:</div>
+                                            <div>Khối lệnh thực hiện dựa trên điều kiện đúng hay sai (lệnh $if$).</div>
+                                        </div>
+                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                            <div class="font-bold text-emerald-600 min-w-[100px]">Lặp:</div>
+                                            <div>Khối lệnh thực hiện lặp đi lặp lại tùy theo điều kiện ($for, while$).</div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-emerald-700">2. Lệnh $BREAK$</p>
-                                        <p>Dùng để kết thúc vòng lặp ngay lập tức. Thường dùng trong $while \ True$ để thoát khi thỏa mãn điều kiện dừng.</p>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-emerald-700">3. Cấu trúc lập trình</p>
-                                        <ul class="list-none space-y-1 ml-2">
-                                            <li>- <span class="font-semibold">Tuần tự:</span> Thực hiện từ trên xuống.</li>
-                                            <li>- <span class="font-semibold">Rẽ nhánh:</span> Lệnh $if$.</li>
-                                            <li>- <span class="font-semibold">Lặp:</span> Lệnh $for, while$.</li>
-                                        </ul>
-                                    </div>
+                                    <p class="text-center font-bold bg-slate-100 p-2 rounded-lg text-slate-600 border border-dashed border-slate-300">Đây là ba cấu trúc lập trình cơ bản của mọi ngôn ngữ bậc cao.</p>
                                 </div>
                             </div>
                         </details>
@@ -278,47 +298,71 @@ window.courseContent = [
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 1. In từ 1 đến $n$</p>
-                                        <p class="text-xs italic text-slate-500">Input: 5 &rarr; Output: 1 2 3 4 5</p>
+                                <div class="grid grid-cols-1 gap-4 mt-4">
+                                    <!-- Câu 1-3 -->
+                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
+                                        <p class="font-bold text-orange-700 mb-2">Câu 1. In các số từ $1$ đến $n$</p>
+                                        <p class="text-slate-600 mb-2 underline underline-offset-4 decoration-slate-200 italic font-medium">Mô tả:</p>
+                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số từ $1$ đến $n$, mỗi số cách nhau một khoảng trắng.</p>
+                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 5 &rarr; Output: 1 2 3 4 5</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 2. Tính tổng 1 đến $n$</p>
-                                        <p class="text-xs italic text-slate-500">Input: 4 &rarr; Output: 10</p>
+            
+                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
+                                        <p class="font-bold text-orange-700 mb-2">Câu 2. Tính tổng các số từ $1$ đến $n$</p>
+                                        <p class="mb-2 italic underline underline-offset-4 decoration-slate-200 font-medium">Mô tả:</p>
+                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Dùng vòng lặp $while$ để tính tổng các số từ $1$ đến $n$.</p>
+                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 4 &rarr; Output: 10</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 3. In số chẵn < $n$</p>
-                                        <p class="text-xs italic text-slate-500">Input: 10 &rarr; Output: 2 4 6 8</p>
+            
+                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
+                                        <p class="font-bold text-orange-700 mb-2">Câu 3. In các số chẵn nhỏ hơn $n$</p>
+                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số chẵn nhỏ hơn $n$.</p>
+                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 10 &rarr; Output: 2 4 6 8</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 4. Đếm số chữ số</p>
-                                        <p class="text-xs italic text-slate-500">Dùng chia nguyên $n // 10$</p>
+            
+                                    <!-- Câu 4-7: Xử lý số -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
+                                            <p class="font-bold text-blue-800 mb-1">Câu 4. Đếm chữ số</p>
+                                            <p class="text-xs mb-2">Dùng $while$ chia nguyên cho 10 ($n // 10$).</p>
+                                            <p class="text-[10px] font-mono italic">12345 &rarr; 5</p>
+                                        </div>
+                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
+                                            <p class="font-bold text-blue-800 mb-1">Câu 5. Tổng chữ số</p>
+                                            <p class="text-xs mb-2">Dùng phép chia lấy dư ($% 10$).</p>
+                                            <p class="text-[10px] font-mono italic">123 &rarr; 6</p>
+                                        </div>
+                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
+                                            <p class="font-bold text-blue-800 mb-1">Câu 6. Đảo ngược số</p>
+                                            <p class="text-xs mb-2">Xây dựng số mới: $S = S \times 10 + n \% 10$.</p>
+                                            <p class="text-[10px] font-mono italic">1203 &rarr; 3021</p>
+                                        </div>
+                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
+                                            <p class="font-bold text-blue-800 mb-1">Câu 7. Kiểm tra đối xứng</p>
+                                            <p class="text-xs mb-2">So sánh $n$ gốc với số đảo ngược.</p>
+                                            <p class="text-[10px] font-mono italic">1221 &rarr; YES</p>
+                                        </div>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 5. Tổng các chữ số</p>
-                                        <p class="text-xs italic text-slate-500">Dùng chia dư $% 10$</p>
+            
+                                    <!-- Câu 8-10 -->
+                                    <div class="p-4 border border-slate-100 rounded-xl bg-emerald-50/50">
+                                        <p class="font-bold text-emerald-800 mb-1">Câu 8. Tìm UCLN (Euclid)</p>
+                                        <p class="text-sm italic text-emerald-900 mb-2 underline underline-offset-4 decoration-emerald-200 font-medium">Thuật toán:</p>
+                                        <p class="text-sm mb-2">Trong khi $b \neq 0$, thực hiện: $r = a \% b; a = b; b = r$. Kết quả là $a$.</p>
+                                        <p class="text-xs font-mono bg-white p-2 rounded">24, 36 &rarr; 12</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 6. Đảo ngược số</p>
-                                        <p class="text-xs italic text-slate-500">Công thức: $S = S \times 10 + dư$</p>
+            
+                                    <div class="p-4 border border-red-100 rounded-xl bg-red-50/50">
+                                        <p class="font-bold text-red-800 mb-1">Câu 9. Nhập đến khi gặp số âm</p>
+                                        <p class="text-sm italic text-red-900 mb-2 underline underline-offset-4 decoration-red-200 font-medium">Thực hiện:</p>
+                                        <p class="text-sm mb-1">Sử dụng $while \ True$ kết hợp lệnh $break$ khi số nhập vào $< 0$.</p>
+                                        <p class="text-xs font-mono bg-white p-2 rounded">5, 3, 7, -1 &rarr; Tổng: 15</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 7. Số đối xứng</p>
-                                        <p class="text-xs italic text-slate-500">So sánh $n$ với số đảo ngược</p>
+            
+                                    <div class="p-4 border border-indigo-100 rounded-xl bg-indigo-50/50 shadow-sm">
+                                        <p class="font-bold text-indigo-800 mb-1">Câu 10. Tìm số nhỏ nhất</p>
+                                        <p class="text-sm">Nhập $n$ phần tử, khởi tạo $min$ bằng số đầu tiên và dùng $while$ để so sánh, cập nhật giá trị $min$.</p>
                                     </div>
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-slate-50">
-                                        <p class="font-bold text-orange-700 mb-1">Câu 8. Tìm UCLN</p>
-                                        <p class="text-xs italic text-slate-500">Sử dụng thuật toán Euclid</p>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-orange-100 rounded-xl border-l-4 border-orange-500 mt-2">
-                                    <p class="font-bold text-orange-800">Câu 9. Ứng dụng BREAK</p>
-                                    <p class="text-sm">Sử dụng <code class="bg-white px-1 text-red-600 font-bold">while True</code> để nhập số liên tục cho đến khi gặp số âm thì dừng và tính tổng các số dương.</p>
-                                </div>
-                                <div class="p-4 bg-slate-800 text-white rounded-xl">
-                                    <p class="font-bold text-blue-300">Câu 10. Tìm số nhỏ nhất</p>
-                                    <p class="text-sm">Nhập dãy $n$ phần tử, cập nhật biến $min$ trong quá trình lặp.</p>
                                 </div>
                             </div>
                         </details>
@@ -334,13 +378,14 @@ window.courseContent = [
                             </summary>
                             <div class="p-6 pt-0 border-t border-slate-100">
                                 <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4 bg-slate-100 flex items-center justify-center">
-                                    <p class="text-slate-400 italic text-sm text-center">Video hướng dẫn giải 10 bài tập vận dụng đang được cập nhật...</p>
+                                    <p class="text-slate-400 italic text-sm text-center px-4">Video hướng dẫn thuật toán chi tiết cho 10 bài tập trên đang được biên tập...</p>
                                 </div>
                             </div>
                         </details>
                     </div>
                 `
-            },
+            }
+            ,
             { title: "Bài 22: Kiểu dữ liệu danh sách (List)", videoId: "", desc: "Xử lý dãy số và dữ liệu mảng.", downloadUrl: "#" },
             { title: "Bài 23: Một số lệnh làm việc với dữ liệu danh sách", videoId: "", desc: "Các hàm append, remove, insert.", downloadUrl: "#" },
             { title: "Bài 24: Xâu ký tự", videoId: "", desc: "Xử lý văn bản trong Python.", downloadUrl: "#" },
