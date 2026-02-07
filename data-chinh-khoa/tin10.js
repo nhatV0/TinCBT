@@ -44,12 +44,12 @@ window.courseContent = [
             { title: "Bài 19: Câu lệnh rẽ nhánh If", videoId: "", desc: "Cấu trúc điều kiện trong lập trình.", downloadUrl: "#" },
             {
                 title: "BÀI 20: CÂU LỆNH LẶP FOR",
-                videoId: "", // Video đã được chuyển vào contentHtml Mục IV
-                desc: "Tìm hiểu cấu trúc lặp với số lần biết trước trong lập trình Python và hàm range().",
+                videoId: "",
+                desc: "Biết được ý nghĩa của lệnh range, chức năng và cách dùng lệnh lặp for trong Python.",
                 downloadUrl: "#",
                 contentHtml: `
                     <div class="space-y-6 mt-4 text-left">
-                        <!-- I. Mục tiêu -->
+                        <!-- Mục I: Mục tiêu bài học -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -58,13 +58,25 @@ window.courseContent = [
                                 </div>
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                                <p><strong>Kiến thức:</strong> Hiểu được cấu trúc và cách hoạt động của câu lệnh lặp <code>for</code> với vùng giá trị <code>range()</code>.</p>
-                                <p><strong>Kĩ năng:</strong> Sử dụng lệnh <code>for</code> và hàm <code>range()</code> để giải quyết bài toán lặp.</p>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 leading-relaxed text-sm md:text-base">
+                                <div>
+                                    <p class="font-bold text-blue-700">Kiến thức:</p>
+                                    <ul class="list-disc ml-5 space-y-1">
+                                        <li>Biết được ý nghĩa của vùng giá trị tạo bởi lệnh <code>range()</code>.</li>
+                                        <li>Biết được chức năng của lệnh lặp <code>for</code> và cách dùng trong Python.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-blue-700">Kỹ năng:</p>
+                                    <ul class="list-disc ml-5 space-y-1">
+                                        <li>Vận dụng được lệnh lặp <code>for</code> để thực hiện các công việc lặp đi lặp lại với số lần xác định.</li>
+                                        <li>Sử dụng được lệnh <code>range()</code> để tạo danh sách các giá trị số nguyên phục vụ vòng lặp.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </details>
-
-                        <!-- II. Lý thuyết -->
+            
+                        <!-- Mục II: Lý thuyết trọng tâm -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -73,16 +85,34 @@ window.courseContent = [
                                 </div>
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
-                                <p>Cấu trúc: <code>for i in range(n):</code></p>
-                                <p>Hàm <code>range(n)</code> tạo dãy số từ $0$ đến $n-1$.</p>
-                                <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-300">
-                                    <p class="text-sm italic">Ví dụ: <code>range(5)</code> sẽ tạo ra các giá trị: 0, 1, 2, 3, 4.</p>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+                                <p>Cú pháp của lệnh lặp với số lần biết trước <strong>for</strong> trong Python như sau:</p>
+                                <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs md:text-sm">for &lt;i&gt; in range(n):
+                &lt;khối lệnh&gt;</pre>
+                                <p>Khi thực hiện, ở mỗi vòng lặp biến <code>i</code> sẽ được gán lần lượt các giá trị trong vùng giá trị của lệnh <code>range()</code> và thực hiện khối lệnh. <strong>Lưu ý:</strong> Khối lệnh lặp phải được viết lùi vào so với dòng chứa lệnh <code>for</code>.</p>
+                                
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <p class="font-bold mb-2">Lệnh tạo vùng giá trị <code>range()</code>:</p>
+                                    <ul class="space-y-2">
+                                        <li><code>range(stop)</code>: trả lại vùng giá trị từ $0$ đến $stop - 1$.</li>
+                                        <li><code>range(start, stop)</code>: trả lại vùng giá trị từ $start$ đến $stop - 1$.</li>
+                                    </ul>
+                                </div>
+            
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="p-3 bg-blue-50 rounded-lg text-sm italic">
+                                        - <code>range(n)</code>: các số $0, 1, ..., n – 1$.<br>
+                                        - <code>range(1, n + 1)</code>: các số $1, 2, ..., n$.
+                                    </div>
+                                    <div class="p-3 bg-blue-50 rounded-lg text-sm italic">
+                                        - <code>range(0, 99)</code>: các số $0, 1, ..., 98$.<br>
+                                        - <code>range(100, 1)</code>: cho vùng rỗng.
+                                    </div>
                                 </div>
                             </div>
                         </details>
-
-                        <!-- III. Bài tập vận dụng -->
+            
+                        <!-- Mục III: Bài tập vận dụng -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -91,17 +121,63 @@ window.courseContent = [
                                 </div>
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
-                                <div class="bg-orange-50 p-4 rounded-xl border-l-4 border-orange-400">
-                                    <p class="font-bold text-orange-900">Bài tập 1:</p>
-                                    <p class="text-sm text-orange-800">Viết chương trình in ra các số chẵn từ 0 đến 10 sử dụng vòng lặp <code>for</code>.</p>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6">
+                                <div class="space-y-4">
+                                    <!-- Bài 1 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 1. In dãy số</p>
+                                        <p class="text-sm">Viết chương trình in ra các số nguyên từ $1$ đến $n$ trên cùng một dòng.</p>
+                                    </div>
+                                    <!-- Bài 2 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 2. In các số chẵn</p>
+                                        <p class="text-sm">Nhập số nguyên dương $n$. In ra các số chẵn từ $1$ đến $n$. Gợi ý: <code>range(2, n+1, 2)</code>.</p>
+                                    </div>
+                                    <!-- Bài 3 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 3. Tính tổng</p>
+                                        <p class="text-sm">Nhập $n$. Tính và in ra tổng $S = 1 + 2 + ... + n$.</p>
+                                    </div>
+                                    <!-- Bài 4 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 4. Bảng cửu chương</p>
+                                        <p class="text-sm">Nhập $n$ ($1 \le n \le 9$). In ra bảng cửu chương của $n$.</p>
+                                    </div>
+                                    <!-- Bài 5 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 5. Đếm số chia hết</p>
+                                        <p class="text-sm">Đếm xem trong đoạn từ $1$ đến $n$ có bao nhiêu số chia hết cho $3$.</p>
+                                    </div>
+                                    <!-- Bài 6 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 6. Tính giai thừa</p>
+                                        <p class="text-sm">Nhập $n$. Tính $n! = 1 \times 2 \times ... \times n$.</p>
+                                    </div>
+                                    <!-- Bài 7 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 7. Tính tổng dãy số</p>
+                                        <p class="text-sm">Tính giá trị: $S = 1^2 + 2^2 + 3^2 + ... + n^2$.</p>
+                                    </div>
+                                    <!-- Bài 8 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 8. Kiểm tra số nguyên tố</p>
+                                        <p class="text-sm">Dùng vòng lặp <code>for</code> để kiểm tra $n$ có phải là số nguyên tố hay không.</p>
+                                    </div>
+                                    <!-- Bài 9 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 9. Vẽ hình bằng ký tự *</p>
+                                        <p class="text-sm">Nhập $n$. In ra $n$ dòng, mỗi dòng có $n$ dấu *.</p>
+                                    </div>
+                                    <!-- Bài 10 -->
+                                    <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
+                                        <p class="font-bold text-orange-900 text-sm md:text-base">Bài 10. Dãy Fibonacci</p>
+                                        <p class="text-sm">Nhập $n$. In ra $n$ số Fibonacci đầu tiên ($0, 1, 1, 2, 3, 5, ...$).</p>
+                                    </div>
                                 </div>
-                                <pre class="bg-slate-900 text-green-400 p-4 rounded-xl text-xs overflow-x-auto">for i in range(0, 11, 2):
-    print(i)</pre>
                             </div>
                         </details>
-
-                        <!-- IV. Học liệu kèm theo -->
+            
+                        <!-- Mục IV: Học liệu kèm theo -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -111,9 +187,8 @@ window.courseContent = [
                                 <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                             </summary>
                             <div class="p-6 pt-0 border-t border-slate-100">
-                                <p class="text-sm text-slate-500 mb-4 italic">Thầy/Cô và các em có thể xem video hướng dẫn chi tiết bên dưới:</p>
-                                <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100">
-                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/6f_iM0vY0C4" frameborder="0" allowfullscreen></iframe>
+                                <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4 bg-slate-100 flex items-center justify-center">
+                                    <p class="text-slate-400 italic text-sm">Nội dung video đang được cập nhật...</p>
                                 </div>
                             </div>
                         </details>
