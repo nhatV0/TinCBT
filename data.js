@@ -69,14 +69,14 @@ window.courses = {
     // Nhóm 4: Các nội dung khác
     khac: [
         { 
-            id: 'mos-cert', 
+            id: 'mos-cert', // ID duy nhất cho MOS
             title: 'Chứng chỉ MOS', 
             icon: 'award', 
-            dataPath: 'data-khac/mos.js', 
-            description: 'Luyện thi chứng chỉ Microsoft Office Specialist (Word, Excel, PPT).' 
-        },
+            dataPath: 'data-khac/mos.js', // Thầy đã đổi sang data-khac
+            description: 'Luyện thi chứng chỉ Microsoft Office Specialist.' 
+        }, // <--- PHẢI CÓ DẤU PHẨY Ở ĐÂY ĐỂ NGĂN CÁCH
         { 
-            id: 'office-tips', 
+            id: 'office-tips', // ID duy nhất cho Thủ thuật
             title: 'Thủ thuật Tin học', 
             icon: 'mouse-pointer-2', 
             dataPath: 'data-khac/tips.js', 
@@ -84,4 +84,5 @@ window.courses = {
         }
     ]
 };
+
 
