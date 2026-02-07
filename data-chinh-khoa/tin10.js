@@ -44,11 +44,12 @@ window.courseContent = [
             { title: "Bài 19: Câu lệnh rẽ nhánh If", videoId: "", desc: "Cấu trúc điều kiện trong lập trình.", downloadUrl: "#" },
             {
                 title: "BÀI 20: CÂU LỆNH LẶP FOR",
-                videoId: "6f_iM0vY0C4",
+                videoId: "", // Video đã được chuyển vào contentHtml Mục IV
                 desc: "Tìm hiểu cấu trúc lặp với số lần biết trước trong lập trình Python và hàm range().",
                 downloadUrl: "#",
                 contentHtml: `
                     <div class="space-y-6 mt-4 text-left">
+                        <!-- I. Mục tiêu -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -62,6 +63,8 @@ window.courseContent = [
                                 <p><strong>Kĩ năng:</strong> Sử dụng lệnh <code>for</code> và hàm <code>range()</code> để giải quyết bài toán lặp.</p>
                             </div>
                         </details>
+
+                        <!-- II. Lý thuyết -->
                         <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
@@ -73,6 +76,45 @@ window.courseContent = [
                             <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
                                 <p>Cấu trúc: <code>for i in range(n):</code></p>
                                 <p>Hàm <code>range(n)</code> tạo dãy số từ $0$ đến $n-1$.</p>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-300">
+                                    <p class="text-sm italic">Ví dụ: <code>range(5)</code> sẽ tạo ra các giá trị: 0, 1, 2, 3, 4.</p>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- III. Bài tập vận dụng -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
+                                <div class="bg-orange-50 p-4 rounded-xl border-l-4 border-orange-400">
+                                    <p class="font-bold text-orange-900">Bài tập 1:</p>
+                                    <p class="text-sm text-orange-800">Viết chương trình in ra các số chẵn từ 0 đến 10 sử dụng vòng lặp <code>for</code>.</p>
+                                </div>
+                                <pre class="bg-slate-900 text-green-400 p-4 rounded-xl text-xs overflow-x-auto">for i in range(0, 11, 2):
+    print(i)</pre>
+                            </div>
+                        </details>
+
+                        <!-- IV. Học liệu kèm theo -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100">
+                                <p class="text-sm text-slate-500 mb-4 italic">Thầy/Cô và các em có thể xem video hướng dẫn chi tiết bên dưới:</p>
+                                <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100">
+                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/6f_iM0vY0C4" frameborder="0" allowfullscreen></iframe>
+                                </div>
                             </div>
                         </details>
                     </div>
