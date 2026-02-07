@@ -72,7 +72,7 @@ window.courses = {
             id: 'mos-cert', 
             title: 'Chứng chỉ MOS', 
             icon: 'award', 
-            dataPath: 'data-mos/mos.js', 
+            dataPath: 'data-khac/mos.js', 
             description: 'Luyện thi chứng chỉ Microsoft Office Specialist (Word, Excel, PPT).' 
         },
         { 
@@ -84,3 +84,4 @@ window.courses = {
         }
     ]
 };
+
