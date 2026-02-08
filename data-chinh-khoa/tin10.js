@@ -539,7 +539,7 @@ window.courseContent = [
                // --- BÀI 23 ---
             {
             title: "Bài 23: Một số lệnh làm việc với dữ liệu danh sách",
-            videoId: " ",
+            videoId: "",
             desc: "Các hàm append, remove, insert và các thao tác nâng cao với List trong Python.",
             downloadUrl: "#",
             contentHtml: `
