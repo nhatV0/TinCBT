@@ -537,158 +537,135 @@ window.courseContent = [
             `
         },
                 {
-        title: "BÀI 23: MỘT SỐ LỆNH LÀM VIỆC VỚI DỮ LIỆU DANH SÁCH",
-        videoId: "", 
-        desc: "Học cách sử dụng toán tử in để kiểm tra sự tồn tại của phần tử và các phương thức quan trọng để thao tác với danh sách trong Python.",
-        downloadUrl: "#",
-        contentHtml: `
-            <div class="space-y-6 mt-4 text-left">
-                <!-- Mục I: Mục tiêu bài học -->
-                <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
-                    <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                        <div class="flex items-center gap-3">
+            title: "BÀI 23: MỘT SỐ LỆNH LÀM VIỆC VỚI DỮ LIỆU DANH SÁCH",
+            videoId: "", 
+            desc: "Nội dung bài học về cách duyệt danh sách và các phương thức thao tác dữ liệu danh sách trong Python kèm hệ thống bài tập thực hành.",
+            downloadUrl: "#",
+            contentHtml: `
+                <div class="space-y-6 mt-4 text-left">
+                    <!-- Mục I: Mục tiêu bài học -->
+                    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="flex items-center gap-3 p-5 bg-slate-50 border-b border-slate-100">
                             <div class="p-2 bg-indigo-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
-                            <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                            <h2 class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</h2>
                         </div>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                        <ul class="list-disc ml-5 space-y-2 font-medium">
-                            <li>Biết cách duyệt danh sách bằng toán tử $in$.</li>
-                            <li>Biết và thực hiện được một số phương thức thường dùng với danh sách.</li>
-                        </ul>
-                    </div>
-                </details>
-    
-                <!-- Mục II: Lý thuyết trọng tâm -->
-                <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                        <div class="flex items-center gap-3">
+                        <div class="p-6 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base font-medium">
+                            <ul class="list-disc ml-5 space-y-2">
+                                <li>Biết cách duyệt danh sách bằng toán tử $in$.</li>
+                                <li>Thực hiện thành thạo các phương thức: $append()$, $insert()$, $clear()$, $remove()$.</li>
+                                <li>Vận dụng giải quyết các bài toán thực tế với cấu trúc dữ liệu danh sách.</li>
+                            </ul>
+                        </div>
+                    </section>
+        
+                    <!-- Mục II: Lý thuyết trọng tâm -->
+                    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="flex items-center gap-3 p-5 bg-slate-50 border-b border-slate-100">
                             <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-                            <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                            <h2 class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</h2>
                         </div>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
-                        <h3 class="font-bold text-emerald-700 border-b pb-1">1. Duyệt danh sách với toán tử $in$</h3>
-                        <p>Dùng để kiểm tra $&lt;giá \ trị&gt;$ có trong $&lt;danh \ sách&gt;$ không.</p>
-                        <div class="bg-slate-900 text-slate-200 p-4 rounded-xl font-mono text-xs md:text-sm">
-                            &lt;giá trị&gt; in &lt;danh sách&gt;
-                        </div>
-                        <p class="italic text-slate-500 text-xs">Trả về <strong>True</strong> nếu có, <strong>False</strong> nếu không có.</p>
-    
-                        <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-400">
-                            <p class="font-bold text-blue-800 text-sm mb-2 uppercase">💡 Duyệt nhanh bằng for:</p>
-                            <pre class="text-xs md:text-sm text-slate-800">for &lt;biến_chạy&gt; in &lt;danh_sách&gt;:
-        &lt;khối_lệnh&gt;</pre>
-                        </div>
-    
-                        <h3 class="font-bold text-emerald-700 border-b pb-1">2. Một số lệnh làm việc với danh sách</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-100">
-                                        <th class="p-2 border font-bold">Lệnh (Phương thức)</th>
-                                        <th class="p-2 border font-bold">Mô tả tác dụng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="p-2 border font-mono text-blue-600">A.append(x)</td>
-                                        <td class="p-2 border">Bổ sung $x$ vào cuối danh sách $A$.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border font-mono text-blue-600">A.insert(k, x)</td>
-                                        <td class="p-2 border">Chèn $x$ vào vị trí $k$ của danh sách $A$.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border font-mono text-blue-600">A.clear()</td>
-                                        <td class="p-2 border">Xóa toàn bộ dữ liệu của $A$.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-2 border font-mono text-blue-600">A.remove(x)</td>
-                                        <td class="p-2 border">Xóa phần tử $x$ đầu tiên tìm thấy.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-400 text-xs md:text-sm">
-                            <strong>Lưu ý về remove:</strong> Nếu không tìm thấy $x$, lệnh sẽ báo lỗi. Nếu có nhiều $x$, chỉ xóa cái đầu tiên bên trái.
-                        </div>
-                    </div>
-                </details>
-    
-                <!-- Mục III: Bài tập vận dụng -->
-                <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
-                            <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
-                        </div>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-100">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-xs md:text-sm">
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 1</p>
-                                <p>Cho $A = [2, 4, 6, 8]$. Giá trị của $4 \in A$?</p>
+                        <div class="p-6 text-slate-700 space-y-5 text-sm md:text-base">
+                            <div>
+                                <h3 class="font-bold text-emerald-700 mb-2">1. Duyệt danh sách với toán tử $in$</h3>
+                                <p class="mb-2">Kiểm tra sự tồn tại của phần tử:</p>
+                                <div class="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs md:text-sm mb-3">
+                                    &lt;giá trị&gt; in &lt;danh sách&gt; <span class="text-slate-500"># Trả về True/False</span>
+                                </div>
+                                <p class="mb-2 italic">Duyệt từng phần tử (không dùng range):</p>
+                                <div class="bg-slate-900 text-blue-400 p-3 rounded-lg font-mono text-xs md:text-sm">
+                                    <span class="text-pink-400">for</span> x <span class="text-pink-400">in</span> A:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;print(x)
+                                </div>
                             </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 2</p>
-                                <p>Cho $A = [1, 3, 5, 7]$. Giá trị của $2 \in A$?</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 3</p>
-                                <p>Viết lệnh kiểm tra $x$ (nhập từ phím) có trong $A$ không và in kết quả.</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 4</p>
-                                <p>Cho $A = [10, 20, 30]$. $A$ thay đổi thế nào sau $A.append(40)$?</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 5</p>
-                                <p>Cho $A = [1, 2, 4, 5]$. $A$ thay đổi thế nào sau $A.insert(2, 3)$?</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 6</p>
-                                <p>Cho $A = [5, 6, 7]$. Sau $A.clear()$, $A$ còn mấy phần tử?</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 7</p>
-                                <p>Cho $A = [1, 2, 3, 2, 4]$. $A$ thế nào sau $A.remove(2)$?</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                <p class="font-bold text-orange-600 mb-1">Câu 8</p>
-                                <p>Dùng vòng lặp $for$ và toán tử $in$ để in từng phần tử của $A = [3, 6, 9, 12]$.</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 md:col-span-2">
-                                <p class="font-bold text-orange-600 mb-1">Câu 9</p>
-                                <p>Viết chương trình kiểm tra danh sách có số lẻ không. Có in <strong>YES</strong>, không in <strong>NO</strong>.</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 md:col-span-2">
-                                <p class="font-bold text-orange-600 mb-1">Câu 10</p>
-                                <p>Cho $A = []$. Thêm lần lượt $1, 2, 3$, sau đó xóa số $2$ và in danh sách cuối cùng.</p>
+        
+                            <div>
+                                <h3 class="font-bold text-emerald-700 mb-2">2. Một số phương thức làm việc với danh sách</h3>
+                                <div class="grid grid-cols-1 gap-3">
+                                    <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                        <code class="text-blue-600 font-bold bg-white px-2 py-1 rounded shadow-sm">append(x)</code>
+                                        <span>Thêm $x$ vào cuối danh sách.</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                        <code class="text-blue-600 font-bold bg-white px-2 py-1 rounded shadow-sm">insert(k, x)</code>
+                                        <span>Chèn $x$ vào vị trí chỉ số $k$.</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                        <code class="text-blue-600 font-bold bg-white px-2 py-1 rounded shadow-sm">clear()</code>
+                                        <span>Xóa sạch toàn bộ các phần tử.</span>
+                                    </div>
+                                    <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                        <code class="text-blue-600 font-bold bg-white px-2 py-1 rounded shadow-sm">remove(x)</code>
+                                        <span>Xóa phần tử $x$ đầu tiên tìm thấy (từ trái qua).</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </details>
-    
-                <!-- Mục IV: Học liệu kèm theo -->
-                <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                    <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
-                            <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </section>
+        
+                    <!-- Mục III: Bài tập thực hành -->
+                    <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="flex items-center gap-3 p-5 bg-slate-50 border-b border-slate-100">
+                            <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="code" class="w-5 h-5"></i></div>
+                            <h2 class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập thực hành</h2>
                         </div>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-100 text-center py-10">
-                        <p class="text-slate-400 italic">Học liệu đang được cập nhật...</p>
-                    </div>
-                </details>
-            </div>
-        `
-    },
+                        <div class="p-6">
+                            <div class="space-y-4">
+                                <!-- Câu 1-10 -->
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 1. Nhập và in danh sách</h4>
+                                    <p class="text-sm">Nhập số nguyên $n$, sau đó nhập $n$ số nguyên vào danh sách. In danh sách vừa nhập ra màn hình.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 2. Duyệt danh sách</h4>
+                                    <p class="text-sm">Nhập một danh sách số nguyên. In mỗi phần tử trên một dòng bằng vòng lặp <code class="bg-slate-100 px-1 rounded text-pink-500">for ... in</code>.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 3. Tính tổng danh sách</h4>
+                                    <p class="text-sm">Nhập danh sách $n$ số nguyên. Tính và in ra tổng các phần tử trong danh sách.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 4. Đếm số dương</h4>
+                                    <p class="text-sm">Nhập danh sách số nguyên. Đếm xem có bao nhiêu số dương trong danh sách.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 5. Tìm phần tử lớn nhất</h4>
+                                    <p class="text-sm">Nhập danh sách $n$ số nguyên. Tìm và in ra số lớn nhất (không sử dụng hàm <code class="bg-slate-100 px-1 rounded text-blue-600">max()</code>).</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 6. Kiểm tra phần tử</h4>
+                                    <p class="text-sm">Nhập một danh sách và một số $x$. In <strong>YES</strong> nếu $x$ có trong danh sách, ngược lại in <strong>NO</strong>.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 7. Tách danh sách</h4>
+                                    <p class="text-sm">Nhập một danh sách số nguyên. Tạo và in ra hai danh sách mới: một danh sách chứa các số chẵn, một danh sách chứa các số lẻ.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 8. Đếm số lần xuất hiện</h4>
+                                    <p class="text-sm">Nhập danh sách số nguyên và số $x$. Đếm số lần $x$ xuất hiện trong danh sách.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 9. Xoá phần tử trùng nhau</h4>
+                                    <p class="text-sm">Nhập danh sách số nguyên. Tạo danh sách mới chỉ chứa các giá trị duy nhất, giữ nguyên thứ tự ban đầu.</p>
+                                </div>
+        
+                                <div class="p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:shadow-md transition-shadow border-2 border-orange-100">
+                                    <h4 class="font-bold text-orange-600 mb-2">Câu 10. Sắp xếp danh sách (Nâng cao)</h4>
+                                    <p class="text-sm">Nhập danh sách $n$ số nguyên. Sắp xếp theo thứ tự tăng dần mà không dùng hàm <code class="bg-slate-100 px-1 rounded text-blue-600">sort()</code> hay <code class="bg-slate-100 px-1 rounded text-blue-600">sorted()</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `
+        },
             { title: "Bài 24: Xâu ký tự", videoId: "", desc: "Xử lý văn bản trong Python.", downloadUrl: "#" },
             { title: "Bài 25: Một số lệnh làm việc với xâu ký tự", videoId: "", desc: "Cắt xâu, tìm kiếm xâu.", downloadUrl: "#" },
             { title: "Bài 26: Hàm trong Python", videoId: "", desc: "Định nghĩa và sử dụng hàm.", downloadUrl: "#" },
