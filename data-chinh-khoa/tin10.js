@@ -539,7 +539,7 @@ window.courseContent = [
                // --- BÀI 23 ---
             {
             title: "Bài 23: Một số lệnh làm việc với dữ liệu danh sách",
-            videoId: "6f_iM0vY0C4",
+            videoId: " ",
             desc: "Các hàm append, remove, insert và các thao tác nâng cao với List trong Python.",
             downloadUrl: "#",
             contentHtml: `
@@ -663,6 +663,21 @@ window.courseContent = [
                             </div>
                         </div>
                     </details>
+                    <!-- Mục IV: Học liệu kèm theo -->
+                    <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                                <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <div class="p-6 pt-0 border-t border-slate-100">
+                            <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/T8Cq6R6Vd8s" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </details>
                 </div>
             `
         },
@@ -670,7 +685,7 @@ window.courseContent = [
         // --- BÀI 24 ---
         {
             title: "Bài 24: Xâu ký tự",
-            videoId: "S_vTOnW-TFA",
+            videoId: "",
             desc: "Khái niệm xâu ký tự, cách truy cập phần tử, duyệt xâu và các lệnh cơ bản với xâu.",
             downloadUrl: "#",
             contentHtml: `
@@ -779,6 +794,21 @@ window.courseContent = [
                                     <p class="font-bold text-indigo-700">Câu 10. Đếm số từ</p>
                                     <p class="text-slate-600 mt-1"><b>Yêu cầu:</b> Nhập xâu gồm nhiều từ cách nhau bởi dấu cách. Hãy đếm số từ trong xâu.</p>
                                 </div>
+                            </div>
+                        </div>
+                    </details>
+                    <!-- Mục IV: Học liệu kèm theo -->
+                    <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                                <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                        </summary>
+                        <div class="p-6 pt-0 border-t border-slate-100">
+                            <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/T8Cq6R6Vd8s" frameborder="0" allowfullscreen></iframe>
                             </div>
                         </div>
                     </details>
