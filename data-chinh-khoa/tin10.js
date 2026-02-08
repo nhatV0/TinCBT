@@ -334,7 +334,7 @@ window.courseContent = [
                                         </div>
                                         <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
                                             <p class="font-bold text-blue-800 mb-1">Câu 6. Đảo ngược số</p>
-                                            <p class="text-xs mb-2">Xây dựng số mới: $S = S \times 10 + n \% 10$.</p>
+                                            <p class="text-xs mb-2">Xây dựng số mới:.</p>
                                             <p class="text-[10px] font-mono italic">1203 &rarr; 3021</p>
                                         </div>
                                         <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
@@ -346,16 +346,16 @@ window.courseContent = [
             
                                     <!-- Câu 8-10 -->
                                     <div class="p-4 border border-slate-100 rounded-xl bg-emerald-50/50">
-                                        <p class="font-bold text-emerald-800 mb-1">Câu 8. Tìm UCLN (Euclid)</p>
-                                        <p class="text-sm italic text-emerald-900 mb-2 underline underline-offset-4 decoration-emerald-200 font-medium">Thuật toán:</p>
-                                        <p class="text-sm mb-2">Trong khi $b \neq 0$, thực hiện: $r = a \% b; a = b; b = r$. Kết quả là $a$.</p>
+                                        <p class="font-bold text-emerald-800 mb-1">Câu 8. Tìm UCLN (ước chung lớn nhất)</p>
+                                        <p class="text-sm italic text-emerald-900 mb-2 underline underline-offset-4 decoration-emerald-200 font-medium">thực hiện:</p>
+                                        <p class="text-sm mb-2">nếu $b$ = $0$, kết quả sẽ là rỗng.</p>
                                         <p class="text-xs font-mono bg-white p-2 rounded">24, 36 &rarr; 12</p>
                                     </div>
             
                                     <div class="p-4 border border-red-100 rounded-xl bg-red-50/50">
                                         <p class="font-bold text-red-800 mb-1">Câu 9. Nhập đến khi gặp số âm</p>
                                         <p class="text-sm italic text-red-900 mb-2 underline underline-offset-4 decoration-red-200 font-medium">Thực hiện:</p>
-                                        <p class="text-sm mb-1">Sử dụng $while \ True$ kết hợp lệnh $break$ khi số nhập vào $< 0$.</p>
+                                        <p class="text-sm mb-1">Sử dụng $while$ \ $True$ kết hợp lệnh $break$ khi số nhập vào $< 0$.</p>
                                         <p class="text-xs font-mono bg-white p-2 rounded">5, 3, 7, -1 &rarr; Tổng: 15</p>
                                     </div>
             
