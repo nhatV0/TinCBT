@@ -83,14 +83,15 @@ window.courses = {
             description: 'Các mẹo hay giúp xử lý công việc văn phòng hiệu quả.' 
         },
         { 
-        id: 'vex-robotics', 
-        title: 'Lập trình Robotics với VEX IQ (cơ bản)', 
-        icon: 'cpu', 
-        dataPath: 'data-khac/vex-iq.js', 
-        description: 'Khóa học cơ bản lập trình với VEX IQ phiên bản Education giúp học sinh làm quen với bộ KIT và phần mềm học tập.' 
+            id: 'vex-robotics', 
+            title: 'Lập trình Robotics với VEX IQ (cơ bản)', 
+            icon: 'cpu', 
+            dataPath: 'data-khac/vex-iq.js', 
+            description: 'Khóa học cơ bản lập trình với VEX IQ phiên bản Education giúp học sinh làm quen với bộ KIT và phần mềm học tập.' 
         }
     ]
 };
+
 
 
 
