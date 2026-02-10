@@ -185,8 +185,8 @@ window.courseContent = [
                                     <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2">🛠️ Mức độ: Vận dụng</h4>
                                     <div class="space-y-3">
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Bài 5:</b> Xếp loại học lực dựa trên điểm trung bình $dtb$.</p>
-                                            <p class="text-xs text-slate-500 mt-1">Điều kiện: $\ge 8$ (Giỏi), $[6.5, 8)$ (Khá), $[5, 6.5)$ (Trung bình), $< 5$ (Yếu).</p>
+                                            <p><b>Bài 5:</b> Xếp loại học lực dựa trên điểm trung bình $điểmtb$.</p>
+                                            <p class="text-xs text-slate-500 mt-1">Điều kiện: $Trên 8$ (Giỏi), $[6.5, 8)$ (Khá), $[5, 6.5)$ (Trung bình), $< 5$ (Yếu).</p>
                                             <p class="text-xs text-slate-500">Input: 7.2 → Output: Khá</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
@@ -195,7 +195,7 @@ window.courseContent = [
                                             <p class="text-xs text-slate-500">Input: 2000 → Output: Năm nhuận | Input: 2023 → Output: Năm không nhuận</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Câu 14:</b> Tính $BMI = cân\_nặng / (chiều\_cao^2)$.</p>
+                                            <p><b>Câu 14:</b> Tính $BMI = cân nặng / (chiều cao^2)$.</p>
                                             <p class="text-xs text-slate-500 mt-1">Input: 60kg, 1.7m → BMI ≈ 20.76 → Output: Bình thường</p>
                                         </div>
                                     </div>
