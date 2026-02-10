@@ -41,7 +41,151 @@ window.courseContent = [
             { title: "Bài 16: Ngôn ngữ lập trình bậc cao và Python", videoId: "", desc: "Môi trường lập trình Python.", downloadUrl: "#" },
             { title: "Bài 17: Biến và lệnh gán", videoId: "", desc: "Cách đặt tên biến và gán giá trị.", downloadUrl: "#" },
             { title: "Bài 18: Các lệnh vào ra đơn giản", videoId: "", desc: "Lệnh input() và print().", downloadUrl: "#" },
-            { title: "Bài 19: Câu lệnh rẽ nhánh If", videoId: "", desc: "Cấu trúc điều kiện trong lập trình.", downloadUrl: "#" },
+            {
+                title: "Bài 19: Câu lệnh rẽ nhánh If",
+                videoId: "", // Sẽ thêm sau theo Mục IV
+                desc: "Tìm hiểu về biểu thức lôgic, các phép toán so sánh và cấu trúc điều kiện if-else trong Python.",
+                downloadUrl: "#",
+                contentHtml: `
+                    <div class="space-y-6 mt-4 text-left">
+                        <!-- Mục I: Mục tiêu bài học -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base font-medium">
+                                <ul class="list-disc ml-5 space-y-2 mt-4">
+                                    <li>Biết và trình bày được các phép toán với kiểu dữ liệu lôgic.</li>
+                                    <li>Sử dụng được lệnh rẽ nhánh <code>if</code> trong lập trình.</li>
+                                </ul>
+                            </div>
+                        </details>
+            
+                        <!-- Mục II: Lý thuyết trọng tâm -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
+                                <!-- 1. Biểu thức Logic -->
+                                <div class="space-y-3">
+                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Biểu thức lôgic
+                                    </p>
+                                    <p>Các phép so sánh trong Python:</p>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm font-mono">
+                                        <div class="p-2 bg-slate-50 rounded border text-center">&lt; : nhỏ hơn</div>
+                                        <div class="p-2 bg-slate-50 rounded border text-center">&gt; : lớn hơn</div>
+                                        <div class="p-2 bg-slate-50 rounded border text-center">== : bằng nhau</div>
+                                        <div class="p-2 bg-slate-50 rounded border text-center">&lt;= : nhỏ hoặc bằng</div>
+                                        <div class="p-2 bg-slate-50 rounded border text-center">&gt;= : lớn hoặc bằng</div>
+                                        <div class="p-2 bg-slate-50 rounded border text-center">!= : khác nhau</div>
+                                    </div>
+                                    <p class="mt-2">Bảng phép toán lôgic (<code>and</code>, <code>or</code>, <code>not</code>):</p>
+                                    <div class="overflow-x-auto mt-2">
+                                        <table class="w-full text-center border-collapse border border-slate-200 text-xs md:text-sm">
+                                            <thead class="bg-slate-100">
+                                                <tr>
+                                                    <th class="border p-2">X</th>
+                                                    <th class="border p-2">Y</th>
+                                                    <th class="border p-2">X and Y</th>
+                                                    <th class="border p-2">X or Y</th>
+                                                    <th class="border p-2">not X</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td class="border p-2">True</td><td class="border p-2">True</td><td class="border p-2">True</td><td class="border p-2">True</td><td class="border p-2">False</td></tr>
+                                                <tr><td class="border p-2">True</td><td class="border p-2">False</td><td class="border p-2">False</td><td class="border p-2">True</td><td class="border p-2">False</td></tr>
+                                                <tr><td class="border p-2">False</td><td class="border p-2">True</td><td class="border p-2">False</td><td class="border p-2">True</td><td class="border p-2">True</td></tr>
+                                                <tr><td class="border p-2">False</td><td class="border p-2">False</td><td class="border p-2">False</td><td class="border p-2">False</td><td class="border p-2">True</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+            
+                                <!-- 2. Lệnh If -->
+                                <div class="space-y-4 pt-4 border-t">
+                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Lệnh If
+                                    </p>
+                                    
+                                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                                        <p class="font-bold text-blue-800 underline mb-2">Dạng thiếu:</p>
+                                        <pre class="bg-white p-3 rounded border text-xs text-indigo-600">if &lt;điều kiện&gt;:
+                &lt;khối lệnh&gt;</pre>
+                                    </div>
+            
+                                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">
+                                        <p class="font-bold text-orange-800 underline mb-2">Dạng đủ:</p>
+                                        <pre class="bg-white p-3 rounded border text-xs text-indigo-600">if &lt;điều kiện&gt;:
+                &lt;khối lệnh 1&gt;
+            else:
+                &lt;khối lệnh 2&gt;</pre>
+                                    </div>
+            
+                                    <div class="p-4 bg-red-50 rounded-xl border border-red-100">
+                                        <p class="text-red-800 text-sm font-medium"><b>Chú ý:</b> Các khối lệnh đều cần viết sau dấu <code>:</code> và lùi vào, thẳng hàng. Lùi đầu dòng là bắt buộc trong Python để xác định phạm vi lệnh.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+            
+                        <!-- Mục III: Bài tập vận dụng -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+                                <div class="grid grid-cols-1 gap-3 mt-4">
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 1:</b> Nhập một số nguyên. Nếu số đó lớn hơn $0$ thì in ra "Số dương".</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 2:</b> Nhập tuổi học sinh. Nếu tuổi $\ge 15$ thì in "Đủ tuổi học THPT".</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 3:</b> Nhập một số. Nếu chẵn in "Số chẵn", ngược lại in "Số lẻ".</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 4:</b> Nhập điểm. Nếu điểm $\ge 5$ in "Đạt", ngược lại in "Chưa đạt".</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 5:</b> Xếp loại học lực (Giỏi: $\ge 8$, Khá: $6.5 \le d < 8$, TB: $5 \le d < 6.5$, Yếu: $d < 5$).</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Bài 6:</b> Nhập số $1-7$. In ra thứ tương ứng ($1$ → Thứ hai, $7$ → Chủ nhật).</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 7:</b> So sánh $a$ và $b$. In ra: $a > b$, $a < b$ hoặc $a = b$.</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 8:</b> Kiểm tra năm nhuận $y$ (Chia hết $400$ hoặc chia hết $4$ nhưng không chia hết $100$).</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 9:</b> Kiểm tra $3$ số $a, b, c$ có tạo thành tam giác không.</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 10:</b> Tính tiền điện: $\le 50 kWh$ (1.678đ), $51-100 kWh$ (1.734đ), $>100 kWh$ (2.014đ).</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 11:</b> In lời chào theo giờ $h$: $5-10$ (Sáng), $11-17$ (Chiều), $18-22$ (Tối), còn lại (Ngủ ngon).</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 12:</b> Xác định số nguyên là Dương/Âm/0 và đồng thời là Chẵn hay Lẻ.</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 13:</b> Tính lương: Thưởng $\ge 10$ năm ($20\%$), $5-9$ năm ($10\%$), còn lại $0\%$.</div>
+                                    <div class="p-3 bg-slate-50 rounded-lg border"><b>Câu 14:</b> Tính $BMI$ và phân loại: Gầy ($<18.5$), Bình thường ($18.5-24.9$), Thừa cân ($25-29.9$), Béo phì ($\ge 30$).</div>
+                                    <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200">
+                                        <b>Câu 32 (Nâng cao):</b> Nhập số tiền chia hết cho 1.000. Đổi ra các mệnh giá từ 500k xuống 1k sao cho tổng số tờ tiền là ít nhất.
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+            
+                        <!-- Mục IV: Học liệu kèm theo -->
+                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                                </div>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                            </summary>
+                            <div class="p-6 pt-0 border-t border-slate-100">
+                                <p class="text-sm text-slate-500 mt-4 italic text-center">Nội dung video sẽ được cập nhật sớm nhất.</p>
+                            </div>
+                        </details>
+                    </div>
+                `
+            },
             {
                 title: "BÀI 20: CÂU LỆNH LẶP FOR",
                 videoId: "",
