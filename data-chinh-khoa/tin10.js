@@ -5,7 +5,7 @@ window.courseContent = [
         lessons: [
             { videoId: "", 
                 desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
-                downloadUrl: "" }
+                downloadUrl: "Book/SGK-tin10-CK.pdf" }
         ]
     },
     {
