@@ -179,11 +179,11 @@ window.courseContent = [
                                             <p class="text-xs text-slate-500 mt-1">Input: 5 | Output: Số dương</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Bài 3:</b> Nhập số nguyên $n$. Kiểm tra chẵn lẻ.</p>
+                                            <p><b>Bài 2:</b> Nhập số nguyên $n$. Kiểm tra chẵn lẻ.</p>
                                             <p class="text-xs text-slate-500 mt-1">Input: 4 → Output: Số chẵn | Input: 7 → Output: Số lẻ</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Câu 7:</b> Nhập 2 số $a, b$. So sánh chúng.</p>
+                                            <p><b>Câu 3:</b> Nhập 2 số $a, b$. So sánh chúng.</p>
                                             <p class="text-xs text-slate-500 mt-1">Input: 5, 5 → Output: a bằng b | Input: 8, 3 → Output: a lớn hơn b</p>
                                         </div>
                                     </div>
@@ -194,17 +194,17 @@ window.courseContent = [
                                     <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2">🛠️ Mức độ: Vận dụng</h4>
                                     <div class="space-y-3">
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Bài 5:</b> Xếp loại học lực dựa trên điểm trung bình $điểmtb$.</p>
+                                            <p><b>Bài 4:</b> Xếp loại học lực dựa trên điểm trung bình $điểmtb$.</p>
                                             <p class="text-xs text-slate-500 mt-1">Điều kiện: $Trên 8$ (Giỏi), $[6.5, 8)$ (Khá), $[5, 6.5)$ (Trung bình), $< 5$ (Yếu).</p>
                                             <p class="text-xs text-slate-500">Input: 7.2 → Output: Khá</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Câu 8:</b> Kiểm tra năm nhuận $y$.</p>
+                                            <p><b>Câu 5:</b> Kiểm tra năm nhuận $y$.</p>
                                             <p class="text-xs text-slate-500 mt-1">Logic: ($y \% 400 == 0$) hoặc ($y \% 4 == 0$ and $y \% 100 != 0$).</p>
                                             <p class="text-xs text-slate-500">Input: 2000 → Output: Năm nhuận | Input: 2023 → Output: Năm không nhuận</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Câu 14:</b> Tính $BMI$ = $cân nặng$ / ($chiều$ $cao$ ^2).</p>
+                                            <p><b>Câu 6:</b> Tính $BMI$ = $cân nặng$ / ($chiều$ $cao$ ^2).</p>
                                             <p class="text-xs text-slate-500 mt-1">Input: 60kg, 1.7m → BMI ≈ 20.76 → Output: Bình thường</p>
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@ window.courseContent = [
                                     <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2">🏆 Mức độ: Vận dụng cao</h4>
                                     <div class="space-y-3">
                                         <div class="p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-                                            <p class="font-bold text-indigo-900">Câu 32: Máy ATM thông minh</p>
+                                            <p class="font-bold text-indigo-900">Câu 7: Máy ATM thông minh</p>
                                             <p class="text-sm mt-1">Nhập số tiền $T$ (là bội của 1.000). Hãy phân tích $T$ thành các mệnh giá 500k, 200k, 100k, 50k, 20k, 10k, 5k, 2k, 1k sao cho <b>tổng số tờ tiền là ít nhất</b>.</p>
                                             <div class="mt-2 text-xs text-indigo-700 bg-white p-2 rounded">
                                                 <b>Ví dụ:</b> Input: 658000 <br>
