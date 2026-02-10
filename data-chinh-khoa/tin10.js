@@ -195,7 +195,7 @@ window.courseContent = [
                                             <p class="text-xs text-slate-500">Input: 2000 → Output: Năm nhuận | Input: 2023 → Output: Năm không nhuận</p>
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
-                                            <p><b>Câu 14:</b> Tính $BMI = cân nặng / (chiều cao^2)$.</p>
+                                            <p><b>Câu 14:</b> Tính $BMI$ = $cân nặng$ / ($chiều$ $cao$ ^2).</p>
                                             <p class="text-xs text-slate-500 mt-1">Input: 60kg, 1.7m → BMI ≈ 20.76 → Output: Bình thường</p>
                                         </div>
                                     </div>
