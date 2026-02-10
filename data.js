@@ -5,7 +5,7 @@ window.teacherInfo = {
     role: "Giáo viên Tin học - THPT Chuyên Bến Tre",
     phone: "094.454.0402",
     email: "vominhnhat080402@gmail.com",
-    facebook: "https://www.facebook.com/", // https://www.facebook.com/nhat.vo.5030927
+    facebook: " ", // https://www.facebook.com/nhat.vo.5030927
     zalo: "https://zalo.me/0944540402",
     avatar: "https://cdn-icons-png.flaticon.com/512/1995/1995515.png"
 };
@@ -91,6 +91,7 @@ window.courses = {
         }
     ]
 };
+
 
 
 
