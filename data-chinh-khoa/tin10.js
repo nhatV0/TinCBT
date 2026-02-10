@@ -211,7 +211,7 @@ window.courseContent = [
                                             <p class="border p-1">< 18.5</td><td class="border p-1 text-orange-600 font-bold">Gầy</td></tr>
                                             <p class="border p-1">18.5 - 24.9</td><td class="border p-1 text-green-600 font-bold">Bình thường</td></tr>
                                             <p class="border p-1">25.0 - 29.9</td><td class="border p-1 text-orange-700 font-bold">Thừa cân</td></tr>
-                                            <p class="border p-1">$\ge$ 30.0</td><td class="border p-1 text-red-600 font-bold">Béo phì</td></tr>
+                                            <p class="border p-1">$Trên$ 30.0</td><td class="border p-1 text-red-600 font-bold">Béo phì</td></tr>
                                         </div>
                                     </div>
                                 </div>
