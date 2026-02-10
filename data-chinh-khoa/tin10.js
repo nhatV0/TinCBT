@@ -6,7 +6,7 @@ window.courseContent = [
         lessons: [
             { videoId: "", 
                 desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
-                downloadUrl: "Book/SGK-tin10-CK.pdf" }
+                downloadUrl: "https://drive.google.com/file/d/1AnLn6cG4apsmTtCu5MlGGgyLG42Np1Ex/view?usp=sharing" }
         ]
     },
     {
