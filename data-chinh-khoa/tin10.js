@@ -1,10 +1,11 @@
 // File dữ liệu bài học Tin học 10 - Đầy đủ 34 bài theo chương trình SGK
 window.courseContent = [
     {
-        title: "Sách Giáo Khoa Tin học 10",
         chapterName: "Chương 0: Sách",
         lessons: [
-            { videoId: "", 
+            {    
+                title: "Sách Giáo Khoa Tin học 10",
+                videoId: "", 
                 desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
                 downloadUrl: "https://drive.google.com/file/d/1AnLn6cG4apsmTtCu5MlGGgyLG42Np1Ex/view?usp=sharing" }
         ]
