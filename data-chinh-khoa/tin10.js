@@ -206,7 +206,12 @@ window.courseContent = [
                                         </div>
                                         <div class="p-3 bg-slate-50 rounded-lg border">
                                             <p><b>Câu 6:</b> Tính $BMI$ = $cân nặng$ / ($chiều$ $cao$ ^2).</p>
-                                            <p class="text-xs text-slate-500 mt-1">Input: 60kg, 1.7m → BMI ≈ 20.76 → Output: Bình thường</p>
+                                            <p class="text-xs text-slate-500 mt-1">Input: 60, 1.7 → BMI ≈ 20.76 → Output: Bình thường</p>
+                                            <tr class="bg-blue-100"><th class="border p-1">Chỉ số BMI</th><th class="border p-1">Phân loại</th></tr>
+                                            <tr><td class="border p-1">< 18.5</td><td class="border p-1 text-orange-600 font-bold">Gầy</td></tr>
+                                            <tr><td class="border p-1">18.5 - 24.9</td><td class="border p-1 text-green-600 font-bold">Bình thường</td></tr>
+                                            <tr><td class="border p-1">25.0 - 29.9</td><td class="border p-1 text-orange-700 font-bold">Thừa cân</td></tr>
+                                            <tr><td class="border p-1">$\ge$ 30.0</td><td class="border p-1 text-red-600 font-bold">Béo phì</td></tr>
                                         </div>
                                     </div>
                                 </div>
