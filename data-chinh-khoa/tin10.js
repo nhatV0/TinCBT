@@ -302,7 +302,8 @@ window.courseContent = [
                                     <p class="font-bold mb-2 text-blue-800">Lệnh tạo vùng giá trị <code>range()</code>:</p>
                                     <ul class="space-y-2">
                                         <li><code>range(stop)</code>: trả lại vùng giá trị từ $0$ đến $stop - 1$.</li>
-                                        <li><code>range(start, stop)</code>: trả lại vùng giá trị từ $start$ đến $stop - 1$.</li>
+                                        <li><code>range(start,stop)</code>: trả lại vùng giá trị từ $start$ đến $stop - 1$.</li>
+                                        <li><code>range(start,stop,step)</code>: trả lại vùng giá trị từ $start$ đến $stop - 1$ bước nhảy $step$.</li>
                                     </ul>
                                 </div>
             
