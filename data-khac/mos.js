@@ -3,7 +3,7 @@ window.courseContent = [
     {
         chapterName: "Chủ đề 1: Giới thiệu & Tổng quan bài thi",
         lessons: [
-            { title: "Bài 1: Hệ thống chứng chỉ MOS thế giới", videoId: "", desc: "Phân biệt các cấp độ Specialist, Expert và Master.", downloadUrl: "#" },
+            { title: "Giới thiệu", videoId: "", desc: "Các khóa học về MOS là khóa học chuyên biệt. bạn nào có nhu cầu thì liên hệ thầy", downloadUrl: "#" },
             { title: "Bài 2: Quy trình đăng ký và thi tại Việt Nam", videoId: "", desc: "Thủ tục đăng ký tại IIG và các hồ sơ cần chuẩn bị.", downloadUrl: "#" },
             { title: "Bài 3: Giao diện phần mềm thi thực tế", videoId: "", desc: "Làm quen với cửa sổ Console và vùng làm việc Project.", downloadUrl: "#" },
             { title: "Bài 4: Chiến thuật quản lý thời gian", videoId: "", desc: "Cách xử lý 35 câu hỏi trong vòng 50 phút hiệu quả nhất.", downloadUrl: "#" },
