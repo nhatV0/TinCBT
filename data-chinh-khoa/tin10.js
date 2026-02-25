@@ -391,6 +391,7 @@ window.courseContent = [
                                     <div class="p-4 bg-orange-50 rounded-xl border-l-4 border-orange-400">
                                         <p class="font-bold text-orange-900 text-sm md:text-base italic">Bài 10. Dãy Fibonacci</p>
                                         <p class="text-sm mb-2">Nhập $n$. In ra $n$ số Fibonacci đầu tiên.</p>
+                                        <p class="text-xs font-mono text-slate-500">dãy Fibonacci là dãy có số liền sau bằng tổng 2 số trước nó</p>
                                         <p class="text-xs font-mono text-slate-500">Ví dụ: n = 5 &rarr; Output: 0 1 1 2 3</p>
                                     </div>
                                 </div>
