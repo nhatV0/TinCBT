@@ -418,182 +418,214 @@ window.courseContent = [
                 `
             },
             {
-                title: "Bài 21: Câu lệnh lặp While",
-                videoId: "", 
-                desc: "Tìm hiểu cấu trúc lặp với số lần chưa biết trước, lệnh break và các cấu trúc lập trình cơ bản.",
-                downloadUrl: "#",
-                contentHtml: `
-                    <div class="space-y-6 mt-4 text-left">
-                        <!-- Mục I: Mục tiêu bài học -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                                <ul class="list-disc ml-5 space-y-2 font-medium">
-                                    <li>Biết và thực hành giải các bài toán sử dụng lệnh lặp $while$ với số lần không biết trước.</li>
-                                    <li>Biết ba cấu trúc lập trình cơ bản: tuần tự, rẽ nhánh, lặp.</li>
-                                </ul>
-                            </div>
-                        </details>
-            
-                        <!-- Mục II: Lý thuyết trọng tâm -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
-                                <!-- Lệnh WHILE -->
-                                <div class="space-y-3">
-                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Lệnh $WHILE$
-                                    </p>
-                                    <p>Lệnh lặp $while$ thực hiện khối lệnh với số lần lặp không biết trước. Khối lệnh được thực hiện cho đến khi $<điều kiện> = False$.</p>
-                                    <div class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono shadow-inner">
-                                        <p class="text-orange-400">while <span class="text-emerald-400"><điều kiện></span>:</p>
-                                        <p class="ml-8 text-slate-300"><khối lệnh></p>
-                                    </div>
-                                    
-                                    <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500">
-                                        <p class="font-bold text-amber-800">[Phòng tránh lặp vô hạn]</p>
-                                        <p class="text-amber-900 italic">Để tránh lỗi lặp vô hạn, bên trong <$khối lệnh$>  cần có ít nhất một câu lệnh làm thay đổi giá trị của các biến trong <$điều kiện$> sao cho đến một thời điểm nào đó <$điều kiện$> sẽ trở thành $False$.</p>
-                                    </div>
-            
-                                    <div class="bg-red-50 p-4 rounded-xl border-l-4 border-red-500">
-                                        <p class="font-bold text-red-800">[Lệnh break]</p>
-                                        <p class="text-red-900">Lệnh $break$ được dùng để kết thúc (thoát khỏi) vòng lặp ngay lập tức mà không cần đợi điều kiện của vòng lặp trở thành $False$. Thường dùng để dừng vòng lặp $while \ True$ khi gặp một điều kiện dừng cụ thể.</p>
-                                    </div>
-                                </div>
-            
-                                <!-- Cấu trúc lập trình -->
-                                <div class="space-y-4">
-                                    <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                                        <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Cấu trúc lập trình cơ bản
-                                    </p>
-                                    <div class="space-y-3">
-                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-                                            <div class="font-bold text-blue-600 min-w-[100px]">Tuần tự:</div>
-                                            <div>Khối lệnh thực hiện từ trên xuống dưới (gán giá trị, nhập/xuất dữ liệu).</div>
-                                        </div>
-                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-                                            <div class="font-bold text-orange-600 min-w-[100px]">Rẽ nhánh:</div>
-                                            <div>Khối lệnh thực hiện dựa trên điều kiện đúng hay sai (lệnh $if$).</div>
-                                        </div>
-                                        <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-                                            <div class="font-bold text-emerald-600 min-w-[100px]">Lặp:</div>
-                                            <div>Khối lệnh thực hiện lặp đi lặp lại tùy theo điều kiện ($for, while$).</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-center font-bold bg-slate-100 p-2 rounded-lg text-slate-600 border border-dashed border-slate-300">Đây là ba cấu trúc lập trình cơ bản của mọi ngôn ngữ bậc cao.</p>
-                                </div>
-                            </div>
-                        </details>
-            
-                        <!-- Mục III: Bài tập vận dụng -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="code-2" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
-                                <div class="grid grid-cols-1 gap-4 mt-4">
-                                    <!-- Câu 1-3 -->
-                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
-                                        <p class="font-bold text-orange-700 mb-2">Câu 1. In các số từ $1$ đến $n$</p>
-                                        <p class="text-slate-600 mb-2 underline underline-offset-4 decoration-slate-200 italic font-medium">Mô tả:</p>
-                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số từ $1$ đến $n$, mỗi số cách nhau một khoảng trắng.</p>
-                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 5 &rarr; Output: 1 2 3 4 5</p>
-                                    </div>
-            
-                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
-                                        <p class="font-bold text-orange-700 mb-2">Câu 2. Tính tổng các số từ $1$ đến $n$</p>
-                                        <p class="mb-2 italic underline underline-offset-4 decoration-slate-200 font-medium">Mô tả:</p>
-                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Dùng vòng lặp $while$ để tính tổng các số từ $1$ đến $n$.</p>
-                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 4 &rarr; Output: 10</p>
-                                    </div>
-            
-                                    <div class="group/item border border-slate-100 rounded-xl p-4 bg-slate-50 hover:bg-white hover:shadow-md transition-all">
-                                        <p class="font-bold text-orange-700 mb-2">Câu 3. In các số chẵn nhỏ hơn $n$</p>
-                                        <p class="mb-2">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số chẵn nhỏ hơn $n$.</p>
-                                        <p class="text-xs font-mono bg-white p-2 rounded border">Ví dụ: Input: 10 &rarr; Output: 2 4 6 8</p>
-                                    </div>
-            
-                                    <!-- Câu 4-7: Xử lý số -->
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
-                                            <p class="font-bold text-blue-800 mb-1">Câu 4. Đếm chữ số</p>
-                                            <p class="text-xs mb-2">Dùng $while$ chia nguyên cho 10 ($n // 10$).</p>
-                                            <p class="text-[10px] font-mono italic">12345 &rarr; 5</p>
-                                        </div>
-                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
-                                            <p class="font-bold text-blue-800 mb-1">Câu 5. Tổng chữ số</p>
-                                            <p class="text-xs mb-2">Dùng phép chia lấy dư ($% 10$).</p>
-                                            <p class="text-[10px] font-mono italic">123 &rarr; 6</p>
-                                        </div>
-                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
-                                            <p class="font-bold text-blue-800 mb-1">Câu 6. Đảo ngược số</p>
-                                            <p class="text-xs mb-2">Xây dựng số mới:.</p>
-                                            <p class="text-[10px] font-mono italic">1203 &rarr; 3021</p>
-                                        </div>
-                                        <div class="p-4 border border-blue-100 rounded-xl bg-blue-50/30">
-                                            <p class="font-bold text-blue-800 mb-1">Câu 7. Kiểm tra đối xứng</p>
-                                            <p class="text-xs mb-2">So sánh $n$ gốc với số đảo ngược.</p>
-                                            <p class="text-[10px] font-mono italic">1221 &rarr; YES</p>
-                                        </div>
-                                    </div>
-            
-                                    <!-- Câu 8-10 -->
-                                    <div class="p-4 border border-slate-100 rounded-xl bg-emerald-50/50">
-                                        <p class="font-bold text-emerald-800 mb-1">Câu 8. Tìm UCLN (ước chung lớn nhất)</p>
-                                        <p class="text-sm italic text-emerald-900 mb-2 underline underline-offset-4 decoration-emerald-200 font-medium">thực hiện:</p>
-                                        <p class="text-sm mb-2">nếu $b$ = $0$, kết quả sẽ là rỗng.</p>
-                                        <p class="text-xs font-mono bg-white p-2 rounded">24, 36 &rarr; 12</p>
-                                    </div>
-            
-                                    <div class="p-4 border border-red-100 rounded-xl bg-red-50/50">
-                                        <p class="font-bold text-red-800 mb-1">Câu 9. Nhập đến khi gặp số âm</p>
-                                        <p class="text-sm italic text-red-900 mb-2 underline underline-offset-4 decoration-red-200 font-medium">Thực hiện:</p>
-                                        <p class="text-sm mb-1">Sử dụng $while$ \ $True$ kết hợp lệnh $break$ khi số nhập vào $< 0$.</p>
-                                        <p class="text-xs font-mono bg-white p-2 rounded">5, 3, 7, -1 &rarr; Tổng: 15</p>
-                                    </div>
-            
-                                    <div class="p-4 border border-indigo-100 rounded-xl bg-indigo-50/50 shadow-sm">
-                                        <p class="font-bold text-indigo-800 mb-1">Câu 10. Tìm số nhỏ nhất</p>
-                                        <p class="text-sm">Nhập $n$ phần tử, khởi tạo $min$ bằng số đầu tiên và dùng $while$ để so sánh, cập nhật giá trị $min$.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-            
-                        <!-- Mục IV: Học liệu kèm theo -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100">
-                                <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4 bg-slate-100 flex items-center justify-center">
-                                    <p class="text-slate-400 italic text-sm text-center px-4">Video hướng dẫn thuật toán chi tiết cho 10 bài tập trên đang được biên tập...</p>
-                                </div>
-                            </div>
-                        </details>
+    title: "Bài 21: Câu lệnh lặp While",
+    videoId: "", 
+    desc: "Tìm hiểu cấu trúc lặp với số lần chưa biết trước, lệnh break và các cấu trúc lập trình cơ bản.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
                     </div>
-                `
-            }
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
+                    <ul class="list-disc ml-5 space-y-2 font-medium">
+                        <li>Biết và thực hành giải các bài toán sử dụng lệnh lặp $while$ với số lần không biết trước.</li>
+                        <li>Biết ba cấu trúc lập trình cơ bản: tuần tự, rẽ nhánh, lặp.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+                    <div class="space-y-3">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Lệnh $WHILE$
+                        </p>
+                        <p>Lệnh lặp $while$ thực hiện khối lệnh với số lần lặp không biết trước. Khối lệnh được thực hiện cho đến khi $<điều kiện> = False$.</p>
+                        <div class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono shadow-inner">
+                            <p class="text-orange-400">while <span class="text-emerald-400"><điều kiện></span>:</p>
+                            <p class="ml-8 text-slate-300"><khối lệnh></p>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500">
+                            <p class="font-bold text-amber-800">[Phòng tránh lặp vô hạn]</p>
+                            <p class="text-amber-900 italic">Để tránh lỗi lặp vô hạn, bên trong <$khối lệnh$> cần có ít nhất một câu lệnh làm thay đổi giá trị của các biến trong <$điều kiện$> sao cho đến một thời điểm nào đó <$điều kiện$> sẽ trở thành $False$.</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-800">[Lệnh break]</p>
+                            <p class="text-red-900">Lệnh $break$ được dùng để kết thúc (thoát khỏi) vòng lặp ngay lập tức mà không cần đợi điều kiện của vòng lặp trở thành $False$.</p>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+                    <div class="space-y-8">
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">1️⃣ While cơ bản</p>
+                            <div class="bg-slate-900 text-slate-300 p-4 rounded-xl font-mono text-xs md:text-sm">
+                                <p class="text-orange-400">i = 1</p>
+                                <p class="text-orange-400">while <span class="text-emerald-400">i <= 5</span>:</p>
+                                <p class="ml-8">print(i)</p>
+                                <p class="ml-8">i += 1</p>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">👉 Giải thích: In lần lượt các số từ 1 đến 5.</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">2️⃣ While với điều kiện sai ngay từ đầu</p>
+                            <div class="bg-slate-900 text-slate-300 p-4 rounded-xl font-mono text-xs">
+                                <p class="text-slate-500"># i = 10 không thỏa mãn i < 5</p>
+                                <p>i = 10</p>
+                                <p>while i < 5: print(i)</p>
+                                <p>print("Kết thúc")</p>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">👉 Kết quả: Chỉ in "Kết thúc".</p>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">3️⃣ While vô hạn (Infinite Loop)</p>
+                            <div class="bg-red-50 p-4 rounded-xl border border-red-100 mb-2">
+                                <p class="text-xs text-red-700 font-mono">while True: print("Chạy mãi")</p>
+                            </div>
+                            <div class="bg-slate-900 text-slate-300 p-4 rounded-xl font-mono text-xs">
+                                <p class="text-emerald-400">while True:</p>
+                                <p class="ml-8">s = input("Nhập 'q' để thoát: ")</p>
+                                <p class="ml-8 text-orange-400">if s == 'q': break</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">4️⃣ While với break & 5️⃣ continue</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+                                <div class="bg-slate-900 p-4 rounded-xl text-slate-300">
+                                    <p class="text-red-400 mb-1"># Thử với break</p>
+                                    <p>while i <= 10:</p>
+                                    <p class="ml-4">if i == 5: <span class="text-red-400">break</span></p>
+                                    <p class="ml-4">print(i)</p>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-xl text-slate-300">
+                                    <p class="text-blue-400 mb-1"># Thử với continue</p>
+                                    <p>while i < 5:</p>
+                                    <p class="ml-4">i += 1</p>
+                                    <p class="ml-4">if i == 3: <span class="text-blue-400">continue</span></p>
+                                    <p class="ml-4">print(i)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">6️⃣ While lồng nhau (Nested While)</p>
+                            <div class="bg-slate-100 p-4 rounded-xl font-mono text-xs text-slate-700 border border-slate-200">
+                                <p>while i <= 3:</p>
+                                <p class="ml-4">j = 1</p>
+                                <p class="ml-4">while j <= 2:</p>
+                                <p class="ml-8">print(i, j)</p>
+                                <p class="ml-8">j += 1</p>
+                                <p class="ml-4">i += 1</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">7️⃣ While với else</p>
+                            <p class="text-xs text-slate-600 mb-2 italic">Lưu ý: Khối else sẽ KHÔNG chạy nếu vòng lặp bị dừng bởi lệnh break.</p>
+                            <div class="bg-slate-900 text-slate-300 p-4 rounded-xl font-mono text-xs">
+                                <p>while i <= 3: ...</p>
+                                <p class="text-emerald-400">else:</p>
+                                <p class="ml-4 text-emerald-400">print("Hoàn thành")</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-slate-800 mb-2">8️⃣ Kiểm tra dữ liệu người dùng</p>
+                            <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
+                                <div class="font-mono text-xs text-blue-900">
+                                    <p>password = ""</p>
+                                    <p>while password != "123":</p>
+                                    <p class="ml-4 text-blue-700">password = input("Nhập mật khẩu: ")</p>
+                                    <p>print("Đăng nhập thành công")</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-hidden rounded-xl border border-slate-200">
+                            <table class="w-full text-sm">
+                                <thead class="bg-slate-50">
+                                    <tr>
+                                        <th class="p-3 text-left font-bold text-slate-700">Dạng</th>
+                                        <th class="p-3 text-left font-bold text-slate-700">Mục đích</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr><td class="p-3 font-mono text-blue-600">While cơ bản</td><td class="p-3">Lặp khi điều kiện đúng</td></tr>
+                                    <tr><td class="p-3 font-mono text-red-600">break</td><td class="p-3">Thoát vòng lặp ngay lập tức</td></tr>
+                                    <tr><td class="p-3 font-mono text-orange-600">continue</td><td class="p-3">Bỏ qua lượt hiện tại</td></tr>
+                                    <tr><td class="p-3 font-mono text-emerald-600">Nested while</td><td class="p-3">Xử lý dữ liệu nhiều chiều (lặp lồng)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 3. Cấu trúc lập trình cơ bản
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                <div class="font-bold text-blue-600 min-w-[100px]">Tuần tự:</div>
+                                <div>Khối lệnh thực hiện từ trên xuống dưới.</div>
+                            </div>
+                            <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                <div class="font-bold text-orange-600 min-w-[100px]">Rẽ nhánh:</div>
+                                <div>Khối lệnh thực hiện dựa trên điều kiện ($if$).</div>
+                            </div>
+                            <div class="flex gap-4 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                <div class="font-bold text-emerald-600 min-w-[100px]">Lặp:</div>
+                                <div>Khối lệnh lặp lại tùy theo điều kiện ($for, while$).</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="code-2" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+                    </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100">
+                    <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4 bg-slate-100 flex items-center justify-center">
+                        <p class="text-slate-400 italic text-sm text-center px-4">Video hướng dẫn thuật toán chi tiết cho 10 bài tập trên đang được biên tập...</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+    `
+}
             ,
             {
             title: "BÀI 22: KIỂU DỮ LIỆU DANH SÁCH",
