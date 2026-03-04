@@ -705,6 +705,12 @@ window.courseContent = [
                         </summary>
                         <div class="p-6 pt-0 border-t border-slate-100 text-slate-700">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 text-xs md:text-sm p-2">
+                                <!-- Danh sách mẫu -->
+                                <p class="font-black text-orange-600"> Danh sách mẫu </p>
+                                <p class="text-slate-600 mt-1">a = [7, 2, 5, 2, 9, 4, 7, 6]</p>
+                                <p class="text-slate-600 mt-1">b = [10, 3, 8, 3, 1, 6, 9, 2]</p>
+                                <p class="text-slate-600 mt-1">c = [4, 4, 7, 1, 0, 5, 8, 2]</p>
+                                </div>
                                 <!-- Bài 1 -->
                                 <div class="p-3 bg-white border border-slate-100 rounded-xl shadow-sm hover:border-orange-200 transition-colors">
                                     <p class="font-black text-orange-600">Bài 1. Truy cập phần tử</p>
