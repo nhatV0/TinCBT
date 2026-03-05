@@ -597,7 +597,7 @@ window.courseContent = [
                 </div>
             </details>
 
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
                 <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
                     <div class="flex items-center gap-3">
                         <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="code-2" class="w-5 h-5"></i></div>
@@ -606,7 +606,99 @@ window.courseContent = [
                     <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
                 </summary>
                 <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+                    <!-- Danh sách bài tập -->
+                    <div class="grid grid-cols-1 gap-4 mt-4">
+                        <!-- Câu 1 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 1. In các số từ $1$ đến $n$</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số từ $1$ đến $n$, mỗi số cách nhau một khoảng trắng.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 5 → <b>Output:</b> 1 2 3 4 5
+                            </div>
+                        </div>
+
+                        <!-- Câu 2 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 2. Tính tổng các số từ $1$ đến $n$</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Dùng vòng lặp $while$ để tính tổng các số từ $1$ đến $n$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 4 → <b>Output:</b> 10
+                            </div>
+                        </div>
+
+                        <!-- Câu 3 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 3. In các số chẵn nhỏ hơn $n$</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để in ra các số chẵn nhỏ hơn $n$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 10 → <b>Output:</b> 2 4 6 8
+                            </div>
+                        </div>
+
+                        <!-- Câu 4 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 4. Đếm số chữ số của một số</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào một số nguyên dương $n$. Dùng vòng lặp $while$ để đếm xem số đó có bao nhiêu chữ số.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 12345 → <b>Output:</b> 5
+                            </div>
+                        </div>
+
+                        <!-- Câu 5 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 5. Tính tổng các chữ số của một số</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để tính tổng các chữ số của $n$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 123 → <b>Output:</b> 6
+                            </div>
+                        </div>
+
+                        <!-- Câu 6 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 6. Đảo ngược một số</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Dùng vòng lặp $while$ để đảo ngược thứ tự các chữ số của $n$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 1203 → <b>Output:</b> 3021
+                            </div>
+                        </div>
+
+                        <!-- Câu 7 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 7. Kiểm tra số đối xứng</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập vào số nguyên dương $n$. Sử dụng vòng lặp $while$ để kiểm tra xem $n$ có phải là số đối xứng hay không.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 1221 → <b>Output:</b> YES
+                            </div>
+                        </div>
+
+                        <!-- Câu 8 -->
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                            <p class="font-bold text-blue-900">Câu 8. Tìm ước chung lớn nhất (UCLN)</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1 italic">Thuật toán Euclid: Trong khi $b \neq 0$, thực hiện $r = a \% b; a = b; b = r$. Kết quả là $a$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 24 36 → <b>Output:</b> 12
+                            </div>
+                        </div>
+
+                        <!-- Câu 9 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 9. Nhập số cho đến khi gặp số âm</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Liên tục nhập các số nguyên. Dùng vòng lặp $while$ để tính tổng cho đến khi gặp số âm thì dừng (không tính số âm).</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 5 3 7 -1 → <b>Output:</b> 15
+                            </div>
+                        </div>
+
+                        <!-- Câu 10 -->
+                        <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                            <p class="font-bold text-indigo-900">Câu 10. Tìm số nhỏ nhất trong dãy</p>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1">Nhập số lượng $n$, sau đó nhập $n$ số. Dùng $while$ để tìm số nhỏ nhất.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                <b>Input:</b> 5 (dãy 3 7 2 9 4) → <b>Output:</b> 2
+                            </div>
+                        </div>
                     </div>
+                </div>
             </details>
 
             <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
