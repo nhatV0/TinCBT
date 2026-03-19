@@ -325,45 +325,7 @@
                 alert("Lỗi tải dữ liệu công cụ/khóa học.");
             };
         }
-
-        async function selectCourse(courseId) {
-            let found = null;
-            Object.values(window.courses).forEach(group => {
-                const c = group.find(item => item.id === courseId);
-                if(c) found = c;
-            });
-            if (!found) return;
-
-            document.getElementById('loader').classList.remove('hidden');
-            const oldScript = document.getElementById('course-data-script');
-            if(oldScript) oldScript.remove();
-            window.courseContent = null;
-
-            const script = document.createElement('script');
-            script.id = 'course-data-script';
-            script.src = found.dataPath + '?v=' + Date.now();
-            document.head.appendChild(script);
-
-            script.onload = () => {
-                document.getElementById('loader').classList.add('hidden');
-                if (window.courseContent) {
-                    activeCourse = { ...found, content: window.courseContent };
-                    document.getElementById('dashboard').classList.add('hidden');
-                    document.getElementById('learning-screen').classList.remove('hidden');
-                    document.getElementById('nav-info').classList.remove('hidden');
-                    document.getElementById('sidebar-course-title').innerText = activeCourse.title;
-                    renderPlaylist();
-                    playLesson(0, 0);
-                    
-                    if(window.innerWidth < 768) closeSidebarMobile();
-                }
-            };
-            script.onerror = () => {
-                document.getElementById('loader').classList.add('hidden');
-                alert("Lỗi tải dữ liệu khóa học.");
-            };
-        }
-
+        
         function renderPlaylist() {
             const container = document.getElementById('playlist-container');
             let html = '';
