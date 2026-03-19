@@ -250,8 +250,7 @@
                 setTimeout(() => modal.classList.add('hidden'), 200);
             }
         }
-
-        // Vẽ danh sách công cụ từ data.js
+        // 1. Hàm vẽ danh sách công cụ từ mảng teachingTools trong data.js
         function renderTools() {
             const grid = document.getElementById('tool-grid');
             const tools = window.teachingTools || [];
@@ -262,7 +261,7 @@
             }
 
             grid.innerHTML = tools.map(tool => {
-                // Logic xử lý click: Ưu tiên dataPath để mở nội bộ, nếu không có thì mở URL ngoài
+                // Kiểm tra: Nếu có dataPath thì gọi selectCourse nội bộ, ngược lại mở URL ngoài
                 const clickAction = tool.dataPath 
                     ? `toggleToolModal(false); selectCourse('${tool.id}', true);` 
                     : `window.open('${tool.url}', '_blank')`;
@@ -280,52 +279,71 @@
             lucide.createIcons();
         }
 
-        // Cập nhật lại hàm selectCourse một chút để nhận diện được công cụ từ mảng teachingTools
-        async function selectCourse(courseId, isTool = false) {
+        // 2. Hàm xử lý nạp dữ liệu (Dùng chung cho cả Khóa học và Công cụ giảng dạy)
+        async function selectCourse(courseId, isFromTools = false) {
             let found = null;
-            
-            if (isTool) {
+
+            // Bước A: Tìm kiếm dữ liệu dựa trên nguồn nhấn
+            if (isFromTools) {
+                // Nếu nhấn từ Modal công cụ
                 found = (window.teachingTools || []).find(item => item.id === courseId);
             } else {
-                Object.values(window.courses).forEach(group => {
-                    const c = group.find(item => item.id === courseId);
-                    if(c) found = c;
-                });
+                // Nếu nhấn từ Dashboard (Khóa học chính)
+                if (window.courses) {
+                    Object.values(window.courses).forEach(group => {
+                        const c = group.find(item => item.id === courseId);
+                        if (c) found = c;
+                    });
+                }
             }
 
-            if (!found || !found.dataPath) return;
+            // Kiểm tra nếu không tìm thấy hoặc không có đường dẫn file dữ liệu
+            if (!found || !found.dataPath) {
+                console.error("Không tìm thấy dữ liệu cho ID:", courseId);
+                return;
+            }
 
+            // Bước B: Hiển thị Loading và dọn dẹp Script cũ
             document.getElementById('loader').classList.remove('hidden');
             const oldScript = document.getElementById('course-data-script');
-            if(oldScript) oldScript.remove();
+            if (oldScript) oldScript.remove();
             
-            // Reset biến chứa dữ liệu để nạp file mới
+            // Quan trọng: Xóa dữ liệu cũ trước khi nạp file JS mới
             window.courseContent = null; 
 
+            // Bước C: Tạo và nạp file JS dữ liệu bài học (vd: canva.js, lop10.js)
             const script = document.createElement('script');
             script.id = 'course-data-script';
-            script.src = found.dataPath + '?v=' + Date.now();
+            script.src = found.dataPath + '?v=' + Date.now(); // Tránh cache trình duyệt
             document.head.appendChild(script);
 
             script.onload = () => {
                 document.getElementById('loader').classList.add('hidden');
+                
+                // Sau khi file .js nạp xong, nó sẽ đổ dữ liệu vào biến window.courseContent
                 if (window.courseContent) {
                     activeCourse = { ...found, content: window.courseContent };
+                    
+                    // Chuyển đổi giao diện sang màn hình học tập
                     document.getElementById('dashboard').classList.add('hidden');
                     document.getElementById('learning-screen').classList.remove('hidden');
                     document.getElementById('nav-info').classList.remove('hidden');
                     document.getElementById('sidebar-course-title').innerText = activeCourse.title;
-                    renderPlaylist();
-                    playLesson(0, 0);
-                    if(window.innerWidth < 768) closeSidebarMobile();
+                    
+                    renderPlaylist(); // Vẽ danh sách bài học bên trái
+                    playLesson(0, 0); // Tự động mở bài đầu tiên
+                    
+                    if (window.innerWidth < 768) closeSidebarMobile();
+                } else {
+                    alert("Tệp dữ liệu rỗng hoặc không đúng cấu trúc (window.courseContent).");
                 }
             };
+
             script.onerror = () => {
                 document.getElementById('loader').classList.add('hidden');
-                alert("Lỗi tải dữ liệu công cụ/khóa học.");
+                alert("Lỗi: Không thể nạp tệp dữ liệu từ đường dẫn: " + found.dataPath);
             };
         }
-        
         function renderPlaylist() {
             const container = document.getElementById('playlist-container');
             let html = '';
