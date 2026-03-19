@@ -1,256 +1,257 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hệ thống học tập - THPT Chuyên Bến Tre</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- MathJax để hiển thị công thức Toán học chuyên nghiệp -->
-    <script>
-        window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-            svg: { fontCache: 'global' }
-        };
-    </script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Nạp cấu trúc dữ liệu chính -->
-    <script src="data.js"></script>
-    
-    <style>
-        body { 
-            background-color: #f8fafc; 
-            font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif; 
-            scroll-behavior: smooth;
-        }
-        .lesson-active { 
-            background-color: #eff6ff; 
-            color: #2563eb; 
-            border-right: 6px solid #2563eb; 
-            font-weight: bold; 
-        }
-        .video-container { 
-            position: relative; 
-            padding-bottom: 56.25%; 
-            height: 0; 
-            overflow: hidden; 
-            border-radius: 16px; 
-            background: #000; 
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border: 2px solid white;
-        }
-        @media (min-width: 768px) {
-            .video-container { border-radius: 24px; border: 4px solid white; }
-        }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        
-        .course-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 24px; position: relative; }
-        .course-card:hover { transform: translateY(-5px); }
-        
-        /* Tooltip mô tả chỉ hiện trên desktop */
-        @media (min-width: 1024px) {
-            .course-desc { 
-                position: absolute; bottom: 110%; left: 0; right: 0; 
-                background: #1e293b; color: white; padding: 1.25rem; 
-                border-radius: 1rem; font-size: 0.85rem; opacity: 0; 
-                transform: translateY(10px); transition: all 0.3s ease;
-                pointer-events: none; z-index: 50; 
-            }
-            .course-card:hover .course-desc { opacity: 1; transform: translateY(0); }
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hệ thống học tập - THPT Chuyên Bến Tre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- MathJax để hiển thị công thức Toán học chuyên nghiệp -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Nạp cấu trúc dữ liệu chính -->
+    <script src="data.js"></script>
+    
+    <style>
+        body { 
+            background-color: #f8fafc; 
+            font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif; 
+            scroll-behavior: smooth;
+        }
+        .lesson-active { 
+            background-color: #eff6ff; 
+            color: #2563eb; 
+            border-right: 6px solid #2563eb; 
+            font-weight: bold; 
+        }
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 16px; 
+            background: #000; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 2px solid white;
+        }
+        @media (min-width: 768px) {
+            .video-container { border-radius: 24px; border: 4px solid white; }
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        .course-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 24px; position: relative; }
+        .course-card:hover { transform: translateY(-5px); }
+        
+        /* Tooltip mô tả chỉ hiện trên desktop */
+        @media (min-width: 1024px) {
+            .course-desc { 
+                position: absolute; bottom: 110%; left: 0; right: 0; 
+                background: #1e293b; color: white; padding: 1.25rem; 
+                border-radius: 1rem; font-size: 0.85rem; opacity: 0; 
+                transform: translateY(10px); transition: all 0.3s ease;
+                pointer-events: none; z-index: 50; 
+            }
+            .course-card:hover .course-desc { opacity: 1; transform: translateY(0); }
+        }
 
-        footer { background: linear-gradient(to right, #0f172a, #1e293b); color: white; }
+        footer { background: linear-gradient(to right, #0f172a, #1e293b); color: white; }
 
-        pre {
-            scrollbar-width: thin;
-            scrollbar-color: #475569 transparent;
-        }
-        
-        details summary::-webkit-details-marker { display: none; }
+        pre {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 transparent;
+        }
+        
+        details summary::-webkit-details-marker { display: none; }
 
-        /* Custom scrollbar cho Mobile */
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Custom scrollbar cho Mobile */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Modal Animation */
-        #tool-modal.active { display: flex; animation: modalBlurIn 0.3s ease-out; }
-        @keyframes modalBlurIn {
-            from { opacity: 0; backdrop-filter: blur(0px); }
-            to { opacity: 1; backdrop-filter: blur(4px); }
-        }
-    </style>
+        /* Modal Animation */
+        #tool-modal.active { display: flex; animation: modalBlurIn 0.3s ease-out; }
+        @keyframes modalBlurIn {
+            from { opacity: 0; backdrop-filter: blur(0px); }
+            to { opacity: 1; backdrop-filter: blur(4px); }
+        }
+    </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden text-slate-800">
 
-    <!-- Loading Overlay -->
-    <div id="loader" class="fixed inset-0 bg-white/95 flex items-center justify-center z-[100] hidden">
-        <div class="flex flex-col items-center gap-4 p-6 text-center">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
-            <span class="text-base font-bold text-blue-600 uppercase tracking-tighter animate-pulse">Đang tải dữ liệu...</span>
-        </div>
-    </div>
+    <!-- Loading Overlay -->
+    <div id="loader" class="fixed inset-0 bg-white/95 flex items-center justify-center z-[100] hidden">
+        <div class="flex flex-col items-center gap-4 p-6 text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+            <span class="text-base font-bold text-blue-600 uppercase tracking-tighter animate-pulse">Đang tải dữ liệu...</span>
+        </div>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="h-16 md:h-20 bg-white border-b flex items-center justify-between px-4 md:px-8 shrink-0 z-20 shadow-sm">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showDashboard()">
-            <img src="BenTreHighSchool.jpg" alt="Logo" class="h-10 md:h-12 w-auto" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Vietnam.svg'">
-            <div class="flex flex-col">
-                <span class="font-black text-lg md:text-2xl uppercase text-slate-900 leading-none">THPT CHUYÊN</span>
-                <span class="font-bold text-blue-600 text-base md:text-lg leading-none italic">BẾN TRE</span>
-            </div>
-        </div>
-        
-        <div class="flex items-center gap-2 md:gap-4">
-            <!-- Nút công cụ giảng dạy mới -->
-            <button onclick="toggleToolModal(true)" class="flex items-center gap-2 px-3 py-2 md:px-5 md:py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-full font-bold text-xs md:text-sm transition-all border border-amber-200">
-                <i data-lucide="hammer" class="w-4 h-4"></i>
-                <span class="hidden sm:inline">Công cụ giảng dạy</span>
-            </button>
+    <!-- Navigation -->
+    <nav class="h-16 md:h-20 bg-white border-b flex items-center justify-between px-4 md:px-8 shrink-0 z-20 shadow-sm">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="showDashboard()">
+            <img src="BenTreHighSchool.jpg" alt="Logo" class="h-10 md:h-12 w-auto" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Vietnam.svg'">
+            <div class="flex flex-col">
+                <span class="font-black text-lg md:text-2xl uppercase text-slate-900 leading-none">THPT CHUYÊN</span>
+                <span class="font-bold text-blue-600 text-base md:text-lg leading-none italic">BẾN TRE</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-2 md:gap-4">
+            <!-- Nút công cụ giảng dạy mới -->
+            <button onclick="toggleToolModal(true)" class="flex items-center gap-2 px-3 py-2 md:px-5 md:py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-full font-bold text-xs md:text-sm transition-all border border-amber-200">
+                <i data-lucide="hammer" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Công cụ giảng dạy</span>
+            </button>
 
-            <div id="nav-info" class="hidden md:flex items-center gap-4">
-                <button onclick="showDashboard()" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold shadow-md hover:bg-blue-700 transition-all flex items-center gap-2 text-sm">
-                    <i data-lucide="home" class="w-4 h-4"></i> Trang chủ
-                </button>
-            </div>
-            <!-- Mobile Home Button -->
-            <button onclick="showDashboard()" class="md:hidden p-2 text-slate-600 hover:text-blue-600">
-                <i data-lucide="home"></i>
-            </button>
-        </div>
-    </nav>
+            <div id="nav-info" class="hidden md:flex items-center gap-4">
+                <button onclick="showDashboard()" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold shadow-md hover:bg-blue-700 transition-all flex items-center gap-2 text-sm">
+                    <i data-lucide="home" class="w-4 h-4"></i> Trang chủ
+                </button>
+            </div>
+            <!-- Mobile Home Button -->
+            <button onclick="showDashboard()" class="md:hidden p-2 text-slate-600 hover:text-blue-600">
+                <i data-lucide="home"></i>
+            </button>
+        </div>
+    </nav>
 
-    <!-- Dashboard Screen -->
-    <div id="dashboard" class="flex-1 overflow-y-auto">
-        <div class="max-w-7xl mx-auto p-6 md:p-16">
-            <header class="mb-12 md:mb-20 text-center">
-                <h1 class="text-5xl md:text-9xl font-black text-slate-900 mb-4 tracking-tighter italic drop-shadow-md">TIN HỌC</h1>
-                <div class="inline-flex items-center gap-3 px-6 py-2 md:px-8 md:py-3 bg-slate-900 text-white rounded-full text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] shadow-2xl">
-                    <span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span>
-                    Hệ thống học liệu số 4.0
-                </div>
-            </header>
-            
-            <div id="dashboard-content" class="space-y-12 md:space-y-20"></div>
-        </div>
+    <!-- Dashboard Screen -->
+    <div id="dashboard" class="flex-1 overflow-y-auto">
+        <div class="max-w-7xl mx-auto p-6 md:p-16">
+            <header class="mb-12 md:mb-20 text-center">
+                <h1 class="text-5xl md:text-9xl font-black text-slate-900 mb-4 tracking-tighter italic drop-shadow-md">TIN HỌC</h1>
+                <div class="inline-flex items-center gap-3 px-6 py-2 md:px-8 md:py-3 bg-slate-900 text-white rounded-full text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] shadow-2xl">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span>
+                    Hệ thống học liệu số 4.0
+                </div>
+            </header>
+            
+            <div id="dashboard-content" class="space-y-12 md:space-y-20"></div>
+        </div>
 
-        <footer class="mt-20 py-12 px-6 md:px-8 border-t border-slate-200">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div class="flex items-center gap-5">
-                    <img id="t-avatar" src="" class="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-2xl bg-slate-100 object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1995/1995515.png'">
-                    <div>
-                        <h3 id="t-name" class="text-xl md:text-2xl font-black mb-1 italic text-white tracking-tight"></h3>
-                        <p id="t-role" class="text-slate-400 font-bold text-[10px] md:text-xs uppercase tracking-widest mb-3"></p>
-                        <div class="flex gap-3">
-                            <a id="t-fb" href="#" target="_blank" class="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-all"><i data-lucide="facebook" class="w-4 h-4"></i></a>
-                            <a id="t-zalo" href="#" target="_blank" class="p-2 bg-sky-500 hover:bg-sky-400 rounded-lg transition-all"><i data-lucide="phone" class="w-4 h-4"></i></a>
-                            <a id="t-mail" href="#" class="p-2 bg-rose-500 hover:bg-rose-400 rounded-lg transition-all"><i data-lucide="mail" class="w-4 h-4"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:text-right text-slate-400 text-sm">
-                    <p class="font-bold mb-1 italic">Trường THPT Chuyên Bến Tre</p>
-                    <p class="text-[10px] md:text-xs uppercase tracking-tighter">Sáng tạo - Kỷ nguyên số - Thành công</p>
-                </div>
-            </div>
-        </footer>
-    </div>
+        <footer class="mt-20 py-12 px-6 md:px-8 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div class="flex items-center gap-5">
+                    <img id="t-avatar" src="" class="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white shadow-2xl bg-slate-100 object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1995/1995515.png'">
+                    <div>
+                        <h3 id="t-name" class="text-xl md:text-2xl font-black mb-1 italic text-white tracking-tight"></h3>
+                        <p id="t-role" class="text-slate-400 font-bold text-[10px] md:text-xs uppercase tracking-widest mb-3"></p>
+                        <div class="flex gap-3">
+                            <a id="t-fb" href="#" target="_blank" class="p-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-all"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a id="t-zalo" href="#" target="_blank" class="p-2 bg-sky-500 hover:bg-sky-400 rounded-lg transition-all"><i data-lucide="phone" class="w-4 h-4"></i></a>
+                            <a id="t-mail" href="#" class="p-2 bg-rose-500 hover:bg-rose-400 rounded-lg transition-all"><i data-lucide="mail" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:text-right text-slate-400 text-sm">
+                    <p class="font-bold mb-1 italic">Trường THPT Chuyên Bến Tre</p>
+                    <p class="text-[10px] md:text-xs uppercase tracking-tighter">Sáng tạo - Kỷ nguyên số - Thành công</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-    <!-- Learning Screen -->
-    <div id="learning-screen" class="hidden flex flex-col md:flex-row flex-1 overflow-hidden">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="w-full md:w-80 lg:w-96 bg-white border-r flex flex-col shrink-0 z-10 shadow-2xl transition-all duration-300 overflow-hidden">
-            <div class="p-4 md:p-6 border-b bg-slate-50 flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-0.5">Đang học</p>
-                    <h2 id="sidebar-course-title" class="font-bold text-slate-800 text-xs md:text-sm uppercase truncate max-w-[180px] md:max-w-[200px]"></h2>
-                </div>
-                <button onclick="showDashboard()" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-colors">
-                    <i data-lucide="log-out" class="w-5 h-5"></i>
-                </button>
-            </div>
-            
-            <div class="overflow-y-auto flex-1 scrollbar-hide" id="playlist-container"></div>
-            
-            <div class="hidden md:flex p-4 bg-slate-50 border-t items-center gap-3">
-                <img id="t-avatar-small" src="" class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover">
-                <div class="text-[11px]">
-                    <p class="font-black text-slate-800 uppercase leading-none mb-1" id="t-name-small"></p>
-                    <p class="text-slate-500 font-bold" id="t-mail-small"></p>
-                </div>
-            </div>
-        </aside>
-        
-        <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto bg-[#f1f5f9] p-4 md:p-10 relative">
-            <!-- Mobile Toggle Sidebar Button -->
-            <button id="mobile-toggle-btn" onclick="toggleSidebarMobile()" class="md:hidden mb-4 w-full py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center gap-2 font-bold text-blue-600 text-sm">
-                <i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học
-            </button>
+    <!-- Learning Screen -->
+    <div id="learning-screen" class="hidden flex flex-col md:flex-row flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full md:w-80 lg:w-96 bg-white border-r flex flex-col shrink-0 z-10 shadow-2xl transition-all duration-300 overflow-hidden">
+            <div class="p-4 md:p-6 border-b bg-slate-50 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-0.5">Đang học</p>
+                    <h2 id="sidebar-course-title" class="font-bold text-slate-800 text-xs md:text-sm uppercase truncate max-w-[180px] md:max-w-[200px]"></h2>
+                </div>
+                <button onclick="showDashboard()" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-colors">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="overflow-y-auto flex-1 scrollbar-hide" id="playlist-container"></div>
+            
+            <div class="hidden md:flex p-4 bg-slate-50 border-t items-center gap-3">
+                <img id="t-avatar-small" src="" class="w-10 h-10 rounded-full border-2 border-white shadow-md object-cover">
+                <div class="text-[11px]">
+                    <p class="font-black text-slate-800 uppercase leading-none mb-1" id="t-name-small"></p>
+                    <p class="text-slate-500 font-bold" id="t-mail-small"></p>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto bg-[#f1f5f9] p-4 md:p-10 relative">
+            <!-- Mobile Toggle Sidebar Button -->
+            <button id="mobile-toggle-btn" onclick="toggleSidebarMobile()" class="md:hidden mb-4 w-full py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center gap-2 font-bold text-blue-600 text-sm">
+                <i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học
+            </button>
 
-            <div class="max-w-5xl mx-auto pb-20">
-                <div id="video-wrapper" class="video-container mb-6 md:mb-10">
-                    <iframe id="main-video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                
-                <div class="bg-white rounded-2xl md:rounded-[32px] p-6 md:p-12 shadow-sm border border-slate-200">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 md:mb-8 pb-6 md:pb-8 border-b border-slate-100">
-                        <h1 id="current-lesson-title" class="text-xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight"></h1>
-                        <div id="download-zone" class="w-full md:w-auto"></div>
-                    </div>
-                    
-                    <div id="current-lesson-desc" class="text-slate-700 text-sm md:text-lg leading-relaxed"></div>
-                </div>
-            </div>
-        </main>
-    </div>
+            <div class="max-w-5xl mx-auto pb-20">
+                <div id="video-wrapper" class="video-container mb-6 md:mb-10">
+                    <iframe id="main-video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <div class="bg-white rounded-2xl md:rounded-[32px] p-6 md:p-12 shadow-sm border border-slate-200">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 md:mb-8 pb-6 md:pb-8 border-b border-slate-100">
+                        <h1 id="current-lesson-title" class="text-xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight"></h1>
+                        <div id="download-zone" class="w-full md:w-auto"></div>
+                    </div>
+                    
+                    <div id="current-lesson-desc" class="text-slate-700 text-sm md:text-lg leading-relaxed"></div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-    <!-- Modal Công cụ giảng dạy -->
-    <div id="tool-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white w-full max-w-4xl rounded-[32px] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-6 md:p-8 border-b bg-slate-50 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg">
-                        <i data-lucide="layout-grid" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-black uppercase italic text-slate-800 tracking-tight">Tiện ích giảng dạy</h2>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dành cho Giáo viên & Học sinh</p>
-                    </div>
-                </div>
-                <button onclick="toggleToolModal(false)" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-all">
-                    <i data-lucide="x" class="w-8 h-8"></i>
-                </button>
-            </div>
-            
-            <div id="tool-grid" class="p-6 md:p-10 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Danh sách công cụ sẽ được nạp tự động từ data.js -->
-            </div>
+    <!-- Modal Công cụ giảng dạy -->
+    <div id="tool-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-[32px] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-6 md:p-8 border-b bg-slate-50 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg">
+                        <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-black uppercase italic text-slate-800 tracking-tight">Tiện ích giảng dạy</h2>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dành cho Giáo viên & Học sinh</p>
+                    </div>
+                </div>
+                <button onclick="toggleToolModal(false)" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-all">
+                    <i data-lucide="x" class="w-8 h-8"></i>
+                </button>
+            </div>
+            
+            <div id="tool-grid" class="p-6 md:p-10 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Danh sách công cụ sẽ được nạp tự động từ data.js -->
+            </div>
 
-            <div class="p-4 bg-slate-50 text-center border-t">
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Hỗ trợ tương tác lớp học 4.0</p>
-            </div>
-        </div>
-    </div>
+            <div class="p-4 bg-slate-50 text-center border-t">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Hỗ trợ tương tác lớp học 4.0</p>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        let activeCourse = null;
-        let isMobileSidebarOpen = false;
+    <script>
+        let activeCourse = null;
+        let isMobileSidebarOpen = false;
 
-        // Hàm đóng/mở Modal công cụ
-        function toggleToolModal(show) {
-            const modal = document.getElementById('tool-modal');
-            if (show) {
-                renderTools(); 
-                modal.classList.add('active');
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.remove('active');
-                setTimeout(() => modal.classList.add('hidden'), 200);
-            }
-        }
-        // Vẽ danh sách công cụ từ data.js
+        // Hàm đóng/mở Modal công cụ
+        function toggleToolModal(show) {
+            const modal = document.getElementById('tool-modal');
+            if (show) {
+                renderTools(); 
+                modal.classList.add('active');
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.remove('active');
+                setTimeout(() => modal.classList.add('hidden'), 200);
+            }
+        }
+
+        // Vẽ danh sách công cụ từ data.js
         function renderTools() {
             const grid = document.getElementById('tool-grid');
             const tools = window.teachingTools || [];
@@ -364,116 +365,116 @@
             };
         }
 
-        function renderPlaylist() {
-            const container = document.getElementById('playlist-container');
-            let html = '';
-            activeCourse.content.forEach((chapter, cIndex) => {
-                html += `<div class="px-5 py-3 bg-slate-100 border-y text-[9px] md:text-[10px] font-black text-slate-500 uppercase italic tracking-widest">${chapter.chapterName}</div>`;
-                chapter.lessons.forEach((lesson, lIndex) => {
-                    html += `
-                        <div onclick="playLesson(${cIndex}, ${lIndex})" id="l-${cIndex}-${lIndex}" class="flex items-center gap-3 px-5 py-4 cursor-pointer hover:bg-blue-50 border-b text-xs md:text-sm lesson-item transition-all group">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-black group-hover:bg-blue-600 group-hover:text-white transition-all shrink-0">
-                                ${lIndex + 1}
-                            </div>
-                            <span class="flex-1 font-bold text-slate-700">${lesson.title}</span>
-                        </div>`;
-                });
-            });
-            container.innerHTML = html;
-        }
+        function renderPlaylist() {
+            const container = document.getElementById('playlist-container');
+            let html = '';
+            activeCourse.content.forEach((chapter, cIndex) => {
+                html += `<div class="px-5 py-3 bg-slate-100 border-y text-[9px] md:text-[10px] font-black text-slate-500 uppercase italic tracking-widest">${chapter.chapterName}</div>`;
+                chapter.lessons.forEach((lesson, lIndex) => {
+                    html += `
+                        <div onclick="playLesson(${cIndex}, ${lIndex})" id="l-${cIndex}-${lIndex}" class="flex items-center gap-3 px-5 py-4 cursor-pointer hover:bg-blue-50 border-b text-xs md:text-sm lesson-item transition-all group">
+                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-black group-hover:bg-blue-600 group-hover:text-white transition-all shrink-0">
+                                ${lIndex + 1}
+                            </div>
+                            <span class="flex-1 font-bold text-slate-700">${lesson.title}</span>
+                        </div>`;
+                });
+            });
+            container.innerHTML = html;
+        }
 
-        function playLesson(cIndex, lIndex) {
-            const lesson = activeCourse.content[cIndex].lessons[lIndex];
-            const videoFrame = document.getElementById('main-video');
-            const wrapper = document.getElementById('video-wrapper');
-            
-            videoFrame.src = lesson.videoId ? `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0` : "";
-            wrapper.style.display = lesson.videoId ? "block" : "none";
-            
-            document.getElementById('current-lesson-title').innerText = lesson.title;
-            
-            let contentHtml = `<p class="mb-5 font-bold text-slate-600 italic border-l-4 border-slate-200 pl-4 text-sm md:text-base">${lesson.desc || ''}</p>`;
-            
-            if (lesson.contentHtml) {
-                contentHtml += lesson.contentHtml;
-            } else if (lesson.activities) {
-                lesson.activities.forEach(act => {
-                    contentHtml += `
-                        <div class="bg-blue-50 border-l-8 border-blue-500 p-5 rounded-r-xl shadow-sm mb-4">
-                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest">${act.type}</span>
-                            <div class="text-slate-800 font-bold text-base">${act.content}</div>
-                        </div>`;
-                });
-            }
-            
-            document.getElementById('current-lesson-desc').innerHTML = contentHtml;
-            
-            const dz = document.getElementById('download-zone');
-            dz.innerHTML = (lesson.downloadUrl && lesson.downloadUrl !== "#") ? 
-                `<a href="${lesson.downloadUrl}" target="_blank" class="w-full md:w-auto bg-slate-900 text-white px-5 py-3 rounded-xl text-xs font-black flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-lg active:scale-95">
-                    <i data-lucide="download-cloud" class="w-4 h-4"></i> TẢI TÀI LIỆU
-                </a>` : '';
+        function playLesson(cIndex, lIndex) {
+            const lesson = activeCourse.content[cIndex].lessons[lIndex];
+            const videoFrame = document.getElementById('main-video');
+            const wrapper = document.getElementById('video-wrapper');
+            
+            videoFrame.src = lesson.videoId ? `https://www.youtube.com/embed/${lesson.videoId}?autoplay=1&rel=0` : "";
+            wrapper.style.display = lesson.videoId ? "block" : "none";
+            
+            document.getElementById('current-lesson-title').innerText = lesson.title;
+            
+            let contentHtml = `<p class="mb-5 font-bold text-slate-600 italic border-l-4 border-slate-200 pl-4 text-sm md:text-base">${lesson.desc || ''}</p>`;
+            
+            if (lesson.contentHtml) {
+                contentHtml += lesson.contentHtml;
+            } else if (lesson.activities) {
+                lesson.activities.forEach(act => {
+                    contentHtml += `
+                        <div class="bg-blue-50 border-l-8 border-blue-500 p-5 rounded-r-xl shadow-sm mb-4">
+                            <span class="text-[9px] font-black text-blue-600 uppercase tracking-widest">${act.type}</span>
+                            <div class="text-slate-800 font-bold text-base">${act.content}</div>
+                        </div>`;
+                });
+            }
+            
+            document.getElementById('current-lesson-desc').innerHTML = contentHtml;
+            
+            const dz = document.getElementById('download-zone');
+            dz.innerHTML = (lesson.downloadUrl && lesson.downloadUrl !== "#") ? 
+                `<a href="${lesson.downloadUrl}" target="_blank" class="w-full md:w-auto bg-slate-900 text-white px-5 py-3 rounded-xl text-xs font-black flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-lg active:scale-95">
+                    <i data-lucide="download-cloud" class="w-4 h-4"></i> TẢI TÀI LIỆU
+                </a>` : '';
 
-            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('lesson-active'));
-            const activeEl = document.getElementById(`l-${cIndex}-${lIndex}`);
-            if(activeEl) activeEl.classList.add('lesson-active');
-            
-            lucide.createIcons();
-            
-            if (window.MathJax && window.MathJax.typeset) {
-                window.MathJax.typeset();
-            }
+            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('lesson-active'));
+            const activeEl = document.getElementById(`l-${cIndex}-${lIndex}`);
+            if(activeEl) activeEl.classList.add('lesson-active');
+            
+            lucide.createIcons();
+            
+            if (window.MathJax && window.MathJax.typeset) {
+                window.MathJax.typeset();
+            }
 
-            if(window.innerWidth < 768) closeSidebarMobile();
-        }
+            if(window.innerWidth < 768) closeSidebarMobile();
+        }
 
-        function toggleSidebarMobile() {
-            const sidebar = document.getElementById('sidebar');
-            const btn = document.getElementById('mobile-toggle-btn');
-            if (!isMobileSidebarOpen) {
-                sidebar.style.height = "400px";
-                btn.innerHTML = `<i data-lucide="chevron-up" class="w-4 h-4"></i> Đóng danh sách`;
-            } else {
-                sidebar.style.height = "0px";
-                btn.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học`;
-            }
-            isMobileSidebarOpen = !isMobileSidebarOpen;
-            lucide.createIcons();
-        }
+        function toggleSidebarMobile() {
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.getElementById('mobile-toggle-btn');
+            if (!isMobileSidebarOpen) {
+                sidebar.style.height = "400px";
+                btn.innerHTML = `<i data-lucide="chevron-up" class="w-4 h-4"></i> Đóng danh sách`;
+            } else {
+                sidebar.style.height = "0px";
+                btn.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học`;
+            }
+            isMobileSidebarOpen = !isMobileSidebarOpen;
+            lucide.createIcons();
+        }
 
-        function closeSidebarMobile() {
-            if(window.innerWidth < 768) {
-                const sidebar = document.getElementById('sidebar');
-                const btn = document.getElementById('mobile-toggle-btn');
-                sidebar.style.height = "0px";
-                btn.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học`;
-                isMobileSidebarOpen = false;
-                lucide.createIcons();
-            }
-        }
+        function closeSidebarMobile() {
+            if(window.innerWidth < 768) {
+                const sidebar = document.getElementById('sidebar');
+                const btn = document.getElementById('mobile-toggle-btn');
+                sidebar.style.height = "0px";
+                btn.innerHTML = `<i data-lucide="menu" class="w-4 h-4"></i> Danh sách bài học`;
+                isMobileSidebarOpen = false;
+                lucide.createIcons();
+            }
+        }
 
-        function showDashboard() {
-            document.getElementById('dashboard').classList.remove('hidden');
-            document.getElementById('learning-screen').classList.add('hidden');
-            document.getElementById('nav-info').classList.add('hidden');
-            document.getElementById('main-video').src = '';
-            syncUI();
-        }
+        function showDashboard() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('learning-screen').classList.add('hidden');
+            document.getElementById('nav-info').classList.add('hidden');
+            document.getElementById('main-video').src = '';
+            syncUI();
+        }
 
-        window.onload = () => {
-            syncUI();
-            if(window.innerWidth < 768) {
-                document.getElementById('sidebar').style.height = "0px";
-            }
-        };
+        window.onload = () => {
+            syncUI();
+            if(window.innerWidth < 768) {
+                document.getElementById('sidebar').style.height = "0px";
+            }
+        };
 
-        window.onresize = () => {
-            if(window.innerWidth >= 768) {
-                document.getElementById('sidebar').style.height = "auto";
-            } else if(!isMobileSidebarOpen) {
-                document.getElementById('sidebar').style.height = "0px";
-            }
-        };
-    </script>
+        window.onresize = () => {
+            if(window.innerWidth >= 768) {
+                document.getElementById('sidebar').style.height = "auto";
+            } else if(!isMobileSidebarOpen) {
+                document.getElementById('sidebar').style.height = "0px";
+            }
+        };
+    </script>
 </body>
 </html>
