@@ -250,100 +250,120 @@
                 setTimeout(() => modal.classList.add('hidden'), 200);
             }
         }
-        // 1. Hàm vẽ danh sách công cụ từ mảng teachingTools trong data.js
-        function renderTools() {
-            const grid = document.getElementById('tool-grid');
-            const tools = window.teachingTools || [];
-            
-            if (tools.length === 0) {
-                grid.innerHTML = `<p class="col-span-full text-center text-slate-400 italic py-10">Chưa có công cụ nào được cấu hình trong data.js</p>`;
-                return;
-            }
+        // Vẽ danh sách công cụ từ data.js
+        function renderTools() {
+            const grid = document.getElementById('tool-grid');
+            const tools = window.teachingTools || [];
+            
+            if (tools.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-slate-400 italic py-10">Chưa có công cụ nào được cấu hình trong data.js</p>`;
+                return;
+            }
 
-            grid.innerHTML = tools.map(tool => {
-                // Kiểm tra: Nếu có dataPath thì gọi selectCourse nội bộ, ngược lại mở URL ngoài
-                const clickAction = tool.dataPath 
-                    ? `toggleToolModal(false); selectCourse('${tool.id}', true);` 
-                    : `window.open('${tool.url}', '_blank')`;
+            grid.innerHTML = tools.map(tool => `
+                <div onclick="window.open('${tool.url}', '_blank')" class="group p-6 bg-white border-2 border-slate-100 rounded-[24px] hover:border-amber-400 hover:shadow-xl cursor-pointer transition-all flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-amber-100">
+                        <i data-lucide="${tool.icon || 'external-link'}"></i>
+                    </div>
+                    <h4 class="font-black text-slate-900 uppercase text-xs mb-1 italic tracking-tight">${tool.title}</h4>
+                    <p class="text-[10px] text-slate-500 font-bold leading-snug line-clamp-2">${tool.desc || ''}</p>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
 
-                return `
-                    <div onclick="${clickAction}" class="group p-6 bg-white border-2 border-slate-100 rounded-[24px] hover:border-amber-400 hover:shadow-xl cursor-pointer transition-all flex flex-col items-center text-center">
-                        <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-amber-100">
-                            <i data-lucide="${tool.icon || 'external-link'}"></i>
-                        </div>
-                        <h4 class="font-black text-slate-900 uppercase text-xs mb-1 italic tracking-tight">${tool.title}</h4>
-                        <p class="text-[10px] text-slate-500 font-bold leading-snug line-clamp-2">${tool.description || ''}</p>
-                    </div>
-                `;
-            }).join('');
-            lucide.createIcons();
-        }
+        function syncUI() {
+            if(window.teacherInfo) {
+                const t = window.teacherInfo;
+                document.getElementById('t-name').innerText = t.name;
+                document.getElementById('t-role').innerText = t.role;
+                document.getElementById('t-fb').href = t.facebook;
+                document.getElementById('t-zalo').href = t.zalo;
+                document.getElementById('t-mail').href = `mailto:${t.email}`;
+                document.getElementById('t-avatar').src = t.avatar;
+                document.getElementById('t-name-small').innerText = "GV. " + t.name;
+                document.getElementById('t-mail-small').innerText = t.email;
+                document.getElementById('t-avatar-small').src = t.avatar;
+            }
 
-        // 2. Hàm xử lý nạp dữ liệu (Dùng chung cho cả Khóa học và Công cụ giảng dạy)
-        async function selectCourse(courseId, isFromTools = false) {
-            let found = null;
+            const container = document.getElementById('dashboard-content');
+            if(!window.courses) return;
+            
+            const sections = [
+                { label: 'Chương trình Chính khoa', key: 'chinhKhoa', color: 'blue', icon: 'book-open' },
+                { label: 'Lớp Chuyên Tin', key: 'chuyenTin', color: 'purple', icon: 'code-2' },
+                { label: 'Chuyên đề tự chọn', key: 'chuyenDe', color: 'emerald', icon: 'layers' },
+                { label: 'Khác', key: 'khac', color: 'amber', icon: 'more-horizontal' }
+            ];
 
-            // Bước A: Tìm kiếm dữ liệu dựa trên nguồn nhấn
-            if (isFromTools) {
-                // Nếu nhấn từ Modal công cụ
-                found = (window.teachingTools || []).find(item => item.id === courseId);
-            } else {
-                // Nếu nhấn từ Dashboard (Khóa học chính)
-                if (window.courses) {
-                    Object.values(window.courses).forEach(group => {
-                        const c = group.find(item => item.id === courseId);
-                        if (c) found = c;
-                    });
-                }
-            }
+            container.innerHTML = sections.map(sec => {
+                const list = window.courses[sec.key];
+                if (!list || list.length === 0) return '';
+                return `
+                <section>
+                    <div class="flex items-center gap-4 mb-6 md:mb-8">
+                        <div class="p-2.5 md:p-3 bg-${sec.color}-600 text-white rounded-xl md:rounded-2xl shadow-lg">
+                            <i data-lucide="${sec.icon}" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl font-black uppercase text-slate-800 tracking-tighter italic">${sec.label}</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+                        ${list.map(course => `
+                            <div onclick="selectCourse('${course.id}')" class="course-card bg-white p-6 md:p-8 border border-slate-200 hover:border-${sec.color}-400 hover:shadow-xl cursor-pointer group">
+                                <div class="hidden lg:block course-desc font-bold">${course.description || 'Học liệu điện tử môn Tin học.'}</div>
+                                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-${sec.color}-50 text-${sec.color}-600 flex items-center justify-center mb-5 group-hover:bg-${sec.color}-600 group-hover:text-white transition-all">
+                                    <i data-lucide="${course.icon || 'star'}" class="w-6 h-6 md:w-7 md:h-7"></i>
+                                </div>
+                                <h3 class="font-black text-lg md:text-xl text-slate-900 mb-2 leading-tight">${course.title}</h3>
+                                <div class="flex items-center gap-2 text-${sec.color}-600 font-bold text-[9px] md:text-[10px] uppercase tracking-widest">
+                                    <span>Vào học ngay</span> <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4"></i>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>`;
+            }).join('');
+            lucide.createIcons();
+        }
 
-            // Kiểm tra nếu không tìm thấy hoặc không có đường dẫn file dữ liệu
-            if (!found || !found.dataPath) {
-                console.error("Không tìm thấy dữ liệu cho ID:", courseId);
-                return;
-            }
+        async function selectCourse(courseId) {
+            let found = null;
+            Object.values(window.courses).forEach(group => {
+                const c = group.find(item => item.id === courseId);
+                if(c) found = c;
+            });
+            if (!found) return;
 
-            // Bước B: Hiển thị Loading và dọn dẹp Script cũ
-            document.getElementById('loader').classList.remove('hidden');
-            const oldScript = document.getElementById('course-data-script');
-            if (oldScript) oldScript.remove();
-            
-            // Quan trọng: Xóa dữ liệu cũ trước khi nạp file JS mới
-            window.courseContent = null; 
+            document.getElementById('loader').classList.remove('hidden');
+            const oldScript = document.getElementById('course-data-script');
+            if(oldScript) oldScript.remove();
+            window.courseContent = null;
 
-            // Bước C: Tạo và nạp file JS dữ liệu bài học (vd: canva.js, lop10.js)
-            const script = document.createElement('script');
-            script.id = 'course-data-script';
-            script.src = found.dataPath + '?v=' + Date.now(); // Tránh cache trình duyệt
-            document.head.appendChild(script);
+            const script = document.createElement('script');
+            script.id = 'course-data-script';
+            script.src = found.dataPath + '?v=' + Date.now();
+            document.head.appendChild(script);
 
-            script.onload = () => {
-                document.getElementById('loader').classList.add('hidden');
-                
-                // Sau khi file .js nạp xong, nó sẽ đổ dữ liệu vào biến window.courseContent
-                if (window.courseContent) {
-                    activeCourse = { ...found, content: window.courseContent };
-                    
-                    // Chuyển đổi giao diện sang màn hình học tập
-                    document.getElementById('dashboard').classList.add('hidden');
-                    document.getElementById('learning-screen').classList.remove('hidden');
-                    document.getElementById('nav-info').classList.remove('hidden');
-                    document.getElementById('sidebar-course-title').innerText = activeCourse.title;
-                    
-                    renderPlaylist(); // Vẽ danh sách bài học bên trái
-                    playLesson(0, 0); // Tự động mở bài đầu tiên
-                    
-                    if (window.innerWidth < 768) closeSidebarMobile();
-                } else {
-                    alert("Tệp dữ liệu rỗng hoặc không đúng cấu trúc (window.courseContent).");
-                }
-            };
+            script.onload = () => {
+                document.getElementById('loader').classList.add('hidden');
+                if (window.courseContent) {
+                    activeCourse = { ...found, content: window.courseContent };
+                    document.getElementById('dashboard').classList.add('hidden');
+                    document.getElementById('learning-screen').classList.remove('hidden');
+                    document.getElementById('nav-info').classList.remove('hidden');
+                    document.getElementById('sidebar-course-title').innerText = activeCourse.title;
+                    renderPlaylist();
+                    playLesson(0, 0);
+                    
+                    if(window.innerWidth < 768) closeSidebarMobile();
+                }
+            };
+            script.onerror = () => {
+                document.getElementById('loader').classList.add('hidden');
+                alert("Lỗi tải dữ liệu khóa học.");
+            };
+        }
 
-            script.onerror = () => {
-                document.getElementById('loader').classList.add('hidden');
-                alert("Lỗi: Không thể nạp tệp dữ liệu từ đường dẫn: " + found.dataPath);
-            };
-        }
         function renderPlaylist() {
             const container = document.getElementById('playlist-container');
             let html = '';
