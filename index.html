@@ -45,7 +45,6 @@
             .video-container { border-radius: 24px; border: 4px solid white; }
         }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .hidden { display: none; }
         
         .course-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 24px; position: relative; }
         .course-card:hover { transform: translateY(-5px); }
@@ -74,6 +73,13 @@
         /* Custom scrollbar cho Mobile */
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Modal Animation */
+        #tool-modal.active { display: flex; animation: modalBlurIn 0.3s ease-out; }
+        @keyframes modalBlurIn {
+            from { opacity: 0; backdrop-filter: blur(0px); }
+            to { opacity: 1; backdrop-filter: blur(4px); }
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden text-slate-800">
@@ -89,21 +95,30 @@
     <!-- Navigation -->
     <nav class="h-16 md:h-20 bg-white border-b flex items-center justify-between px-4 md:px-8 shrink-0 z-20 shadow-sm">
         <div class="flex items-center gap-3 cursor-pointer" onclick="showDashboard()">
-            <img src="logo-truong.png" alt="Logo" class="h-10 md:h-12 w-auto" onerror="this.src='BenTreHighSchool.jpg'">
+            <img src="BenTreHighSchool.jpg" alt="Logo" class="h-10 md:h-12 w-auto" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Vietnam.svg'">
             <div class="flex flex-col">
                 <span class="font-black text-lg md:text-2xl uppercase text-slate-900 leading-none">THPT CHUYÊN</span>
                 <span class="font-bold text-blue-600 text-base md:text-lg leading-none italic">BẾN TRE</span>
             </div>
         </div>
-        <div id="nav-info" class="hidden md:flex items-center gap-4">
-            <button onclick="showDashboard()" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold shadow-md hover:bg-blue-700 transition-all flex items-center gap-2 text-sm">
-                <i data-lucide="home" class="w-4 h-4"></i> Trang chủ
+        
+        <div class="flex items-center gap-2 md:gap-4">
+            <!-- Nút công cụ giảng dạy mới -->
+            <button onclick="toggleToolModal(true)" class="flex items-center gap-2 px-3 py-2 md:px-5 md:py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-full font-bold text-xs md:text-sm transition-all border border-amber-200">
+                <i data-lucide="hammer" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Công cụ giảng dạy</span>
+            </button>
+
+            <div id="nav-info" class="hidden md:flex items-center gap-4">
+                <button onclick="showDashboard()" class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold shadow-md hover:bg-blue-700 transition-all flex items-center gap-2 text-sm">
+                    <i data-lucide="home" class="w-4 h-4"></i> Trang chủ
+                </button>
+            </div>
+            <!-- Mobile Home Button -->
+            <button onclick="showDashboard()" class="md:hidden p-2 text-slate-600 hover:text-blue-600">
+                <i data-lucide="home"></i>
             </button>
         </div>
-        <!-- Mobile Home Button -->
-        <button onclick="showDashboard()" class="md:hidden p-2 text-slate-600 hover:text-blue-600">
-            <i data-lucide="home"></i>
-        </button>
     </nav>
 
     <!-- Dashboard Screen -->
@@ -191,9 +206,72 @@
         </main>
     </div>
 
+    <!-- Modal Công cụ giảng dạy -->
+    <div id="tool-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-[32px] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-6 md:p-8 border-b bg-slate-50 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg">
+                        <i data-lucide="layout-grid" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-black uppercase italic text-slate-800 tracking-tight">Tiện ích giảng dạy</h2>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Dành cho Giáo viên & Học sinh</p>
+                    </div>
+                </div>
+                <button onclick="toggleToolModal(false)" class="p-2 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-all">
+                    <i data-lucide="x" class="w-8 h-8"></i>
+                </button>
+            </div>
+            
+            <div id="tool-grid" class="p-6 md:p-10 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Danh sách công cụ sẽ được nạp tự động từ data.js -->
+            </div>
+
+            <div class="p-4 bg-slate-50 text-center border-t">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Hỗ trợ tương tác lớp học 4.0</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         let activeCourse = null;
         let isMobileSidebarOpen = false;
+
+        // Hàm đóng/mở Modal công cụ
+        function toggleToolModal(show) {
+            const modal = document.getElementById('tool-modal');
+            if (show) {
+                renderTools(); 
+                modal.classList.add('active');
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.remove('active');
+                setTimeout(() => modal.classList.add('hidden'), 200);
+            }
+        }
+
+        // Vẽ danh sách công cụ từ data.js
+        function renderTools() {
+            const grid = document.getElementById('tool-grid');
+            const tools = window.teachingTools || [];
+            
+            if (tools.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-slate-400 italic py-10">Chưa có công cụ nào được cấu hình trong data.js</p>`;
+                return;
+            }
+
+            grid.innerHTML = tools.map(tool => `
+                <div onclick="window.open('${tool.url}', '_blank')" class="group p-6 bg-white border-2 border-slate-100 rounded-[24px] hover:border-amber-400 hover:shadow-xl cursor-pointer transition-all flex flex-col items-center text-center">
+                    <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-amber-100">
+                        <i data-lucide="${tool.icon || 'external-link'}"></i>
+                    </div>
+                    <h4 class="font-black text-slate-900 uppercase text-xs mb-1 italic tracking-tight">${tool.title}</h4>
+                    <p class="text-[10px] text-slate-500 font-bold leading-snug line-clamp-2">${tool.desc || ''}</p>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
 
         function syncUI() {
             if(window.teacherInfo) {
@@ -278,7 +356,6 @@
                     renderPlaylist();
                     playLesson(0, 0);
                     
-                    // Trên mobile, khi nạp bài học thì đóng sidebar lại
                     if(window.innerWidth < 768) closeSidebarMobile();
                 }
             };
@@ -348,7 +425,6 @@
                 window.MathJax.typeset();
             }
 
-            // Nếu trên mobile, sau khi chọn bài thì thu nhỏ sidebar
             if(window.innerWidth < 768) closeSidebarMobile();
         }
 
@@ -392,7 +468,6 @@
             }
         };
 
-        // Reset sidebar khi xoay màn hình
         window.onresize = () => {
             if(window.innerWidth >= 768) {
                 document.getElementById('sidebar').style.height = "auto";
