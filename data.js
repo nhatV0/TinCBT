@@ -89,8 +89,47 @@ window.courses = {
             dataPath: 'data-khac/vex-iq.js', 
             description: 'Khóa học cơ bản lập trình với VEX IQ phiên bản Education giúp học sinh làm quen với bộ KIT và phần mềm học tập.' 
         }
-    ]
+    ]  
 };
+// 3. CÔNG CỤ GIẢNG DẠY (Dành cho Giáo viên)
+// Mảng này dùng để hiển thị các tiện ích nhanh ở thanh bên hoặc Dashboard
+window.teachingTools = [
+    {
+        id: 'wheel',
+        title: "Vòng quay may mắn",
+        description: "Dùng để gọi tên học sinh hoặc chọn phần thưởng ngẫu nhiên.",
+        icon: "refresh-cw", // Tên icon Lucide
+        url: "https://wheelofnames.com/vi/" 
+    },
+    {
+        id: 'timer',
+        title: "Đồng hồ đếm ngược",
+        description: "Quản lý thời gian làm bài tập hoặc thảo luận nhóm trên lớp.",
+        icon: "timer",
+        url: "https://www.google.com/search?q=timer"
+    },
+    {
+        id: 'whiteboard',
+        title: "Bảng trắng Online",
+        description: "Phác thảo ý tưởng, vẽ sơ đồ giải thuật trực quan.",
+        icon: "pen-tool",
+        url: "https://excalidraw.com/"
+    },
+    {
+        id: 'compiler',
+        title: "Trình biên dịch Online",
+        description: "Chạy thử code C++, Python nhanh mà không cần cài đặt.",
+        icon: "code",
+        url: "https://www.programiz.com/cpp-programming/online-compiler/"
+    },
+    {
+        id: 'mindmap',
+        title: "Sơ đồ tư duy",
+        description: "Công cụ giúp hệ thống hóa kiến thức bài học nhanh chóng.",
+        icon: "git-branch",
+        url: "https://www.mindmup.com/"
+    }
+];
 
 
 
