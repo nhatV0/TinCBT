@@ -121,7 +121,7 @@ window.teachingTools = [
         title: "Trình biên dịch Online",
         description: "Chạy thử code C++, Python nhanh mà không cần cài đặt.",
         icon: "code",
-        url: "https://www.programiz.com/cpp-programming/online-compiler/"
+        url: "https://www.programiz.com/python-programming/online-compiler/"
     },
     {
         id: 'mindmap',
