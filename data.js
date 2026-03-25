@@ -106,8 +106,7 @@ window.teachingTools = [
         title: "Đồng hồ đếm ngược",
         description: "Quản lý thời gian làm bài tập hoặc thảo luận nhóm trên lớp.",
         icon: "timer",
-        dataPath: 'data-khac/vex-iq.js', 
-        description: 'Khóa học cơ bản lập trình với VEX IQ phiên bản Education giúp học sinh làm quen với bộ KIT và phần mềm học tập.' 
+        url: "https://stopwatch-app.com/timer"
     },
     {
         id: 'whiteboard',
