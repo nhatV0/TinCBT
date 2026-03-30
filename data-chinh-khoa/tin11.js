@@ -7,7 +7,7 @@ window.courseContent = [
                 title: "Sách Giáo Khoa Tin học 11",
                 videoId: "", 
                 desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
-                downloadUrl: "https://drive.google.com/file/d/1xO4SkeZZ7jZqF_aU8B7U1uJRWUslZGxe/view?usp=sharing" }
+                downloadUrl: "https://drive.google.com/file/d/1kuWgKPERcCXQU13OUndYyUm05w1oPKRB/view?usp=sharing" }
         ]
     },
     {
@@ -272,7 +272,7 @@ window.courseContent = [
                             <p>Xác định bởi số điểm ảnh trên một inch (đơn vị: $dpi$ hoặc $ppi$).</p>
                             <ul class="list-disc ml-5 mt-2 space-y-1 text-xs">
                                 <li>Ảnh in ấn thường cần tối thiểu $300 \ dpi$.</li>
-                                <li>Công thức: $\t{Số pixel} = \t{Kích thước (inch)} \times \t{Độ phân giải (dpi)}$.</li>
+                                <li>Công thức: $\t{Số pixel} = \t{Kích thước (inch)} x \t{Độ phân giải (dpi)}$.</li>
                             </ul>
                         </div>
                     </div>
