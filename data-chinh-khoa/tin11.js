@@ -198,7 +198,212 @@ window.courseContent = [
     {
         chapterName: "Chủ đề 7: Phần mềm chỉnh sửa ảnh và làm video",
         lessons: [
-            { title: "Bài 25: Phần mềm chỉnh sửa ảnh", videoId: "", desc: "Làm quen giao diện và công cụ cơ bản.", downloadUrl: "#" },
+            {
+    title: "Bài 25: Phần mềm chỉnh sửa ảnh",
+    videoId: "",
+    desc: "Làm quen với GIMP, các khái niệm ảnh số, điểm ảnh, độ phân giải và các thao tác chỉnh sửa ảnh cơ bản.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
+                        <li>Làm quen với phần mềm chỉnh sửa ảnh chuyên nghiệp (GIMP).</li>
+                        <li>Hiểu được các khái niệm cơ bản về ảnh số, độ phân giải và điểm ảnh.</li>
+                        <li>Thực hiện thành thạo các thao tác cơ bản: mở tệp, phóng to/thu nhỏ, xoay và cắt ảnh.</li>
+                        <li>Biết cách thay đổi kích thước, độ phân giải và xuất ảnh sang các định dạng phổ biến.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
+
+                    <!-- Phần 1: Ảnh số -->
+                    <div class="space-y-3">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Giới thiệu ảnh số
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 space-y-1">
+                                <p class="font-bold text-blue-800">Ảnh số</p>
+                                <p class="text-xs">Là biểu diễn số của hình ảnh. Ảnh bitmap là phổ biến nhất với các định dạng: <code>.bmp, .jpeg, .png, .gif, .psd,...</code></p>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 space-y-1">
+                                <p class="font-bold text-emerald-800">Điểm ảnh (Pixel)</p>
+                                <p class="text-xs">Ảnh bitmap là tập hợp các pixel hình vuông nhỏ. Mỗi pixel xác định bởi tọa độ $(x, y)$ và mang giá trị màu sắc cụ thể.</p>
+                            </div>
+                            <div class="p-4 bg-orange-50 rounded-xl border border-orange-100 space-y-1">
+                                <p class="font-bold text-orange-800">Megapixel</p>
+                                <p class="text-xs">Đơn vị đo tổng số điểm ảnh. Ví dụ: Ảnh $2560 \times 1920 \approx 5$ triệu pixel (camera 5 Megapixel).</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-800 mb-2">Độ phân giải</p>
+                            <p>Xác định bởi số điểm ảnh trên một inch (đơn vị: $dpi$ hoặc $ppi$).</p>
+                            <ul class="list-disc ml-5 mt-2 space-y-1 text-xs">
+                                <li>Ảnh in ấn thường cần tối thiểu $300 \ dpi$.</li>
+                                <li>Công thức: $\text{Số pixel} = \text{Kích thước (inch)} \times \text{Độ phân giải (dpi)}$.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Phần 2: GIMP -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Phần mềm chỉnh sửa ảnh (GIMP)
+                        </p>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-800 mb-3">a) Giao diện của GIMP</p>
+                            <p class="text-xs text-slate-600 mb-3">GIMP có thể làm việc ở chế độ nhiều cửa sổ hoặc một cửa sổ (<code>Windows → Single-window Mode</code>). Các thành phần chính:</p>
+                            <div class="overflow-hidden rounded-xl border border-slate-200">
+                                <table class="w-full text-xs">
+                                    <thead class="bg-slate-100">
+                                        <tr>
+                                            <th class="p-2 text-left font-bold text-slate-700">Thành phần</th>
+                                            <th class="p-2 text-left font-bold text-slate-700">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        <tr><td class="p-2 font-semibold text-blue-700">Thanh bảng chọn</td><td class="p-2">Chứa các lệnh hệ thống (File, Edit, Select,...)</td></tr>
+                                        <tr><td class="p-2 font-semibold text-blue-700">Bảng công cụ</td><td class="p-2">Chứa các nút lệnh như di chuyển, cắt, xoay, thêm chữ...</td></tr>
+                                        <tr><td class="p-2 font-semibold text-blue-700">Hộp tuỳ chọn công cụ</td><td class="p-2">Hiển thị thuộc tính của công cụ đang chọn</td></tr>
+                                        <tr><td class="p-2 font-semibold text-blue-700">Vùng hiển thị ảnh</td><td class="p-2">Nơi thực hiện chỉnh sửa trực tiếp trên ảnh</td></tr>
+                                        <tr><td class="p-2 font-semibold text-blue-700">Các hộp chức năng</td><td class="p-2">Quản lý lớp (Layers), kênh màu (Channels), cọ vẽ (Brushes)...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <p class="font-bold text-emerald-800 mb-3">b) Một số thao tác cơ bản</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
+                                    <p class="font-bold text-slate-800 mb-1">📂 Mở tệp</p>
+                                    <p><code>File → Open</code> hoặc kéo thả ảnh vào phần mềm.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
+                                    <p class="font-bold text-slate-800 mb-1">🔍 Phóng to / Thu nhỏ</p>
+                                    <p>Dùng công cụ Zoom hoặc giữ $Ctrl$ + lăn chuột.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
+                                    <p class="font-bold text-slate-800 mb-1">✂️ Cắt ảnh (Crop)</p>
+                                    <p>Dùng công cụ Crop, kéo khung chọn và nhấn $Enter$.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
+                                    <p class="font-bold text-slate-800 mb-1">🔄 Xoay ảnh (Rotate)</p>
+                                    <p>Nhấn $Shift + R$, nhập góc xoay hoặc kéo chuột trực tiếp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: THỰC HÀNH -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Thực hành</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 mt-4">
+
+                    <!-- Nhiệm vụ 1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">Nhiệm vụ 1</span> Thao tác hiển thị ảnh
+                        </p>
+                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
+                            <li>Khởi động GIMP, mở một tệp ảnh bất kỳ.</li>
+                            <li>Chọn công cụ <strong>Zoom</strong>. Trong hộp tùy chọn, tích vào <code>Zoom in</code> (phóng to) hoặc <code>Zoom out</code> (thu nhỏ).</li>
+                            <li>Nháy chuột vào vị trí cần quan sát chi tiết.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Nhiệm vụ 2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-600 text-white text-xs rounded-full">Nhiệm vụ 2</span> Thay đổi kích thước và độ phân giải ($Scale \ Image$)
+                        </p>
+                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
+                            <li>Chọn <code>Image → Scale Image</code>.</li>
+                            <li>Điều chỉnh các thông số:
+                                <ul class="list-disc ml-5 mt-1 space-y-1 text-xs text-slate-600">
+                                    <li><strong>Width/Height:</strong> Thay đổi kích thước vật lý của ảnh.</li>
+                                    <li><strong>X/Y resolution:</strong> Thay đổi độ phân giải (thường dùng cho in ấn).</li>
+                                </ul>
+                            </li>
+                            <li>Nhấn <code>Scale</code> để áp dụng.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Nhiệm vụ 3 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">Nhiệm vụ 3</span> Xoay, cắt và xuất ảnh
+                        </p>
+                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
+                            <li>Dùng công cụ <strong>Rotate</strong> ($Shift + R$) để chỉnh các ảnh bị nghiêng. Kéo chuột để xoay và nhấn <code>Rotate</code>.</li>
+                            <li>Dùng công cụ <strong>Crop</strong> ($Shift + C$) để loại bỏ phần thừa. Nhấn $Enter$ để hoàn tất.</li>
+                            <li>Xuất ảnh (Export):
+                                <ul class="list-disc ml-5 mt-1 space-y-1 text-xs text-slate-600">
+                                    <li>Chọn <code>File → Export As</code>.</li>
+                                    <li>Chọn định dạng đuôi <code>.jpg</code> hoặc <code>.png</code>.</li>
+                                    <li>Nhấn <code>Export</code>, điều chỉnh chất lượng và nhấn <code>Export</code> lần nữa.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <div class="mt-3 p-3 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="text-red-800 text-xs font-medium italic"><b>Lưu ý:</b> Lệnh <code>Save</code> trong GIMP chỉ lưu tệp dự án đuôi <code>.xcf</code>, không phải tệp ảnh thông thường. Muốn xuất ảnh phải dùng <code>Export As</code>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
+                    <p class="text-sm text-slate-500 italic">Video bài giảng và tệp thực hành đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { title: "Bài 26: Công cụ tinh chỉnh màu sắc và công cụ chọn", videoId: "", desc: "Kỹ thuật xử lý ảnh nâng cao.", downloadUrl: "#" },
             { title: "Bài 27: Công cụ vẽ và một số ứng dụng", videoId: "", desc: "Vẽ và thiết kế trên phần mềm chỉnh sửa ảnh.", downloadUrl: "#" },
             { title: "Bài 28: Tạo ảnh động", videoId: "", desc: "Thiết kế các tệp ảnh động (GIF).", downloadUrl: "#" },
