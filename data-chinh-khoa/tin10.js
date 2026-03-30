@@ -1154,7 +1154,256 @@ window.courseContent = [
                 </div>
             `
         },
-            { title: "Bài 25: Một số lệnh làm việc với xâu ký tự", videoId: "", desc: "Cắt xâu, tìm kiếm xâu.", downloadUrl: "#" },
+            { {
+    title: "Bài 25: Một số lệnh làm việc với xâu kí tự",
+    videoId: "",
+    desc: "Tìm hiểu toán tử in, lệnh find(), split() và join() để xử lý xâu kí tự trong Python.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
+                        <li>Biết và thực hiện được một số lệnh (phương thức) thường dùng với xâu kí tự.</li>
+                        <li>Hiểu và vận dụng được toán tử <code>in</code>, lệnh <code>find()</code>, <code>split()</code> và <code>join()</code> trong các bài toán xử lý xâu.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
+
+                    <!-- Phần 1: Xâu con và tìm kiếm -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Xâu con và lệnh tìm vị trí xâu con
+                        </p>
+
+                        <!-- Toán tử in -->
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <p class="font-bold text-emerald-800 mb-2">Toán tử <code>in</code></p>
+                            <p class="mb-2">Dùng để kiểm tra một xâu có nằm trong xâu khác hay không. Kết quả trả về là giá trị $True$ hoặc $False$.</p>
+                            <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs">&lt;xâu 1&gt; in &lt;xâu 2&gt;</pre>
+                            <p class="text-xs text-emerald-700 mt-2 italic">Ví dụ: <code>"Python" in "Hoc Python vui"</code> → <code>True</code></p>
+                        </div>
+
+                        <!-- Lệnh find() -->
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                            <p class="font-bold text-blue-800 mb-2">Lệnh <code>find()</code></p>
+                            <p class="mb-2">Tìm vị trí xuất hiện đầu tiên của xâu con trong xâu mẹ. Trả về $-1$ nếu không tìm thấy.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                    <p class="text-xs font-bold text-slate-600 mb-1 uppercase">Cú pháp đơn:</p>
+                                    <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs">&lt;xâu mẹ&gt;.find(&lt;xâu con&gt;)</pre>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-600 mb-1 uppercase">Cú pháp đầy đủ:</p>
+                                    <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs">&lt;xâu mẹ&gt;.find(&lt;xâu con&gt;, start)</pre>
+                                </div>
+                            </div>
+                            <p class="text-xs text-blue-700 mt-2 italic">Ví dụ: <code>"hello".find("l")</code> → <code>2</code> &nbsp;|&nbsp; <code>"hello".find("x")</code> → <code>-1</code></p>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Phần 2: split và join -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Một số lệnh thường dùng với xâu kí tự
+                        </p>
+
+                        <!-- Lệnh split() -->
+                        <div class="p-4 bg-orange-50 rounded-xl border border-orange-100">
+                            <p class="font-bold text-orange-800 mb-2">Lệnh <code>split()</code></p>
+                            <p class="mb-2">Tách một xâu thành các từ và đưa vào một danh sách ($list$).</p>
+                            <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs">&lt;xâu mẹ&gt;.split(&lt;kí tự tách&gt;)</pre>
+                            <p class="text-xs text-orange-700 mt-2 italic">Mặc định: Nếu không ghi kí tự tách, Python tự động tách theo dấu cách.</p>
+                            <p class="text-xs text-orange-700 mt-1 italic">Ví dụ: <code>"Tao Cam Xoai".split()</code> → <code>["Tao", "Cam", "Xoai"]</code></p>
+                        </div>
+
+                        <!-- Lệnh join() -->
+                        <div class="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                            <p class="font-bold text-purple-800 mb-2">Lệnh <code>join()</code></p>
+                            <p class="mb-2">Nối các phần tử của một danh sách (các phần tử phải là xâu) thành một xâu duy nhất.</p>
+                            <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs">"&lt;kí tự nối&gt;".join(&lt;danh sách&gt;)</pre>
+                            <p class="text-xs text-purple-700 mt-2 italic">Ví dụ: <code>"-".join(["Ha Noi", "Nam Dinh"])</code> → <code>"Ha Noi-Nam Dinh"</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Bảng tổng kết -->
+                    <div class="overflow-hidden rounded-xl border border-slate-200">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="p-3 text-left font-bold text-slate-700">Lệnh</th>
+                                    <th class="p-3 text-left font-bold text-slate-700">Chức năng</th>
+                                    <th class="p-3 text-left font-bold text-slate-700">Trả về</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-xs">
+                                <tr><td class="p-3 font-mono text-emerald-700">in</td><td class="p-3">Kiểm tra xâu con có tồn tại</td><td class="p-3">True / False</td></tr>
+                                <tr><td class="p-3 font-mono text-blue-700">find(sub, start)</td><td class="p-3">Tìm vị trí xâu con</td><td class="p-3">Chỉ số hoặc -1</td></tr>
+                                <tr><td class="p-3 font-mono text-orange-700">split(sep)</td><td class="p-3">Tách xâu thành danh sách</td><td class="p-3">list</td></tr>
+                                <tr><td class="p-3 font-mono text-purple-700">sep.join(list)</td><td class="p-3">Nối danh sách thành xâu</td><td class="p-3">str</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                        <p class="text-red-800 text-sm font-medium italic"><b>Lưu ý:</b> Xâu trong Python có tính chất bất biến (<i>immutable</i>). Các lệnh trên đều trả về kết quả mới chứ không làm thay đổi xâu gốc.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
+                    <div class="grid grid-cols-1 gap-4 mt-4">
+
+                        <!-- Câu 1 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 1. Kiểm tra sự tồn tại</p>
+                            <p class="text-slate-600 text-sm mt-1">Nhập xâu $S$ và xâu $sub$. Kiểm tra xem $sub$ có xuất hiện trong $S$ hay không.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng toán tử <code>in</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: S="Hoc Python", sub="Python" → Output: True
+                            </div>
+                        </div>
+
+                        <!-- Câu 2 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 2. Tìm vị trí đầu tiên</p>
+                            <p class="text-slate-600 text-sm mt-1">Cho xâu $S = "Hoc \ lap \ trinh \ Python \ rat \ vui"$. Tìm vị trí xuất hiện đầu tiên của từ $"Python"$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng phương thức <code>find()</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Output: 14
+                            </div>
+                        </div>
+
+                        <!-- Câu 3 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 3. Tìm vị trí từ một điểm cho trước</p>
+                            <p class="text-slate-600 text-sm mt-1">Tìm vị trí của kí tự $"a"$ trong xâu $S$ bắt đầu từ chỉ số $5$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng cú pháp <code>S.find("a", 5)</code>.</p>
+                        </div>
+
+                        <!-- Câu 4 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 4. Tách xâu thành danh sách</p>
+                            <p class="text-slate-600 text-sm mt-1">Cho xâu $S = "Tao, Cam, Xoai, Mit"$. Hãy tách xâu này thành một danh sách các loại quả riêng biệt.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng lệnh <code>split(", ")</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Output: ["Tao", "Cam", "Xoai", "Mit"]
+                            </div>
+                        </div>
+
+                        <!-- Câu 5 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 5. Đếm số lượng từ trong câu</p>
+                            <p class="text-slate-600 text-sm mt-1">Nhập một câu từ bàn phím, hãy cho biết câu đó có bao nhiêu từ.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Dùng <code>split()</code> để đưa vào danh sách, sau đó dùng <code>len()</code> để đếm.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: "Hoc lap trinh rat vui" → Output: 5
+                            </div>
+                        </div>
+
+                        <!-- Câu 6 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 6. Nối danh sách thành xâu</p>
+                            <p class="text-slate-600 text-sm mt-1">Cho danh sách $L = ["Ha \ Noi", "Nam \ Dinh", "Ninh \ Binh"]$. Hãy nối các phần tử thành một xâu, ngăn cách nhau bởi dấu gạch ngang ($-$).</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng phương thức <code>join()</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Output: "Ha Noi-Nam Dinh-Ninh Binh"
+                            </div>
+                        </div>
+
+                        <!-- Câu 7 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 7. Xử lý phần mở rộng tệp tin</p>
+                            <p class="text-slate-600 text-sm mt-1">Cho tên tệp tin (ví dụ: $"bai\_tap.py"$). Hãy tách để lấy phần đuôi mở rộng (sau dấu chấm).</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng <code>split(".")</code> và truy cập phần tử cuối cùng của danh sách.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: "bai_tap.py" → Output: "py"
+                            </div>
+                        </div>
+
+                        <!-- Câu 8 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 8. Kiểm tra định dạng ngày tháng</p>
+                            <p class="text-slate-600 text-sm mt-1">Nhập xâu ngày tháng định dạng $"dd/mm/yyyy"$. Hãy in ra năm (yyyy).</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Tách xâu bằng kí tự $"/"$ và lấy phần tử ở chỉ số $2$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: "15/08/2025" → Output: "2025"
+                            </div>
+                        </div>
+
+                        <!-- Câu 9 - Nâng cao -->
+                        <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                            <p class="font-bold text-indigo-900">Câu 9. Thay thế khoảng trắng thừa (Nâng cao)</p>
+                            <p class="text-slate-600 text-sm mt-1">Nhập một câu có nhiều khoảng trắng thừa, hãy chuyển xâu đó thành xâu các từ chỉ cách nhau đúng một dấu cách.</p>
+                            <p class="text-xs text-indigo-700 mt-1 italic">Gợi ý: Kết hợp <code>split()</code> (không tham số) để lấy danh sách từ, sau đó dùng <code>" ".join()</code> để nối lại.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: "Hoc &nbsp;&nbsp; Python &nbsp; rat &nbsp;&nbsp; vui" → Output: "Hoc Python rat vui"
+                            </div>
+                        </div>
+
+                        <!-- Câu 10 - Nâng cao -->
+                        <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                            <p class="font-bold text-indigo-900">Câu 10. Tìm tất cả các vị trí (Nâng cao)</p>
+                            <p class="text-slate-600 text-sm mt-1">Nhập xâu $S$ và kí tự $c$. Tìm và in ra tất cả các vị trí mà $c$ xuất hiện trong $S$.</p>
+                            <p class="text-xs text-indigo-700 mt-1 italic">Gợi ý: Sử dụng vòng lặp <code>while</code> kết hợp <code>find(c, start)</code> và cập nhật <code>start</code> sau mỗi lần tìm thấy.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                Input: S="banana", c="a" → Output: 1 3 5
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
+                    <p class="text-sm text-slate-500 italic">Video bài giảng và mã nguồn tham khảo đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+    },
             { title: "Bài 26: Hàm trong Python", videoId: "", desc: "Định nghĩa và sử dụng hàm.", downloadUrl: "#" },
             { title: "Bài 27: Tham số của hàm", videoId: "", desc: "Truyền dữ liệu vào hàm.", downloadUrl: "#" },
             { title: "Bài 28: Phạm vi của biến", videoId: "", desc: "Biến toàn cục và biến địa phương.", downloadUrl: "#" },
