@@ -1154,7 +1154,7 @@ window.courseContent = [
                 </div>
             `
         },
-            { {
+            {
     title: "Bài 25: Một số lệnh làm việc với xâu kí tự",
     videoId: "",
     desc: "Tìm hiểu toán tử in, lệnh find(), split() và join() để xử lý xâu kí tự trong Python.",
