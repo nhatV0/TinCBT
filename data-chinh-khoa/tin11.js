@@ -1,6 +1,16 @@
 // File dữ liệu bài học Tin học 11 - Định hướng Tin học ứng dụng (Kết nối tri thức)
 window.courseContent = [
     {
+        chapterName: "Chương 0: Sách",
+        lessons: [
+            {    
+                title: "Sách Giáo Khoa Tin học 11",
+                videoId: "", 
+                desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
+                downloadUrl: "https://drive.google.com/file/d/1xO4SkeZZ7jZqF_aU8B7U1uJRWUslZGxe/view?usp=sharing" }
+        ]
+    },
+    {
         chapterName: "Chủ đề 1: Máy tính và xã hội tri thức",
         lessons: [
             { title: "Bài 1: Hệ điều hành", videoId: "", desc: "Khái niệm, vai trò và các loại hệ điều hành phổ biến.", downloadUrl: "#" },
@@ -262,7 +272,7 @@ window.courseContent = [
                             <p>Xác định bởi số điểm ảnh trên một inch (đơn vị: $dpi$ hoặc $ppi$).</p>
                             <ul class="list-disc ml-5 mt-2 space-y-1 text-xs">
                                 <li>Ảnh in ấn thường cần tối thiểu $300 \ dpi$.</li>
-                                <li>Công thức: $\text{Số pixel} = \text{Kích thước (inch)} \times \text{Độ phân giải (dpi)}$.</li>
+                                <li>Công thức: $\t{Số pixel} = \t{Kích thước (inch)} \times \t{Độ phân giải (dpi)}$.</li>
                             </ul>
                         </div>
                     </div>
