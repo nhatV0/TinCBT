@@ -1404,7 +1404,252 @@ window.courseContent = [
         </div>
     `
     },
-            { title: "Bài 26: Hàm trong Python", videoId: "", desc: "Định nghĩa và sử dụng hàm.", downloadUrl: "#" },
+           {
+    title: "Bài 26: Hàm trong Python",
+    videoId: "",
+    desc: "Khái niệm hàm, cách định nghĩa hàm có và không có giá trị trả về, và các hàm có sẵn trong Python.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
+                        <li>Biết và hiểu được khái niệm chương trình con là hàm.</li>
+                        <li>Biết cách tạo (định nghĩa) hàm tự định nghĩa và hiểu sự khác biệt giữa hàm có giá trị trả lại và hàm không trả lại giá trị.</li>
+                        <li>Biết cách sử dụng các tham số trong hàm để giải quyết các bài toán lập trình.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
+
+                    <!-- Phần 1: Hàm có sẵn -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Một số hàm thiết kế sẵn của Python
+                        </p>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-xs md:text-sm">
+                                <thead class="bg-slate-50">
+                                    <tr>
+                                        <th class="p-3 text-left font-bold text-slate-700">Nhóm</th>
+                                        <th class="p-3 text-left font-bold text-slate-700">Hàm</th>
+                                        <th class="p-3 text-left font-bold text-slate-700">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr><td class="p-3 font-bold text-blue-700" rowspan="3">Nhập / Xuất</td><td class="p-3 font-mono text-blue-600">print()</td><td class="p-3">Xuất dữ liệu ra màn hình</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600">input()</td><td class="p-3">Nhận dữ liệu từ người dùng (trả về kiểu xâu)</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600">len()</td><td class="p-3">Trả về số lượng phần tử của xâu, danh sách...</td></tr>
+                                    <tr><td class="p-3 font-bold text-orange-700" rowspan="3">Chuyển đổi kiểu</td><td class="p-3 font-mono text-orange-600">int(), float()</td><td class="p-3">Ép kiểu sang số nguyên hoặc số thực</td></tr>
+                                    <tr><td class="p-3 font-mono text-orange-600">str(), bool()</td><td class="p-3">Ép kiểu sang xâu hoặc lôgic</td></tr>
+                                    <tr><td class="p-3 font-mono text-orange-600">list(), tuple()</td><td class="p-3">Chuyển đổi sang danh sách hoặc bộ</td></tr>
+                                    <tr><td class="p-3 font-bold text-emerald-700" rowspan="4">Toán học</td><td class="p-3 font-mono text-emerald-600">abs()</td><td class="p-3">Giá trị tuyệt đối $|x|$</td></tr>
+                                    <tr><td class="p-3 font-mono text-emerald-600">max(), min()</td><td class="p-3">Tìm phần tử lớn nhất / nhỏ nhất</td></tr>
+                                    <tr><td class="p-3 font-mono text-emerald-600">sum()</td><td class="p-3">Tính tổng các phần tử trong danh sách</td></tr>
+                                    <tr><td class="p-3 font-mono text-emerald-600">pow(x, y)</td><td class="p-3">Tính lũy thừa $x^y$</td></tr>
+                                    <tr><td class="p-3 font-bold text-purple-700" rowspan="3">Thao tác dữ liệu</td><td class="p-3 font-mono text-purple-600">range()</td><td class="p-3">Tạo vùng giá trị số nguyên dùng trong vòng lặp</td></tr>
+                                    <tr><td class="p-3 font-mono text-purple-600">sorted()</td><td class="p-3">Sắp xếp và trả về danh sách mới</td></tr>
+                                    <tr><td class="p-3 font-mono text-purple-600">chr(), ord()</td><td class="p-3">Chuyển đổi qua lại giữa mã Unicode và ký tự</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Phần 2: Hàm tự định nghĩa -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Thiết lập các hàm tự định nghĩa
+                        </p>
+                        <p>Hàm giúp chia nhỏ chương trình lớn thành các khối mã có thể <strong>tái sử dụng</strong>.</p>
+
+                        <!-- Hàm có return -->
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                            <p class="font-bold text-blue-800 mb-2">a. Hàm có trả lại giá trị</p>
+                            <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs">def &lt;tên hàm&gt;(&lt;tham số&gt;):
+    &lt;khối lệnh&gt;
+    return &lt;giá trị&gt;</pre>
+                            <p class="text-xs text-blue-700 mt-2 italic">Khi gặp lệnh <code>return</code>, hàm kết thúc ngay lập tức và gửi kết quả về nơi gọi.</p>
+                            <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs mt-2">def tinh_tong(a, b):
+    return a + b
+
+ket_qua = tinh_tong(3, 5)   # ket_qua = 8</pre>
+                        </div>
+
+                        <!-- Hàm không có return -->
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <p class="font-bold text-emerald-800 mb-2">b. Hàm không trả lại giá trị</p>
+                            <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs">def &lt;tên hàm&gt;(&lt;tham số&gt;):
+    &lt;khối lệnh&gt;
+    return   # Có thể có hoặc không</pre>
+                            <p class="text-xs text-emerald-700 mt-2 italic">Thường dùng để thực hiện một hành động (như in ấn). Nếu không có <code>return</code>, hàm tự động trả về giá trị đặc biệt <code>None</code>.</p>
+                            <pre class="bg-slate-900 text-blue-300 p-3 rounded-xl font-mono text-xs mt-2">def in_loi_chao(ten):
+    print("Xin chào,", ten)
+
+in_loi_chao("An")   # In: Xin chào, An</pre>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                        <p class="text-red-800 text-sm font-medium italic"><b>Lưu ý quan trọng:</b> Các lệnh trong thân hàm phải được viết lùi vào (indent) và thẳng hàng nhau sau dấu hai chấm <code>:</code>. Tham số là các biến nhận dữ liệu truyền vào hàm khi gọi.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4">
+                    <div class="grid grid-cols-1 gap-4 mt-4">
+
+                        <!-- Câu 1 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 1. Hàm lời chào</p>
+                            <p class="text-slate-600 text-sm mt-1">Định nghĩa hàm <code>xinchao(ten)</code> nhận vào một tên và in ra màn hình: <code>"Xin chào, [tên]!"</code>.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Đây là hàm không trả lại giá trị, sử dụng lệnh <code>print()</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                xinchao("An") → In: Xin chào, An!
+                            </div>
+                        </div>
+
+                        <!-- Câu 2 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 2. Tính diện tích hình chữ nhật</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>dientich_hcn(a, b)</code> nhận vào chiều dài và chiều rộng, trả về giá trị diện tích.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng lệnh <code>return a * b</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                dientich_hcn(5, 3) → 15
+                            </div>
+                        </div>
+
+                        <!-- Câu 3 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 3. Kiểm tra số chẵn</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>la_so_chan(n)</code> trả về $True$ nếu $n$ là số chẵn, ngược lại trả về $False$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng phép toán chia dư <code>% 2 == 0</code>.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                la_so_chan(4) → True &nbsp;|&nbsp; la_so_chan(7) → False
+                            </div>
+                        </div>
+
+                        <!-- Câu 4 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 4. Tìm số lớn hơn</p>
+                            <p class="text-slate-600 text-sm mt-1">Định nghĩa hàm <code>tim_max(a, b)</code> nhận vào hai số và trả về số có giá trị lớn hơn.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng cấu trúc <code>if...else</code> bên trong hàm.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                tim_max(8, 3) → 8
+                            </div>
+                        </div>
+
+                        <!-- Câu 5 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 5. Hàm tính tổng dãy số</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>tong_tu_1_den_n(n)</code> nhận vào số nguyên dương $n$ và trả về tổng $1 + 2 + \dots + n$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng vòng lặp <code>for</code> và một biến tích lũy bên trong hàm.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                tong_tu_1_den_n(5) → 15
+                            </div>
+                        </div>
+
+                        <!-- Câu 6 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 6. Hàm đổi đơn vị nhiệt độ</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>c_to_f(celsius)</code> nhận vào độ C và trả về giá trị tương ứng ở độ F.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Công thức $F = C \times 1.8 + 32$.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                c_to_f(100) → 212.0
+                            </div>
+                        </div>
+
+                        <!-- Câu 7 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 7. Kiểm tra tính hợp lệ của mật khẩu</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>kiem_tra_mat_khau(mk)</code> nhận vào một xâu. Trả về $True$ nếu độ dài xâu $\ge 8$ kí tự, ngược lại trả về $False$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Kết hợp lệnh <code>len()</code> bên trong hàm.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                kiem_tra_mat_khau("abc") → False &nbsp;|&nbsp; kiem_tra_mat_khau("matkhau1") → True
+                            </div>
+                        </div>
+
+                        <!-- Câu 8 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 8. In hình vuông ký tự</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>ve_hinh_vuong(n, kytu)</code> in ra một hình vuông cỡ $n \times n$ bằng ký tự <code>kytu</code>.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng hai vòng lặp lồng nhau hoặc phép nhân xâu kí tự.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                ve_hinh_vuong(3, "*") → In:<br>***<br>***<br>***
+                            </div>
+                        </div>
+
+                        <!-- Câu 9 -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-slate-900">Câu 9. Tính giai thừa</p>
+                            <p class="text-slate-600 text-sm mt-1">Định nghĩa hàm <code>giai_thua(n)</code> để tính $n! = 1 \times 2 \times \dots \times n$.</p>
+                            <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Khởi tạo biến kết quả bằng $1$ và dùng vòng lặp nhân dồn.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                giai_thua(5) → 120
+                            </div>
+                        </div>
+
+                        <!-- Câu 10 - Nâng cao -->
+                        <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                            <p class="font-bold text-indigo-900">Câu 10. Hàm xử lý xâu (Nâng cao)</p>
+                            <p class="text-slate-600 text-sm mt-1">Viết hàm <code>dao_nguoc_xau(s)</code> nhận vào một xâu và trả về xâu đó theo thứ tự ngược lại.</p>
+                            <p class="text-xs text-indigo-700 mt-1 italic">Gợi ý: Có thể dùng kỹ thuật cắt xâu <code>s[::-1]</code> hoặc vòng lặp duyệt ngược.</p>
+                            <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                                dao_nguoc_xau("Python") → "nohtyP"
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
+                    <p class="text-sm text-slate-500 italic">Video bài giảng và mã nguồn tham khảo đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { title: "Bài 27: Tham số của hàm", videoId: "", desc: "Truyền dữ liệu vào hàm.", downloadUrl: "#" },
             { title: "Bài 28: Phạm vi của biến", videoId: "", desc: "Biến toàn cục và biến địa phương.", downloadUrl: "#" },
             { title: "Bài 29: Nhận biết lỗi chương trình", videoId: "", desc: "Các loại lỗi cú pháp và logic.", downloadUrl: "#" },
