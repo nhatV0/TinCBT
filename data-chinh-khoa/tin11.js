@@ -414,7 +414,210 @@ window.courseContent = [
         </div>
     `
 },
-            { title: "Bài 26: Công cụ tinh chỉnh màu sắc và công cụ chọn", videoId: "", desc: "Kỹ thuật xử lý ảnh nâng cao.", downloadUrl: "#" },
+            {
+    title: "Bài 26: Công cụ tinh chỉnh màu sắc và công cụ chọn",
+    videoId: "",
+    desc: "Tìm hiểu các tham số màu sắc ảnh số, công cụ chỉnh màu và các công cụ tạo vùng chọn trong GIMP.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
+                        <li>Biết các tham số biểu diễn màu cơ bản của ảnh số (Độ sáng, độ tương phản, tông màu, độ bão hòa).</li>
+                        <li>Biết và sử dụng thành thạo các công cụ chọn đơn giản: <strong>Rectangle Select</strong>, <strong>Ellipse Select</strong>, <strong>Free Select</strong>.</li>
+                        <li>Thực hiện được các lệnh chỉnh màu cơ bản để cải thiện chất lượng hình ảnh thông qua phần mềm GIMP.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
+
+                    <!-- Phần 1: Tinh chỉnh màu sắc -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Công cụ tinh chỉnh màu sắc
+                        </p>
+
+                        <!-- Brightness-Contrast -->
+                        <div class="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                            <p class="font-bold text-yellow-800 mb-2">a) Chỉnh độ sáng và tương phản — <code>Colors → Brightness-Contrast</code></p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                                <div class="p-3 bg-white rounded-lg border border-yellow-100">
+                                    <p class="font-bold text-slate-700">☀️ Brightness (Độ sáng)</p>
+                                    <p class="mt-1 text-slate-600">Giá trị càng lớn, ảnh càng sáng.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border border-yellow-100">
+                                    <p class="font-bold text-slate-700">🔲 Contrast (Tương phản)</p>
+                                    <p class="mt-1 text-slate-600">Điều chỉnh sự khác biệt giữa vùng sáng và vùng tối.</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-yellow-700 mt-2 italic">Có thể chuyển sang công cụ <strong>Levels</strong> để chỉnh chi tiết hơn bằng nút <code>Edit this Settings as Levels</code>.</p>
+                        </div>
+
+                        <!-- Color Balance -->
+                        <div class="p-4 bg-pink-50 rounded-xl border border-pink-100">
+                            <p class="font-bold text-pink-800 mb-2">b) Cân bằng màu — <code>Colors → Color Balance</code></p>
+                            <p class="text-xs mb-2">Hiệu chỉnh các màu nổi trội trong ba dải độ sáng:</p>
+                            <div class="grid grid-cols-3 gap-2 text-xs text-center">
+                                <div class="p-2 bg-slate-700 text-white rounded-lg font-bold">Shadows<br><span class="font-normal opacity-75">Vùng tối</span></div>
+                                <div class="p-2 bg-slate-400 text-white rounded-lg font-bold">Midtones<br><span class="font-normal opacity-75">Vùng trung bình</span></div>
+                                <div class="p-2 bg-yellow-200 text-slate-800 rounded-lg font-bold">Highlights<br><span class="font-normal opacity-75">Vùng sáng</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Hue-Saturation -->
+                        <div class="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                            <p class="font-bold text-purple-800 mb-2">c) Chỉnh màu sắc — <code>Colors → Hue-Saturation</code></p>
+                            <div class="overflow-hidden rounded-xl border border-purple-100">
+                                <table class="w-full text-xs">
+                                    <thead class="bg-purple-100">
+                                        <tr>
+                                            <th class="p-2 text-left font-bold text-purple-800">Tham số</th>
+                                            <th class="p-2 text-left font-bold text-purple-800">Ý nghĩa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-purple-50 bg-white">
+                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Hue</td><td class="p-2">Thay đổi tông màu trên vòng tròn màu</td></tr>
+                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Lightness</td><td class="p-2">Thay đổi độ sáng của màu</td></tr>
+                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Saturation</td><td class="p-2">Thay đổi độ bão hoà (đậm/nhạt) của màu</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="text-xs text-purple-700 mt-2 italic">Cho phép chỉnh sửa trên từng kênh màu riêng biệt ($Red, Green, Blue, Cyan, Magenta, Yellow$) hoặc toàn bộ ($Master$).</p>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-100">
+
+                    <!-- Phần 2: Vùng chọn -->
+                    <div class="space-y-4">
+                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
+                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Vai trò và cách thiết lập vùng chọn
+                        </p>
+                        <p>Vùng chọn giúp chia nhỏ hình ảnh để xử lý riêng biệt từng phần, <strong>tránh ảnh hưởng đến toàn bộ bức ảnh</strong>.</p>
+
+                        <!-- Công cụ chọn -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-center">
+                                <p class="text-2xl mb-1">▭</p>
+                                <p class="font-bold text-blue-800">Rectangle Select</p>
+                                <p class="text-slate-600 mt-1">Phím tắt: <code class="bg-blue-100 px-1 rounded">R</code></p>
+                                <p class="text-slate-600 mt-1">Tạo vùng chọn hình chữ nhật</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-center">
+                                <p class="text-2xl mb-1">⬭</p>
+                                <p class="font-bold text-emerald-800">Ellipse Select</p>
+                                <p class="text-slate-600 mt-1">Phím tắt: <code class="bg-emerald-100 px-1 rounded">E</code></p>
+                                <p class="text-slate-600 mt-1">Tạo vùng chọn hình tròn hoặc elip</p>
+                            </div>
+                            <div class="p-3 bg-orange-50 rounded-xl border border-orange-100 text-center">
+                                <p class="text-2xl mb-1">✏️</p>
+                                <p class="font-bold text-orange-800">Free Select</p>
+                                <p class="text-slate-600 mt-1">Kéo thả tự do</p>
+                                <p class="text-slate-600 mt-1">Tạo vùng chọn tự do bao quanh đối tượng</p>
+                            </div>
+                        </div>
+
+                        <!-- Thao tác kết hợp -->
+                        <div class="overflow-hidden rounded-xl border border-slate-200">
+                            <table class="w-full text-xs">
+                                <thead class="bg-slate-50">
+                                    <tr>
+                                        <th class="p-3 text-left font-bold text-slate-700">Thao tác</th>
+                                        <th class="p-3 text-left font-bold text-slate-700">Phím kết hợp</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr><td class="p-3">Mở rộng vùng chọn</td><td class="p-3 font-mono font-bold text-blue-600">Shift + kéo chọn mới</td></tr>
+                                    <tr><td class="p-3">Trừ bớt vùng chọn</td><td class="p-3 font-mono font-bold text-red-600">Ctrl + kéo chọn mới</td></tr>
+                                    <tr><td class="p-3">Cắt và di chuyển</td><td class="p-3 font-mono font-bold text-orange-600">Alt + Ctrl + kéo thả</td></tr>
+                                    <tr><td class="p-3">Sao chép và di chuyển</td><td class="p-3 font-mono font-bold text-emerald-600">Alt + Shift + kéo thả</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: THỰC HÀNH -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Thực hành</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 mt-4">
+
+                    <!-- Nhiệm vụ 1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 flex items-center gap-2 mb-3">
+                            <span class="px-2 py-0.5 bg-yellow-500 text-white text-xs rounded-full">Nhiệm vụ 1</span> Chỉnh độ sáng, tương phản và màu sắc cho ảnh phong cảnh
+                        </p>
+                        <ol class="list-decimal ml-5 space-y-2 text-sm text-slate-700">
+                            <li>Vào menu <code>Colors → Brightness-Contrast</code>. Tăng <strong>Brightness</strong> và <strong>Contrast</strong> (ví dụ: 42 và 59) để ảnh rõ nét hơn.</li>
+                            <li>Lưu thiết lập (nếu cần) bằng nút <code>+</code> tại ô <strong>Presets</strong>.</li>
+                            <li>Vào <code>Colors → Color Balance</code>. Chọn dải màu trung bình (<strong>Midtones</strong>) và điều chỉnh các thanh trượt $Red, Green, Blue$ để làm ấm tông màu bình minh.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Nhiệm vụ 2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-900 flex items-center gap-2 mb-3">
+                            <span class="px-2 py-0.5 bg-purple-600 text-white text-xs rounded-full">Nhiệm vụ 2</span> Tạo vùng chọn và chỉnh sửa cục bộ
+                        </p>
+                        <ol class="list-decimal ml-5 space-y-2 text-sm text-slate-700">
+                            <li>Dùng <code>Brightness-Contrast</code> để tăng sáng tổng thể cho ảnh chụp bị tối.</li>
+                            <li>Sử dụng <strong>Rectangle Select Tool</strong> (<code>R</code>) khoanh vùng đối tượng thứ nhất. Vào <code>Colors → Hue-Saturation</code> để tăng độ tươi cho màu sắc vùng này.</li>
+                            <li>Sử dụng <strong>Free Select Tool</strong> để bao quanh đối tượng thứ hai. Vào <code>Colors → Color Balance</code>, chọn dải <strong>Midtones</strong> và tăng kênh <strong>Blue</strong> để làm đậm sắc tím.</li>
+                            <li>Nhấn <code>OK</code> và bỏ vùng chọn để xem kết quả tổng thể.</li>
+                        </ol>
+                        <div class="mt-3 p-3 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="text-red-800 text-xs font-medium italic"><b>Lưu ý:</b> Khi có vùng chọn đang hoạt động, mọi thao tác chỉnh màu chỉ ảnh hưởng đến vùng được chọn. Nhấn <code>Select → None</code> hoặc <code>Shift + Ctrl + A</code> để bỏ chọn.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
+                    <p class="text-sm text-slate-500 italic">Video bài giảng và tệp thực hành đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { title: "Bài 27: Công cụ vẽ và một số ứng dụng", videoId: "", desc: "Vẽ và thiết kế trên phần mềm chỉnh sửa ảnh.", downloadUrl: "#" },
             { title: "Bài 28: Tạo ảnh động", videoId: "", desc: "Thiết kế các tệp ảnh động (GIF).", downloadUrl: "#" },
             { title: "Bài 29: Khám phá phần mềm làm phim", videoId: "", desc: "Giao diện và các thành phần của phần mềm dựng video.", downloadUrl: "#" },
