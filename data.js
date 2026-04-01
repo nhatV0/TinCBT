@@ -128,6 +128,13 @@ window.teachingTools = [
         description: "Công cụ giúp hệ thống hóa kiến thức bài học nhanh chóng.",
         icon: "git-branch",
         url: "https://www.mindmup.com/"
+    },
+    {
+        id: 'GIMP',
+        title: "Công cụ chinhr sửa ảnh",
+        description: "Công cụ giúp chỉnh sửa ảnh online",
+        icon: "image",
+        url: "https://fixthephoto.com/vi/gimp-online.html"
     }
 ];
 
