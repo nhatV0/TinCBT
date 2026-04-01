@@ -123,18 +123,18 @@ window.teachingTools = [
         url: "https://www.programiz.com/python-programming/online-compiler/"
     },
     {
+        id: 'GIMP',
+        title: "Công cụ chỉnh sửa ảnh",
+        description: "Công cụ giúp chỉnh sửa ảnh online",
+        icon: "image",
+        url: "https://fixthephoto.com/vi/gimp-online.html"
+    },
+    {
         id: 'mindmap',
         title: "Sơ đồ tư duy",
         description: "Công cụ giúp hệ thống hóa kiến thức bài học nhanh chóng.",
         icon: "git-branch",
         url: "https://www.mindmup.com/"
-    },
-    {
-        id: 'GIMP',
-        title: "Công cụ chinhr sửa ảnh",
-        description: "Công cụ giúp chỉnh sửa ảnh online",
-        icon: "image",
-        url: "https://fixthephoto.com/vi/gimp-online.html"
     }
 ];
 
