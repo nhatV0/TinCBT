@@ -1346,7 +1346,7 @@ window.courseContent = [
                         <!-- Câu 7 -->
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
                             <p class="font-bold text-slate-900">Câu 7. Xử lý phần mở rộng tệp tin</p>
-                            <p class="text-slate-600 text-sm mt-1">Cho tên tệp tin (ví dụ: $"bai\_tap.py"$). Hãy tách để lấy phần đuôi mở rộng (sau dấu chấm).</p>
+                            <p class="text-slate-600 text-sm mt-1">Cho tên tệp tin (ví dụ: $"baitap.py"$). Hãy tách để lấy phần đuôi mở rộng (sau dấu chấm).</p>
                             <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng <code>split(".")</code> và truy cập phần tử cuối cùng của danh sách.</p>
                             <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
                                 Input: "bai_tap.py" → Output: "py"
