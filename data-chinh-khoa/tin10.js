@@ -1302,7 +1302,7 @@ window.courseContent = [
                             <p class="text-slate-600 text-sm mt-1">Cho xâu $S = "Hoc \ lap \ trinh \ Python \ rat \ vui"$. Tìm vị trí xuất hiện đầu tiên của từ $"Python"$.</p>
                             <p class="text-xs text-slate-500 mt-1 italic">Gợi ý: Sử dụng phương thức <code>find()</code>.</p>
                             <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
-                                Output: 14
+                                Output: 11
                             </div>
                         </div>
 
