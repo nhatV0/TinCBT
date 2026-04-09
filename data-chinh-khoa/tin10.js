@@ -1904,7 +1904,284 @@ print(tongduong(C))   # Kết quả: 17</pre>
         </div>
     `
     },
-            { title: "Bài 28: Phạm vi của biến", videoId: "", desc: "Biến toàn cục và biến địa phương.", downloadUrl: "#" },
+    {
+    title: "Bài 28: Phạm Vi Của Biến",
+    videoId: "",
+    desc: "Tìm hiểu phạm vi hoạt động của biến trong Python, phân biệt biến cục bộ và biến toàn cục, và cách sử dụng từ khóa global.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span><span>Biết và trình bày được ý nghĩa của <strong>phạm vi hoạt động của biến</strong> trong chương trình và hàm.</span></li>
+                        <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span><span>Phân biệt được <strong>biến địa phương (cục bộ)</strong> và <strong>biến toàn cục</strong>.</span></li>
+                        <li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span><span>Biết cách sử dụng từ khóa <code class="bg-slate-100 px-1 rounded font-mono text-blue-700">global</code> để thay đổi giá trị của biến toàn cục bên trong hàm.</span></li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <!-- Phần 1: Biến cục bộ -->
+                    <div>
+                        <h3 class="font-black text-slate-800 text-base mb-3 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-black">1</span>
+                            Phạm vi của biến khai báo trong hàm (Biến cục bộ)
+                        </h3>
+                        <p class="mb-3">Trong Python, tất cả các biến khai báo <strong>bên trong hàm</strong> đều có tính <strong>địa phương (cục bộ)</strong>, nghĩa là chúng chỉ có hiệu lực ở bên trong hàm đó và <strong>không có tác dụng ở bên ngoài hàm</strong>.</p>
+                        <p class="mb-2 font-semibold text-slate-600">Ví dụ minh họa:</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def func(a, b):
+    n = 10     # Biến n được khai báo bên trong hàm
+    a = a * 2
+    b = a + b
+    return a + b + n
+
+# Chương trình chính
+a = 1
+b = 2
+print(func(a, b)) # Kết quả: 16
+print(a, b)       # Kết quả: 1 2  (a và b không đổi sau khi chạy hàm)
+print(n)          # Báo lỗi: NameError: name 'n' is not defined</pre>
+                        <div class="mt-3 p-4 bg-sky-50 rounded-xl border-l-4 border-sky-400 space-y-1">
+                            <p class="font-bold text-sky-800 text-xs uppercase tracking-wide mb-1">Giải thích</p>
+                            <p>• Các biến $n, a, b$ bên trong hàm chỉ hoạt động <strong>bên trong</strong> <code class="bg-sky-100 px-1 rounded font-mono text-sky-700">func</code>.</p>
+                            <p>• Sau khi chạy hàm, các biến $a, b$ bên ngoài vẫn giữ nguyên giá trị ban đầu.</p>
+                            <p>• Gọi biến $n$ ở ngoài hàm sẽ bị <strong>báo lỗi</strong> vì hệ thống không nhận diện được biến địa phương này.</p>
+                        </div>
+                    </div>
+
+                    <!-- Phần 2: Biến toàn cục -->
+                    <div>
+                        <h3 class="font-black text-slate-800 text-base mb-3 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-black">2</span>
+                            Phạm vi của biến khai báo ngoài hàm (Biến toàn cục)
+                        </h3>
+                        <p class="mb-3">Biến được khai báo <strong>bên ngoài tất cả các hàm</strong> được gọi là <strong>biến toàn cục</strong>.</p>
+
+                        <p class="font-semibold text-slate-700 mb-1">✅ Truy cập giá trị:</p>
+                        <p class="mb-2">Bên trong hàm có thể <strong>đọc giá trị</strong> của biến toàn cục đã khai báo trước đó một cách trực tiếp.</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def f(a, b):
+    return a + b + N  # Truy cập giá trị của N
+
+N = 10
+print(f(1, 2))  # Kết quả: 13  (1 + 2 + 10)</pre>
+
+                        <p class="font-semibold text-slate-700 mt-4 mb-1">⚠️ Thay đổi giá trị — dùng từ khóa <code class="bg-slate-100 px-1 rounded font-mono text-yellow-700">global</code>:</p>
+                        <p class="mb-2">Biến khai báo bên ngoài sẽ <strong>không tự động thay đổi</strong> bên trong hàm nếu ta thực hiện phép gán, trừ khi dùng từ khóa <code class="bg-slate-100 px-1 rounded font-mono text-yellow-700">global</code>.</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def f(n):
+    global t      # Khai báo t là biến toàn cục bên trong hàm
+    t = 2 * n + 1
+    return t
+
+t = 10
+print(f(1))  # Kết quả: 3
+print(t)     # Kết quả: 3  (Giá trị t đã bị thay đổi)</pre>
+                    </div>
+
+                    <!-- Lưu ý quan trọng -->
+                    <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                        <p class="font-black text-red-700 text-sm mb-2">⚠️ Lưu ý quan trọng về từ khóa <code class="font-mono">global</code></p>
+                        <ul class="space-y-1 text-sm text-red-800">
+                            <li>• Khai báo <code class="bg-red-100 px-1 rounded font-mono">global x</code> phải đặt <strong>trước</strong> bất kỳ lệnh gán nào liên quan đến <code class="bg-red-100 px-1 rounded font-mono">x</code> trong thân hàm.</li>
+                            <li>• Lạm dụng <code class="bg-red-100 px-1 rounded font-mono">global</code> có thể khiến chương trình khó theo dõi và dễ gây lỗi — chỉ dùng khi thực sự cần thiết.</li>
+                            <li>• Nếu chỉ cần <strong>đọc</strong> giá trị biến toàn cục (không gán lại), <strong>không cần</strong> dùng <code class="bg-red-100 px-1 rounded font-mono">global</code>.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Bảng so sánh -->
+                    <div>
+                        <p class="font-black text-slate-800 mb-2">📊 Bảng so sánh biến cục bộ và biến toàn cục:</p>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-slate-100 text-slate-700 font-bold">
+                                    <tr>
+                                        <th class="px-4 py-2 border-b border-slate-200">Đặc điểm</th>
+                                        <th class="px-4 py-2 border-b border-slate-200">Biến cục bộ</th>
+                                        <th class="px-4 py-2 border-b border-slate-200">Biến toàn cục</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-600">
+                                    <tr class="bg-white"><td class="px-4 py-2 border-b border-slate-100">Nơi khai báo</td><td class="px-4 py-2 border-b border-slate-100">Bên trong hàm</td><td class="px-4 py-2 border-b border-slate-100">Bên ngoài hàm</td></tr>
+                                    <tr class="bg-slate-50"><td class="px-4 py-2 border-b border-slate-100">Phạm vi sử dụng</td><td class="px-4 py-2 border-b border-slate-100">Chỉ trong hàm đó</td><td class="px-4 py-2 border-b border-slate-100">Toàn bộ chương trình</td></tr>
+                                    <tr class="bg-white"><td class="px-4 py-2 border-b border-slate-100">Thay đổi từ trong hàm</td><td class="px-4 py-2 border-b border-slate-100">Trực tiếp</td><td class="px-4 py-2 border-b border-slate-100">Cần từ khóa <code class="font-mono">global</code></td></tr>
+                                    <tr class="bg-slate-50"><td class="px-4 py-2">Tồn tại sau khi hàm kết thúc</td><td class="px-4 py-2">Không</td><td class="px-4 py-2">Có</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4">
+
+                    <!-- Bài 1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 1 <span class="text-xs font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="text-sm mb-2">Viết hàm tính tổng 2 số nguyên $a$ và $b$, sau đó in kết quả ra màn hình.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> a = 3, b = 4<br>
+                            <span class="text-slate-400">Output:</span> 7
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Định nghĩa hàm với 2 tham số và dùng <code class="font-mono">return a + b</code>.</p>
+                    </div>
+
+                    <!-- Bài 2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 2 <span class="text-xs font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="text-sm mb-2">Thực hiện thay đổi giá trị biến trong hàm nhưng kiểm tra để <strong>không làm thay đổi</strong> biến ngoài. In giá trị biến $x$ trước và sau khi gọi hàm.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> x = 5<br>
+                            <span class="text-slate-400">Output:</span> Trong hàm x = 50 | Ngoài hàm x = 5
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Khai báo biến trùng tên trong hàm nhưng <strong>không</strong> dùng từ khóa <code class="font-mono">global</code>.</p>
+                    </div>
+
+                    <!-- Bài 3 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 3 <span class="text-xs font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="text-sm mb-2">Viết hàm cộng một tham số truyền vào với biến toàn cục $N$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> a = 2, N = 10<br>
+                            <span class="text-slate-400">Output:</span> 12
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Gọi trực tiếp tên biến $N$ trong biểu thức tính toán của hàm (không cần <code class="font-mono">global</code> vì chỉ đọc).</p>
+                    </div>
+
+                    <!-- Bài 4 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 4 <span class="text-xs font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="text-sm mb-2">Sử dụng <code class="font-mono bg-slate-100 px-1 rounded text-blue-700">global</code> để tăng giá trị của biến toàn cục $x$ thêm 1 đơn vị bên trong hàm. In giá trị $x$ trước và sau khi gọi hàm.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> x = 7<br>
+                            <span class="text-slate-400">Output:</span> Trước: 7 | Sau: 8
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Sử dụng cú pháp <code class="font-mono">global x</code> trước lệnh <code class="font-mono">x = x + 1</code>.</p>
+                    </div>
+
+                    <!-- Bài 5 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 5 <span class="text-xs font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="text-sm mb-2">Viết hàm nhân đôi một số nhưng đảm bảo biến $a$ ban đầu ngoài hàm <strong>không bị thay đổi</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> a = 6<br>
+                            <span class="text-slate-400">Output:</span> Kết quả nhân đôi: 12 | a bên ngoài vẫn là: 6
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Sử dụng tham số hoặc biến cục bộ để tính toán, không dùng <code class="font-mono">global</code>.</p>
+                    </div>
+
+                    <!-- Bài 6 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 6 <span class="text-xs font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="text-sm mb-2">Viết hàm tính tổng 3 số $a, b, c$; trong đó $c$ là <strong>biến toàn cục</strong>. Hàm chỉ nhận 2 tham số $a$ và $b$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> a = 1, b = 2, c = 3<br>
+                            <span class="text-slate-400">Output:</span> 6
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Hàm chỉ nhận 2 tham số $a, b$, giá trị $c$ lấy từ phạm vi toàn cục.</p>
+                    </div>
+
+                    <!-- Bài 7 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 7 <span class="text-xs font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="text-sm mb-2">Đoạn code sau bị lỗi khi cố gắng thay đổi biến toàn cục trong hàm. Hãy tìm lỗi và sửa lại cho đúng:</p>
+                        <pre class="bg-slate-900 text-red-300 p-3 rounded-xl font-mono text-xs mt-2 overflow-x-auto">def tang():
+    x = x + 1   # Lỗi!
+
+x = 5
+tang()
+print(x)</pre>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Output mong muốn:</span> 6
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Thêm dòng khai báo <code class="font-mono">global x</code> vào đầu thân hàm.</p>
+                    </div>
+
+                    <!-- Bài 8 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">Bài 8 <span class="text-xs font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="text-sm mb-2">Viết hàm tăng biến toàn cục thêm 1 mỗi lần hàm được gọi. Gọi hàm 4 lần và in giá trị sau mỗi lần gọi.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">Input:</span> x = 0<br>
+                            <span class="text-slate-400">Output:</span> 1  2  3  4
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">💡 Gợi ý: Sử dụng <code class="font-mono">global</code> và phép gán tăng dần <code class="font-mono">x += 1</code> trong thân hàm.</p>
+                    </div>
+
+                    <!-- Bài 9 - Nâng cao -->
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 text-sm mb-1">Bài 9 <span class="text-xs font-normal text-indigo-500">(Nâng cao)</span></p>
+                        <p class="text-sm mb-2 text-indigo-900">Viết 2 hàm khác nhau sử dụng cùng một tên biến cục bộ <code class="font-mono bg-indigo-100 px-1 rounded">ket_qua</code> nhưng trả về 2 kết quả khác nhau, để <strong>chứng minh tính độc lập</strong> của biến cục bộ.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-indigo-400">Output:</span><br>
+                            Hàm 1: ket_qua = 100<br>
+                            Hàm 2: ket_qua = hello
+                        </div>
+                        <p class="text-xs text-indigo-500 mt-2">💡 Gợi ý: Khai báo biến địa phương cùng tên trong 2 khối <code class="font-mono">def</code> khác nhau — chúng hoàn toàn độc lập với nhau.</p>
+                    </div>
+
+                    <!-- Bài 10 - Nâng cao -->
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 text-sm mb-1">Bài 10 <span class="text-xs font-normal text-indigo-500">(Nâng cao)</span></p>
+                        <p class="text-sm mb-2 text-indigo-900">Viết chương trình <strong>đếm số lần gọi hàm</strong> bằng cách sử dụng một biến toàn cục <code class="font-mono bg-indigo-100 px-1 rounded">dem</code>. Hàm in ra giá trị hiện tại của bộ đếm mỗi lần được gọi.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-indigo-400">Input:</span> Gọi hàm 3 lần, dem = 0<br>
+                            <span class="text-indigo-400">Output:</span> 1  2  3
+                        </div>
+                        <p class="text-xs text-indigo-500 mt-2">💡 Gợi ý: Sử dụng biến đếm toàn cục tăng dần mỗi khi hàm thực thi bằng <code class="font-mono">global dem</code> và <code class="font-mono">dem += 1</code>.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3">
+                    <p class="text-sm font-semibold text-slate-600">1. Video giảng giải về Biến cục bộ và Biến toàn cục:</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <p class="text-sm font-semibold text-slate-600 mt-2">2. Thực hành từ khóa Global trong Python:</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+    },
             { title: "Bài 29: Nhận biết lỗi chương trình", videoId: "", desc: "Các loại lỗi cú pháp và logic.", downloadUrl: "#" },
             { title: "Bài 30: Kiểm thử và gỡ lỗi", videoId: "", desc: "Quy trình tìm và sửa lỗi chương trình.", downloadUrl: "#" }
         ]
