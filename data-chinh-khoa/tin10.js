@@ -1650,7 +1650,260 @@ in_loi_chao("An")   # In: Xin chào, An</pre>
         </div>
     `
 },
-            { title: "Bài 27: Tham số của hàm", videoId: "", desc: "Truyền dữ liệu vào hàm.", downloadUrl: "#" },
+           {
+    title: "Bài 27: Tham số của hàm",
+    videoId: "",
+    desc: "Tìm hiểu về tham số, đối số của hàm và cách tổ chức chương trình sử dụng chương trình con trong Python.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="mt-1 text-blue-500">✔</span> Biết cách thiết lập các tham số của hàm.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1 text-blue-500">✔</span> Hiểu được cách truyền giá trị thông qua đối số hàm.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1 text-blue-500">✔</span> Hiểu được sự khác biệt giữa <strong>tham số (parameter)</strong> và <strong>đối số (argument)</strong>.</li>
+                        <li class="flex items-start gap-2"><span class="mt-1 text-blue-500">✔</span> Biết cách tổ chức chương trình sử dụng chương trình con (hàm) để giải quyết các bài toán phức tạp, tăng tính rõ ràng và khả năng tái sử dụng mã nguồn.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <!-- Phần 1 -->
+                    <div>
+                        <h3 class="font-black text-emerald-700 uppercase text-sm mb-3">1. Tham số và đối số của hàm</h3>
+                        <p class="mb-3">
+                            <strong>Tham số (parameter)</strong> được định nghĩa khi <em>khai báo hàm</em> và được dùng như biến trong thân hàm.
+                            <strong>Đối số (argument)</strong> là giá trị cụ thể được truyền vào khi <em>gọi hàm</em>.
+                        </p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def f(a, b, c):   # a, b, c là THAM SỐ
+    return a + b + c
+
+# Gọi hàm với giá trị cụ thể (đối số là số cụ thể)
+print(f(1, 2, 3))   # Kết quả: 6
+
+# Gọi hàm với biến đã có giá trị (đối số là biến)
+x, y, z = 10, 20, 5
+print(f(x, y, z))   # Kết quả: 35</pre>
+                        <div class="mt-4 space-y-2">
+                            <p>📌 <strong>Khai báo:</strong> Trong <code class="bg-slate-100 px-1 rounded">def f(a, b, c):</code>, các biến $a, b, c$ là <strong>tham số</strong> — đóng vai trò biến trung gian nhận dữ liệu.</p>
+                            <p>📌 <strong>Lời gọi hàm:</strong> Trong <code class="bg-slate-100 px-1 rounded">f(1, 2, 3)</code>, các giá trị $1, 2, 3$ là <strong>đối số</strong> — được truyền vào theo đúng thứ tự.</p>
+                        </div>
+                        <div class="mt-4 p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-700 mb-1">⚠ Lưu ý quan trọng</p>
+                            <ul class="space-y-1 text-red-800 text-sm">
+                                <li>• Số lượng đối số khi gọi hàm phải <strong>bằng</strong> số lượng tham số đã khai báo.</li>
+                                <li>• Nếu gọi hàm bằng biến chưa được định nghĩa (ví dụ: <code>f(m, n, p)</code> khi $m, n, p$ chưa có giá trị), chương trình sẽ báo lỗi <strong>NameError</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phần 2 -->
+                    <div>
+                        <h3 class="font-black text-emerald-700 uppercase text-sm mb-3">2. Cách sử dụng chương trình con</h3>
+                        <p class="mb-3">Sử dụng chương trình con giúp chia nhỏ bài toán lớn thành các bài toán nhỏ hơn, giúp chương trình dễ hiểu, dễ bảo trì và nâng cấp.</p>
+
+                        <p class="font-semibold text-slate-800 mb-2">📝 Ví dụ 1: Kiểm tra và in các số nguyên tố từ $1$ đến $n$</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def prime(n):
+    c = 0
+    k = 1
+    while k < n:
+        if n % k == 0:
+            c = c + 1
+        k = k + 1
+    if c == 1:   # Số nguyên tố chỉ có 1 ước là 1 (xét từ 1 đến n-1)
+        return True
+    else:
+        return False
+
+# Chương trình chính
+n = int(input("Nhập số tự nhiên n: "))
+for k in range(1, n + 1):
+    if prime(k):
+        print(k, end = " ")</pre>
+
+                        <p class="font-semibold text-slate-800 mt-4 mb-2">📝 Ví dụ 2: Tính tổng các số hạng dương của nhiều dãy số</p>
+                        <p class="mb-2 text-sm">Thiết lập hàm <code class="bg-slate-100 px-1 rounded">tongduong(A)</code> để dùng chung cho nhiều danh sách khác nhau.</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">def tongduong(A):
+    s = 0
+    for k in A:
+        if k > 0:
+            s = s + k
+    return s
+
+# Chương trình chính
+B = [1, -10, -11, 8, 2, 0, -5]
+C = [0, 2, -1, 5, 10, -3]
+
+print(tongduong(B))   # Kết quả: 11
+print(tongduong(C))   # Kết quả: 17</pre>
+
+                        <div class="mt-4 p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500">
+                            <p class="font-bold text-emerald-700 mb-2">✅ Lợi ích của chương trình con</p>
+                            <ul class="space-y-1 text-emerald-800 text-sm">
+                                <li>• Phân chia công việc, phát huy tinh thần làm việc nhóm.</li>
+                                <li>• Chương trình chính có cấu trúc rõ ràng, dễ đọc.</li>
+                                <li>• Thuận tiện cho việc hiệu chỉnh, phát triển và nâng cấp.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <!-- Câu 1 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟢 Câu 1 <span class="font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">tong(a, b)</code> trả về tổng của hai số.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Sử dụng lệnh <code>return a + b</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> a = 2, b = 3 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 5
+                        </div>
+                    </div>
+
+                    <!-- Câu 2 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟢 Câu 2 <span class="font-normal text-slate-500">(Cơ bản)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">hieu(a, b)</code> trả về hiệu của hai số.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Thực hiện phép trừ <code>a - b</code> bên trong lệnh <code>return</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> a = 7, b = 4 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 3
+                        </div>
+                    </div>
+
+                    <!-- Câu 3 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟡 Câu 3 <span class="font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">tich(a, b, c)</code> trả về tích của ba số.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Nhân 3 tham số $a \times b \times c$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> a = 2, b = 3, c = 4 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 24
+                        </div>
+                    </div>
+
+                    <!-- Câu 4 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟡 Câu 4 <span class="font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">max2(a, b)</code> trả về số lớn hơn trong hai số.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Dùng cấu trúc <code>if...else</code> để so sánh $a$ và $b$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> a = 5, b = 9 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 9
+                        </div>
+                    </div>
+
+                    <!-- Câu 5 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟡 Câu 5 <span class="font-normal text-slate-500">(Trung bình)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">chanle(n)</code> kiểm tra số chẵn hay lẻ. Nếu chẵn trả về <code>"Chan"</code>, ngược lại trả về <code>"Le"</code>.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Dùng phép toán chia dư <code>n % 2</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> n = 6 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> Chan<br>
+                            <span class="text-slate-400">Input:</span> n = 7 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> Le
+                        </div>
+                    </div>
+
+                    <!-- Câu 6 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟠 Câu 6 <span class="font-normal text-slate-500">(Khá)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">tongday(A)</code> tính tổng các phần tử trong một danh sách $A$.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Khởi tạo biến $S = 0$ và duyệt danh sách bằng vòng lặp <code>for</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> A = [1, 2, 3, 4, 5] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 15
+                        </div>
+                    </div>
+
+                    <!-- Câu 7 -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">🟠 Câu 7 <span class="font-normal text-slate-500">(Khá)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">tongduong(A)</code> tính tổng các số dương trong danh sách.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Sử dụng câu lệnh <code>if k > 0:</code> bên trong vòng lặp trước khi cộng dồn.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> A = [1, -10, -11, 8, 2, 0, -5] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 11
+                        </div>
+                    </div>
+
+                    <!-- Câu 8 -->
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800">🔴 Câu 8 <span class="font-normal text-indigo-500">(Nâng cao)</span></p>
+                        <p class="mt-1">Viết hàm <code class="bg-white px-1 rounded border">nguyento(n)</code> kiểm tra số nguyên tố. Trả về <code>True</code> nếu là số nguyên tố, ngược lại <code>False</code>.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Đếm số lượng ước của $n$ từ $1$ đến $n$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> n = 7 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> True<br>
+                            <span class="text-slate-400">Input:</span> n = 9 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> False
+                        </div>
+                    </div>
+
+                    <!-- Câu 9 -->
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800">🔴 Câu 9 <span class="font-normal text-indigo-500">(Nâng cao)</span></p>
+                        <p class="mt-1">Sử dụng hàm <code class="bg-white px-1 rounded border">nguyento(n)</code> đã viết ở Câu 8, in ra các số nguyên tố từ $1$ đến $n$.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Dùng vòng lặp chạy từ $1 \dots n$ và gọi hàm <code>nguyento</code> trong mỗi bước lặp.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> n = 20 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 2 3 5 7 11 13 17 19
+                        </div>
+                    </div>
+
+                    <!-- Câu 10 -->
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800">🔴 Câu 10 <span class="font-normal text-indigo-500">(Nâng cao)</span></p>
+                        <p class="mt-1">Cho hai danh sách $A$ và $B$. Viết chương trình sử dụng hàm <code class="bg-white px-1 rounded border">tongduong()</code> để tính tổng số dương của mỗi danh sách.</p>
+                        <p class="mt-1 text-slate-500 text-xs">💡 Gợi ý: Gọi <code>tongduong(A)</code> và <code>tongduong(B)</code> rồi in kết quả.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> A = [1, -10, -11, 8, 2, 0, -5], B = [0, 2, -1, 5, 10, -3]<br>
+                            <span class="text-slate-400">Output:</span> Tổng dương A = 11 &nbsp;|&nbsp; Tổng dương B = 17
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+    `
+    },
             { title: "Bài 28: Phạm vi của biến", videoId: "", desc: "Biến toàn cục và biến địa phương.", downloadUrl: "#" },
             { title: "Bài 29: Nhận biết lỗi chương trình", videoId: "", desc: "Các loại lỗi cú pháp và logic.", downloadUrl: "#" },
             { title: "Bài 30: Kiểm thử và gỡ lỗi", videoId: "", desc: "Quy trình tìm và sửa lỗi chương trình.", downloadUrl: "#" }
