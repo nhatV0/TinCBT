@@ -41,14 +41,14 @@ window.courses = {
     chuyenTin: [
         { 
             id: 'cpp-basic', 
-            title: 'basic', 
+            title: 'Basic', 
             icon: 'terminal', 
             dataPath: 'data-chuyen/cpp_basic.js', 
             description: 'Làm quen với ngôn ngữ lập trình C++.' 
         },
         { 
             id: 'cpp-avanced', 
-            title: 'avanced', 
+            title: 'Avanced', 
             icon: 'code-2', 
             dataPath: 'data-chuyen-tin/cpp_avanced.js', 
             description: 'bắt đầu học, đọc hiểu về các kỹ thuật lập trình.' 
