@@ -49,35 +49,35 @@ window.courses = {
         { 
             id: 'cpp-avenced', 
             title: 'Lập trình nâng cao', 
-            icon: 'binary', 
+            icon: 'code-2', 
             dataPath: 'data-chuyen-tin/cpp_avenced.js', 
             description: 'bắt đầu học, đọc hiểu về các kỹ thuật lập trình.' 
         },
         { 
             id: 'aldesaan', 
             title: 'Algorithm Design and Analysis', 
-            icon: 'binary', 
+            icon: 'cpu', 
             dataPath: 'data-chuyen-tin/aldesaan.js', 
             description: 'tìm hiểu về các thuật toán và giải thuật trong lập trình' 
         },
         { 
             id: 'datastruc', 
             title: 'Data Structure', 
-            icon: 'binary', 
+            icon: 'layers', 
             dataPath: 'data-chuyen-tin/datastruc.js', 
             description: 'Tìm hiểu về cấu trúc dữ liệu, tìm kiếm, ngăn xếp và cây' 
         },
         { 
             id: 'graph', 
             title: 'Graph theory', 
-            icon: 'binary', 
+            icon: 'share-2', 
             dataPath: 'data-chuyen-tin/graph.js', 
             description: 'Tìm hiểu về lý thuyết đồ thị các cách duyệt của đồ thị' 
         },
         { 
             id: 'oop', 
             title: 'Object-Oriented Programming', 
-            icon: 'binary', 
+            icon: 'box', 
             dataPath: 'data-chuyen-tin/oop.js', 
             description: 'Lập trình hướng đối tượng sẽ không nằm trong chương trình nhưng là phần giúp các bạn hiểu về hướng đối tượng' 
         }
