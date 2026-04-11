@@ -841,12 +841,283 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Hàm", 
-                videoId: "", 
-                desc: "Tư duy chia nhỏ bài toán (Modular programming), phạm vi biến và truyền tham số.", 
-                downloadUrl: "#" 
-            },
+    {
+    title: "Bài 5: Mảng một chiều và kỹ thuật xử lý dãy số",
+    videoId: "",
+    desc: "Nắm vững cách khai báo, duyệt và xử lý mảng một chiều — nền tảng thiết yếu cho mọi bài toán dữ liệu trong lập trình thi đấu.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-bold text-slate-800 mb-2">📚 Kiến thức</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu cấu trúc bộ nhớ của mảng một chiều, cách khai báo tĩnh và động.</li>
+                        <li>Nắm vững chỉ số mảng (index), truy cập phần tử và duyệt mảng.</li>
+                        <li>Hiểu sự khác biệt giữa khai báo mảng toàn cục và cục bộ.</li>
+                    </ul>
+                    <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Thực hiện các thao tác cơ bản: tìm min/max, tính tổng, đếm phần tử thỏa điều kiện.</li>
+                        <li>Xây dựng mảng tiền tố (Prefix Sum) để tối ưu truy vấn tổng đoạn.</li>
+                        <li>Áp dụng kỹ thuật đảo mảng, dịch chuyển và nén dữ liệu.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">1. Khai báo và khởi tạo mảng</p>
+                        <p class="mb-2">Mảng là tập hợp các phần tử <strong>cùng kiểu dữ liệu</strong>, được lưu trữ liên tiếp trong bộ nhớ và truy cập qua chỉ số (bắt đầu từ <code class="bg-slate-100 px-1 rounded">0</code>).</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li><strong>Mảng toàn cục:</strong> Tự động khởi tạo bằng <code class="bg-slate-100 px-1 rounded">0</code>. Dùng cho mảng kích thước lớn ($\geq 10^5$) để tránh Stack Overflow.</li>
+                            <li><strong>Mảng cục bộ:</strong> Giá trị ban đầu ngẫu nhiên (rác). Cần khởi tạo thủ công hoặc dùng <code class="bg-slate-100 px-1 rounded">memset</code>.</li>
+                        </ul>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-700 mb-1">⚠️ Lỗi phổ biến nhất: Truy cập ngoài biên (Out of Bounds)</p>
+                            <p class="text-red-800">Mảng kích thước $N$ có chỉ số hợp lệ từ $0$ đến $N-1$. Truy cập <code class="bg-red-100 px-1 rounded">a[N]</code> gây <strong>Undefined Behavior</strong> — lỗi cực kỳ khó debug. Hãy luôn khai báo mảng dư ra vài phần tử (ví dụ: <code class="bg-red-100 px-1 rounded">int a[MAX_N + 5]</code>).</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">2. Các thao tác cơ bản</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs md:text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="p-2 border border-slate-200 text-left">Thao tác</th>
+                                        <th class="p-2 border border-slate-200 text-left">Độ phức tạp</th>
+                                        <th class="p-2 border border-slate-200 text-left">Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="p-2 border border-slate-200">Duyệt toàn bộ mảng</td><td class="p-2 border border-slate-200 font-mono">$O(N)$</td><td class="p-2 border border-slate-200">Vòng lặp for từ 0 đến N-1</td></tr>
+                                    <tr class="bg-slate-50"><td class="p-2 border border-slate-200">Tìm Min / Max</td><td class="p-2 border border-slate-200 font-mono">$O(N)$</td><td class="p-2 border border-slate-200">Duyệt 1 lần, cập nhật biến kết quả</td></tr>
+                                    <tr><td class="p-2 border border-slate-200">Tính tổng đoạn $[l, r]$</td><td class="p-2 border border-slate-200 font-mono">$O(N)$ → $O(1)$</td><td class="p-2 border border-slate-200">Dùng Prefix Sum để tối ưu</td></tr>
+                                    <tr class="bg-slate-50"><td class="p-2 border border-slate-200">Đảo ngược mảng</td><td class="p-2 border border-slate-200 font-mono">$O(N)$</td><td class="p-2 border border-slate-200">Swap từ hai đầu vào giữa</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">3. Kỹ thuật Prefix Sum (Mảng tiền tố)</p>
+                        <p class="mb-2">Cho phép trả lời truy vấn <strong>"tổng các phần tử từ chỉ số $l$ đến $r$"</strong> trong $O(1)$ thay vì $O(N)$ sau $O(N)$ tiền xử lý.</p>
+                        <p class="mb-1 font-semibold">Công thức xây dựng:</p>
+                        <p class="mb-2 font-mono bg-slate-100 px-3 py-1 rounded-lg inline-block">$prefix[i] = prefix[i-1] + a[i]$</p>
+                        <p class="mb-1 font-semibold">Truy vấn tổng đoạn $[l, r]$:</p>
+                        <p class="font-mono bg-slate-100 px-3 py-1 rounded-lg inline-block">$sum(l, r) = prefix[r] - prefix[l-1]$</p>
+                        <div class="mt-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                            <p class="font-bold text-blue-700 mb-1">💡 Tại sao quan trọng?</p>
+                            <p class="text-blue-800">Nếu có $Q = 10^5$ truy vấn tổng đoạn, cách duyệt thô là $O(N \times Q) = 10^{10}$ — chắc chắn TLE. Prefix Sum giảm xuống $O(N + Q) = 2 \times 10^5$ — chạy tức thì.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">4. Code minh họa (C++)</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;algorithm&gt; // min, max, reverse
+using namespace std;
+
+const int MAX_N = 1e5 + 5;
+int a[MAX_N];      // Mảng dữ liệu (toàn cục)
+long long pre[MAX_N]; // Mảng tiền tố (toàn cục)
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; ++i) cin &gt;&gt; a[i]; // Index từ 1 cho dễ tính prefix
+
+    // Xây dựng Prefix Sum
+    pre[0] = 0;
+    for (int i = 1; i &lt;= n; ++i)
+        pre[i] = pre[i - 1] + a[i];
+
+    // Truy vấn tổng đoạn [l, r] trong O(1)
+    int l, r;
+    cin &gt;&gt; l &gt;&gt; r;
+    cout &lt;&lt; "Tong [" &lt;&lt; l &lt;&lt; ", " &lt;&lt; r &lt;&lt; "] = " &lt;&lt; pre[r] - pre[l - 1] &lt;&lt; "\n";
+
+    // Tìm Min và Max
+    int mn = a[1], mx = a[1];
+    for (int i = 2; i &lt;= n; ++i) {
+        mn = min(mn, a[i]);
+        mx = max(mx, a[i]);
+    }
+    cout &lt;&lt; "Min = " &lt;&lt; mn &lt;&lt; ", Max = " &lt;&lt; mx &lt;&lt; "\n";
+
+    // Đảo ngược mảng
+    reverse(a + 1, a + n + 1);
+
+    return 0;
+}</pre>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500">⭐ Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1. Thống kê cơ bản</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số nguyên. In ra: tổng, giá trị nhỏ nhất, giá trị lớn nhất và trung bình cộng của dãy.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> N=5, arr=[3, 1, 4, 1, 5]<br>
+                            <span class="text-slate-400">Output:</span> Sum=14, Min=1, Max=5, Avg=2.80
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2. Đếm phần tử theo điều kiện</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số nguyên và số $K$. Đếm số phần tử chẵn, số phần tử lẻ, và số phần tử bằng $K$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> N=6, K=3, arr=[1, 3, 2, 3, 4, 3]<br>
+                            <span class="text-slate-400">Output:</span> Chan=2, Le=4, Bang_K=3
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3. Đảo ngược dãy</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số. In ra dãy sau khi đảo ngược thứ tự các phần tử. Thực hiện bằng kỹ thuật hai con trỏ (swap từ hai đầu), không dùng hàm có sẵn.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 5 | 1 2 3 4 5<br>
+                            <span class="text-slate-400">Output:</span> 5 4 3 2 1
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4. Phần tử thứ hai lớn nhất</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số nguyên phân biệt. Tìm phần tử lớn thứ hai mà <strong>không được sắp xếp mảng</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 5 | 3 1 4 1 5<br>
+                            <span class="text-slate-400">Output:</span> 4
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5. Kiểm tra dãy tăng dần</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số nguyên. Kiểm tra xem dãy có được sắp xếp tăng không ngặt (non-decreasing) hay không.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 1 2 2 3 5 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> YES<br>
+                            <span class="text-slate-400">Input:</span> 1 3 2 4 5 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> NO
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6. Xoay vòng mảng</p>
+                        <p class="mt-1 text-slate-600">Nhập dãy $N$ số và số $K$. Dịch chuyển toàn bộ mảng sang phải $K$ vị trí (phần tử cuối vòng về đầu).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> N=5, K=2, arr=[1, 2, 3, 4, 5]<br>
+                            <span class="text-slate-400">Output:</span> 4 5 1 2 3
+                        </div>
+                    </div>
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500 pt-2">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 7. Truy vấn tổng đoạn (Prefix Sum)</p>
+                        <p class="mt-1 text-indigo-800">Nhập dãy $N$ số và $Q$ truy vấn, mỗi truy vấn gồm $l, r$. In ra tổng các phần tử từ vị trí $l$ đến $r$. Yêu cầu: xử lý trong $O(N + Q)$ bằng Prefix Sum.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=5, arr=[2,4,1,3,5], Q=3: (1,3), (2,5), (1,5)<br>
+                            <span class="text-slate-400">Output:</span> 7 | 13 | 15
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 8. Dãy con có tổng lớn nhất (Kadane's Algorithm)</p>
+                        <p class="mt-1 text-indigo-800">Nhập dãy $N$ số nguyên (có thể âm). Tìm dãy con liên tiếp có tổng lớn nhất. Yêu cầu: giải trong $O(N)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> [-2, 1, -3, 4, -1, 2, 1, -5, 4]<br>
+                            <span class="text-slate-400">Output:</span> 6 (dãy con [4, -1, 2, 1])
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Gợi ý:</strong> Dùng biến <code>curSum</code> (tổng kết thúc tại vị trí hiện tại) và <code>maxSum</code>. Nếu <code>curSum &lt; 0</code>, reset về <code>0</code>.
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 9. Đếm cặp tổng bằng K (nâng cấp Bài 13 trước)</p>
+                        <p class="mt-1 text-indigo-800">Nhập $N$ số nguyên và $K$. Đếm số cặp $(i, j)$ với $i &lt; j$ sao cho $a_i + a_j = K$. Giải $O(N^2)$ trước, sau đó tối ưu lên $O(N \log N)$ bằng cách sắp xếp + Two Pointers.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=5, K=9, arr=[2, 7, 4, 5, 3]<br>
+                            <span class="text-slate-400">Output:</span> 2
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 10. 🧠 Mảng hiệu (Difference Array)</p>
+                        <p class="mt-1 text-indigo-800">Cho mảng $N$ phần tử ban đầu đều bằng $0$ và $Q$ thao tác: mỗi thao tác cộng giá trị $v$ vào tất cả phần tử từ $l$ đến $r$. In ra mảng sau khi thực hiện hết. Yêu cầu: $O(N + Q)$ bằng kỹ thuật Difference Array.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=5, Q=2: (1,3,+2), (2,5,+3)<br>
+                            <span class="text-slate-400">Output:</span> 2 5 5 3 3
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Tư duy:</strong> Đây là kỹ thuật đối ngẫu với Prefix Sum. Thay vì truy vấn tổng, ta tối ưu hóa thao tác <em>cập nhật đoạn</em>. Rất phổ biến trong các bài toán hình học mảng và lịch trình.
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">🔍 Từ khóa tìm kiếm gợi ý:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>Arrays in C++ tutorial competitive programming</li>
+                            <li>Prefix sum array technique C++</li>
+                            <li>Kadane's algorithm maximum subarray</li>
+                            <li>Difference array range update C++</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">📖 Tài liệu đọc thêm:</p>
+                        <p class="text-slate-600">Mục <strong>"Arrays"</strong> và <strong>"Prefix Sums"</strong> trên <a href="https://usaco.guide" target="_blank" class="text-blue-600 underline hover:text-blue-800">USACO Guide</a> — tài liệu luyện thi lập trình quốc tế chất lượng cao, miễn phí.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Mảng", 
                 videoId: "", 
