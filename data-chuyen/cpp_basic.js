@@ -1378,13 +1378,13 @@ int main() {
 
                     <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
                         <p class="font-semibold text-indigo-900">Bài 13. 🧠 Điểm yên ngựa (Saddle Point)</p>
-                        <p class="mt-1 text-indigo-800">Cho ma trận $M \times N$. Tìm tất cả các <strong>điểm yên ngựa</strong>: phần tử vừa là <em>nhỏ nhất trong hàng</em> vừa là <em>lớn nhất trong cột</em> của nó. In ra tọa độ và giá trị của từng điểm, hoặc <code>NONE</code> nếu không tồn tại.</p>
+                        <p class="mt-1 text-indigo-800">Cho ma trận $M x N$. Tìm tất cả các <strong>điểm yên ngựa</strong>: phần tử vừa là <em>nhỏ nhất trong hàng</em> vừa là <em>lớn nhất trong cột</em> của nó. In ra tọa độ và giá trị của từng điểm, hoặc <code>NONE</code> nếu không tồn tại.</p>
                         <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
                             <span class="text-slate-400">Input:</span> [[1,2,3],[4,5,6],[7,8,9]]<br>
                             <span class="text-slate-400">Output:</span> (0,2) = 3
                         </div>
                         <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
-                            💬 <strong>Gợi ý:</strong> Với mỗi phần tử $a[i][j]$, kiểm tra: nó có phải Min của hàng $i$ không? Nó có phải Max của cột $j$ không? Độ phức tạp: $O(M \times N \times (M + N))$ — thử tối ưu về $O(M \times N)$.
+                            💬 <strong>Gợi ý:</strong> Với mỗi phần tử $a[i][j]$, kiểm tra: nó có phải Min của hàng $i$ không? Nó có phải Max của cột $j$ không? Độ phức tạp: $O(M x N  (M + N))$ — thử tối ưu về $O(M x N)$.
                         </div>
                     </div>
 
