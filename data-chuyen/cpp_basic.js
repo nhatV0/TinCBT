@@ -1423,12 +1423,306 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Cấu trúc (Struct)", 
-                videoId: "", 
-                desc: "Cách gom nhóm các thuộc tính để mô tả một thực thể phức tạp hơn.", 
-                downloadUrl: "#" 
-            },
+    {
+    title: "Bài 6: Cấu trúc (Struct) — Tổ chức dữ liệu phức tạp",
+    videoId: "",
+    desc: "Học cách gom nhóm nhiều thuộc tính khác nhau vào một kiểu dữ liệu tự định nghĩa, nền tảng để mô hình hóa bài toán thực tế trong lập trình thi đấu.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-bold text-slate-800 mb-2">📚 Kiến thức</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu khái niệm <strong>kiểu dữ liệu do người dùng định nghĩa</strong> (User-defined types).</li>
+                        <li>Nắm cách gom nhóm các thuộc tính có kiểu khác nhau vào một <strong>thực thể duy nhất</strong>.</li>
+                        <li>Phân biệt khi nào nên dùng <code class="bg-slate-100 px-1 rounded">struct</code> và khi nào nên dùng <code class="bg-slate-100 px-1 rounded">std::pair</code>.</li>
+                    </ul>
+                    <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Định nghĩa và sử dụng <code class="bg-slate-100 px-1 rounded">struct</code> với Constructor cơ bản.</li>
+                        <li>Quản lý <strong>mảng / vector các cấu trúc</strong> (Array of Structs).</li>
+                        <li>Viết <strong>nạp chồng toán tử so sánh</strong> (<code class="bg-slate-100 px-1 rounded">operator &lt;</code>) để sử dụng với <code class="bg-slate-100 px-1 rounded">std::sort</code>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">1. Tại sao cần Struct?</p>
+                        <p class="mb-2">Giả sử cần quản lý thông tin 100 học sinh (tên, điểm Toán, điểm Tin). Cách làm thông thường là dùng <strong>3 mảng rời rạc</strong> — dễ gây sai lệch khi sắp xếp vì các mảng không được đồng bộ cùng nhau.</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs md:text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="p-2 border border-slate-200 text-left">Cách tiếp cận</th>
+                                        <th class="p-2 border border-slate-200 text-left">Ưu điểm</th>
+                                        <th class="p-2 border border-slate-200 text-left">Nhược điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-2 border border-slate-200 font-semibold">3 mảng rời rạc</td>
+                                        <td class="p-2 border border-slate-200">Đơn giản</td>
+                                        <td class="p-2 border border-slate-200 text-red-600">Dễ sai khi sort, khó bảo trì</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="p-2 border border-slate-200 font-semibold">1 mảng struct</td>
+                                        <td class="p-2 border border-slate-200 text-green-700">Mạch lạc, an toàn, dễ mở rộng</td>
+                                        <td class="p-2 border border-slate-200">Cần học thêm cú pháp</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">2. Định nghĩa và khai báo</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">struct Student {
+    string name;
+    double math, it;
+    double avg;
+};</pre>
+                        <p class="mt-2">Truy cập thuộc tính qua dấu chấm: <code class="bg-slate-100 px-1 rounded">s.name</code>, <code class="bg-slate-100 px-1 rounded">s.math</code>.</p>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">3. Struct vs std::pair — Khi nào dùng cái nào?</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong><code class="bg-slate-100 px-1 rounded">std::pair&lt;T1, T2&gt;</code>:</strong> Dùng khi chỉ cần gom <strong>đúng 2 giá trị</strong> đơn giản, không cần đặt tên thuộc tính. Nhanh gọn cho bài toán cạnh đồ thị <code class="bg-slate-100 px-1 rounded">{u, v}</code>, tọa độ <code class="bg-slate-100 px-1 rounded">{x, y}</code>.</li>
+                            <li><strong><code class="bg-slate-100 px-1 rounded">struct</code>:</strong> Dùng khi cần gom <strong>3 thuộc tính trở lên</strong>, cần tên rõ ràng, cần Constructor hoặc nạp chồng toán tử. Phù hợp cho bài toán phức tạp hơn.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">4. Nạp chồng toán tử so sánh (<code class="bg-slate-100 px-1 rounded">operator &lt;</code>)</p>
+                        <p class="mb-2">Để dùng <code class="bg-slate-100 px-1 rounded">std::sort</code> trên mảng struct, cần định nghĩa quy tắc so sánh. Khi đó <code class="bg-slate-100 px-1 rounded">sort</code> sẽ tự biết cách sắp xếp các đối tượng.</p>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-700 mb-1">⚠️ Lưu ý quan trọng</p>
+                            <p class="text-red-800"><code class="bg-red-100 px-1 rounded">operator &lt;</code> phải được khai báo <code class="bg-red-100 px-1 rounded">const</code> ở cuối. Nếu quên <code class="bg-red-100 px-1 rounded">const</code>, compiler sẽ báo lỗi khi dùng với <code class="bg-red-100 px-1 rounded">std::sort</code> hoặc <code class="bg-red-100 px-1 rounded">std::set</code>.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">5. Code minh họa hoàn chỉnh (C++)</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+struct Student {
+    string name;
+    double it;
+
+    // Constructor: Khởi tạo nhanh
+    Student(string n = "", double i = 0) : name(n), it(i) {}
+
+    // operator < : Sắp xếp điểm Tin giảm dần
+    // Nếu điểm bằng nhau, sắp xếp tên theo thứ tự từ điển
+    bool operator &lt; (const Student&amp; other) const {
+        if (it != other.it) return it &gt; other.it;
+        return name &lt; other.name;
+    }
+};
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n; cin &gt;&gt; n;
+    vector&lt;Student&gt; ds;
+
+    for (int i = 0; i &lt; n; ++i) {
+        string name; double score;
+        cin &gt;&gt; name &gt;&gt; score;
+        ds.push_back(Student(name, score));
+    }
+
+    sort(ds.begin(), ds.end()); // Dùng operator < đã định nghĩa
+
+    cout &lt;&lt; "-- DANH SACH SAU KHI SAP XEP --\n";
+    for (const auto&amp; s : ds) {
+        cout &lt;&lt; s.name &lt;&lt; " : " &lt;&lt; s.it &lt;&lt; "\n";
+    }
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                        <p class="font-bold text-blue-700 mb-1">💡 Ứng dụng phổ biến trong thi đấu</p>
+                        <p class="text-blue-800">Struct được dùng rất nhiều để mô hình hóa: <strong>Point {x, y}</strong> trong bài toán hình học, <strong>Edge {u, v, weight}</strong> trong bài toán đồ thị (Dijkstra, Kruskal), <strong>Event {time, type}</strong> trong kỹ thuật quét đường (Sweep Line).</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500">⭐ Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1. Struct Point và khoảng cách</p>
+                        <p class="mt-1 text-slate-600">Định nghĩa <code class="bg-slate-100 px-1 rounded">struct Point</code> gồm tọa độ $x, y$ (số thực). Viết hàm <code class="bg-slate-100 px-1 rounded">double distance(Point a, Point b)</code> tính khoảng cách Euclid giữa 2 điểm.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> (0,0) và (3,4) &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 5.000
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2. Struct Fraction (Phân số)</p>
+                        <p class="mt-1 text-slate-600">Định nghĩa <code class="bg-slate-100 px-1 rounded">struct Fraction</code> gồm tử số và mẫu số nguyên. Viết hàm <code class="bg-slate-100 px-1 rounded">Fraction simplify(Fraction f)</code> rút gọn phân số về dạng tối giản. (Dùng lại hàm <code class="bg-slate-100 px-1 rounded">gcd</code> từ Bài 4.)</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 12/8 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 3/2
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3. Struct Time — Chuyển đổi giây</p>
+                        <p class="mt-1 text-slate-600">Tạo <code class="bg-slate-100 px-1 rounded">struct Time</code> gồm giờ, phút, giây. Viết hàm <code class="bg-slate-100 px-1 rounded">Time fromSeconds(int s)</code> nhận vào tổng số giây và chuyển thành <code class="bg-slate-100 px-1 rounded">Time</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 3661 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 1:01:01
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4. Quản lý sách — Tìm cuốn rẻ nhất</p>
+                        <p class="mt-1 text-slate-600">Viết chương trình quản lý $N$ cuốn sách (tên sách, giá tiền). In ra thông tin cuốn sách có giá rẻ nhất.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> N=3: ("Toan",45000), ("Ly",38000), ("Hoa",52000)<br>
+                            <span class="text-slate-400">Output:</span> Ly - 38000 VND
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5. Tổng lương nhân viên</p>
+                        <p class="mt-1 text-slate-600">Dùng mảng struct để lưu danh sách $N$ nhân viên (mã NV, họ tên, lương). Tính và in ra tổng lương toàn công ty và tên nhân viên có lương cao nhất.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> NV001 An 15000000 | NV002 Binh 20000000<br>
+                            <span class="text-slate-400">Output:</span> Tong=35000000 | Cao nhat: Binh
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6. Kiểm tra 2 điểm trùng nhau</p>
+                        <p class="mt-1 text-slate-600">Dùng <code class="bg-slate-100 px-1 rounded">struct Point</code> từ Bài 1. Viết hàm <code class="bg-slate-100 px-1 rounded">bool equals(Point a, Point b)</code> kiểm tra 2 điểm có trùng nhau không (xét cả sai số $\epsilon = 10^{-9}$).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> (1.0, 2.0) và (1.0, 2.0) &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> TRUNG<br>
+                            <span class="text-slate-400">Input:</span> (1.0, 2.0) và (1.0, 2.1) &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> KHAC
+                        </div>
+                    </div>
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500 pt-2">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 7. Xếp hạng thí sinh thi đại học</p>
+                        <p class="mt-1 text-indigo-800">Nhập danh sách thí sinh gồm SBD, Họ tên, Điểm Toán, Lý, Hóa. Sắp xếp theo <strong>Tổng điểm giảm dần</strong>; nếu bằng nhau thì ưu tiên <strong>điểm Toán cao hơn</strong>. In danh sách đã xếp hạng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> SBD001 An 9 8 7 | SBD002 Binh 8 9 7<br>
+                            <span class="text-slate-400">Output:</span> #1 An 24đ | #2 Binh 24đ (An ưu tiên vì Toán=9)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 8. Struct Rectangle — Diện tích và kiểm tra điểm</p>
+                        <p class="mt-1 text-indigo-800">Định nghĩa <code class="bg-indigo-100 px-1 rounded">struct Rectangle</code> bằng 2 điểm: góc dưới trái $(x_1, y_1)$ và góc trên phải $(x_2, y_2)$. Viết hàm tính diện tích và hàm kiểm tra điểm $M$ có nằm trong (kể cả biên) hình chữ nhật không.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Rect:</span> (0,0)-(4,3), M=(2,1)<br>
+                            <span class="text-slate-400">Output:</span> DienTich=12 | M nam TRONG hinh chu nhat
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 9. Số phức — Các phép toán cơ bản</p>
+                        <p class="mt-1 text-indigo-800">Định nghĩa <code class="bg-indigo-100 px-1 rounded">struct Complex</code> gồm phần thực $a$ và phần ảo $b$ (biểu diễn $a + bi$). Viết các hàm <strong>cộng, trừ, nhân</strong> hai số phức và in kết quả dạng $a + bi$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">A=</span>(3+2i), <span class="text-slate-400">B=</span>(1+4i)<br>
+                            <span class="text-slate-400">A+B=</span> 4+6i &nbsp;|&nbsp; <span class="text-slate-400">A×B=</span> -5+14i
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 10. 🧠 Cặp điểm gần nhau nhất</p>
+                        <p class="mt-1 text-indigo-800">Cho $N$ điểm trên mặt phẳng tọa độ. Tìm <strong>cặp điểm có khoảng cách nhỏ nhất</strong>. In ra tọa độ 2 điểm và khoảng cách giữa chúng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=4: (0,0),(3,4),(1,1),(6,8)<br>
+                            <span class="text-slate-400">Output:</span> (0,0)-(1,1) = 1.414
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Gợi ý:</strong> Giải $O(N^2)$ bằng vòng lặp lồng. Với $N \leq 10^5$, cần thuật toán chia đôi $O(N \log N)$ — thử sức nếu đã quen với đệ quy!
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 11. Chuẩn bị cho Tham lam — Sắp xếp đồ vật</p>
+                        <p class="mt-1 text-indigo-800">Cho danh sách $N$ đồ vật (trọng lượng $w$ và giá trị $v$). Sắp xếp các đồ vật theo <strong>tỉ lệ $v/w$ giảm dần</strong>. In danh sách đã sắp xếp. (Đây là bước tiền xử lý cho bài toán <em>Tham lam — Knapsack phân số</em>.)</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> (w=2,v=6),(w=3,v=6),(w=1,v=4)<br>
+                            <span class="text-slate-400">Output:</span> (1,4)→4.0 | (2,6)→3.0 | (3,6)→2.0
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Kết nối bài sau:</strong> Kỹ thuật sắp xếp struct theo tiêu chí tùy chỉnh này là nền tảng của nhiều thuật toán <strong>Tham lam (Greedy)</strong> và <strong>Quy hoạch động</strong>.
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">🔍 Từ khóa tìm kiếm gợi ý:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>C++ Struct tutorial competitive programming</li>
+                            <li>Operator overloading C++ sort custom comparator</li>
+                            <li>Sorting array of structs C++ std::sort</li>
+                            <li>C++ struct vs std::pair when to use</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">📖 Tài liệu đọc thêm:</p>
+                        <p class="text-slate-600">Bài viết <strong>"Custom Data Types & Structs"</strong> trên <a href="https://www.learncpp.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">LearnCpp.com</a> — hướng dẫn chi tiết về struct, constructor và operator overloading trong C++.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
         ]
     }
 ];
