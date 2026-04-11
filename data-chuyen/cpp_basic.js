@@ -1118,12 +1118,311 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Mảng", 
-                videoId: "", 
-                desc: "Cấu trúc dữ liệu tuyến tính đầu tiên, quản lý dãy số và bảng số.", 
-                downloadUrl: "#" 
-            },
+    {
+    title: "Bài 5: Mảng — Cấu trúc dữ liệu tuyến tính đầu tiên",
+    videoId: "",
+    desc: "Hiểu cách lưu trữ và xử lý dữ liệu tuyến tính với mảng một chiều và ma trận — nền tảng không thể thiếu trong lập trình thi đấu.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-bold text-slate-800 mb-2">📚 Kiến thức</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu cách lưu trữ dữ liệu liên tiếp trong bộ nhớ, phân biệt <strong>mảng 1 chiều</strong> và <strong>mảng 2 chiều</strong> (ma trận).</li>
+                        <li>Nắm vững khái niệm <strong>chỉ số (index)</strong> bắt đầu từ $0$ trong C++.</li>
+                        <li>Hiểu về giới hạn bộ nhớ và lý do phải khai báo mảng lớn ở phạm vi toàn cục.</li>
+                    </ul>
+                    <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Khai báo, nhập/xuất và duyệt mảng thành thạo.</li>
+                        <li>Thực hiện các thao tác cơ bản: tìm kiếm, tính tổng, tìm cực trị (Min/Max).</li>
+                        <li>Xây dựng và ứng dụng <strong>mảng cộng dồn (Prefix Sum)</strong> để tối ưu truy vấn tổng đoạn.</li>
+                        <li>Xử lý bài toán trên <strong>ma trận</strong> với vòng lặp lồng nhau.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">1. Khai báo và bộ nhớ</p>
+                        <p class="mb-2">Mảng là tập hợp các phần tử <strong>cùng kiểu dữ liệu</strong>, được lưu trữ <strong>liên tiếp nhau trong bộ nhớ</strong> và truy cập qua chỉ số nguyên.</p>
+                        <ul class="list-disc list-inside space-y-1 mb-3">
+                            <li><strong>Khai báo tĩnh:</strong> <code class="bg-slate-100 px-1 rounded">int a[100];</code> — kích thước cố định tại thời điểm biên dịch.</li>
+                            <li><strong>Chỉ số hợp lệ:</strong> từ $0$ đến $n-1$. Truy cập <code class="bg-slate-100 px-1 rounded">a[n]</code> gây lỗi <em>Out of Bounds</em>.</li>
+                        </ul>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-700 mb-1">⚠️ Quy tắc vàng trong thi đấu</p>
+                            <p class="text-red-800">Nếu mảng cần đến $10^5$ phần tử trở lên, <strong>bắt buộc khai báo toàn cục</strong>. Khai báo trong <code class="bg-red-100 px-1 rounded">main()</code> khiến mảng nằm trên Stack (giới hạn ~1–8 MB) và gây <strong>Stack Overflow</strong>. Mảng toàn cục nằm ở vùng nhớ Static — dung lượng lớn hơn nhiều và tự động khởi tạo bằng <code class="bg-red-100 px-1 rounded">0</code>.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">2. Truy cập và duyệt mảng</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Truy cập phần tử thứ $i$: <code class="bg-slate-100 px-1 rounded">a[i]</code> — thao tác $O(1)$.</li>
+                            <li>Duyệt toàn bộ: vòng lặp <code class="bg-slate-100 px-1 rounded">for</code> từ <code class="bg-slate-100 px-1 rounded">0</code> đến <code class="bg-slate-100 px-1 rounded">n-1</code> — $O(N)$.</li>
+                            <li>Tìm Min/Max: duyệt 1 lần, cập nhật biến kết quả — $O(N)$.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">3. Mảng hai chiều (Ma trận)</p>
+                        <p class="mb-2">Dùng để quản lý bảng số, tọa độ lưới hoặc đồ thị dạng kề.</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Khai báo: <code class="bg-slate-100 px-1 rounded">int a[100][100];</code> — hàng trước, cột sau.</li>
+                            <li>Duyệt: 2 vòng lặp lồng nhau — $O(M \times N)$.</li>
+                            <li>Phần tử hàng $i$, cột $j$: <code class="bg-slate-100 px-1 rounded">a[i][j]</code>.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">4. Kỹ thuật Prefix Sum (Mảng cộng dồn)</p>
+                        <p class="mb-2">Cho phép trả lời truy vấn <strong>tổng đoạn $[L, R]$</strong> trong $O(1)$ sau $O(N)$ tiền xử lý.</p>
+                        <p class="mb-1 font-semibold">Xây dựng (index từ 0):</p>
+                        <p class="font-mono bg-slate-100 px-3 py-1 rounded-lg inline-block mb-2">$S[i] = A[0] + A[1] + \ldots + A[i]$</p>
+                        <p class="mb-1 font-semibold">Truy vấn tổng đoạn $[L, R]$:</p>
+                        <p class="font-mono bg-slate-100 px-3 py-1 rounded-lg inline-block">$sum(L,R) = S[R] - S[L-1]$ &nbsp;(với $S[-1] = 0$)</p>
+                        <div class="mt-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                            <p class="font-bold text-blue-700 mb-1">💡 Tại sao quan trọng?</p>
+                            <p class="text-blue-800">Với $Q = 10^5$ truy vấn tổng đoạn, cách duyệt thô tốn $O(N \times Q) = 10^{10}$ bước — chắc chắn TLE. Prefix Sum giảm xuống $O(N + Q)$ — chạy tức thì.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">5. Code minh họa (C++)</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;algorithm&gt; // min, max, sort
+
+using namespace std;
+
+const int MAXN = 1e6 + 5;
+int a[MAXN]; // Khai báo toàn cục cho mảng lớn
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n; cin &gt;&gt; n;
+
+    // Nhập mảng
+    for (int i = 0; i &lt; n; ++i) cin &gt;&gt; a[i];
+
+    // Tìm Min / Max
+    int mn = a[0], mx = a[0];
+    for (int i = 1; i &lt; n; ++i) {
+        mn = min(mn, a[i]);
+        mx = max(mx, a[i]);
+    }
+    cout &lt;&lt; "Min: " &lt;&lt; mn &lt;&lt; " | Max: " &lt;&lt; mx &lt;&lt; "\n";
+
+    // Xây dựng Prefix Sum
+    long long S[MAXN];
+    S[0] = a[0];
+    for (int i = 1; i &lt; n; ++i) S[i] = S[i - 1] + a[i];
+
+    // Truy vấn tổng đoạn [L, R] trong O(1)
+    int L, R; cin &gt;&gt; L &gt;&gt; R;
+    long long ans = S[R] - (L > 0 ? S[L - 1] : 0);
+    cout &lt;&lt; "Tong [" &lt;&lt; L &lt;&lt; ", " &lt;&lt; R &lt;&lt; "] = " &lt;&lt; ans &lt;&lt; "\n";
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                        <p class="font-bold text-blue-700 mb-1">💡 Tư duy hiện đại — std::vector</p>
+                        <p class="text-blue-800">Mảng tĩnh có kích thước cố định và không linh hoạt. Trong C++ hiện đại và thi đấu đỉnh cao, <code class="bg-blue-100 px-1 rounded">std::vector</code> thường được ưu tiên nhờ khả năng <strong>tự co giãn kích thước</strong> và hỗ trợ nhiều phương thức mạnh mẽ. Đây sẽ là chủ đề của bài STL Container.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500">⭐ Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1. Phần tử ở vị trí chẵn</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên. In ra các phần tử ở <strong>vị trí chỉ số chẵn</strong> ($0, 2, 4, \ldots$).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> N=5, arr=[10, 20, 30, 40, 50]<br>
+                            <span class="text-slate-400">Output:</span> 10 30 50
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2. Trung bình cộng các phần tử dương</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên. Tính và in ra trung bình cộng của các phần tử <strong>dương</strong> trong mảng. Nếu không có phần tử dương, in ra <code>NONE</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> [-1, 3, -5, 7, 2] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 4.00
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3. Vị trí cuối cùng của giá trị X</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên và giá trị $X$. Tìm <strong>chỉ số cuối cùng</strong> mà tại đó mảng bằng $X$. Nếu không tìm thấy, in ra <code>-1</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> arr=[1,3,5,3,7], X=3 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 3
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4. Kiểm tra mảng đối xứng (Palindrome)</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên. Kiểm tra xem mảng có <strong>đối xứng</strong> (đọc xuôi = đọc ngược) không.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> [1, 2, 3, 2, 1] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> YES<br>
+                            <span class="text-slate-400">Input:</span> [1, 2, 3, 4, 5] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> NO
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5. Lọc số nguyên tố trong mảng</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên dương. In ra các số nguyên tố trong mảng. (<em>Tái sử dụng hàm <code class="bg-slate-100 px-1 rounded">isPrime</code> từ Bài 4</em>.)</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> [4, 7, 10, 13, 15, 17]<br>
+                            <span class="text-slate-400">Output:</span> 7 13 17
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6. Đếm số lần xuất hiện</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên và giá trị $X$. Đếm số lần $X$ xuất hiện trong mảng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> arr=[1,3,3,5,3,7], X=3 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 3
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 7. Đảo ngược mảng không dùng mảng phụ</p>
+                        <p class="mt-1 text-slate-600">Nhập mảng $N$ số nguyên. Đảo ngược mảng tại chỗ bằng kỹ thuật <strong>swap hai đầu vào giữa</strong>, không sử dụng mảng phụ.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> [1, 2, 3, 4, 5] &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 5 4 3 2 1
+                        </div>
+                    </div>
+
+                    <p class="font-bold uppercase text-xs tracking-widest text-slate-500 pt-2">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 8. Mảng cộng dồn — Truy vấn tổng đoạn</p>
+                        <p class="mt-1 text-indigo-800">Cho mảng $A$ có $N$ phần tử. Xây dựng mảng $S$ sao cho $S[i] = A[0] + A[1] + \ldots + A[i]$. Xử lý $Q$ truy vấn, mỗi truy vấn cho $L, R$: tính tổng $A[L] + \ldots + A[R]$ trong $O(1)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> arr=[2,4,1,3,5], Q=2: (1,3), (0,4)<br>
+                            <span class="text-slate-400">Output:</span> 8 | 15
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 9. Dãy con liên tiếp tăng dài nhất</p>
+                        <p class="mt-1 text-indigo-800">Nhập dãy $N$ số nguyên. Tìm <strong>độ dài</strong> của dãy con gồm các phần tử liên tiếp (về chỉ số) tăng dần dài nhất.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> [1, 2, 3, 1, 2, 3, 4, 1]<br>
+                            <span class="text-slate-400">Output:</span> 4 (dãy con [1, 2, 3, 4])
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 10. Tần suất xuất hiện (Counting Sort)</p>
+                        <p class="mt-1 text-indigo-800">Cho mảng $N$ số nguyên có giá trị từ $0$ đến $10^6$. In ra mỗi giá trị xuất hiện trong mảng và số lần xuất hiện tương ứng, theo thứ tự tăng dần. (Kỹ thuật <strong>mảng đánh dấu</strong>.)</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> [3, 1, 2, 1, 3, 3]<br>
+                            <span class="text-slate-400">Output:</span> 1 → 2 lần | 2 → 1 lần | 3 → 3 lần
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 11. Ma trận xoắn ốc</p>
+                        <p class="mt-1 text-indigo-800">Cho số nguyên dương $N$. In ra ma trận vuông $N \times N$ chứa các số từ $1$ đến $N^2$ được điền theo dạng <strong>xoắn ốc từ ngoài vào trong</strong> (theo chiều kim đồng hồ).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=3<br>
+                            <span class="text-slate-400">Output:</span><br>
+                            1 2 3<br>
+                            8 9 4<br>
+                            7 6 5
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 12. Cộng hai ma trận</p>
+                        <p class="mt-1 text-indigo-800">Nhập hai ma trận cùng kích thước $M \times N$. In ra ma trận tổng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> A=[[1,2],[3,4]], B=[[5,6],[7,8]]<br>
+                            <span class="text-slate-400">Output:</span> [[6,8],[10,12]]
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 13. 🧠 Điểm yên ngựa (Saddle Point)</p>
+                        <p class="mt-1 text-indigo-800">Cho ma trận $M \times N$. Tìm tất cả các <strong>điểm yên ngựa</strong>: phần tử vừa là <em>nhỏ nhất trong hàng</em> vừa là <em>lớn nhất trong cột</em> của nó. In ra tọa độ và giá trị của từng điểm, hoặc <code>NONE</code> nếu không tồn tại.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> [[1,2,3],[4,5,6],[7,8,9]]<br>
+                            <span class="text-slate-400">Output:</span> (0,2) = 3
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Gợi ý:</strong> Với mỗi phần tử $a[i][j]$, kiểm tra: nó có phải Min của hàng $i$ không? Nó có phải Max của cột $j$ không? Độ phức tạp: $O(M \times N \times (M + N))$ — thử tối ưu về $O(M \times N)$.
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">🔍 Từ khóa tìm kiếm gợi ý:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>C++ Arrays one-dimensional tutorial</li>
+                            <li>Two-dimensional arrays matrix C++</li>
+                            <li>Prefix Sum technique competitive programming</li>
+                            <li>Global vs Local array memory stack overflow C++</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">📖 Tài liệu đọc thêm:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>Mục <strong>"Arrays"</strong> trên <a href="https://www.geeksforgeeks.org/arrays-in-cpp/" target="_blank" class="text-blue-600 underline hover:text-blue-800">GeeksforGeeks</a>.</li>
+                            <li>Mục <strong>"Prefix Sums"</strong> trên <a href="https://cp-algorithms.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">CP-Algorithms.com</a> — tài liệu thuật toán chuẩn dành cho lập trình thi đấu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Cấu trúc (Struct)", 
                 videoId: "", 
