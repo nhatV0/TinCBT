@@ -564,12 +564,283 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Vòng lặp", 
-                videoId: "", 
-                desc: "Xử lý các công việc lặp lại (for, while, do-while), kỹ thuật lồng vòng lặp.", 
-                downloadUrl: "#" 
-            },
+    {
+    title: "Bài 3: Cấu trúc vòng lặp và kỹ thuật lồng nhau",
+    videoId: "",
+    desc: "Nắm vững for, while, do-while và kỹ thuật lồng vòng lặp để giải quyết các bài toán lập trình hiệu quả.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-bold text-slate-800 mb-2">📚 Kiến thức</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu rõ cơ chế hoạt động của <code class="bg-slate-100 px-1 rounded">for</code>, <code class="bg-slate-100 px-1 rounded">while</code>, <code class="bg-slate-100 px-1 rounded">do-while</code>.</li>
+                        <li>Phân biệt được sự khác biệt giữa các loại vòng lặp và tình huống sử dụng tối ưu.</li>
+                    </ul>
+                    <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Kiểm soát biến chạy và điều kiện dừng để tránh vòng lặp vô tận.</li>
+                        <li>Sử dụng thành thạo <code class="bg-slate-100 px-1 rounded">break</code>, <code class="bg-slate-100 px-1 rounded">continue</code>.</li>
+                        <li>Làm chủ kỹ thuật lồng vòng lặp (Nested Loops) và tính toán sơ bộ độ phức tạp thời gian.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">1. Các loại vòng lặp</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong><code class="bg-slate-100 px-1 rounded">for</code>:</strong> Dùng khi biết trước số lần lặp hoặc có quy luật tăng tiến rõ ràng. Cực kỳ phổ biến trong duyệt mảng.</li>
+                            <li><strong><code class="bg-slate-100 px-1 rounded">while</code>:</strong> Dùng khi số lần lặp phụ thuộc vào một điều kiện logic; thường dùng cho các bài toán mà số bước lặp không cố định ngay từ đầu.</li>
+                            <li><strong><code class="bg-slate-100 px-1 rounded">do-while</code>:</strong> Tương tự <code class="bg-slate-100 px-1 rounded">while</code> nhưng thân vòng lặp luôn được thực thi <em>ít nhất một lần</em> trước khi kiểm tra điều kiện.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">2. Lệnh điều khiển bổ trợ</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong><code class="bg-slate-100 px-1 rounded">break</code>:</strong> Thoát ngay lập tức khỏi vòng lặp gần nhất chứa nó.</li>
+                            <li><strong><code class="bg-slate-100 px-1 rounded">continue</code>:</strong> Bỏ qua phần còn lại của thân vòng lặp trong lần lặp hiện tại và bắt đầu ngay lần lặp mới.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">3. Vòng lặp lồng nhau (Nested Loops)</p>
+                        <p class="mb-2">Là việc đặt một vòng lặp bên trong một vòng lặp khác. Mỗi lần vòng lặp ngoài chạy 1 bước, vòng lặp trong sẽ chạy hết toàn bộ chu kỳ của nó.</p>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-700 mb-1">⚠️ Lưu ý về độ phức tạp</p>
+                            <p class="text-red-800">Nếu vòng ngoài chạy $N$ lần, vòng trong chạy $M$ lần, tổng số lần thực hiện lệnh là $N \times M$. Với $N, M = 10^4$, tổng số bước là $10^8$ — đây là ngưỡng giới hạn thường gặp cho 1 giây xử lý của CPU. Lồng vòng lặp quá sâu là nguyên nhân chính gây lỗi <strong>TLE (Time Limit Exceeded)</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">4. Code minh họa (C++)</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // Ví dụ 1: Vòng lặp for - Tính tổng từ 1 đến n
+    int n; cin &gt;&gt; n;
+    long long sum = 0;
+    for (int i = 1; i &lt;= n; ++i) {
+        sum += i;
+    }
+
+    // Ví dụ 2: Vòng lặp while - Tìm chữ số đầu tiên của một số
+    int m; cin &gt;&gt; m;
+    int first_digit = m;
+    while (first_digit &gt;= 10) {
+        first_digit /= 10;
+    }
+
+    // Ví dụ 3: Vòng lặp lồng nhau - In bảng cửu chương
+    for (int i = 1; i &lt;= 9; ++i) {
+        for (int j = 1; j &lt;= 9; ++j) {
+            cout &lt;&lt; i &lt;&lt; "x" &lt;&lt; j &lt;&lt; "=" &lt;&lt; i * j &lt;&lt; "\t";
+        }
+        cout &lt;&lt; "\n";
+    }
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                        <p class="font-bold text-blue-700 mb-1">💡 Tư duy nâng cao</p>
+                        <p class="text-blue-800">Các kỹ thuật như <strong>Hai con trỏ (Two Pointers)</strong> và <strong>Cửa sổ trượt (Sliding Window)</strong> có thể biến vòng lặp lồng nhau $O(N^2)$ thành vòng lặp đơn $O(N)$. Đây là hướng tư duy cần khám phá ở phần bài tập nâng cao!</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-bold text-slate-800 uppercase text-xs tracking-widest text-slate-500">⭐ Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1. Số chẵn trong khoảng</p>
+                        <p class="mt-1 text-slate-600">Nhập số nguyên $N$. In ra các số chẵn từ $2$ đến $N$, mỗi số cách nhau một khoảng trắng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 10<br>
+                            <span class="text-slate-400">Output:</span> 2 4 6 8 10
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2. Tổng ước số</p>
+                        <p class="mt-1 text-slate-600">Nhập số nguyên dương $N$. Tính và in ra tổng tất cả các ước số của $N$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 12<br>
+                            <span class="text-slate-400">Output:</span> 28
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3. Kiểm tra số nguyên tố</p>
+                        <p class="mt-1 text-slate-600">Nhập số nguyên $N$. Kiểm tra $N$ có phải là số nguyên tố không. In ra <code>YES</code> hoặc <code>NO</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 17 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> YES<br>
+                            <span class="text-slate-400">Input:</span> 12 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> NO
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4. Số chính phương</p>
+                        <p class="mt-1 text-slate-600">Nhập số nguyên $N$. In ra tất cả các số chính phương nhỏ hơn hoặc bằng $N$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 30<br>
+                            <span class="text-slate-400">Output:</span> 1 4 9 16 25
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5. Đếm số chữ số</p>
+                        <p class="mt-1 text-slate-600">Dùng vòng lặp <code class="bg-slate-100 px-1 rounded">while</code> đếm số lượng chữ số của một số nguyên $N$ (có thể âm).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> -12345 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 5
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6. Tính giai thừa</p>
+                        <p class="mt-1 text-slate-600">Dùng vòng lặp tính $n!$ với $n \leq 20$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 5 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 120
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 7. Vẽ hình chữ nhật đặc</p>
+                        <p class="mt-1 text-slate-600">Nhập $M$ và $N$. Dùng vòng lặp lồng nhau in ra hình chữ nhật đặc kích thước $M \times N$ bằng dấu <code>*</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            <span class="text-slate-400">Input:</span> 3 5<br>
+                            <span class="text-slate-400">Output:</span><br>
+                            * * * * *<br>
+                            * * * * *<br>
+                            * * * * *
+                        </div>
+                    </div>
+
+                    <p class="font-bold text-slate-800 uppercase text-xs tracking-widest text-slate-500 pt-2">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 8. Tam giác cân rỗng</p>
+                        <p class="mt-1 text-indigo-800">Nhập $H$, in ra tam giác cân rỗng độ cao $H$ bằng dấu <code>*</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> 4<br>
+                            <span class="text-slate-400">Output:</span><br>
+                            &nbsp;&nbsp;&nbsp;*<br>
+                            &nbsp;&nbsp;* *<br>
+                            &nbsp;* &nbsp; *<br>
+                            * * * * *
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 9. Số hoàn hảo</p>
+                        <p class="mt-1 text-indigo-800">Tìm và in ra tất cả các số hoàn hảo nhỏ hơn $10.000$. (Số hoàn hảo là số có tổng các ước thực sự bằng chính nó, ví dụ: $6 = 1 + 2 + 3$).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Output:</span> 6 28 496 8128
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 10. Phân tích thừa số nguyên tố</p>
+                        <p class="mt-1 text-indigo-800">Nhập $N$. In ra phân tích thừa số nguyên tố dạng $N = p_1^{a_1} \times p_2^{a_2} \times \ldots$</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> 60 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 60 = 2^2 x 3^1 x 5^1
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 11. Dãy Fibonacci</p>
+                        <p class="mt-1 text-indigo-800">Dùng vòng lặp (không dùng đệ quy) in ra $N$ số đầu tiên của dãy Fibonacci.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> 7 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 0 1 1 2 3 5 8
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 12. ƯCLN bằng thuật toán Euclid</p>
+                        <p class="mt-1 text-indigo-800">Nhập 2 số $a, b$. Dùng vòng lặp <code class="bg-indigo-100 px-1 rounded">while</code> triển khai thuật toán Euclid để tìm ước chung lớn nhất.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> 48 18 &nbsp;|&nbsp; <span class="text-slate-400">Output:</span> 6
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-900">Bài 13. 🧠 Bài toán cặp số (Tư duy tối ưu)</p>
+                        <p class="mt-1 text-indigo-800">Cho dãy $N$ số nguyên và số $K$. Đếm số cặp $(i, j)$ với $i &lt; j$ sao cho $a_i + a_j = K$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-100">
+                            <span class="text-slate-400">Input:</span> N=5, K=9, arr=[2, 7, 4, 5, 3]<br>
+                            <span class="text-slate-400">Output:</span> 2
+                        </div>
+                        <div class="mt-2 p-3 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+                            💬 <strong>Thử sức:</strong> Giải bằng vòng lặp lồng $O(N^2)$ với $N = 10^3$. Sau đó tự hỏi: nếu $N = 10^5$, cần cải tiến thuật toán như thế nào? (Gợi ý: Two Pointers hoặc Hash Map)
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">🔍 Từ khóa tìm kiếm gợi ý:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>Loops in C++ — for, while, do-while</li>
+                            <li>Nested loops efficiency C++</li>
+                            <li>Euclidean Algorithm loop implementation</li>
+                            <li>Primality test C++ loop</li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-semibold text-slate-700 mb-1">📖 Tài liệu đọc thêm:</p>
+                        <p class="text-slate-600">Mục <strong>"Control flow"</strong> trên <a href="https://www.learncpp.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">LearnCpp.com</a> — nguồn tài liệu C++ miễn phí chất lượng cao.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Hàm", 
                 videoId: "", 
