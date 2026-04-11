@@ -467,7 +467,7 @@ int main() {
                     </div>
 
                     <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p><strong>Bài 5.</strong> Nhập điểm số $d$ (số thực, $0 \le d \le 10$). Dùng <code>if-else if</code> và Boolean Flag <code>is_valid</code> để xếp loại: Giỏi ($\ge 8$), Khá ($\ge 6.5$), Trung Bình ($\ge 5$), Yếu (còn lại). Nếu $d$ ngoài $[0, 10]$ thì báo lỗi.</p>
+                        <p><strong>Bài 5.</strong> Nhập điểm số $d$ (số thực, $0$ đến $10$). Dùng <code>if-else if</code> và Boolean Flag <code> is_valid </code> để xếp loại: Giỏi (>= $8$), Khá (< $8$,>= $6.5$), Trung Bình (< $6.5$,>= $5$), Yếu (còn lại). Nếu $d$ ngoài $[0, 10]$ thì báo lỗi.</p>
                         <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
                             <span class="text-slate-400">Input:</span>  7.5<br>
                             <span class="text-slate-400">Output:</span> Kha
