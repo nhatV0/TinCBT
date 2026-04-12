@@ -7,13 +7,13 @@ window.courseContent = [
                 title: "Lập trình Cơ bản", 
                 videoId: "", 
                 desc: "Nội dung đọc trước khi học", 
-                downloadUrl: "https://drive.google.com/file/d/1YarO-N7i8urMdFUf0nY-QNb6v8DHrSo8/view?usp=drive_link" 
+                pdfUrl: "https://drive.google.com/file/d/1YarO-N7i8urMdFUf0nY-QNb6v8DHrSo8/view?usp=drive_link" 
             },
             { 
                 title: "Bài tập CƠ BẢN", 
                 videoId: "", 
                 desc: "Hiểu sâu về địa chỉ ô nhớ và quản lý bộ nhớ động.", 
-                downloadUrl: "https://drive.google.com/file/d/1FSH63BsnGS635_wW39Nj9O1CWMPZ8r58/view?usp=drive_link" 
+                pdfUrl: "https://drive.google.com/file/d/1FSH63BsnGS635_wW39Nj9O1CWMPZ8r58/view?usp=drive_link" 
             }
         ]
     },
