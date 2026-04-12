@@ -316,13 +316,18 @@
                             </a>
                         </div>
                     </div>
-                    <!-- Canvas area -->
+                    <!-- Canvas area (PDF.js cho file local) -->
                     <div id="pdf-canvas-container">
                         <div id="pdf-loading" class="pdf-loading">
                             <div class="pdf-spinner"></div>
                             <span class="text-sm font-bold text-slate-500 uppercase tracking-widest animate-pulse">Đang tải PDF...</span>
                         </div>
                         <canvas id="pdf-canvas" class="hidden"></canvas>
+                    </div>
+                    <!-- Iframe embed cho Google Drive / OneDrive / link trực tiếp -->
+                    <div id="pdf-iframe-container" class="hidden" style="background:#e2e8f0;">
+                        <iframe id="pdf-iframe" src="" frameborder="0" allowfullscreen
+                            style="width:100%; height:68vh; min-height:400px; display:block; border:none;"></iframe>
                     </div>
                 </div>
                 <!-- /PDF PLAYER -->
@@ -352,6 +357,25 @@
         let pdfRendering = false;
         let pdfCurrentUrl = '';
 
+        // Chuyển link Google Drive /view hoặc /edit thành link embed preview
+        function toGoogleDriveEmbed(url) {
+            // Dạng: https://drive.google.com/file/d/FILE_ID/view...
+            const match = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+            if (match) return `https://drive.google.com/file/d/${match[1]}/preview`;
+            // Dạng: https://drive.google.com/open?id=FILE_ID
+            const match2 = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/);
+            if (match2) return `https://drive.google.com/file/d/${match2[1]}/preview`;
+            return null;
+        }
+
+        // Chuyển link OneDrive share thành embed
+        function toOneDriveEmbed(url) {
+            if (url.includes('onedrive.live.com') || url.includes('1drv.ms')) {
+                return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}`;
+            }
+            return null;
+        }
+
         async function loadPDF(url, filename) {
             pdfDoc = null;
             pdfCurrentPage = 1;
@@ -363,32 +387,61 @@
             document.getElementById('pdf-wrapper').classList.remove('hidden');
             document.getElementById('video-wrapper').style.display = 'none';
 
-            // Reset UI
+            // Reset UI toolbar
             document.getElementById('pdf-filename').innerText = filename || 'Tài liệu PDF';
             document.getElementById('pdf-download-btn').href = url;
-            document.getElementById('pdf-current-page').innerText = '...';
-            document.getElementById('pdf-total-pages').innerText = '...';
 
+            const canvasContainer = document.getElementById('pdf-canvas-container');
+            const iframeContainer = document.getElementById('pdf-iframe-container');
             const canvas = document.getElementById('pdf-canvas');
             const loading = document.getElementById('pdf-loading');
-            canvas.classList.add('hidden');
-            loading.style.display = 'flex';
 
-            try {
-                const loadingTask = pdfjsLib.getDocument(url);
-                pdfDoc = await loadingTask.promise;
-                pdfTotalPages = pdfDoc.numPages;
-                document.getElementById('pdf-total-pages').innerText = pdfTotalPages;
-                await renderPDFPage(1);
-            } catch (err) {
-                loading.innerHTML = `
-                    <div class="text-center p-8">
-                        <p class="text-red-500 font-bold mb-3">Không thể tải file PDF.</p>
-                        <a href="${url}" target="_blank" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-all">
-                            Mở trực tiếp ↗
-                        </a>
-                    </div>`;
-                console.error('PDF load error:', err);
+            // --- Kiểm tra loại URL ---
+            const driveEmbed = toGoogleDriveEmbed(url);
+            const oneDriveEmbed = toOneDriveEmbed(url);
+            const isExternalEmbed = driveEmbed || oneDriveEmbed;
+
+            if (isExternalEmbed) {
+                // CHEDE IFRAME: Google Drive / OneDrive - không bị CORS
+                canvasContainer.style.display = 'none';
+                iframeContainer.classList.remove('hidden');
+                document.getElementById('pdf-iframe').src = driveEmbed || oneDriveEmbed;
+                document.getElementById('pdf-current-page').innerText = '-';
+                document.getElementById('pdf-total-pages').innerText = '-';
+                document.getElementById('pdf-prev-btn').disabled = true;
+                document.getElementById('pdf-next-btn').disabled = true;
+                // Cập nhật link tải về dạng download thay vì view
+                if (driveEmbed) {
+                    const fileId = driveEmbed.match(/\/d\/([a-zA-Z0-9_-]+)\//)[1];
+                    document.getElementById('pdf-download-btn').href = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                }
+            } else {
+                // CHE DO PDF.js: file local hoặc URL trực tiếp
+                iframeContainer.classList.add('hidden');
+                canvasContainer.style.display = 'block';
+                canvas.classList.add('hidden');
+                loading.style.display = 'flex';
+                document.getElementById('pdf-current-page').innerText = '...';
+                document.getElementById('pdf-total-pages').innerText = '...';
+                document.getElementById('pdf-prev-btn').disabled = false;
+                document.getElementById('pdf-next-btn').disabled = false;
+
+                try {
+                    const loadingTask = pdfjsLib.getDocument(url);
+                    pdfDoc = await loadingTask.promise;
+                    pdfTotalPages = pdfDoc.numPages;
+                    document.getElementById('pdf-total-pages').innerText = pdfTotalPages;
+                    await renderPDFPage(1);
+                } catch (err) {
+                    loading.innerHTML = `
+                        <div class="text-center p-8">
+                            <p class="text-red-500 font-bold mb-3">Không thể tải file PDF.</p>
+                            <a href="${url}" target="_blank" class="px-5 py-2 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-all">
+                                Mở trực tiếp ↗
+                            </a>
+                        </div>`;
+                    console.error('PDF load error:', err);
+                }
             }
         }
 
