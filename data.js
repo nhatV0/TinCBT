@@ -37,7 +37,7 @@ window.courses = {
         },
         { 
             id: 'tin12plus', 
-            title: 'CHINH PHỤC 10 ĐIỂM THPT', 
+            title: 'tin học THPT', 
             icon: 'flame', // Sử dụng icon ngọn lửa thay vì award
             dataPath: 'data-chinh-khoa/tin12plus.js', 
             description: 'Chiến dịch ôn thi cuối cùng. Hệ thống đề thi thử mô phỏng 100% cấu trúc thật của Bộ GD&ĐT.' 
