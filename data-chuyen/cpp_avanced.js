@@ -575,7 +575,7 @@ int main() {
         </div>
     `
 },
-            {
+{
     title: "Bài 9: Nhập Xuất File (Tệp) trong Thi Đấu",
     videoId: "",
     desc: "Nắm vững kỹ thuật đọc/ghi tệp với freopen và fstream theo chuẩn thi HSG, kết hợp Fast I/O để tối đa hóa hiệu suất chương trình C++.",
@@ -855,7 +855,17 @@ int main() {
                             <li><code>ifndef ONLINE_JUDGE file redirect trick</code></li>
                             <li><code>File handling in competitive programming C++</code></li>
                         </ul>
-                    </div>,
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Đọc mục <strong>Input/Output with files</strong> trên <a href="https://cplusplus.com/doc/tutorial/files/" target="_blank" class="text-blue-600 hover:underline">cplusplus.com</a> để hiểu sâu hơn về <code>fstream</code> và các chế độ mở file.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "STL (Vector, Stack, Queue)", 
                 videoId: "", 
