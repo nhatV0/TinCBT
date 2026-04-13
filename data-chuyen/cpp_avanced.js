@@ -866,12 +866,318 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "STL (Vector, Stack, Queue)", 
-                videoId: "", 
-                desc: "Sử dụng các container mạnh mẽ có sẵn của C++ để tăng tốc độ code.", 
-                downloadUrl: "#" 
-            },
+       {
+    title: "Bài 10: Thư Viện Chuẩn STL - Vector, Stack, Queue",
+    videoId: "",
+    desc: "Nắm vững ba container STL quan trọng nhất — vector, stack, queue — và ứng dụng chúng để giải quyết các bài toán thi đấu lập trình hiệu quả.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Nắm vững khái niệm <strong>Container</strong> trong thư viện chuẩn STL của C++.</li>
+                        <li>Hiểu cấu trúc và nguyên lý hoạt động của <strong>vector</strong> (mảng động), <strong>stack</strong> (ngăn xếp LIFO) và <strong>queue</strong> (hàng đợi FIFO).</li>
+                        <li>Biết khi nào nên chọn container nào cho từng bài toán cụ thể.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Dùng <code>vector</code> thay thế hoàn toàn mảng tĩnh trong các tình huống kích thước dữ liệu biến động.</li>
+                        <li>Ứng dụng <code>stack</code> để xử lý biểu thức, kiểm tra ngoặc, quay lui (backtracking).</li>
+                        <li>Ứng dụng <code>queue</code> để triển khai thuật toán duyệt theo chiều rộng (BFS) và mô phỏng hàng đợi.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">1. std::vector — Mảng động</p>
+                        <p><code>vector</code> là mảng có khả năng <strong>tự thay đổi kích thước</strong> khi thêm/xóa phần tử. Các phần tử nằm liên tiếp trong bộ nhớ → truy cập ngẫu nhiên $O(1)$. Đây là container được dùng nhiều nhất trong thi đấu.</p>
+                        <div class="overflow-x-auto mt-2">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-emerald-50">
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Hàm</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Ý nghĩa</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Độ phức tạp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">v.push_back(x)</td><td class="border border-slate-200 px-3 py-1.5">Thêm x vào cuối</td><td class="border border-slate-200 px-3 py-1.5">$O(1)$ amortized</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">v.pop_back()</td><td class="border border-slate-200 px-3 py-1.5">Xóa phần tử cuối</td><td class="border border-slate-200 px-3 py-1.5">$O(1)$</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">v.size()</td><td class="border border-slate-200 px-3 py-1.5">Số phần tử hiện có</td><td class="border border-slate-200 px-3 py-1.5">$O(1)$</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">v.resize(n)</td><td class="border border-slate-200 px-3 py-1.5">Đặt kích thước thành n</td><td class="border border-slate-200 px-3 py-1.5">$O(n)$</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">v.erase(it)</td><td class="border border-slate-200 px-3 py-1.5">Xóa phần tử tại iterator</td><td class="border border-slate-200 px-3 py-1.5">$O(n)$</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">v.clear()</td><td class="border border-slate-200 px-3 py-1.5">Xóa toàn bộ phần tử</td><td class="border border-slate-200 px-3 py-1.5">$O(n)$</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">2. std::stack — Ngăn xếp (LIFO)</p>
+                        <p>Hoạt động theo nguyên lý <strong>LIFO</strong> (Last In, First Out — Vào sau, Ra trước). Hình dung như chồng đĩa: chỉ lấy được từ trên cùng.</p>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 mt-2 text-xs">
+                            <span class="font-bold text-slate-700">Ứng dụng điển hình:</span> Kiểm tra dấu ngoặc hợp lệ, tính biểu thức hậu tố, chuyển đổi cơ số, khử đệ quy, Monotonic Stack.
+                        </div>
+                        <div class="overflow-x-auto mt-2">
+                            <table class="w-full text-xs border-collapse">
+                                <thead><tr class="bg-orange-50"><th class="border border-slate-200 px-3 py-2 text-left font-bold">Hàm</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Ý nghĩa</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">st.push(x)</td><td class="border border-slate-200 px-3 py-1.5">Đẩy x lên đỉnh</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">st.pop()</td><td class="border border-slate-200 px-3 py-1.5">Xóa phần tử ở đỉnh (không trả về giá trị)</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">st.top()</td><td class="border border-slate-200 px-3 py-1.5">Xem giá trị ở đỉnh (không xóa)</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">st.empty()</td><td class="border border-slate-200 px-3 py-1.5">Kiểm tra ngăn xếp có rỗng không</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-2">
+                            <p class="font-semibold text-red-700">⚠️ Lỗi thường gặp:</p>
+                            <p class="mt-1 text-red-600">Gọi <code>st.top()</code> hoặc <code>st.pop()</code> khi stack đang rỗng sẽ gây <strong>Undefined Behavior</strong>. Luôn kiểm tra <code>!st.empty()</code> trước!</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">3. std::queue — Hàng đợi (FIFO)</p>
+                        <p>Hoạt động theo nguyên lý <strong>FIFO</strong> (First In, First Out — Vào trước, Ra trước). Hình dung như hàng người xếp chờ: người vào trước được phục vụ trước.</p>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 mt-2 text-xs">
+                            <span class="font-bold text-slate-700">Ứng dụng điển hình:</span> Thuật toán BFS (duyệt đồ thị theo chiều rộng), tìm đường ngắn nhất trên lưới, mô phỏng hàng đợi thực tế.
+                        </div>
+                        <div class="overflow-x-auto mt-2">
+                            <table class="w-full text-xs border-collapse">
+                                <thead><tr class="bg-blue-50"><th class="border border-slate-200 px-3 py-2 text-left font-bold">Hàm</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Ý nghĩa</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">q.push(x)</td><td class="border border-slate-200 px-3 py-1.5">Thêm x vào cuối hàng đợi</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">q.pop()</td><td class="border border-slate-200 px-3 py-1.5">Xóa phần tử ở đầu hàng đợi</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">q.front()</td><td class="border border-slate-200 px-3 py-1.5">Xem phần tử ở đầu (không xóa)</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">q.back()</td><td class="border border-slate-200 px-3 py-1.5">Xem phần tử ở cuối (không xóa)</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">q.empty()</td><td class="border border-slate-200 px-3 py-1.5">Kiểm tra hàng đợi có rỗng không</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">4. Code minh họa tổng hợp (C++)</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // 1. VECTOR: Mảng động
+    vector&lt;int&gt; v = {1, 2, 3};
+    v.push_back(4);
+    v.push_back(5);
+    cout &lt;&lt; "Vector: ";
+    for (int x : v) cout &lt;&lt; x &lt;&lt; " "; // 1 2 3 4 5
+    cout &lt;&lt; "\nSize = " &lt;&lt; v.size() &lt;&lt; "\n";
+
+    // 2. STACK: Đảo ngược chuỗi
+    string s = "HELLO";
+    stack&lt;char&gt; st;
+    for (char c : s) st.push(c);
+    cout &lt;&lt; "Dao nguoc: ";
+    while (!st.empty()) {
+        cout &lt;&lt; st.top(); // Xem đỉnh
+        st.pop();         // Xóa đỉnh
+    } // Output: OLLEH
+    cout &lt;&lt; "\n";
+
+    // 3. QUEUE: Xử lý theo thứ tự vào
+    queue&lt;int&gt; q;
+    q.push(10); q.push(20); q.push(30);
+    cout &lt;&lt; "Queue: ";
+    while (!q.empty()) {
+        cout &lt;&lt; q.front() &lt;&lt; " "; // Xem đầu hàng
+        q.pop();                    // Xóa đầu hàng
+    } // Output: 10 20 30
+    cout &lt;&lt; "\n";
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <div class="p-4 bg-amber-50 rounded-xl border-l-4 border-amber-400">
+                        <p class="font-semibold text-amber-800">💡 So sánh nhanh ba container:</p>
+                        <ul class="mt-1 text-amber-700 space-y-1 text-xs">
+                            <li><strong>vector</strong>: Truy cập ngẫu nhiên, thêm/xóa cuối nhanh → dùng khi cần mảng linh hoạt.</li>
+                            <li><strong>stack</strong>: Chỉ thao tác ở đỉnh (LIFO) → dùng cho bài toán "cái gần nhất", biểu thức, ngoặc.</li>
+                            <li><strong>queue</strong>: Chỉ thao tác ở hai đầu (FIFO) → dùng cho BFS, xử lý theo thứ tự.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Đọc dãy số vào vector</p>
+                        <p class="mt-1 text-slate-600">Nhập các số nguyên liên tiếp cho đến khi gặp số <code>0</code> (số 0 không được thêm vào). Lưu vào <code>vector&lt;int&gt;</code> rồi in ra các phần tử tại vị trí <strong>lẻ</strong> (chỉ số 1, 3, 5...).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> 10 20 30 40 50 0<br>
+                            <span class="text-slate-400">// Output:</span> 20 40
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Ma trận bằng vector 2 chiều</p>
+                        <p class="mt-1 text-slate-600">Dùng <code>vector&lt;vector&lt;int&gt;&gt;</code> để lưu ma trận $M \times N$. Nhập dữ liệu, tính và in tổng từng hàng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> M=2, N=3 → {1 2 3} {4 5 6}<br>
+                            <span class="text-slate-400">// Output:</span> Hang 1: 6 / Hang 2: 15
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Chuyển cơ số bằng Stack</p>
+                        <p class="mt-1 text-slate-600">Dùng <code>stack</code> để chuyển một số nguyên dương $N$ từ hệ thập phân sang hệ bát phân (cơ số 8). Lần lượt push phần dư, pop để lấy kết quả.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> N = 255<br>
+                            <span class="text-slate-400">// Output:</span> 377
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Kiểm tra ngoặc hợp lệ</p>
+                        <p class="mt-1 text-slate-600">Nhập vào chuỗi chỉ gồm <code>(</code> và <code>)</code>. Dùng <code>stack</code> kiểm tra chuỗi ngoặc có hợp lệ không: mở trước đóng sau, số lượng bằng nhau.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// "(()())" → </span>Hop le<br>
+                            <span class="text-slate-400">// "())("  → </span>Khong hop le
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Mô phỏng hàng đợi mua vé</p>
+                        <p class="mt-1 text-slate-600">Nhập $N$ tên người vào <code>queue&lt;string&gt;</code>. Lần lượt phục vụ từng người: in ra tên người được phục vụ rồi xóa khỏi hàng đợi cho đến khi hàng trống.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> 3 → An Binh Chi<br>
+                            <span class="text-slate-400">// Output:</span> Phuc vu: An / Binh / Chi
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6: Xóa phần tử tại vị trí k</p>
+                        <p class="mt-1 text-slate-600">Cho <code>vector&lt;int&gt; v</code> và số nguyên $k$. Dùng <code>v.erase(v.begin() + k)</code> để xóa phần tử tại vị trí thứ $k$ (0-indexed). In mảng trước và sau khi xóa.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// v={10,20,30,40,50}, k=2</span><br>
+                            <span class="text-slate-400">// Output:</span> 10 20 40 50
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 7: Lọc số nguyên tố vào vector mới</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code>vector&lt;int&gt; filterPrimes(vector&lt;int&gt; v)</code> trả về vector mới chỉ chứa các số nguyên tố từ vector đầu vào. Kiểm tra nguyên tố bằng hàm riêng <code>bool isPrime(int n)</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}<br>
+                            <span class="text-slate-400">// Output:</span> 2 3 5 7
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: Biến đổi số (BFS cơ bản)</p>
+                        <p class="mt-1 text-indigo-700">Cho hai số $a$ và $b$ ($b > a$). Tại mỗi bước có thể thực hiện $a = a - 1$ hoặc $a = a \times 2$. Dùng <code>queue</code> để tìm <strong>số bước tối thiểu</strong> biến $a$ thành $b$. Dùng mảng <code>visited[]</code> để tránh lặp.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> a=2, b=3<br>
+                            <span class="text-slate-400">// Output:</span> 2 buoc (2→1→... hoặc 2×2=4→4-1=3)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Tính biểu thức hậu tố (Postfix)</p>
+                        <p class="mt-1 text-indigo-700">Cho biểu thức hậu tố gồm các số nguyên và toán tử <code>+ - * /</code>, các token cách nhau bởi dấu cách. Dùng <code>stack&lt;int&gt;</code> để tính giá trị: gặp số thì push, gặp toán tử thì pop hai số, tính rồi push kết quả.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> "5 3 + 8 *"<br>
+                            <span class="text-slate-400">// Output:</span> 64 &nbsp;<span class="text-slate-400">// (5+3)*8</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Hình chữ nhật lớn nhất (Monotonic Stack)</p>
+                        <p class="mt-1 text-indigo-700">Cho mảng $N$ số nguyên biểu diễn độ cao các cột liên tiếp, mỗi cột rộng 1 đơn vị. Tìm diện tích hình chữ nhật lớn nhất có thể tạo ra. Dùng <strong>Monotonic Stack</strong> với độ phức tạp $O(N)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> N=6, heights = {2, 1, 5, 6, 2, 3}<br>
+                            <span class="text-slate-400">// Output:</span> 10 &nbsp;<span class="text-slate-400">// cột 5 và 6 cao 5 và 6, rộng 2</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 11: Dãy con ngắn nhất có tổng bằng K</p>
+                        <p class="mt-1 text-indigo-700">Cho mảng $N$ số nguyên dương và số $K$. Tìm <strong>dãy con liên tiếp ngắn nhất</strong> có tổng đúng bằng $K$. Dùng kỹ thuật <strong>cửa sổ trượt</strong> (Two Pointers) với <code>vector</code>, độ phức tạp $O(N)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> N=5, K=7, a={2,3,1,2,4}<br>
+                            <span class="text-slate-400">// Output:</span> 2 &nbsp;<span class="text-slate-400">// dãy {3,4} có độ dài 2</span>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>C++ STL containers vector stack queue guide</code></li>
+                            <li><code>Monotonic Stack problems competitive programming</code></li>
+                            <li><code>BFS algorithm using queue C++</code></li>
+                            <li><code>Postfix expression evaluation stack C++</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Đọc thêm tại <a href="https://wiki.vnoi.info/vi/algo/data-structures/Stack" target="_blank" class="text-blue-600 hover:underline">VNOI Wiki — Thư viện chuẩn STL</a> để tìm hiểu thêm các bài toán ứng dụng thực tế trong thi đấu Việt Nam.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Đệ quy & Đệ quy quay lui", 
                 videoId: "", 
