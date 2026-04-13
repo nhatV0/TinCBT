@@ -1465,12 +1465,310 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Xử lý chuỗi", 
-                videoId: "", 
-                desc: "Làm chủ std::string và các bài toán liên quan đến văn bản.", 
-                downloadUrl: "#" 
-            }
+      {
+    title: "Bài 12: Xử Lý Chuỗi Ký Tự (String Handling)",
+    videoId: "",
+    desc: "Thao tác thành thạo std::string trong C++ — cắt, ghép, tìm kiếm, tách từ và chuyển đổi chuỗi — để xử lý hiệu quả các bài toán văn bản trong thi đấu lập trình.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Nắm vững các phương thức mạnh mẽ của <code>std::string</code> trong C++.</li>
+                        <li>Hiểu cách lưu trữ, quản lý bộ nhớ của chuỗi và sự khác biệt giữa <code>cin &gt;&gt;</code> và <code>getline</code>.</li>
+                        <li>Biết cách dùng <code>stringstream</code> để tách từ (tokenizing) linh hoạt.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Thao tác thành thạo: cắt (<code>substr</code>), tìm kiếm (<code>find</code>), xóa (<code>erase</code>), thay thế (<code>replace</code>).</li>
+                        <li>Xử lý các bài toán chuẩn hóa văn bản, đếm từ, đảo ngược câu.</li>
+                        <li>Chuyển đổi linh hoạt giữa chuỗi và số bằng <code>to_string</code>, <code>stoi</code>, <code>stoll</code>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">1. Khai báo và Nhập xuất</p>
+                        <p>C++ cung cấp kiểu <code>string</code> trong <code>&lt;string&gt;</code>. Có hai cách nhập khác nhau tùy mục đích:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                                <p class="font-bold text-slate-700 mb-1"><code>cin &gt;&gt; s</code></p>
+                                <p class="text-slate-600">Đọc <strong>một từ</strong> — dừng khi gặp khoảng trắng, tab hoặc xuống dòng.</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs">
+                                <p class="font-bold text-emerald-700 mb-1"><code>getline(cin, s)</code></p>
+                                <p class="text-emerald-600">Đọc <strong>cả dòng</strong> kể cả khoảng trắng — dừng khi gặp ký tự xuống dòng.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-2">
+                            <p class="font-semibold text-red-700">⚠️ Bẫy kinh điển — cin.ignore():</p>
+                            <p class="mt-1 text-red-600 text-xs">Sau khi dùng <code>cin &gt;&gt; n</code>, bộ đệm còn ký tự <code>\n</code>. Nếu gọi <code>getline</code> ngay sau đó, nó sẽ đọc chuỗi rỗng. Giải pháp: gọi <code>cin.ignore()</code> hoặc <code>cin.ignore(INT_MAX, '\n')</code> trước khi <code>getline</code>.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">2. Bảng các phương thức quan trọng</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-emerald-50">
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Phương thức</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Ý nghĩa</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Ví dụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">s.length()</td><td class="border border-slate-200 px-3 py-1.5">Độ dài chuỗi</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"abc".length() → 3</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">s.substr(pos, len)</td><td class="border border-slate-200 px-3 py-1.5">Cắt chuỗi con</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"hello".substr(1,3) → "ell"</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">s.find(s1)</td><td class="border border-slate-200 px-3 py-1.5">Tìm vị trí đầu tiên của s1</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"hello".find("ll") → 2</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">s.erase(pos, len)</td><td class="border border-slate-200 px-3 py-1.5">Xóa len ký tự từ pos</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"hello".erase(1,3) → "ho"</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">s.replace(pos,len,s1)</td><td class="border border-slate-200 px-3 py-1.5">Thay thế đoạn con bằng s1</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"hello".replace(1,3,"a") → "hao"</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">s += s1</td><td class="border border-slate-200 px-3 py-1.5">Nối chuỗi vào cuối</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"he" += "llo" → "hello"</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">s.pop_back()</td><td class="border border-slate-200 px-3 py-1.5">Xóa ký tự cuối</td><td class="border border-slate-200 px-3 py-1.5 font-mono">"hello" → "hell"</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 mt-2 text-xs">
+                            <span class="font-bold text-amber-700">💡 Lưu ý:</span> <code>s.find()</code> trả về <code>string::npos</code> (giá trị cực lớn) khi không tìm thấy. Luôn kiểm tra <code>if (pos != string::npos)</code> trước khi dùng kết quả.
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">3. Chuyển đổi Chuỗi ↔ Số</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead><tr class="bg-blue-50"><th class="border border-slate-200 px-3 py-2 text-left font-bold">Hàm</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Chiều</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Ví dụ</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">to_string(n)</td><td class="border border-slate-200 px-3 py-1.5">Số → Chuỗi</td><td class="border border-slate-200 px-3 py-1.5 font-mono">to_string(42) → "42"</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">stoi(s)</td><td class="border border-slate-200 px-3 py-1.5">Chuỗi → int</td><td class="border border-slate-200 px-3 py-1.5 font-mono">stoi("123") → 123</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5 font-mono">stoll(s)</td><td class="border border-slate-200 px-3 py-1.5">Chuỗi → long long</td><td class="border border-slate-200 px-3 py-1.5 font-mono">stoll("10000000000")</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5 font-mono">stod(s)</td><td class="border border-slate-200 px-3 py-1.5">Chuỗi → double</td><td class="border border-slate-200 px-3 py-1.5 font-mono">stod("3.14") → 3.14</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">4. Code minh họa: Chuẩn hóa tên + Tách từ (C++)</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;  // Cần cho stringstream
+using namespace std;
+
+// Chuẩn hóa tên: viết hoa chữ cái đầu mỗi từ
+string formatName(string s) {
+    string res = "", word;
+    stringstream ss(s);  // Dùng stringstream để tách từ
+
+    while (ss &gt;&gt; word) {           // Tách từng từ theo khoảng trắng
+        word[0] = toupper(word[0]); // Viết hoa chữ đầu
+        for (int i = 1; i &lt; (int)word.length(); ++i)
+            word[i] = tolower(word[i]); // Viết thường phần còn lại
+        res += word + " ";
+    }
+    if (!res.empty()) res.pop_back(); // Xóa khoảng trắng cuối
+    return res;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    string name;
+    getline(cin, name);  // Nhập cả dòng
+
+    cout &lt;&lt; formatName(name) &lt;&lt; "\n";
+    // "nguyen van AN" → "Nguyen Van An"
+
+    // Ví dụ tìm kiếm & thay thế
+    string s = "Hello World Hello";
+    size_t pos;
+    while ((pos = s.find("Hello")) != string::npos)
+        s.replace(pos, 5, "Hi");
+    cout &lt;&lt; s &lt;&lt; "\n"; // "Hi World Hi"
+
+    return 0;
+}</pre>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Phân loại ký tự</p>
+                        <p class="mt-1 text-slate-600">Nhập một chuỗi, đếm và in ra số lượng <strong>chữ cái</strong> (<code>isalpha</code>), <strong>chữ số</strong> (<code>isdigit</code>) và <strong>ký tự đặc biệt</strong> (còn lại).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "Hello, W0rld!"<br>
+                            <span class="text-slate-400">// Output:</span> Chu cai: 9 | Chu so: 1 | Dac biet: 3
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Kiểm tra Palindrome</p>
+                        <p class="mt-1 text-slate-600">Kiểm tra chuỗi có phải chuỗi đối xứng (đọc xuôi = đọc ngược) hay không. Bỏ qua hoa/thường và khoảng trắng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// "racecar" → </span>Palindrome<br>
+                            <span class="text-slate-400">// "A man a plan a canal Panama" → </span>Palindrome
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Đếm số từ trong câu</p>
+                        <p class="mt-1 text-slate-600">Nhập một câu (dùng <code>getline</code>). Đếm số từ trong câu. Dùng <code>stringstream</code> để tách từ và đếm.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "  Hello   World  foo  "<br>
+                            <span class="text-slate-400">// Output:</span> 3 tu
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Chuyển đổi hoa/thường</p>
+                        <p class="mt-1 text-slate-600">Nhập chuỗi. In ra hai phiên bản: toàn bộ chữ <strong>HOA</strong> (dùng <code>toupper</code>) và toàn bộ chữ <strong>thường</strong> (dùng <code>tolower</code>) bằng cách duyệt từng ký tự.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "Hello World"<br>
+                            <span class="text-slate-400">// Output:</span> HELLO WORLD / hello world
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Thay ký tự 'a' thành '4'</p>
+                        <p class="mt-1 text-slate-600">Nhập chuỗi. Dùng <code>s.find()</code> trong vòng lặp kết hợp <code>s.replace()</code> để tìm và thay <strong>tất cả</strong> ký tự <code>'a'</code> (hoa và thường) thành <code>'4'</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "banana"<br>
+                            <span class="text-slate-400">// Output:</span> b4n4n4
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6: In ký tự ở vị trí chẵn</p>
+                        <p class="mt-1 text-slate-600">Nhập chuỗi. In ra các ký tự tại chỉ số chẵn (0, 2, 4...). Sau đó in riêng các ký tự tại chỉ số lẻ (1, 3, 5...).</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "abcdef"<br>
+                            <span class="text-slate-400">// Chan: </span>ace <span class="text-slate-400">| Le: </span>bdf
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 7: Đảo ngược thứ tự các từ</p>
+                        <p class="mt-1 text-slate-600">Nhập câu, đảo ngược thứ tự các từ (không đảo ký tự trong từ). Dùng <code>stringstream</code> tách từ vào <code>vector&lt;string&gt;</code> rồi in ngược.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "Hello World Foo"<br>
+                            <span class="text-slate-400">// Output:</span> Foo World Hello
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: So sánh số siêu lớn</p>
+                        <p class="mt-1 text-indigo-700">Nhập hai chuỗi số nguyên $A$ và $B$ (tối đa 1000 chữ số). So sánh xem $A > B$, $A &lt; B$ hay $A = B$ mà <strong>không chuyển sang số</strong>. Gợi ý: so sánh độ dài trước, sau đó so sánh từ điển.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// "999" vs "1000" → </span>A &lt; B<br>
+                            <span class="text-slate-400">// "12345" vs "12345" → </span>A = B
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Nén và giải nén chuỗi (RLE)</p>
+                        <p class="mt-1 text-indigo-700">Nén chuỗi theo thuật toán Run-Length Encoding: các ký tự liên tiếp giống nhau được thay bằng ký tự đó + số lần lặp. Viết cả hàm <strong>nén</strong> và <strong>giải nén</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Nen:</span> "aaabbc" → "a3b2c1"<br>
+                            <span class="text-slate-400">// Giai nen:</span> "a3b2c1" → "aaabbc"
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Tần suất từ trong đoạn văn</p>
+                        <p class="mt-1 text-indigo-700">Đọc một đoạn văn bản. Dùng <code>map&lt;string, int&gt;</code> đếm tần suất mỗi từ (chuẩn hóa về chữ thường). Tìm và in ra từ xuất hiện <strong>nhiều nhất</strong> cùng số lần.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> "the cat sat on the mat the"<br>
+                            <span class="text-slate-400">// Output:</span> "the" xuat hien 3 lan
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 11: Chuỗi con chung dài nhất</p>
+                        <p class="mt-1 text-indigo-700">Cho hai chuỗi $s_1$ và $s_2$. Tìm độ dài <strong>chuỗi con liên tiếp chung dài nhất</strong>. Dùng hai vòng lặp lồng nhau và <code>substr</code> hoặc <code>find</code>. Độ phức tạp $O(N^2)$ hoặc $O(N^3)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// s1="abcdef", s2="zcdemf"</span><br>
+                            <span class="text-slate-400">// Output:</span> "cde" (do dai 3)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 12: Mã hóa Caesar</p>
+                        <p class="mt-1 text-indigo-700">Nhập chuỗi và số nguyên $K$. Mã hóa bằng cách dịch mỗi chữ cái đi $K$ vị trí trong bảng chữ cái (vòng tròn, giữ nguyên ký tự không phải chữ cái). Viết cả hàm <strong>mã hóa</strong> và <strong>giải mã</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> "Hello, World!" K=3<br>
+                            <span class="text-slate-400">// Ma hoa:</span> "Khoor, Zruog!"<br>
+                            <span class="text-slate-400">// Giai ma (K=3):</span> "Hello, World!"
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>std::string member functions C++ reference</code></li>
+                            <li><code>C++ stringstream tutorial tokenizing</code></li>
+                            <li><code>String Palindrome algorithm C++</code></li>
+                            <li><code>Run-Length Encoding implementation C++</code></li>
+                            <li><code>Caesar cipher C++ implementation</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Xem đầy đủ các phương thức tại <a href="https://en.cppreference.com/w/cpp/string/basic_string" target="_blank" class="text-blue-600 hover:underline">cppreference.com — std::string</a> hoặc chuyên đề <strong>Xử lý xâu</strong> trên VNOI Wiki.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+}
         ]
     }
 ];
