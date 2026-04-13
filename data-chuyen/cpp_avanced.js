@@ -1178,12 +1178,293 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Đệ quy & Đệ quy quay lui", 
-                videoId: "", 
-                desc: "Bước đầu của tư duy thuật toán tìm kiếm không gian lời giải (Vét cạn).", 
-                downloadUrl: "#" 
-            },
+   {
+    title: "Bài 11: Đệ Quy & Đệ Quy Quay Lui (với Nhánh Cận & Memoization)",
+    videoId: "",
+    desc: "Nắm vững kỹ thuật đệ quy có nhớ (Memoization) để khử trùng lặp và quay lui có nhánh cận (Pruning) để tối ưu tìm kiếm lời giải trong các bài toán thi đấu.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Nắm vững cấu trúc của một hàm đệ quy: <strong>base case</strong> và <strong>recursive case</strong>.</li>
+                        <li>Hiểu kỹ thuật <strong>Memoization</strong> (đệ quy có nhớ) để loại bỏ tính toán trùng lặp.</li>
+                        <li>Hiểu cơ chế <strong>Backtracking</strong> (quay lui) và <strong>Pruning</strong> (nhánh cận) để cắt tỉa không gian tìm kiếm.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Triển khai thuật toán quay lui để liệt kê cấu hình (hoán vị, tổ hợp, tập con...).</li>
+                        <li>"Tỉa nhánh" hiệu quả để loại bỏ sớm các trường hợp chắc chắn không tối ưu.</li>
+                        <li>Chuyển đổi đệ quy lãng phí $O(2^n)$ sang đệ quy tối ưu $O(n)$ bằng mảng nhớ.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">1. Đệ quy có nhớ (Memoization)</p>
+                        <p>Khi hàm đệ quy được gọi nhiều lần với <strong>cùng tham số</strong>, ta dùng mảng/bảng để lưu kết quả đã tính. Lần sau gặp lại thì trả về ngay — không tính lại.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                            <div class="p-3 bg-red-50 rounded-xl border border-red-200 text-xs">
+                                <p class="font-bold text-red-700 mb-1">❌ Đệ quy ngây thơ — $O(2^n)$</p>
+                                <p class="text-red-600"><code>fibo(50)</code> gọi <code>fibo(48)</code> hàng tỉ lần — máy treo!</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs">
+                                <p class="font-bold text-emerald-700 mb-1">✅ Đệ quy có nhớ — $O(n)$</p>
+                                <p class="text-emerald-600">Mỗi giá trị chỉ tính <strong>đúng một lần</strong>, các lần sau tra bảng trong $O(1)$.</p>
+                            </div>
+                        </div>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-3">long long memo[100];
+
+long long fibo(int n) {
+    if (n &lt;= 1) return n;                    // Base case
+    if (memo[n] != -1) return memo[n];        // Đã tính rồi → trả về ngay
+    return memo[n] = fibo(n-1) + fibo(n-2);  // Tính và LƯU lại
+}
+
+// Khởi tạo: fill(memo, memo+100, -1);
+// fibo(50) = 12586269025 — tính tức thì!</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">2. Đệ quy quay lui (Backtracking)</p>
+                        <p>Tìm kiếm lời giải bằng cách <strong>thử từng bước</strong>. Nếu bước hiện tại vi phạm ràng buộc hoặc không khả thi, ta <strong>quay lại</strong> bước trước để thử lựa chọn khác. Cấu trúc chuẩn gồm 3 bước: <em>Ghi nhận → Tiến sâu → Quay lui (hoàn tác)</em>.</p>
+                        <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-400 mt-2">
+                            <p class="font-semibold text-blue-800">💡 Khung quay lui tổng quát:</p>
+<pre class="bg-slate-800 text-blue-200 p-3 rounded-lg font-mono text-xs mt-1 overflow-x-auto">void backtrack(int buoc) {
+    if (buoc == N + 1) { /* In/lưu kết quả */ return; }
+    for (moi lua_chon kha_thi) {
+        x[buoc] = lua_chon;   // 1. Ghi nhận
+        danh_dau();            // 2. Đánh dấu đã dùng
+        backtrack(buoc + 1);  // 3. Tiến sâu
+        bo_danh_dau();         // 4. QUAY LUI: Hoàn tác
+    }
+}</pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">3. Kỹ thuật Nhánh cận (Pruning)</p>
+                        <p>Trong quá trình quay lui, nếu nhận thấy nhánh đang đi <strong>chắc chắn không dẫn đến lời giải tốt hơn kỷ lục</strong> hiện có, ta dừng ngay lập tức thay vì tiếp tục đào sâu vô ích.</p>
+                        <div class="p-4 bg-amber-50 rounded-xl border-l-4 border-amber-400 mt-2">
+                            <p class="font-semibold text-amber-800">⚙️ Ví dụ nhánh cận trong bài toán tối ưu:</p>
+                            <p class="mt-1 text-amber-700 text-xs">Nếu <code>chi_phi_hien_tai + uoc_luong_con_lai &gt;= min_cost</code> → dừng nhánh này ngay, không cần tiến sâu thêm.</p>
+                        </div>
+                        <div class="overflow-x-auto mt-3">
+                            <table class="w-full text-xs border-collapse">
+                                <thead><tr class="bg-slate-100"><th class="border border-slate-200 px-3 py-2 text-left font-bold">Loại nhánh cận</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Mô tả</th><th class="border border-slate-200 px-3 py-2 text-left font-bold">Ví dụ</th></tr></thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5">Ràng buộc</td><td class="border border-slate-200 px-3 py-1.5">Vi phạm điều kiện bài</td><td class="border border-slate-200 px-3 py-1.5">Quân hậu tấn công nhau</td></tr>
+                                    <tr class="bg-slate-50"><td class="border border-slate-200 px-3 py-1.5">Giới hạn</td><td class="border border-slate-200 px-3 py-1.5">Chi phí vượt kỷ lục</td><td class="border border-slate-200 px-3 py-1.5">TSP, bài toán cái túi</td></tr>
+                                    <tr><td class="border border-slate-200 px-3 py-1.5">Heuristic</td><td class="border border-slate-200 px-3 py-1.5">Ưu tiên nhánh triển vọng</td><td class="border border-slate-200 px-3 py-1.5">Quy tắc Warnsdorff</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">4. Code minh họa: Fibonacci + Liệt kê hoán vị (C++)</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+// --- MEMOIZATION ---
+long long memo[100];
+long long fibo(int n) {
+    if (n &lt;= 1) return n;
+    if (memo[n] != -1) return memo[n];
+    return memo[n] = fibo(n-1) + fibo(n-2);
+}
+
+// --- BACKTRACKING: Liệt kê hoán vị ---
+int n, x[15];
+bool used[15];
+
+void backtrack(int i) {
+    for (int j = 1; j &lt;= n; ++j) {
+        if (!used[j]) {           // Nhánh cận: chỉ chọn giá trị chưa dùng
+            x[i] = j;
+            used[j] = true;       // Ghi nhận
+            if (i == n) {
+                for (int k = 1; k &lt;= n; ++k) cout &lt;&lt; x[k] &lt;&lt; " ";
+                cout &lt;&lt; "\n";
+            } else {
+                backtrack(i + 1); // Tiến sâu
+            }
+            used[j] = false;      // QUAY LUI: hoàn tác
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    fill(memo, memo + 100, -1LL);
+    cout &lt;&lt; "Fibo(50) = " &lt;&lt; fibo(50) &lt;&lt; "\n"; // 12586269025
+
+    cout &lt;&lt; "Hoan vi cua {1,2,3}:\n";
+    n = 3;
+    fill(used + 1, used + n + 1, false);
+    backtrack(1);
+    return 0;
+}</pre>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-3">
+                            <p class="font-semibold text-red-700">⚠️ Lỗi cổ điển khi viết quay lui:</p>
+                            <ul class="list-disc list-inside mt-1 text-red-600 space-y-1 text-xs">
+                                <li>Quên <strong>hoàn tác</strong> (<code>used[j] = false</code>) sau khi quay lui → kết quả sai hoàn toàn.</li>
+                                <li>Thiếu <strong>base case</strong> → đệ quy vô hạn, tràn stack.</li>
+                                <li>Quên khởi tạo mảng <code>memo</code> về <code>-1</code> → Memoization trả về kết quả rác.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Tổ hợp C(n, k) có nhớ</p>
+                        <p class="mt-1 text-slate-600">Dùng đệ quy có nhớ tính $C(n, k)$ dựa trên công thức Pascal: $C(n,k) = C(n-1,k-1) + C(n-1,k)$ với base case $C(n,0) = C(n,n) = 1$. Dùng mảng 2D <code>memo[n][k]</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// C(5,2) = 10 | C(10,3) = 120 | C(20,10) = 184756</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Dãy nhị phân không có hai số 1 liền nhau</p>
+                        <p class="mt-1 text-slate-600">Liệt kê tất cả dãy nhị phân độ dài $N$ mà không có hai chữ số <code>1</code> nào đứng cạnh nhau. Dùng quay lui: nhánh cận là nếu vị trí trước đã là <code>1</code> thì không được đặt <code>1</code> tiếp.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// N=3 → </span>000 001 010 100 101
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Tìm max bằng đệ quy (Chia để trị)</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code>int findMax(int arr[], int l, int r)</code> dùng đệ quy chia mảng làm đôi, tìm max của từng nửa rồi trả về max của hai kết quả. Độ phức tạp $O(n)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// {3,1,9,2,7} → Max = 9</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Liệt kê tập con có tổng bằng S</p>
+                        <p class="mt-1 text-slate-600">Dùng quay lui để liệt kê tất cả tập con của $\{1, 2, \dots, N\}$ có tổng các phần tử đúng bằng $S$. Nhánh cận: nếu tổng hiện tại đã vượt $S$ thì dừng ngay.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// N=4, S=5 → {1,4} {2,3} {1,2,...}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Lũy thừa nhanh $a^b$ bằng đệ quy</p>
+                        <p class="mt-1 text-slate-600">Viết hàm đệ quy tính $a^b$ với độ phức tạp $O(\log b)$ dựa trên: nếu $b$ chẵn thì $a^b = (a^{b/2})^2$, nếu lẻ thì $a^b = a \times a^{b-1}$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// pow(2,10) = 1024 | pow(3,8) = 6561</span>
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 6: N-Queens (Nhánh cận)</p>
+                        <p class="mt-1 text-indigo-700">Đặt $N$ quân hậu trên bàn cờ $N \times N$ sao cho không quân nào tấn công quân nào. Dùng 3 mảng <code>bool col[], diag1[], diag2[]</code> để kiểm tra cột và hai đường chéo trong $O(1)$ thay vì $O(N)$. Đếm tổng số cách đặt.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// N=4 → 2 cách | N=8 → 92 cách</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 7: Bài toán Người giao hàng (TSP + Nhánh cận)</p>
+                        <p class="mt-1 text-indigo-700">Cho $N \le 12$ thành phố và ma trận khoảng cách. Tìm hành trình qua tất cả thành phố và trở về xuất phát với <strong>tổng chi phí nhỏ nhất</strong>. Dùng biến <code>min_cost</code> làm kỷ lục: nếu chi phí hiện tại đã $\ge$ kỷ lục thì cắt nhánh ngay.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Ví dụ N=4, ma trận khoảng cách → Chi phí tối thiểu</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: Chia mảng cân bằng nhất</p>
+                        <p class="mt-1 text-indigo-700">Cho mảng $N$ phần tử ($N \le 20$). Chia thành 2 nhóm sao cho <strong>độ chênh lệch tổng là nhỏ nhất</strong>. Dùng quay lui: mỗi phần tử hoặc vào nhóm 1 hoặc nhóm 2. Nhánh cận: nếu chênh lệch tối ưu đã bằng 0 thì dừng ngay.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// {1,2,3,4,5} → Nhom {2,4} vs {1,3,5} → chenh lech = 1</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Sudoku Solver</p>
+                        <p class="mt-1 text-indigo-700">Dùng quay lui để giải bảng Sudoku $9 \times 9$ cho trước. Nhánh cận: <strong>ngay khi điền một số</strong>, kiểm tra xem số đó có hợp lệ theo hàng, cột và ô $3 \times 3$ không. Nếu không hợp lệ, thử số tiếp theo ngay.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Mã đi tuần (Knight's Tour)</p>
+                        <p class="mt-1 text-indigo-700">Tìm đường đi của quân mã qua tất cả $N \times N$ ô bàn cờ, mỗi ô đúng một lần. Cài đặt quay lui cơ bản trước. Sau đó áp dụng <strong>quy tắc Warnsdorff</strong>: luôn ưu tiên đi đến ô có <em>ít lựa chọn tiếp theo nhất</em> để tăng tốc đột biến.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Bắt đầu với bàn cờ 5x5 (dễ), sau đó thử 8x8</span>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>Memoization vs Dynamic Programming difference</code></li>
+                            <li><code>Backtracking Pruning techniques competitive programming</code></li>
+                            <li><code>State Space Tree visualization backtracking</code></li>
+                            <li><code>N-Queens problem C++ optimized</code></li>
+                            <li><code>Warnsdorff heuristic Knight's Tour</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Đọc <strong>Chương 2: Giải thuật quay lui</strong> trong tài liệu của thầy Lê Minh Hoàng (Chuyên Tin — ĐHKHTN) — tài liệu kinh điển và chi tiết nhất về chủ đề này bằng tiếng Việt.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Xử lý chuỗi", 
                 videoId: "", 
