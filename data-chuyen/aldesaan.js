@@ -544,12 +544,282 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Quy hoạch động (DP)", 
-                videoId: "", 
-                desc: "\"Trái tim\" của tin học trẻ, giải quyết các bài toán tối ưu bằng cách lưu trữ kết quả trung gian.", 
-                downloadUrl: "#" 
-            },
+       {
+    title: "Bài 15: Quy Hoạch Động (Dynamic Programming)",
+    videoId: "",
+    desc: "Nắm vững tư duy Quy hoạch động — xác định trạng thái, công thức truy hồi và lập bảng Bottom-up — để giải quyết các bài toán tối ưu kinh điển trong thi đấu lập trình.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu hai đặc điểm cốt lõi của bài toán DP: <strong>Cấu trúc con tối ưu</strong> và <strong>Bài toán con chồng chéo</strong>.</li>
+                        <li>Phân biệt hai cách tiếp cận: <strong>Top-down</strong> (đệ quy có nhớ) và <strong>Bottom-up</strong> (lập bảng phương án).</li>
+                        <li>Nắm 4 bước thiết kế: Định nghĩa trạng thái → Công thức truy hồi → Cơ sở → Truy vết.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Xác định được <strong>trạng thái (State)</strong> phù hợp cho từng bài toán.</li>
+                        <li>Viết <strong>công thức truy hồi (Transition)</strong> chính xác và cài đặt Bottom-up bằng vòng lặp.</li>
+                        <li>Giải quyết các bài toán DP kinh điển: LIS, LCS, Knapsack, Coin Change, Edit Distance.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">1. Tư duy Quy hoạch động — 4 bước thiết kế</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-1">
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-center text-xs">
+                                <p class="font-black text-blue-700 text-base">①</p>
+                                <p class="font-bold text-blue-700 mt-1">Định nghĩa trạng thái</p>
+                                <p class="text-blue-600 mt-1"><code>dp[i]</code> là gì?</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-center text-xs">
+                                <p class="font-black text-emerald-700 text-base">②</p>
+                                <p class="font-bold text-emerald-700 mt-1">Công thức truy hồi</p>
+                                <p class="text-emerald-600 mt-1"><code>dp[i]</code> tính từ <code>dp[j]</code> nào?</p>
+                            </div>
+                            <div class="p-3 bg-orange-50 rounded-xl border border-orange-200 text-center text-xs">
+                                <p class="font-black text-orange-700 text-base">③</p>
+                                <p class="font-bold text-orange-700 mt-1">Cơ sở</p>
+                                <p class="text-orange-600 mt-1"><code>dp[0]</code>, <code>dp[1]</code> bằng bao nhiêu?</p>
+                            </div>
+                            <div class="p-3 bg-purple-50 rounded-xl border border-purple-200 text-center text-xs">
+                                <p class="font-black text-purple-700 text-base">④</p>
+                                <p class="font-bold text-purple-700 mt-1">Truy vết</p>
+                                <p class="text-purple-600 mt-1">In ra lời giải cụ thể</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-amber-50 rounded-xl border-l-4 border-amber-400 mt-3">
+                            <p class="font-semibold text-amber-800">⚖️ Top-down vs Bottom-up:</p>
+                            <p class="mt-1 text-amber-700 text-xs"><strong>Top-down</strong> (Memoization): viết tự nhiên như đệ quy, tự động bỏ qua trạng thái không cần tính. <strong>Bottom-up</strong> (Tabulation): dùng vòng lặp, không có overhead đệ quy → <strong>nhanh hơn và được ưu tiên trong thi đấu</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">2. Ví dụ kinh điển: Dãy con tăng dài nhất (LIS)</p>
+                        <p>Định nghĩa: <code>dp[i]</code> = độ dài dãy con tăng dài nhất kết thúc tại vị trí $i$.</p>
+                        <p class="mt-1">Truy hồi: $dp[i] = \max(dp[j] + 1)$ với mọi $j &lt; i$ thỏa $A[j] &lt; A[i]$. Cơ sở: $dp[i] = 1$ (dãy chỉ có một phần tử).</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-2">// LIS - O(N^2)
+int lis(vector&lt;int&gt;&amp; a) {
+    int n = a.size();
+    vector&lt;int&gt; dp(n, 1); // Cơ sở: mọi dp[i] = 1
+    int ans = 1;
+    for (int i = 1; i &lt; n; ++i) {
+        for (int j = 0; j &lt; i; ++j)
+            if (a[j] &lt; a[i])
+                dp[i] = max(dp[i], dp[j] + 1); // Truy hồi
+        ans = max(ans, dp[i]);
+    }
+    return ans;
+}
+// a={3,1,4,1,5,9,2,6} → LIS = 4 (dãy {1,4,5,9} hoặc {1,4,5,6})</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">3. Code minh họa: Bài toán Cái túi 0/1 (Knapsack)</p>
+                        <p>Cho $n$ đồ vật, vật $i$ có khối lượng $w_i$ và giá trị $v_i$. Chọn sao cho tổng khối lượng $\le W$ và tổng giá trị lớn nhất.</p>
+                        <p class="mt-1">Định nghĩa: <code>dp[i][j]</code> = giá trị lớn nhất khi xét $i$ vật đầu tiên với sức chứa $j$.</p>
+                        <p class="mt-0.5">Truy hồi: $dp[i][j] = \max(dp[i-1][j],\ dp[i-1][j-w_i] + v_i)$ nếu $j \ge w_i$.</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-2">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+    int n, W;
+    cin &gt;&gt; n &gt;&gt; W;
+    vector&lt;int&gt; w(n+1), v(n+1);
+    for (int i = 1; i &lt;= n; ++i) cin &gt;&gt; w[i] &gt;&gt; v[i];
+
+    // dp[i][j]: gia tri lon nhat khi xet i vat, suc chua j
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(W+1, 0));
+
+    for (int i = 1; i &lt;= n; ++i) {
+        for (int j = 0; j &lt;= W; ++j) {
+            dp[i][j] = dp[i-1][j]; // Khong chon vat thu i
+            if (j &gt;= w[i])         // Co the chon vat thu i
+                dp[i][j] = max(dp[i][j], dp[i-1][j - w[i]] + v[i]);
+        }
+    }
+    cout &lt;&lt; dp[n][W] &lt;&lt; "\n";
+
+    // --- TRUY VET: In ra cac vat duoc chon ---
+    int j = W;
+    for (int i = n; i &gt;= 1; --i) {
+        if (dp[i][j] != dp[i-1][j]) { // Vat thu i duoc chon
+            cout &lt;&lt; "Chon vat " &lt;&lt; i &lt;&lt; " (w=" &lt;&lt; w[i] &lt;&lt; ", v=" &lt;&lt; v[i] &lt;&lt; ")\n";
+            j -= w[i];
+        }
+    }
+    return 0;
+}</pre>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-3">
+                            <p class="font-semibold text-red-700">⚠️ Tối ưu bộ nhớ — Mảng 1 chiều:</p>
+                            <p class="mt-1 text-red-600 text-xs">Knapsack 2D tốn $O(N \times W)$ bộ nhớ. Có thể giảm xuống $O(W)$ bằng cách dùng mảng 1 chiều và duyệt $j$ từ $W$ <strong>xuống</strong> $w[i]$ (tránh dùng vật cùng lần). Tuy nhiên khi cần truy vết thì phải dùng mảng 2D.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Bậc thang</p>
+                        <p class="mt-1 text-slate-600">Có $N$ bậc thang. Mỗi bước bạn có thể bước 1 hoặc 2 bậc. Đếm số cách lên đến bậc thứ $N$. Viết công thức truy hồi rõ ràng và cài đặt cả <strong>Top-down</strong> lẫn <strong>Bottom-up</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// N=1→1 | N=2→2 | N=5→8 | N=10→89</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Dãy con tăng dài nhất (LIS) — $O(N^2)$</p>
+                        <p class="mt-1 text-slate-600">Tìm độ dài dãy con (không nhất thiết liên tiếp) <strong>tăng dần</strong> dài nhất của mảng $A$ có $N$ phần tử. Định nghĩa trạng thái rõ ràng và viết công thức truy hồi đầy đủ.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// {10,9,2,5,3,7,101,18} → LIS = 4 ({2,3,7,101})</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Xâu con chung dài nhất (LCS)</p>
+                        <p class="mt-1 text-slate-600">Cho hai xâu $S_1$ và $S_2$. Tìm độ dài xâu con chung dài nhất. Trạng thái: <code>dp[i][j]</code> = LCS của $S_1[1..i]$ và $S_2[1..j]$. Truy hồi: nếu $S_1[i] = S_2[j]$ thì cộng 1, ngược lại lấy max.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// S1="ABCBDAB", S2="BDCAB" → LCS = 4 ("BCAB")</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Đổi tiền (Coin Change)</p>
+                        <p class="mt-1 text-slate-600">Cho $N$ mệnh giá tiền (số lượng vô hạn). Tìm số tờ <strong>ít nhất</strong> để đổi đúng số tiền $S$. Đây là bài toán Knapsack không giới hạn: <code>dp[j] = min(dp[j], dp[j - coin[i]] + 1)</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// coins={1,5,10,25}, S=36 → 3 to (25+10+1)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Tổng không kề nhau lớn nhất</p>
+                        <p class="mt-1 text-slate-600">Cho mảng $N$ số dương. Chọn tập con các phần tử sao cho <strong>không có hai phần tử nào đứng cạnh nhau</strong> và tổng là lớn nhất. Trạng thái: <code>dp[i]</code> = tổng lớn nhất khi xét đến phần tử thứ $i$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// {3,2,5,10,7} → 15 (chon 3+5+7 hoac 3+10=13, hay 5+10=15)</span>
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 6: Đường đi ngắn nhất trên ma trận</p>
+                        <p class="mt-1 text-indigo-700">Cho ma trận $A[M][N]$ giá trị nguyên. Tìm đường đi từ $(1,1)$ đến $(M,N)$ chỉ đi <strong>sang phải hoặc xuống dưới</strong> sao cho tổng các ô là <strong>nhỏ nhất</strong>. Truy vết để in đường đi cụ thể.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// 3x3: {1,3,1}/{1,5,1}/{4,2,1} → Tong min = 7</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 7: Biến đổi xâu (Edit Distance)</p>
+                        <p class="mt-1 text-indigo-700">Tìm số phép biến đổi ít nhất (thêm, xóa, thay thế một ký tự) để biến xâu $A$ thành xâu $B$. Trạng thái <code>dp[i][j]</code> = Edit Distance của $A[1..i]$ và $B[1..j]$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// "horse" → "ros" = 3 phep bien doi</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: Subset Sum — tối ưu bộ nhớ $O(S)$</p>
+                        <p class="mt-1 text-indigo-700">Kiểm tra có tồn tại tập con có tổng đúng bằng $S$ không. Cài đặt với mảng <code>dp[j]</code> 1 chiều (<code>bool</code>), duyệt $j$ từ $S$ xuống để tránh dùng phần tử hai lần. So sánh bộ nhớ với cách 2 chiều.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// a={3,1,5,9,12}, S=11 → Co ({2,9} hoac {1,5,5}...)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Dãy con liên tiếp có tổng lớn nhất (Kadane)</p>
+                        <p class="mt-1 text-indigo-700">Tìm dãy con liên tiếp có tổng lớn nhất trong $O(N)$ bằng thuật toán Kadane. Định nghĩa: <code>dp[i]</code> = tổng lớn nhất của dãy con kết thúc tại $i$. Truy hồi: <code>dp[i] = max(A[i], dp[i-1] + A[i])</code>. In cả chỉ số đầu và cuối của dãy.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// {-2,1,-3,4,-1,2,1,-5,4} → 6 (day [4,-1,2,1])</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Trộn sỏi — DP trên đoạn</p>
+                        <p class="mt-1 text-indigo-700">Có $N$ đống sỏi liên tiếp. Mỗi bước gộp 2 đống <strong>liền kề</strong> tốn chi phí = tổng khối lượng của chúng. Tìm cách gộp tất cả thành 1 đống với <strong>tổng chi phí nhỏ nhất</strong>. Trạng thái: <code>dp[l][r]</code> = chi phí gộp từ đống $l$ đến $r$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// {1,2,3,4} → Chi phi min = 19</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 11: Truy vết Cái túi — In danh sách đồ vật</p>
+                        <p class="mt-1 text-indigo-700">Với bài toán Cái túi 0/1 đã giải, thêm phần <strong>truy vết</strong>: từ ô <code>dp[n][W]</code> lần ngược về, nếu <code>dp[i][j] != dp[i-1][j]</code> thì vật $i$ được chọn. In ra danh sách các vật đã chọn cùng tổng khối lượng và tổng giá trị.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// W=10, items={(6,10),(4,6),(3,4)} → Chon vat 1,2; Value=16</span>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>Dynamic Programming introduction top-down bottom-up</code></li>
+                            <li><code>0/1 Knapsack problem DP C++</code></li>
+                            <li><code>Longest Increasing Subsequence O(NlogN) C++</code></li>
+                            <li><code>Edit Distance Levenshtein DP</code></li>
+                            <li><code>Kadane algorithm maximum subarray sum</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Đọc chuyên đề <strong>Quy hoạch động</strong> trên <a href="https://wiki.vnoi.info/algo/dp/basic-dp" target="_blank" class="text-blue-600 hover:underline">VNOI Wiki</a> hoặc cuốn <em>Giải thuật và Lập trình</em> của thầy Lê Minh Hoàng — tài liệu kinh điển về DP bằng tiếng Việt.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Giải thuật tham lam (Greedy)", 
                 videoId: "", 
