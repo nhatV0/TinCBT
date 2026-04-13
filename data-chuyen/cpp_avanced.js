@@ -286,12 +286,295 @@ int main() {
         </div>
     `
     },
-            { 
-                title: "Con trỏ", 
-                videoId: "", 
-                desc: "Hiểu sâu về địa chỉ ô nhớ và quản lý bộ nhớ động.", 
-                downloadUrl: "#" 
-            },
+            {
+    title: "Bài 8: Con Trỏ và Quản Lý Bộ Nhớ Động",
+    videoId: "",
+    desc: "Hiểu bản chất địa chỉ ô nhớ, thao tác với con trỏ và nắm vững kỹ thuật cấp phát bộ nhớ động trên Heap để tối ưu tài nguyên chương trình C++.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu bản chất của <strong>địa chỉ ô nhớ</strong> và <strong>biến con trỏ</strong> trong C++.</li>
+                        <li>Phân biệt rõ sự khác nhau giữa vùng nhớ <strong>Stack</strong> (tĩnh) và <strong>Heap</strong> (động).</li>
+                        <li>Hiểu mối quan hệ mật thiết giữa <strong>con trỏ và mảng</strong>.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Thao tác thành thạo với toán tử <code>&amp;</code> (lấy địa chỉ) và <code>*</code> (giải tham chiếu).</li>
+                        <li>Cấp phát và giải phóng bộ nhớ động bằng <code>new</code> và <code>delete</code>.</li>
+                        <li>Tránh các lỗi phổ biến: <strong>Memory Leak</strong>, <strong>Stack Overflow</strong>, <strong>Dangling Pointer</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">1. Bản chất của Con trỏ</p>
+                        <p>Mọi biến trong chương trình đều được lưu tại một <strong>địa chỉ cụ thể trong RAM</strong>. <strong>Biến con trỏ</strong> là biến đặc biệt mà giá trị của nó không phải dữ liệu thông thường (như <code>10</code>, <code>3.14</code>) mà là <strong>địa chỉ của một biến khác</strong>.</p>
+                        <div class="mt-2 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-400">
+                            <p class="font-semibold text-blue-800">💡 Hình dung trực quan:</p>
+                            <p class="mt-1 text-blue-700">RAM giống như dãy nhà trọ, mỗi nhà có một số phòng (địa chỉ). Biến thường là <em>người ở trong phòng</em>. Con trỏ là <em>tờ giấy ghi số phòng</em> — nó không phải người ở, nhưng biết chính xác người ở đâu.</p>
+                        </div>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-3">int  a   = 10;    // Biến thường: lưu giá trị 10
+int *ptr = &amp;a;   // Con trỏ ptr: lưu ĐỊA CHỈ của a
+// Khai báo: KieuDL *tenConTro;</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">2. Hai toán tử quan trọng</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Toán tử</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Tên gọi</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Ý nghĩa</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Ví dụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-emerald-700">&amp;</td>
+                                        <td class="border border-slate-200 px-3 py-2">Address-of</td>
+                                        <td class="border border-slate-200 px-3 py-2">Lấy địa chỉ của một biến</td>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-xs">ptr = &amp;a</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-orange-600">*</td>
+                                        <td class="border border-slate-200 px-3 py-2">Dereference</td>
+                                        <td class="border border-slate-200 px-3 py-2">Truy xuất giá trị tại địa chỉ con trỏ đang trỏ đến</td>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-xs">*ptr = 99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">3. Stack vs Heap — Hai vùng bộ nhớ quan trọng</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <p class="font-bold text-slate-700 mb-1">📦 Stack (Tĩnh)</p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1 text-xs">
+                                    <li>Cấp phát <strong>tự động</strong> khi khai báo biến</li>
+                                    <li>Giới hạn nhỏ (~1MB – 8MB)</li>
+                                    <li>Dễ gây <strong>Stack Overflow</strong> với mảng lớn</li>
+                                    <li>Tự giải phóng khi ra khỏi scope</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                                <p class="font-bold text-emerald-700 mb-1">🌐 Heap (Động)</p>
+                                <ul class="list-disc list-inside text-emerald-700 space-y-1 text-xs">
+                                    <li>Lập trình viên <strong>tự quản lý</strong></li>
+                                    <li>Dung lượng rất lớn (hàng trăm MB)</li>
+                                    <li>Dùng <code>new</code> để cấp phát</li>
+                                    <li>Phải dùng <code>delete</code> để giải phóng</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-3">
+                            <p class="font-semibold text-red-700">⚠️ Memory Leak — Lỗi nguy hiểm thầm lặng:</p>
+                            <p class="mt-1 text-red-600">Nếu dùng <code>new</code> mà quên <code>delete</code>, bộ nhớ bị chiếm giữ mãi mãi cho đến khi chương trình kết thúc. Trong các bài thi dài hoặc chương trình lớn, điều này gây ra hiện tượng máy chậm dần rồi treo.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">4. Code minh họa tổng hợp (C++)</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // --- CƠ BẢN: Toán tử & và * ---
+    int a = 10;
+    int *ptr = &amp;a;  // ptr lưu địa chỉ của a
+
+    cout &lt;&lt; "Gia tri cua a   : " &lt;&lt; a    &lt;&lt; "\n"; // 10
+    cout &lt;&lt; "Dia chi cua a   : " &lt;&lt; &amp;a   &lt;&lt; "\n"; // 0x...
+    cout &lt;&lt; "ptr dang giu    : " &lt;&lt; ptr  &lt;&lt; "\n"; // cùng địa chỉ
+    cout &lt;&lt; "Gia tri *ptr    : " &lt;&lt; *ptr &lt;&lt; "\n"; // 10
+
+    *ptr = 99;  // Thay đổi a thông qua con trỏ
+    cout &lt;&lt; "a sau khi *ptr=99: " &lt;&lt; a &lt;&lt; "\n"; // 99
+
+    // --- BỘ NHỚ ĐỘNG: new / delete ---
+    int n;
+    cout &lt;&lt; "Nhap n: "; cin &gt;&gt; n;
+
+    int *arr = new int[n];  // Cấp phát trên Heap
+
+    for (int i = 0; i &lt; n; ++i)
+        arr[i] = i * 2;     // Truy cập như mảng thường
+
+    for (int i = 0; i &lt; n; ++i)
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+
+    delete[] arr;   // LUÔN giải phóng sau khi dùng xong
+    arr = nullptr;  // Đặt về nullptr để tránh Dangling Pointer
+
+    return 0;
+}</pre>
+                        <div class="p-4 bg-amber-50 rounded-xl border-l-4 border-amber-400 mt-3">
+                            <p class="font-semibold text-amber-800">💬 Ghi chú thực tiễn:</p>
+                            <p class="mt-1 text-amber-700">Trong C++ hiện đại (C++11 trở lên), người ta ưu tiên dùng <strong>Smart Pointers</strong> (<code>unique_ptr</code>, <code>shared_ptr</code>) để tự động giải phóng bộ nhớ, tránh quên <code>delete</code>. Tuy nhiên trong thi đấu HSG, <strong>con trỏ trần</strong> vẫn là công cụ không thể thiếu khi xây dựng Linked List, Tree hay các cấu trúc tự cài đặt.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Thay đổi giá trị qua con trỏ</p>
+                        <p class="mt-1 text-slate-600">Khai báo biến <code>int x = 5</code> và con trỏ <code>ptr</code> trỏ đến <code>x</code>. Dùng <code>*ptr</code> để thay đổi <code>x</code> thành 100. In ra địa chỉ và giá trị của <code>x</code> trước và sau khi thay đổi.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Output mẫu:</span><br>
+                            Truoc: x = 5, &amp;x = 0x...<br>
+                            Sau: x = 100, *ptr = 100
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Hàm Swap dùng con trỏ</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code>void swap(int *a, int *b)</code> sử dụng con trỏ để hoán vị giá trị hai biến. Gọi hàm từ <code>main()</code> và kiểm tra kết quả.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> a = 3, b = 7<br>
+                            <span class="text-slate-400">// Output:</span> a = 7, b = 3
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Con trỏ vs Tham chiếu</p>
+                        <p class="mt-1 text-slate-600">Viết chương trình minh họa sự khác biệt giữa <code>int *ptr</code> (con trỏ) và <code>int &amp;ref</code> (tham chiếu): con trỏ có thể trỏ lại sang biến khác, tham chiếu thì không. In ra địa chỉ để kiểm chứng.</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Mảng động số thực</p>
+                        <p class="mt-1 text-slate-600">Cấp phát động mảng $n$ số thực (<code>double</code>) trên Heap. Nhập các phần tử từ bàn phím, tính và in ra trung bình cộng. Nhớ giải phóng bộ nhớ sau khi xong.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> n=4, {1.5, 2.5, 3.0, 5.0}<br>
+                            <span class="text-slate-400">// Output:</span> Trung binh: 3.00
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Duyệt mảng bằng con trỏ</p>
+                        <p class="mt-1 text-slate-600">Cho mảng <code>int a[] = {1, 2, 3, 4, 5}</code>. Sử dụng con trỏ và toán tử <code>++</code> (thay vì chỉ số <code>i</code>) để duyệt và in ra tất cả các phần tử. Lưu ý: tên mảng là địa chỉ phần tử đầu tiên.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Output:</span> 1 2 3 4 5
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6: Tìm giá trị lớn nhất qua con trỏ</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code>int* findMax(int *arr, int n)</code> trả về <strong>con trỏ</strong> trỏ đến phần tử lớn nhất trong mảng. In ra giá trị và địa chỉ của phần tử đó.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> {3, 1, 9, 2, 7}<br>
+                            <span class="text-slate-400">// Output:</span> Max = 9, tai dia chi 0x...
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 7: Ma trận động 2 chiều</p>
+                        <p class="mt-1 text-indigo-700">Dùng <strong>con trỏ của con trỏ</strong> (<code>int **matrix</code>) để cấp phát động một ma trận $M \times N$. Điền giá trị, in ra, rồi viết hàm <code>freeMatrix(int **matrix, int M)</code> để giải phóng an toàn từng hàng rồi đến mảng ngoài.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Cấp phát:</span> int **m = new int*[M];<br>
+                            <span class="text-slate-400">//            </span> for(i) m[i] = new int[N];
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: Linked List đơn giản</p>
+                        <p class="mt-1 text-indigo-700">Định nghĩa <code>struct Node { int data; Node* next; }</code>. Viết hàm <code>pushFront(Node* &amp;head, int val)</code> thêm phần tử vào đầu danh sách và hàm <code>printList(Node* head)</code> in toàn bộ danh sách.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Thêm 1, 2, 3 → Output:</span> 3 → 2 → 1 → NULL
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Con trỏ hàm (Function Pointer)</p>
+                        <p class="mt-1 text-indigo-700">Viết hàm <code>int tinhToan(int a, int b, int (*phepTinh)(int, int))</code>. Định nghĩa các hàm <code>cong</code>, <code>tru</code>, <code>nhan</code> rồi truyền vào làm tham số. In kết quả của từng phép toán.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// tinhToan(6, 2, cong)  → 8</span><br>
+                            <span class="text-slate-400">// tinhToan(6, 2, tru)   → 4</span><br>
+                            <span class="text-slate-400">// tinhToan(6, 2, nhan)  → 12</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Tối ưu hóa mảng động</p>
+                        <p class="mt-1 text-indigo-700">So sánh hai cách: (1) khai báo mảng tĩnh toàn cục <code>int a[1000000]</code>, (2) dùng con trỏ cấp phát đúng $N$ phần tử theo yêu cầu. Dùng <code>sizeof</code> và quan sát để nhận xét về sự khác biệt bộ nhớ thực tế được sử dụng.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>C++ Pointers vs References explained</code></li>
+                            <li><code>Dynamic memory allocation C++ new delete</code></li>
+                            <li><code>Memory leak prevention C++</code></li>
+                            <li><code>Smart pointers unique_ptr C++11</code></li>
+                            <li><code>C++ pointer and array relationship</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-1">📄 Tài liệu tham khảo:</p>
+                        <p class="text-slate-600">Đọc mục <strong>Pointers</strong> trên <a href="https://www.learncpp.com/cpp-tutorial/introduction-to-pointers/" target="_blank" class="text-blue-600 hover:underline">LearnCpp.com</a> — trang web dạy C++ chi tiết và miễn phí tốt nhất hiện nay.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Nhập xuất file", 
                 videoId: "", 
