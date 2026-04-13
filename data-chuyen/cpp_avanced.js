@@ -575,12 +575,287 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Nhập xuất file", 
-                videoId: "", 
-                desc: "Kỹ năng bắt buộc để đọc dữ liệu từ tệp .INP và xuất ra .OUT trong các kỳ thi.", 
-                downloadUrl: "#" 
-            },
+            {
+    title: "Bài 9: Nhập Xuất File (Tệp) trong Thi Đấu",
+    videoId: "",
+    desc: "Nắm vững kỹ thuật đọc/ghi tệp với freopen và fstream theo chuẩn thi HSG, kết hợp Fast I/O để tối đa hóa hiệu suất chương trình C++.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-semibold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu cơ chế làm việc với tệp tin thông qua thư viện <code>&lt;fstream&gt;</code> (<code>ifstream</code>, <code>ofstream</code>).</li>
+                        <li>Nắm vững kỹ thuật <strong>chuyển hướng luồng</strong> bằng <code>freopen</code> — chuẩn phổ biến nhất trong thi HSG.</li>
+                        <li>Hiểu cách dùng <strong>Preprocessor Directives</strong> (<code>#ifndef ONLINE_JUDGE</code>) để tự động bật/tắt file khi debug và khi nộp bài.</li>
+                    </ul>
+                    <p class="font-semibold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Thành thạo đọc dữ liệu từ tệp <code>.INP</code> và ghi kết quả ra tệp <code>.OUT</code>.</li>
+                        <li>Xử lý linh hoạt các tình huống: tệp không tồn tại, tệp rỗng, đọc đến hết tệp (EOF).</li>
+                        <li>Kết hợp <strong>Fast I/O</strong> với nhập xuất tệp để tối đa hóa hiệu suất.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">1. Thư viện fstream (Cách cơ bản)</p>
+                        <p>C++ cung cấp <code>ifstream</code> để đọc tệp và <code>ofstream</code> để ghi tệp. Sau khi mở, dùng đối tượng file thay cho <code>cin</code>/<code>cout</code>.</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-2">#include &lt;fstream&gt;
+using namespace std;
+
+int main() {
+    ifstream fin("data.inp");   // Mở file đọc
+    ofstream fout("data.out");  // Mở file ghi
+
+    int a, b;
+    fin  &gt;&gt; a &gt;&gt; b;       // Đọc từ file thay vì cin
+    fout &lt;&lt; a + b &lt;&lt; "\n"; // Ghi ra file thay vì cout
+
+    fin.close();   // Đóng file sau khi dùng xong
+    fout.close();
+    return 0;
+}</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">2. Kỹ thuật freopen (Chuẩn thi HSG)</p>
+                        <p>Đây là cách phổ biến nhất trong các kỳ thi. <code>freopen</code> <strong>chuyển hướng</strong> (redirect) luồng <code>stdin</code>/<code>stdout</code> vào tệp — bạn vẫn viết <code>cin</code>/<code>cout</code> như bình thường.</p>
+                        <div class="p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500 mt-2">
+                            <p class="font-semibold text-emerald-800">✅ Ưu điểm khi thi:</p>
+                            <p class="mt-1 text-emerald-700">Chỉ cần <strong>comment 2 dòng</strong> <code>freopen</code> là code chạy được trên Codeforces/SPOJ mà không cần sửa gì thêm.</p>
+                        </div>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-3">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+int main() {
+    freopen("SUM.INP", "r", stdin);  // "r" = read
+    freopen("SUM.OUT", "w", stdout); // "w" = write
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int a, b;
+    while (cin &gt;&gt; a &gt;&gt; b) {  // Đọc đến hết file (EOF)
+        cout &lt;&lt; a + b &lt;&lt; "\n";
+    }
+    return 0;
+}</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">3. Preprocessor Directive — Giải pháp chuyên nghiệp</p>
+                        <p>Dùng <code>#ifndef ONLINE_JUDGE</code> để tự động mở file khi chạy trên máy cá nhân, và tự bỏ qua khi nộp lên hệ thống chấm online. <strong>Không bao giờ lo quên xóa lệnh mở file nữa!</strong></p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto mt-2">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+
+int main() {
+    // Khối này CHỈ chạy trên máy cá nhân (không có ONLINE_JUDGE)
+    // Khi nộp Codeforces/SPOJ, hệ thống tự định nghĩa ONLINE_JUDGE
+    // nên khối này bị bỏ qua hoàn toàn
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt",  "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // Phần code bài toán viết bình thường...
+    int n; cin &gt;&gt; n;
+    cout &lt;&lt; n * 2 &lt;&lt; "\n";
+    return 0;
+}</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-1">4. Xử lý EOF và kiểm tra tệp</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse mt-1">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Tình huống</th>
+                                        <th class="border border-slate-200 px-3 py-2 text-left font-bold">Cách xử lý</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-slate-200 px-3 py-2">Đọc đến hết file, không biết trước số lượng</td>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-xs">while (cin &gt;&gt; x) { ... }</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-200 px-3 py-2">Kiểm tra file có mở được không</td>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-xs">if (!fin.is_open()) { ... }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-200 px-3 py-2">Đọc từng dòng văn bản</td>
+                                        <td class="border border-slate-200 px-3 py-2 font-mono text-xs">while (getline(fin, line)) { ... }</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 mt-3">
+                            <p class="font-semibold text-red-700">⚠️ Lỗi thường gặp khi thi:</p>
+                            <ul class="list-disc list-inside mt-1 text-red-600 space-y-1">
+                                <li>Tên file sai chữ hoa/thường: <code>"sum.inp"</code> khác <code>"SUM.INP"</code> trên Linux (máy chấm thi).</li>
+                                <li>Quên xóa <code>freopen</code> khi nộp bài online → bị Runtime Error hoặc sai kết quả.</li>
+                                <li>Dùng <code>fstream</code> nhưng quên <code>close()</code> → dữ liệu chưa được flush ra file.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-700 uppercase text-xs tracking-widest">🟢 Cơ bản — Kiểm tra lý thuyết</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 1: Tính tích từ file</p>
+                        <p class="mt-1 text-slate-600">Viết chương trình đọc 2 số nguyên từ <code>TINH.INP</code> và ghi tích của chúng vào <code>TINH.OUT</code>. Thực hành cả hai cách: dùng <code>fstream</code> và dùng <code>freopen</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// TINH.INP:</span> 6 7<br>
+                            <span class="text-slate-400">// TINH.OUT:</span> 42
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 2: Tổng mảng từ file</p>
+                        <p class="mt-1 text-slate-600">Tệp <code>MANG.INP</code>: dòng đầu là $N$, dòng tiếp theo là $N$ số nguyên. Tính tổng và ghi kết quả vào <code>MANG.OUT</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// MANG.INP:</span> 5 / 1 2 3 4 5<br>
+                            <span class="text-slate-400">// MANG.OUT:</span> 15
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 3: Đếm số từ trong file</p>
+                        <p class="mt-1 text-slate-600">Đọc một tệp văn bản chứa các từ (cách nhau bởi dấu cách hoặc xuống dòng). Đếm tổng số từ và ghi kết quả ra tệp <code>DEMTU.OUT</code>. Dùng <code>while (fin &gt;&gt; word)</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// Input:</span> "hello world foo bar"<br>
+                            <span class="text-slate-400">// Output:</span> 4
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 4: Sao chép tệp</p>
+                        <p class="mt-1 text-slate-600">Viết chương trình đọc từng dòng từ <code>A.TXT</code> bằng <code>getline</code> và sao chép nguyên vẹn nội dung sang <code>B.TXT</code>. Kiểm tra trường hợp <code>A.TXT</code> không tồn tại.</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 5: Dãy Fibonacci ra file</p>
+                        <p class="mt-1 text-slate-600">Nhập vào số nguyên $N$ từ bàn phím. Ghi $N$ số Fibonacci đầu tiên vào tệp <code>FIBO.OUT</code>, mỗi số trên một dòng. Áp dụng kỹ thuật <code>#ifndef ONLINE_JUDGE</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// N=6 → FIBO.OUT:</span> 0 1 1 2 3 5
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold">Bài 6: Lọc điểm từ file</p>
+                        <p class="mt-1 text-slate-600">Tệp <code>DIEM.INP</code> chứa các điểm số thực, mỗi số một dòng. Đọc và ghi vào <code>DIEM.OUT</code> <strong>chỉ những điểm lớn hơn 5.0</strong>, mỗi điểm một dòng, định dạng 1 chữ số thập phân.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+                            <span class="text-slate-400">// DIEM.INP:</span> 3.5 6.0 8.5 4.0 7.0<br>
+                            <span class="text-slate-400">// DIEM.OUT:</span> 6.0 / 8.5 / 7.0
+                        </div>
+                    </div>
+
+                    <p class="font-black text-indigo-700 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường — Nâng cao</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 7: BigInt từ file</p>
+                        <p class="mt-1 text-indigo-700">Đọc hai số nguyên khổng lồ (tối đa 200 chữ số) từ tệp <code>BIG.INP</code>. Dùng struct <code>BigInt</code> đã xây dựng ở Bài 7 để tính tổng và ghi vào <code>BIG.OUT</code>. Kết hợp <code>freopen</code> với Fast I/O.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// BIG.INP:</span><br>
+                            99999999999999999999999999999<br>
+                            00000000000000000000000000001<br>
+                            <span class="text-slate-400">// BIG.OUT:</span> 100000000000000000000000000000
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 8: Thống kê từ vựng</p>
+                        <p class="mt-1 text-indigo-700">Đọc toàn bộ nội dung tệp <code>VANBAN.INP</code>. Thống kê tần suất xuất hiện của mỗi chữ cái <code>a-z</code> (không phân biệt hoa/thường). Ghi kết quả vào tệp theo thứ tự bảng chữ cái, định dạng: <code>a: 15</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// Input:</span> "Hello World"<br>
+                            <span class="text-slate-400">// Output:</span> d: 1 / e: 1 / h: 1 / l: 3 / o: 2 / r: 1 / w: 1
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 9: Sắp xếp hồ sơ sinh viên</p>
+                        <p class="mt-1 text-indigo-700">Tệp <code>STUDENT.INP</code>: dòng đầu là $N$, mỗi dòng tiếp theo gồm Mã số (int), Tên (string), Điểm (double). Đọc vào <code>vector&lt;struct Student&gt;</code>, sắp xếp theo điểm <strong>giảm dần</strong>, ghi vào <code>STUDENT.OUT</code>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// STUDENT.INP:</span> 3 / 1 An 8.5 / 2 Binh 9.0 / 3 Chi 7.5<br>
+                            <span class="text-slate-400">// STUDENT.OUT:</span> 2 Binh 9.0 / 1 An 8.5 / 3 Chi 7.5
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 10: Tìm số lớn thứ hai trên file lớn</p>
+                        <p class="mt-1 text-indigo-700">Tệp <code>DATA.INP</code> chứa $10^6$ số nguyên. Tìm số lớn thứ hai <strong>mà không đọc toàn bộ vào mảng</strong>: đọc từng số, duy trì hai biến <code>max1</code> và <code>max2</code>. Ghi kết quả vào <code>DATA.OUT</code>. Độ phức tạp $O(N)$, bộ nhớ $O(1)$.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-semibold text-indigo-800">Bài 11: Gộp hai dãy đã sắp xếp</p>
+                        <p class="mt-1 text-indigo-700">Tệp <code>ARRAY1.INP</code> và <code>ARRAY2.INP</code> chứa hai dãy số nguyên tăng dần (mỗi dòng một số). Dùng kỹ thuật <strong>merge hai con trỏ</strong> để gộp thành dãy tăng dần duy nhất, ghi vào <code>MERGE.OUT</code>. Độ phức tạp $O(N+M)$.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border border-indigo-200">
+                            <span class="text-slate-400">// ARRAY1:</span> 1 3 5 / <span class="text-slate-400">ARRAY2:</span> 2 4 6<br>
+                            <span class="text-slate-400">// MERGE.OUT:</span> 1 2 3 4 5 6
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-semibold text-slate-700 mb-2">🔍 Từ khóa tự học:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li><code>C++ freopen vs fstream competitive programming</code></li>
+                            <li><code>Reading until EOF C++ while cin</code></li>
+                            <li><code>ifndef ONLINE_JUDGE file redirect trick</code></li>
+                            <li><code>File handling in competitive programming C++</code></li>
+                        </ul>
+                    </div>,
             { 
                 title: "STL (Vector, Stack, Queue)", 
                 videoId: "", 
