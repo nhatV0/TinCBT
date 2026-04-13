@@ -34,6 +34,13 @@ window.courses = {
             icon: 'network', 
             dataPath: 'data-chinh-khoa/tin12.js', 
             description: 'Chương trình Tin học 12 - Bộ sách Kết nối tri thức với cuộc sống.' 
+        },
+        { 
+            id: 'tin12 plus', 
+            title: 'Tin học 12', 
+            icon: 'hell', 
+            dataPath: 'data-chinh-khoa/tin12plus.js', 
+            description: 'Chương trình ôn luyện kiến thức dành cho kì thi THPT Quốc Gia. Chặn đường cuối cùng .' 
         }
     ],
 
