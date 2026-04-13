@@ -36,11 +36,11 @@ window.courses = {
             description: 'Chương trình Tin học 12 - Bộ sách Kết nối tri thức với cuộc sống.' 
         },
         { 
-            id: 'tin12 plus', 
-            title: 'Tin học 12', 
-            icon: 'hell', 
+            id: 'tin12plus', 
+            title: 'CHINH PHỤC 10 ĐIỂM THPT', 
+            icon: 'flame', // Sử dụng icon ngọn lửa thay vì award
             dataPath: 'data-chinh-khoa/tin12plus.js', 
-            description: 'Chương trình ôn luyện kiến thức dành cho kì thi THPT Quốc Gia. Chặn đường cuối cùng .' 
+            description: 'Chiến dịch ôn thi cuối cùng. Hệ thống đề thi thử mô phỏng 100% cấu trúc thật của Bộ GD&ĐT.' 
         }
     ],
 
