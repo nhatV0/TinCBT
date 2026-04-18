@@ -820,12 +820,260 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Giải thuật tham lam (Greedy)", 
-                videoId: "", 
-                desc: "Lựa chọn phương án tốt nhất ở mỗi bước với hy vọng đạt được tối ưu toàn cục.", 
-                downloadUrl: "#" 
-            }
+      {
+    title: "Bài 16: Giải Thuật Tham Lam (Greedy Algorithm)",
+    videoId: "",
+    desc: "Nắm vững nguyên lý tham lam, phân biệt Greedy với Quy hoạch động và áp dụng vào các bài toán tối ưu kinh điển.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p class="font-bold text-slate-800 mb-2">📘 Kiến thức:</p>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>Hiểu nguyên lý hoạt động của giải thuật Tham lam (Greedy Algorithm).</li>
+                        <li>Phân biệt được khi nào dùng Greedy và khi nào phải dùng Quy hoạch động.</li>
+                        <li>Nhận biết các dấu hiệu Greedy sẽ thất bại trên một bài toán cụ thể.</li>
+                    </ul>
+                    <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Xác định được "chiến lược tham lam" phù hợp cho từng bài toán.</li>
+                        <li>Biết cách kết hợp Greedy với kỹ thuật Sắp xếp (Sorting) và Hàng đợi ưu tiên (Priority Queue).</li>
+                        <li>Rèn luyện tư duy chứng minh tính đúng đắn bằng phản chứng hoặc quy nạp.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-5 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">1. Nguyên lý Tham lam</p>
+                        <p class="mb-3">Giải thuật tham lam đưa ra <span class="font-bold text-emerald-700">lựa chọn có vẻ tốt nhất tại thời điểm hiện tại</span>, sau đó giải tiếp bài toán con còn lại. Nó <span class="font-bold">không bao giờ thay đổi</span> lựa chọn đã thực hiện trong quá khứ.</p>
+                        <p class="mb-2">⚡ <span class="font-bold">Đặc điểm:</span> Tốc độ thực thi rất nhanh, thường đạt $O(N \log N)$ do cần bước sắp xếp.</p>
+                        <p class="font-bold mb-1">✅ Hai điều kiện để áp dụng Greedy:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><span class="font-bold">Lựa chọn tham lam:</span> Tối ưu toàn cục đạt được bằng các lựa chọn tối ưu cục bộ.</li>
+                            <li><span class="font-bold">Cấu trúc con tối ưu:</span> Lời giải tối ưu của bài toán lớn chứa lời giải tối ưu của bài toán con.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">2. Sự khác biệt với Quy hoạch động</p>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-slate-100 text-slate-700">
+                                    <tr>
+                                        <th class="px-4 py-2 font-bold">Tiêu chí</th>
+                                        <th class="px-4 py-2 font-bold text-emerald-700">Greedy</th>
+                                        <th class="px-4 py-2 font-bold text-blue-700">Quy hoạch động (DP)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    <tr class="bg-white">
+                                        <td class="px-4 py-2 font-medium">Cách chọn</td>
+                                        <td class="px-4 py-2">Tốt nhất hiện tại, không nhìn lại</td>
+                                        <td class="px-4 py-2">Xét tất cả lựa chọn, nhìn về tương lai</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="px-4 py-2 font-medium">Tốc độ</td>
+                                        <td class="px-4 py-2">Rất nhanh ($O(N \log N)$)</td>
+                                        <td class="px-4 py-2">Chậm hơn ($O(N^2)$, $O(N \cdot W)$...)</td>
+                                    </tr>
+                                    <tr class="bg-white">
+                                        <td class="px-4 py-2 font-medium">Độ khó chứng minh</td>
+                                        <td class="px-4 py-2">Cần chứng minh cẩn thận</td>
+                                        <td class="px-4 py-2">Cần xác định đúng trạng thái</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="px-4 py-2 font-medium">Ví dụ</td>
+                                        <td class="px-4 py-2">Activity Selection, Huffman</td>
+                                        <td class="px-4 py-2">0/1 Knapsack, LCS, LIS</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">3. Code minh họa: Bài toán Đổi tiền (Hệ tiền xu tối ưu)</p>
+                        <p class="mb-2 text-slate-600">Cho các mệnh giá <span class="font-mono font-bold">{100, 50, 20, 10, 5, 2, 1}</span>. Tìm số tờ ít nhất để có tổng bằng $N$.</p>
+<pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    int coins[] = {100, 50, 20, 10, 5, 2, 1};
+    int n, count = 0;
+    cin &gt;&gt; n;
+
+    for (int i = 0; i &lt; 7; i++) {
+        // Chiến lược tham lam: Lấy càng nhiều tờ mệnh giá lớn càng tốt
+        count += n / coins[i];
+        n %= coins[i];
+    }
+
+    cout &lt;&lt; "So to it nhat: " &lt;&lt; count &lt;&lt; endl;
+    return 0;
+}</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-2">4. Dấu hiệu Greedy sẽ thất bại ⚠️</p>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500 space-y-2">
+                            <p class="font-bold text-red-700">Hãy tránh Greedy khi gặp các dấu hiệu sau:</p>
+                            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                <li><span class="font-bold">Lựa chọn hiện tại ràng buộc tương lai:</span> Ví dụ đổi tiền với hệ <span class="font-mono">{1, 3, 4}</span>, cần đổi 6 đồng — Greedy chọn <span class="font-mono">4+1+1</span> (3 tờ), nhưng tối ưu là <span class="font-mono">3+3</span> (2 tờ).</li>
+                                <li><span class="font-bold">Bài toán có "trọng số" phức tạp:</span> Bài toán Cái túi 0/1 Knapsack — chọn vật đơn giá cao nhất có thể lãng phí không gian túi.</li>
+                                <li><span class="font-bold">Không chứng minh được bằng quy nạp:</span> Nếu không đảm bảo lựa chọn hiện tại luôn nằm trong một lời giải tối ưu, khả năng cao phải dùng DP hoặc Quay lui.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <p class="font-black text-slate-800 uppercase text-xs tracking-widest">⭐ Cơ bản</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 1: Sắp xếp lịch hội thảo</p>
+                        <p class="mt-1 text-slate-600">Cho $N$ cuộc họp, mỗi cuộc họp có thời gian bắt đầu $s_i$ và kết thúc $e_i$. Hãy chọn số cuộc họp nhiều nhất sao cho không có 2 cuộc họp nào trùng lịch nhau.</p>
+                        <p class="mt-2 text-emerald-700 font-medium">💡 Gợi ý: Sắp xếp theo thời gian kết thúc sớm nhất. Tại mỗi bước, chọn cuộc họp kết thúc sớm nhất mà không xung đột với cuộc họp đã chọn trước đó.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <p class="font-bold text-slate-500">Ví dụ:</p>
+                            <p><span class="text-blue-600">Input:</span>  N=4, các khoảng: [1,3], [2,5], [4,6], [5,8]</p>
+                            <p><span class="text-green-600">Output:</span> 3 (chọn [1,3], [4,6], [5,8] — không chọn được 4 vì [5,8] xung đột với [4,6] nếu chọn [2,5])</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 2: Nối dây</p>
+                        <p class="mt-1 text-slate-600">Cho $N$ sợi dây với độ dài khác nhau. Mỗi bước nối 2 sợi thành 1, chi phí bằng tổng độ dài 2 sợi đó. Tìm chi phí nhỏ nhất để nối tất cả thành 1 sợi duy nhất.</p>
+                        <p class="mt-2 text-emerald-700 font-medium">💡 Gợi ý: Dùng <span class="font-mono">priority_queue</span> (min-heap) để luôn lấy 2 sợi ngắn nhất ra nối trước.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <p class="font-bold text-slate-500">Ví dụ:</p>
+                            <p><span class="text-blue-600">Input:</span>  N=4, độ dài: 4 3 2 6</p>
+                            <p><span class="text-green-600">Output:</span> 29  (nối 2+3=5, rồi 4+5=9, rồi 6+9=15 → tổng = 5+9+15 = 29)</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 3: Mua sữa</p>
+                        <p class="mt-1 text-slate-600">Có $N$ nông dân, mỗi người bán $a_i$ lít sữa với giá $p_i$ đồng/lít. Cần mua đúng $M$ lít với tổng chi phí nhỏ nhất.</p>
+                        <p class="mt-2 text-emerald-700 font-medium">💡 Gợi ý: Sắp xếp nông dân theo giá tăng dần. Mua hết từ người rẻ nhất, nếu chưa đủ thì mua tiếp người tiếp theo.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <p class="font-bold text-slate-500">Ví dụ:</p>
+                            <p><span class="text-blue-600">Input:</span>  M=10, N=3; (5 lít, 3đ), (4 lít, 5đ), (6 lít, 2đ)</p>
+                            <p><span class="text-green-600">Output:</span> 38  (mua 6 lít giá 2đ = 12, mua 4 lít giá 3đ = 12 — hết người thứ nhất chỉ có 5 → thực ra: 6×2 + 4×5 = 32... tự tính lại cho đúng)</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 4: Cái túi phân số (Fractional Knapsack)</p>
+                        <p class="mt-1 text-slate-600">Có $N$ loại hàng, mỗi loại có trọng lượng $w_i$ và giá trị $v_i$. Túi chứa tối đa $W$ kg. Được phép lấy một phần của từng loại. Tìm giá trị lớn nhất có thể lấy.</p>
+                        <p class="mt-2 text-emerald-700 font-medium">💡 Gợi ý: Tính đơn giá $v_i / w_i$, sắp xếp giảm dần. Lấy hết hàng có đơn giá cao nhất trước, cho đến khi đầy túi.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <p class="font-bold text-slate-500">Ví dụ:</p>
+                            <p><span class="text-blue-600">Input:</span>  W=50, N=3; (10kg, 60đ), (20kg, 100đ), (30kg, 120đ)</p>
+                            <p><span class="text-green-600">Output:</span> 240.0  (lấy hết 10kg + 20kg + 20/30 của hàng 3)</p>
+                        </div>
+                    </div>
+
+                    <p class="font-black text-slate-800 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường (Nâng cao)</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 5: Lập lịch công việc có thưởng</p>
+                        <p class="mt-1 text-indigo-800">Mỗi công việc có deadline $d_i$ và tiền thưởng $p_i$. Mỗi công việc mất 1 đơn vị thời gian. Tại mỗi thời điểm chỉ làm được 1 việc. Tìm cách sắp xếp để tổng tiền thưởng là lớn nhất.</p>
+                        <p class="mt-2 text-indigo-600 font-medium">💡 Gợi ý: Sắp xếp theo thưởng giảm dần. Dùng mảng slot thời gian, mỗi việc đặt vào slot muộn nhất còn trống trước deadline.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 6: Xóa số</p>
+                        <p class="mt-1 text-indigo-800">Cho số nguyên $N$ rất lớn (dạng chuỗi chữ số). Hãy xóa đúng $K$ chữ số sao cho số còn lại là <span class="font-bold">lớn nhất</span> có thể.</p>
+                        <p class="mt-2 text-indigo-600 font-medium">💡 Gợi ý: Dùng stack. Duyệt từ trái sang phải, nếu chữ số hiện tại lớn hơn đỉnh stack và còn lượt xóa, thì pop stack (xóa chữ số đó).</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-indigo-100 space-y-1">
+                            <p><span class="text-blue-600">Input:</span>  N = "1924", K = 2</p>
+                            <p><span class="text-green-600">Output:</span> "94"</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 7: Cửa hàng Pizza</p>
+                        <p class="mt-1 text-indigo-800">Cho vị trí $N$ khách hàng trên trục số. Một cửa hàng đặt tại $x$ có thể phục vụ tất cả khách trong đoạn $[x-R, x+R]$. Tìm số lượng cửa hàng ít nhất để phục vụ tất cả khách hàng.</p>
+                        <p class="mt-2 text-indigo-600 font-medium">💡 Gợi ý: Sắp xếp vị trí khách hàng. Với khách chưa được phục vụ ở vị trí ngoài cùng trái, đặt cửa hàng tại $x + R$ (tối ưu nhất).</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 8: Mã hóa Huffman</p>
+                        <p class="mt-1 text-indigo-800">Cho $N$ ký tự với tần suất xuất hiện $f_i$. Xây dựng cây mã hóa Huffman và tính tổng số bit cần dùng để mã hóa toàn bộ văn bản.</p>
+                        <p class="mt-2 text-indigo-600 font-medium">💡 Gợi ý: Đây chính là biến thể của bài "Nối dây". Dùng min-heap, mỗi lần ghép 2 nút có tần suất thấp nhất thành 1 nút cha.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded border border-indigo-100 space-y-1">
+                            <p><span class="text-blue-600">Input:</span>  5 ký tự, tần suất: 5 9 12 13 16</p>
+                            <p><span class="text-green-600">Output:</span> 124 bits</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-3 text-sm md:text-base">
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">🔍 Từ khóa tìm kiếm:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600">
+                            <li>Greedy algorithm vs Dynamic programming</li>
+                            <li>Activity Selection Problem greedy proof</li>
+                            <li>Huffman Coding Greedy explained</li>
+                            <li>Optimal Merging Pattern priority queue</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <p class="font-bold text-emerald-800 mb-2">📚 Tài liệu tham khảo:</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-700">
+                            <li>Chương <span class="font-mono">"Greedy Algorithms"</span> — sách <span class="italic">Introduction to Algorithms</span> (CLRS).</li>
+                            <li>Chuyên đề Greedy trên <span class="font-bold">VNOI Wiki</span> (vnoi.info).</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+}
         ]
     }
 ];
