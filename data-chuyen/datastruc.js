@@ -322,12 +322,312 @@ int main() {
         </div>
     `
 },
-            { 
-                title: "Danh sách liên kết, Ngăn xếp, Hàng đợi", 
-                videoId: "", 
-                desc: "Xây dựng thủ công các cấu trúc dữ liệu để hiểu bản chất vận hành của bộ nhớ.", 
-                downloadUrl: "#" 
-            },
+     {
+    title: "Bài 18: Danh Sách Liên Kết, Ngăn Xếp, Hàng Đợi (Cài Đặt Thủ Công)",
+    videoId: "",
+    desc: "Tự cài đặt Linked List, Stack và Queue bằng con trỏ trong C++ để nắm vững quản lý bộ nhớ động.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base space-y-4">
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">📚 Kiến thức:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li>Hiểu cấu trúc của một <strong>Node</strong> và cách các Node kết nối với nhau qua địa chỉ bộ nhớ.</li>
+                            <li>Phân biệt sự khác nhau giữa <strong>Array</strong> (bộ nhớ liên tiếp) và <strong>Linked List</strong> (bộ nhớ rời rạc).</li>
+                            <li>Nắm vững cơ chế <strong>LIFO</strong> của Stack và <strong>FIFO</strong> của Queue.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li>Tự cài đặt <strong>Danh sách liên kết đơn</strong> (Singly Linked List) từ đầu.</li>
+                            <li>Xây dựng <strong>Stack</strong> và <strong>Queue</strong> bằng Linked List để có khả năng co giãn theo RAM.</li>
+                            <li>Làm chủ cấp phát (<code class="bg-slate-100 px-1 rounded font-mono">new</code>) và giải phóng (<code class="bg-slate-100 px-1 rounded font-mono">delete</code>) bộ nhớ động, tránh <strong>Memory Leak</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">1. Danh sách liên kết (Linked List)</p>
+                        <p class="text-slate-600 mb-3">Mỗi phần tử là một <strong>Node</strong> gồm hai phần:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-center">
+                                <p class="font-bold text-blue-800">data</p>
+                                <p class="text-blue-600 text-xs mt-1">Lưu trữ giá trị của phần tử</p>
+                            </div>
+                            <div class="p-3 bg-purple-50 rounded-xl border border-purple-200 text-center">
+                                <p class="font-bold text-purple-800">next</p>
+                                <p class="text-purple-600 text-xs mt-1">Con trỏ → địa chỉ Node tiếp theo</p>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse rounded-xl overflow-hidden border border-slate-200">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700">
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Thao tác</th>
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Array</th>
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Linked List</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="p-3">Truy cập phần tử thứ $i$</td>
+                                        <td class="p-3 font-mono text-emerald-600">$O(1)$</td>
+                                        <td class="p-3 font-mono text-orange-500">$O(N)$</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="p-3">Chèn / Xóa ở đầu</td>
+                                        <td class="p-3 font-mono text-orange-500">$O(N)$</td>
+                                        <td class="p-3 font-mono text-emerald-600">$O(1)$</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-3">Kích thước tối đa</td>
+                                        <td class="p-3 text-orange-500">Cố định khi khai báo</td>
+                                        <td class="p-3 text-emerald-600">Linh hoạt theo RAM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">2. Stack & Queue thủ công</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-4 bg-orange-50 rounded-xl border border-orange-200">
+                                <p class="font-bold text-orange-800">📦 Stack — LIFO</p>
+                                <p class="text-orange-700 text-xs mt-1 mb-2">(Last In — First Out)</p>
+                                <ul class="text-orange-700 text-xs space-y-1 list-disc list-inside">
+                                    <li>Chèn và xóa <strong>đều ở đầu</strong> danh sách</li>
+                                    <li>Quản lý 1 con trỏ: <code class="bg-orange-100 px-1 rounded font-mono">topNode</code></li>
+                                    <li>Ứng dụng: duyệt DFS, kiểm tra ngoặc, undo/redo</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-teal-50 rounded-xl border border-teal-200">
+                                <p class="font-bold text-teal-800">🚶 Queue — FIFO</p>
+                                <p class="text-teal-700 text-xs mt-1 mb-2">(First In — First Out)</p>
+                                <ul class="text-teal-700 text-xs space-y-1 list-disc list-inside">
+                                    <li>Thêm ở <strong>cuối</strong>, lấy ra ở <strong>đầu</strong></li>
+                                    <li>Quản lý 2 con trỏ: <code class="bg-teal-100 px-1 rounded font-mono">head</code> và <code class="bg-teal-100 px-1 rounded font-mono">tail</code></li>
+                                    <li>Ứng dụng: duyệt BFS, xử lý tác vụ theo thứ tự</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">3. Code minh họa: Cài đặt Stack bằng Linked List</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto leading-relaxed">#include &lt;iostream&gt;
+using namespace std;
+
+// Định nghĩa một Node
+struct Node {
+    int data;
+    Node* next;
+};
+
+// Cấu trúc Stack
+struct MyStack {
+    Node* topNode = nullptr;
+
+    // Push: Thêm vào đỉnh
+    void push(int x) {
+        Node* newNode = new Node();
+        newNode-&gt;data = x;
+        newNode-&gt;next = topNode;
+        topNode = newNode;
+    }
+
+    // Pop: Xóa khỏi đỉnh
+    void pop() {
+        if (topNode == nullptr) return;
+        Node* temp = topNode;
+        topNode = topNode-&gt;next;
+        delete temp; // ⚠️ Bắt buộc giải phóng bộ nhớ!
+    }
+
+    int top() {
+        if (topNode != nullptr) return topNode-&gt;data;
+        return -1;
+    }
+
+    bool empty() {
+        return topNode == nullptr;
+    }
+};
+
+int main() {
+    MyStack s;
+    s.push(10); s.push(20); s.push(30);
+
+    while (!s.empty()) {
+        cout &lt;&lt; s.top() &lt;&lt; " ";
+        s.pop();
+    }
+    // Kết quả: 30 20 10
+    return 0;
+}</pre>
+                        <div class="mt-3 p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-800">⚠️ Memory Leak là gì?</p>
+                            <p class="text-red-700 mt-1">Khi dùng <code class="bg-red-100 px-1 rounded font-mono">new</code> để cấp phát Node mà <strong>không bao giờ</strong> gọi <code class="bg-red-100 px-1 rounded font-mono">delete</code>, vùng nhớ đó bị "mất" — chương trình giữ RAM mãi mà không dùng. Trong vòng lặp triệu lần, điều này gây crash ứng dụng.</p>
+                        </div>
+                        <div class="mt-3 p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500">
+                            <p class="font-bold text-emerald-800">✅ Quy tắc vàng</p>
+                            <p class="text-emerald-700 mt-1">Mỗi lần <code class="bg-emerald-100 px-1 rounded font-mono">new Node()</code> phải có đúng <strong>một lần</strong> <code class="bg-emerald-100 px-1 rounded font-mono">delete</code> tương ứng. Khi hủy toàn bộ cấu trúc, hãy giải phóng từng Node một trong vòng lặp.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4">
+
+                    <p class="font-bold text-slate-600 uppercase text-xs tracking-widest">⚡ Cơ bản</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 1: Danh sách liên kết đơn cơ bản</p>
+                        <p class="mt-1 text-slate-600">Tự cài đặt Danh sách liên kết đơn với đầy đủ 3 hàm: <code class="bg-slate-100 px-1 rounded font-mono">insertHead</code> (chèn đầu), <code class="bg-slate-100 px-1 rounded font-mono">insertTail</code> (chèn cuối), <code class="bg-slate-100 px-1 rounded font-mono">deleteHead</code> (xóa đầu). In ra danh sách sau mỗi thao tác.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// Thao tác: insertHead(3) → insertHead(1) → insertTail(5) → deleteHead()</p>
+                            <p class="text-emerald-600">// Danh sách cuối: 3 → 5 → NULL</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 2: Queue thủ công bằng Linked List</p>
+                        <p class="mt-1 text-slate-600">Xây dựng <strong>Hàng đợi (Queue)</strong> thủ công với các hàm: <code class="bg-slate-100 px-1 rounded font-mono">push</code> (thêm vào cuối), <code class="bg-slate-100 px-1 rounded font-mono">pop</code> (xóa đầu), <code class="bg-slate-100 px-1 rounded font-mono">front</code> (xem đầu), <code class="bg-slate-100 px-1 rounded font-mono">empty</code>. Quản lý hai con trỏ <code class="bg-slate-100 px-1 rounded font-mono">head</code> và <code class="bg-slate-100 px-1 rounded font-mono">tail</code>.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// push(1) push(2) push(3) → pop() → front()</p>
+                            <p class="text-emerald-600">// front() = 2  (vì 1 đã bị pop)</p>
+                        </div>
+                        <p class="mt-2 text-xs text-slate-500 italic">⚠️ Chú ý: Khi pop Node cuối cùng, hãy đặt cả head và tail về nullptr.</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 3: Đếm số phần tử</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code class="bg-slate-100 px-1 rounded font-mono">int countNodes(Node* head)</code> đếm số lượng Node trong Danh sách liên kết bằng cách duyệt từ đầu đến khi gặp <code class="bg-slate-100 px-1 rounded font-mono">nullptr</code>.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// Danh sách: 5 → 12 → 3 → 8 → NULL</p>
+                            <p class="text-emerald-600">// countNodes() = 4</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 4: Tìm kiếm trong danh sách</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code class="bg-slate-100 px-1 rounded font-mono">Node* search(Node* head, int x)</code> tìm kiếm giá trị $x$. Trả về con trỏ tới Node chứa $x$, hoặc <code class="bg-slate-100 px-1 rounded font-mono">nullptr</code> nếu không tìm thấy.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// Danh sách: 5 → 12 → 3 → 8 → NULL, tìm x = 3</p>
+                            <p class="text-emerald-600">// Trả về con trỏ tới Node có data = 3</p>
+                            <p class="text-slate-500">// Tìm x = 99 → trả về nullptr</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 5: Giải phóng toàn bộ danh sách</p>
+                        <p class="mt-1 text-slate-600">Viết hàm <code class="bg-slate-100 px-1 rounded font-mono">void freeList(Node*& head)</code> giải phóng <strong>toàn bộ</strong> các Node trong danh sách và đặt lại <code class="bg-slate-100 px-1 rounded font-mono">head = nullptr</code>. Dùng Valgrind hoặc AddressSanitizer để xác nhận không còn Memory Leak.</p>
+                        <p class="mt-2 text-xs text-slate-500 italic">💡 Gợi ý: Lưu con trỏ <code class="bg-slate-100 px-1 rounded font-mono">next</code> vào biến tạm trước khi <code class="bg-slate-100 px-1 rounded font-mono">delete</code> Node hiện tại.</p>
+                    </div>
+
+                    <p class="font-bold text-slate-600 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường (Nâng cao)</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 6: Danh sách liên kết đôi (Doubly Linked List)</p>
+                        <p class="mt-1 text-indigo-800">Mỗi Node có thêm con trỏ <code class="bg-indigo-100 px-1 rounded font-mono">prev</code> trỏ ngược về phía trước. Cài đặt hàm <strong>xóa Node tại vị trí thứ $k$</strong> (0-indexed) trong $O(N)$.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Khi xóa Node giữa: <code class="bg-indigo-100 px-1 rounded font-mono">prev->next = cur->next</code> và <code class="bg-indigo-100 px-1 rounded font-mono">cur->next->prev = prev</code>. Xử lý riêng trường hợp xóa đầu/cuối.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 7: Đảo ngược danh sách liên kết</p>
+                        <p class="mt-1 text-indigo-800">Viết hàm đảo ngược Danh sách liên kết đơn <strong>tại chỗ</strong> — chỉ thay đổi hướng các con trỏ <code class="bg-indigo-100 px-1 rounded font-mono">next</code>, không dùng mảng phụ, độ phức tạp $O(N)$.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-indigo-200 space-y-1">
+                            <p class="text-slate-500">// Input:  1 → 2 → 3 → 4 → 5 → NULL</p>
+                            <p class="text-indigo-600">// Output: 5 → 4 → 3 → 2 → 1 → NULL</p>
+                        </div>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Dùng 3 con trỏ: <code class="bg-indigo-100 px-1 rounded font-mono">prev</code>, <code class="bg-indigo-100 px-1 rounded font-mono">curr</code>, <code class="bg-indigo-100 px-1 rounded font-mono">nextNode</code>. Duyệt một lần và lật hướng từng mũi tên.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 8: Kiểm tra vòng — Floyd's Tortoise & Hare ⭐</p>
+                        <p class="mt-1 text-indigo-800">Cho một danh sách liên kết, kiểm tra xem nó có bị <strong>"vòng"</strong> (Node cuối trỏ ngược lại một Node phía trước) hay không.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Dùng hai con trỏ chạy với tốc độ khác nhau — <strong>slow</strong> (mỗi bước 1 Node) và <strong>fast</strong> (mỗi bước 2 Node). Nếu chúng gặp nhau thì có vòng.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 9: Cài đặt Deque (Double-ended Queue)</p>
+                        <p class="mt-1 text-indigo-800">Xây dựng hàng đợi hai đầu (<strong>Deque</strong>) bằng Danh sách liên kết đôi với 4 hàm: <code class="bg-indigo-100 px-1 rounded font-mono">pushFront</code>, <code class="bg-indigo-100 px-1 rounded font-mono">pushBack</code>, <code class="bg-indigo-100 px-1 rounded font-mono">popFront</code>, <code class="bg-indigo-100 px-1 rounded font-mono">popBack</code> — tất cả đều $O(1)$.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 10: Trộn hai danh sách đã sắp xếp</p>
+                        <p class="mt-1 text-indigo-800">Cho hai Danh sách liên kết đơn đã sắp xếp tăng dần. Trộn chúng thành <strong>một danh sách duy nhất</strong> cũng tăng dần mà <strong>không tạo thêm Node mới</strong> — chỉ thay đổi các liên kết.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-indigo-200 space-y-1">
+                            <p class="text-slate-500">// A: 1 → 3 → 5 → NULL</p>
+                            <p class="text-slate-500">// B: 2 → 4 → 6 → NULL</p>
+                            <p class="text-indigo-600">// Kết quả: 1 → 2 → 3 → 4 → 5 → 6 → NULL</p>
+                        </div>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Dùng một Node giả (<code class="bg-indigo-100 px-1 rounded font-mono">dummy</code>) làm đầu tạm thời. So sánh hai đầu và nối Node nhỏ hơn vào kết quả, tiến con trỏ tương ứng.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-4 text-sm text-slate-700">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-800">🔍 Từ khóa tìm kiếm:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Singly Linked List implementation C++</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Stack using Linked List pointers C++</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Memory management new delete C++</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Floyd cycle detection algorithm</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">📖 Tài liệu đọc thêm:</p>
+                        <p class="mt-1 text-slate-600">Bài <strong>"Linked List"</strong> trên <em>GeeksforGeeks</em> hoặc <em>LearnCpp.com</em> — đặc biệt phần về smart pointer (<code class="bg-slate-100 px-1 rounded font-mono">unique_ptr</code>) để tự động quản lý bộ nhớ trong C++ hiện đại.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+},
             { 
                 title: "Cây nhị phân & Cây AVL", 
                 videoId: "", 
