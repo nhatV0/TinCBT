@@ -666,12 +666,316 @@ void dfs_topo(int u) {
         </div>
     `
 },
-            { 
-                title: "Tìm đường đi", 
-                videoId: "", 
-                desc: "Các thuật toán tìm đường đi ngắn nhất trên đồ thị có trọng số (Dijkstra, Floyd...).", 
-                downloadUrl: "#" 
+       {
+    title: "Bài 22: Thuật Toán Tìm Đường Đi Ngắn Nhất Trên Đồ Thị Có Trọng Số",
+    videoId: "",
+    desc: "Nắm vững Dijkstra với priority_queue và Floyd-Warshall để tìm đường đi ngắn nhất trên đồ thị có trọng số.",
+    downloadUrl: "#",
+    contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base space-y-4">
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">📚 Kiến thức:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li>Hiểu nguyên lý <strong>tham lam</strong> của thuật toán Dijkstra — luôn chọn đỉnh gần nhất để xử lý tiếp.</li>
+                            <li>Nắm vững thuật toán <strong>Floyd-Warshall</strong> — tìm đường đi ngắn nhất giữa mọi cặp đỉnh.</li>
+                            <li>Biết điều kiện áp dụng từng thuật toán: trọng số không âm (Dijkstra) vs. đồ thị nhỏ (Floyd).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 mb-2">🛠️ Kỹ năng:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li>Cài đặt Dijkstra kết hợp <code class="bg-slate-100 px-1 rounded font-mono">priority_queue</code> đạt $O(M \log N)$.</li>
+                            <li>Áp dụng Floyd-Warshall với 3 vòng lặp cho đồ thị $N \leq 500$.</li>
+                            <li>Truy vết mảng <code class="bg-slate-100 px-1 rounded font-mono">parent[]</code> để <strong>in ra lộ trình</strong> đi ngắn nhất.</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">1. So sánh các thuật toán đường đi ngắn nhất</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse rounded-xl overflow-hidden border border-slate-200">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700">
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Thuật toán</th>
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Độ phức tạp</th>
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Điều kiện</th>
+                                        <th class="p-3 text-left font-bold border-b border-slate-200">Phạm vi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="p-3 font-semibold text-emerald-600">Dijkstra + PQ</td>
+                                        <td class="p-3 font-mono text-emerald-600">$O(M \log N)$</td>
+                                        <td class="p-3">Trọng số $\geq 0$</td>
+                                        <td class="p-3">1 nguồn → mọi đỉnh</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50">
+                                        <td class="p-3 font-semibold text-blue-600">Floyd-Warshall</td>
+                                        <td class="p-3 font-mono text-blue-600">$O(N^3)$</td>
+                                        <td class="p-3">Không có chu trình âm</td>
+                                        <td class="p-3">Mọi cặp đỉnh, $N \leq 500$</td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-3 font-semibold text-orange-600">Bellman-Ford</td>
+                                        <td class="p-3 font-mono text-orange-600">$O(N \cdot M)$</td>
+                                        <td class="p-3">Chấp nhận cạnh âm</td>
+                                        <td class="p-3">1 nguồn, phát hiện chu trình âm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3 p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-bold text-red-800">⚠️ Dijkstra KHÔNG hoạt động với cạnh âm!</p>
+                            <p class="text-red-700 mt-1">Nếu đồ thị có cạnh trọng số âm, Dijkstra có thể cho kết quả sai. Dùng <strong>Bellman-Ford</strong> hoặc <strong>SPFA</strong> thay thế.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">2. Thuật toán Dijkstra — Ý tưởng tham lam</p>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="flex-shrink-0 w-6 h-6 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                                <p class="text-slate-700">Khởi tạo $d[s] = 0$, $d[v] = +\infty$ với mọi đỉnh khác. Đẩy $(0, s)$ vào <strong>min-heap</strong>.</p>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="flex-shrink-0 w-6 h-6 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                                <p class="text-slate-700">Lấy đỉnh $u$ có $d[u]$ nhỏ nhất ra khỏi heap. Nếu $d_u > d[u]$: bỏ qua (đã xử lý rồi).</p>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="flex-shrink-0 w-6 h-6 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                                <p class="text-slate-700">Với mỗi cạnh $(u, v, w)$: nếu $d[u] + w &lt; d[v]$ thì cập nhật $d[v]$ và đẩy $(d[v], v)$ vào heap.</p>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <span class="flex-shrink-0 w-6 h-6 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                                <p class="text-slate-700">Lặp đến khi heap rỗng. Mảng $d[]$ chứa khoảng cách ngắn nhất từ $s$ đến mọi đỉnh.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                            <p class="font-bold text-blue-800">💡 Tại sao dùng <code class="bg-blue-100 px-1 rounded font-mono">if (du &gt; d[u]) continue</code>?</p>
+                            <p class="text-blue-700 mt-1">Lazy deletion — ta không xóa phần tử cũ khỏi heap mà chỉ bỏ qua nó khi lấy ra. Đây là cách cài đặt đơn giản và hiệu quả nhất trong C++.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">3. Code minh họa: Dijkstra với Priority Queue</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto leading-relaxed">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+const long long INF = 1e18;
+typedef pair&lt;long long, int&gt; pli;
+
+vector&lt;pair&lt;int,int&gt;&gt; adj[100005]; // {đỉnh kề, trọng số}
+long long d[100005];
+int parent[100005];
+
+void dijkstra(int s, int n) {
+    fill(d + 1, d + n + 1, INF);
+    fill(parent + 1, parent + n + 1, -1);
+    d[s] = 0;
+
+    // Min-heap: {khoảng cách, đỉnh}
+    priority_queue&lt;pli, vector&lt;pli&gt;, greater&lt;pli&gt;&gt; pq;
+    pq.push({0, s});
+
+    while (!pq.empty()) {
+        auto [du, u] = pq.top(); pq.pop();
+
+        if (du &gt; d[u]) continue; // Lazy deletion
+
+        for (auto [v, w] : adj[u]) {
+            if (d[v] &gt; d[u] + w) {
+                d[v] = d[u] + w;
+                parent[v] = u; // Lưu vết để truy lộ trình
+                pq.push({d[v], v});
             }
+        }
+    }
+}
+
+// In lộ trình từ s đến t
+void printPath(int t) {
+    if (parent[t] == -1) { cout &lt;&lt; t; return; }
+    printPath(parent[t]);
+    cout &lt;&lt; " -&gt; " &lt;&lt; t;
+}
+
+int main() {
+    int n, m, s; cin &gt;&gt; n &gt;&gt; m &gt;&gt; s;
+    for (int i = 0; i &lt; m; i++) {
+        int u, v, w; cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+        adj[u].push_back({v, w});
+        // adj[v].push_back({u, w}); // Nếu vô hướng
+    }
+    dijkstra(s, n);
+    for (int i = 1; i &lt;= n; i++)
+        cout &lt;&lt; (d[i] == INF ? -1 : d[i]) &lt;&lt; " ";
+    return 0;
+}</pre>
+                    </div>
+
+                    <div>
+                        <p class="font-black text-slate-800 text-base mb-3">4. Thuật toán Floyd-Warshall</p>
+                        <p class="text-slate-600 mb-3">Công thức cốt lõi: thử đi qua đỉnh trung gian $k$ để rút ngắn khoảng cách $i \to j$:</p>
+                        <p class="text-center font-mono text-slate-800 bg-slate-100 p-3 rounded-xl mb-3">$dist[i][j] = \min(dist[i][j],\ dist[i][k] + dist[k][j])$</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs overflow-x-auto leading-relaxed">// Khởi tạo: dist[i][i] = 0, dist[i][j] = INF nếu không có cạnh
+// Với mỗi cạnh (u,v,w): dist[u][v] = w
+
+for (int k = 1; k &lt;= n; k++)       // Đỉnh trung gian
+    for (int i = 1; i &lt;= n; i++)   // Đỉnh nguồn
+        for (int j = 1; j &lt;= n; j++) // Đỉnh đích
+            if (dist[i][k] != INF &amp;&amp; dist[k][j] != INF)
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+
+// Phát hiện chu trình âm: nếu dist[i][i] &lt; 0 sau khi chạy → có chu trình âm</pre>
+                        <div class="mt-3 p-4 bg-amber-50 rounded-xl border-l-4 border-amber-500">
+                            <p class="font-bold text-amber-800">📌 Thứ tự vòng lặp quan trọng!</p>
+                            <p class="text-amber-700 mt-1">Vòng lặp đỉnh trung gian $k$ <strong>phải là vòng ngoài cùng</strong>. Hoán đổi thứ tự sẽ cho kết quả sai.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4">
+
+                    <p class="font-bold text-slate-600 uppercase text-xs tracking-widest">⚡ Cơ bản</p>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 1: Floyd-Warshall — Ma trận khoảng cách</p>
+                        <p class="mt-1 text-slate-600">Cài đặt Floyd-Warshall để tìm <strong>ma trận khoảng cách ngắn nhất</strong> giữa mọi cặp đỉnh. In $-1$ nếu không có đường đi. ($N \leq 300$)</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// 3 đỉnh, cạnh: 1→2 (w=3), 2→3 (w=4), 1→3 (w=10)</p>
+                            <p class="text-emerald-600">// dist[1][3] = 7  (đi qua đỉnh 2)</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 2: Dijkstra + In lộ trình</p>
+                        <p class="mt-1 text-slate-600">Tìm đường đi ngắn nhất từ $s$ đến $t$ và <strong>in ra toàn bộ lộ trình</strong> (dãy đỉnh theo thứ tự đi). Dùng mảng <code class="bg-slate-100 px-1 rounded font-mono">parent[]</code> để truy vết.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// Đường đi ngắn nhất: 1 → 3 → 5 → 7</p>
+                            <p class="text-emerald-600">// Tổng trọng số: 12</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 3: Trung tâm của đồ thị</p>
+                        <p class="mt-1 text-slate-600">Cho đồ thị có trọng số. Tìm đỉnh $u$ sao cho <strong>tổng khoảng cách ngắn nhất từ $u$ đến tất cả đỉnh khác là nhỏ nhất</strong>. Chạy Dijkstra từ mỗi đỉnh.</p>
+                        <p class="mt-2 text-xs text-slate-500 italic">💡 Nếu $N$ nhỏ ($\leq 300$), dùng Floyd-Warshall rồi tính tổng theo hàng.</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">Bài 4: Dijkstra trên lưới chi phí</p>
+                        <p class="mt-1 text-slate-600">Cho lưới $M \times N$, mỗi ô $(i,j)$ có <strong>chi phí</strong> để đi vào. Tìm đường đi từ $(1,1)$ đến $(M,N)$ với <strong>tổng chi phí nhỏ nhất</strong>.</p>
+                        <div class="mt-3 text-xs font-mono bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                            <p class="text-slate-500">// Lưới 3x3: [[1,3,1],[1,5,1],[4,2,1]]</p>
+                            <p class="text-emerald-600">// Chi phí tối thiểu: 7  (1→3→1→1→1)</p>
+                        </div>
+                        <p class="mt-2 text-xs text-slate-500 italic">💡 Mỗi ô là một đỉnh, cạnh giữa ô kề nhau có trọng số là chi phí ô đích.</p>
+                    </div>
+
+                    <p class="font-bold text-slate-600 uppercase text-xs tracking-widest mt-6">🏆 Đấu trường (Nâng cao)</p>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 5: Dijkstra trên trạng thái — Xe và xăng ⭐</p>
+                        <p class="mt-1 text-indigo-800">Có $N$ thành phố, xe có bình xăng dung tích $C$. Giá xăng ở mỗi thành phố khác nhau. Tìm <strong>chi phí nhỏ nhất</strong> để đi từ thành phố $S$ đến $T$.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Trạng thái: <code class="bg-indigo-100 px-1 rounded font-mono">(vị trí, lượng xăng hiện tại)</code>. Tổng số trạng thái: $N \times (C+1)$. Áp dụng Dijkstra trên không gian trạng thái này.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 6: Bellman-Ford & Phát hiện chu trình âm</p>
+                        <p class="mt-1 text-indigo-800">Cài đặt <strong>Bellman-Ford</strong> để tìm đường đi ngắn nhất trên đồ thị có <strong>cạnh âm</strong>. Phát hiện và báo cáo nếu tồn tại <strong>chu trình âm</strong>.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Sau $N-1$ vòng lặp, nếu vẫn còn thể cải thiện thêm ở vòng thứ $N$ → có chu trình âm.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 7: Đường đi an toàn nhất</p>
+                        <p class="mt-1 text-indigo-800">Mỗi cạnh có xác suất an toàn $0 &lt; p \leq 1$. Tìm đường từ $S$ đến $T$ sao cho <strong>tích xác suất an toàn là lớn nhất</strong>.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Lấy $-\log(p)$ làm trọng số mới, bài toán trở thành tìm đường đi <strong>ngắn nhất</strong> thông thường (dùng Dijkstra). Kết quả: $e^{-d[T]}$.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 8: Nâng cấp đường — Chọn K cạnh miễn phí</p>
+                        <p class="mt-1 text-indigo-800">Cho đồ thị $N$ đỉnh. Bạn được chọn tối đa $K$ cạnh để giảm trọng số xuống $0$. Tìm <strong>đường đi ngắn nhất từ 1 đến $N$</strong>.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Trạng thái: <code class="bg-indigo-100 px-1 rounded font-mono">(đỉnh, số cạnh miễn phí đã dùng)</code>. Tổng trạng thái: $N \times (K+1)$. Dijkstra trên trạng thái này.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 9: Floyd nâng cao — Đếm số đường đi ngắn nhất</p>
+                        <p class="mt-1 text-indigo-800">Sau khi chạy Floyd-Warshall, với mỗi cặp đỉnh $(i, j)$, hãy <strong>đếm số lượng đường đi ngắn nhất khác nhau</strong>.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Gợi ý: Duy trì thêm mảng <code class="bg-indigo-100 px-1 rounded font-mono">cnt[i][j]</code>. Khi tìm thấy đường đi ngắn hơn: cập nhật <code class="bg-indigo-100 px-1 rounded font-mono">cnt</code>. Khi bằng nhau: cộng thêm vào <code class="bg-indigo-100 px-1 rounded font-mono">cnt</code>.</p>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-900">Bài 10: Giao thông công cộng</p>
+                        <p class="mt-1 text-indigo-800">Cho danh sách các tuyến xe buýt với thời gian khởi hành và thời gian di chuyển. Tìm lịch trình <strong>mất ít thời gian nhất</strong> để đến đích, kể cả thời gian chờ xe.</p>
+                        <p class="mt-2 text-xs text-indigo-600 italic">💡 Trạng thái: <code class="bg-indigo-100 px-1 rounded font-mono">(đỉnh, thời điểm đến sớm nhất)</code>. Dijkstra với trọng số = thời gian chờ + thời gian di chuyển.</p>
+                    </div>
+
+                </div>
+            </details>
+
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-4 text-sm text-slate-700">
+                    <p class="text-sm text-slate-500 italic">🎬 Video bài giảng đang được chuẩn bị, sẽ cập nhật sớm.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                        <p class="font-bold text-slate-800">🔍 Từ khóa tìm kiếm:</p>
+                        <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Dijkstra priority queue C++ implementation</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Floyd Warshall algorithm intuition</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Bellman-Ford negative cycles detection</code></li>
+                            <li><code class="bg-slate-100 px-1 rounded font-mono">Dijkstra on states competitive programming</code></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800">📖 Tài liệu đọc thêm:</p>
+                        <p class="mt-1 text-slate-600">Chuyên đề <strong>"Đường đi ngắn nhất"</strong> trên <em>VNOI Wiki</em> — đặc biệt phần so sánh chi tiết các thuật toán và các biến thể nâng cao của Dijkstra trên không gian trạng thái.</p>
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    `
+}
         ]
     }
 ];
