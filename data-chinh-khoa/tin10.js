@@ -13,11 +13,908 @@ window.courseContent = [
     {
         chapterName: "Chương 1: Máy tính và xã hội tri thức",
         lessons: [
-            { title: "Bài 1: Thông tin và xử lý thông tin", videoId: "", desc: "Khái niệm thông tin và dữ liệu.", downloadUrl: "#" },
-            { title: "Bài 2: Vai trò của thiết bị thông minh", videoId: "", desc: "Thế giới thiết bị thông minh.", downloadUrl: "#" },
-            { title: "Bài 3: Một số ứng dụng của mạng máy tính", videoId: "", desc: "Ứng dụng thực tế của mạng.", downloadUrl: "#" },
-            { title: "Bài 4: Hệ điều hành và phần mềm ứng dụng", videoId: "", desc: "Phân biệt phần mềm hệ thống và ứng dụng.", downloadUrl: "#" },
-            { title: "Bài 5: Dữ liệu trong thiết bị nhớ", videoId: "", desc: "Các đơn vị lưu trữ dữ liệu.", downloadUrl: "#" }
+    {
+        title: "Bài 1: Thông Tin và Xử Lý Thông Tin",
+        videoId: "",
+        desc: "Phân biệt thông tin và dữ liệu, hiểu quá trình xử lý thông tin bằng máy tính và thực hiện chuyển đổi đơn vị lưu trữ dữ liệu.",
+        downloadUrl: "#",
+        contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Phân biệt được <strong>thông tin</strong> và <strong>dữ liệu</strong>.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Hiểu được quá trình xử lý thông tin bằng máy tính.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Thực hiện thành thạo việc chuyển đổi giữa các đơn vị lưu trữ dữ liệu.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Nêu được sự ưu việt của việc lưu trữ, xử lý và truyền thông tin bằng thiết bị số.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">1. Thông Tin và Dữ Liệu</h3>
+                        <ul class="space-y-2">
+                            <li><strong>Thông tin:</strong> Là tất cả những gì mang lại cho con người hiểu biết. Thông tin gắn liền với quá trình nhận thức.</li>
+                            <li><strong>Dữ liệu:</strong> Là thông tin đã được đưa vào máy tính để máy tính có thể nhận biết và xử lý được (dưới dạng dãy bit 0, 1).</li>
+                        </ul>
+                        <div class="mt-3 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500">
+                            <p class="font-semibold text-blue-800 mb-1">Mối quan hệ:</p>
+                            <ul class="text-blue-700 space-y-1 text-sm">
+                                <li>• Thông tin là <em>ý nghĩa</em> của dữ liệu.</li>
+                                <li>• Dữ liệu là <em>hình thức thể hiện</em> của thông tin.</li>
+                                <li>• Dữ liệu không đầy đủ có thể làm thông tin sai lệch hoặc không xác định được.</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <p class="font-mono text-sm text-slate-600">Tiếp nhận dữ liệu &rarr; Xử lý dữ liệu &rarr; Đưa ra kết quả</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">2. Đơn Vị Lưu Trữ Dữ Liệu</h3>
+                        <ul class="space-y-1 mb-3">
+                            <li><strong>Bit:</strong> Đơn vị nhỏ nhất của thông tin (0 hoặc 1).</li>
+                            <li><strong>Byte (B):</strong> Đơn vị nhỏ nhất máy tính có thể truy cập. $1 \text{ Byte} = 8 \text{ bit}$.</li>
+                            <li>Các đơn vị lớn hơn nhau $2^{10} = 1024$ lần.</li>
+                        </ul>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-emerald-600 text-white">
+                                        <th class="p-3 text-left rounded-tl-lg">Đơn vị</th>
+                                        <th class="p-3 text-left">Ký hiệu</th>
+                                        <th class="p-3 text-left rounded-tr-lg">Giá trị</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3">Kilobyte</td><td class="p-3 font-mono">KB</td><td class="p-3">$2^{10}$ B</td></tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3">Megabyte</td><td class="p-3 font-mono">MB</td><td class="p-3">$2^{10}$ KB</td></tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3">Gigabyte</td><td class="p-3 font-mono">GB</td><td class="p-3">$2^{10}$ MB</td></tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3">Terabyte</td><td class="p-3 font-mono">TB</td><td class="p-3">$2^{10}$ GB</td></tr>
+                                    <tr class="hover:bg-slate-50"><td class="p-3">Petabyte</td><td class="p-3 font-mono">PB</td><td class="p-3">$2^{10}$ TB</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">3. Ưu Việt của Thiết Bị Số</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                                <p class="font-bold text-emerald-700 mb-1">💾 Lưu trữ</p>
+                                <p class="text-sm text-slate-600">Dung lượng cực lớn, thiết bị gọn nhẹ, chi phí thấp, tìm kiếm dễ dàng.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                                <p class="font-bold text-blue-700 mb-1">⚡ Xử lý</p>
+                                <p class="text-sm text-slate-600">Tốc độ cực nhanh (vài chục tỷ phép tính/giây) và độ chính xác tuyệt đối.</p>
+                            </div>
+                            <div class="p-4 bg-orange-50 rounded-xl border border-orange-200">
+                                <p class="font-bold text-orange-700 mb-1">📡 Truyền thông</p>
+                                <p class="text-sm text-slate-600">Tốc độ rất lớn (cáp quang hàng chục Mb/s), tương tác tức thời.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1: Trắc nghiệm kiến thức</p>
+                        <p>Định nghĩa nào về Byte là đúng?</p>
+                        <ul class="mt-2 space-y-1 text-sm">
+                            <li>A. Là đơn vị dữ liệu 4 bit.</li>
+                            <li class="text-emerald-700 font-semibold">B. Là đơn vị dữ liệu 8 bit. ✓</li>
+                            <li>C. Là đơn vị dữ liệu nhỏ nhất của thông tin.</li>
+                            <li>D. Là đơn vị dữ liệu 16 bit.</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border text-emerald-700">💡 Gợi ý: 1 Byte = 8 bit. Bit mới là đơn vị nhỏ nhất.</div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 2: Quy đổi đơn vị ra KB</p>
+                        <ul class="space-y-1">
+                            <li>a) $3 \text{ MB}$</li>
+                            <li>b) $2 \text{ GB}$</li>
+                            <li>c) $2048 \text{ B}$</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            💡 Gợi ý: Dùng phép nhân/chia cho 1024.<br>
+                            a) 3 MB = 3 × 1024 = 3072 KB<br>
+                            b) 2 GB = 2 × 1024 × 1024 = 2 097 152 KB<br>
+                            c) 2048 B = 2048 ÷ 1024 = 2 KB
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 3: Bài tập số hóa sách</p>
+                        <p>Một cuốn sách số hóa cần $50 \text{ MB}$. Thư viện có $2000$ cuốn. Tính tổng dung lượng theo đơn vị GB và kiểm tra xem thẻ nhớ $256 \text{ GB}$ có chứa đủ không?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            💡 Gợi ý:<br>
+                            Tổng = 50 × 2000 = 100 000 MB<br>
+                            Đổi sang GB: 100 000 ÷ 1024 ≈ 97,66 GB<br>
+                            97,66 GB &lt; 256 GB → Thẻ nhớ chứa đủ ✓
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 4: Bài tập tính số ảnh</p>
+                        <p>Mỗi ảnh có kích thước trung bình khoảng $10\,000 \text{ KB}$. Tính một thẻ nhớ $16 \text{ GB}$ chứa được tối đa bao nhiêu ảnh?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            💡 Gợi ý:<br>
+                            16 GB = 16 × 1024 × 1024 = 16 777 216 KB<br>
+                            Số ảnh = 16 777 216 ÷ 10 000 ≈ 1677 ảnh
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 mb-2">🌟 Câu 5: Thảo luận (Nâng cao)</p>
+                        <p class="text-slate-700">Cho ví dụ về một dữ liệu thể hiện nhiều thông tin khác nhau tùy theo ngữ cảnh.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border text-indigo-700">
+                            💡 Gợi ý: Dữ liệu "39°C" trong bản tin thời tiết có nghĩa là nhiệt độ môi trường rất cao; nhưng trong bệnh án lại có nghĩa là bệnh nhân đang sốt cao, cần can thiệp y tế.
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3 text-sm text-slate-600">
+                    <p>📹 Video 1: Phân biệt thông tin và dữ liệu (Sư phạm trực quan)</p>
+                    <p>📹 Video 2: Các đơn vị đo lường trong Tin học</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+        `
+    },
+
+    // ===== BÀI 2 =====
+    {
+        title: "Bài 2: Vai Trò của Thiết Bị Thông Minh và Tin Học đối với Xã Hội",
+        videoId: "",
+        desc: "Nhận biết thiết bị thông minh, hiểu vai trò của chúng trong CMCN 4.0 và các thành tựu nổi bật của ngành Tin học với xã hội hiện đại.",
+        downloadUrl: "#",
+        contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Nhận biết và nêu được ví dụ cụ thể về các <strong>thiết bị thông minh</strong> thông dụng.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Hiểu được vai trò của thiết bị thông minh trong xã hội và <strong>CMCN 4.0</strong>.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Biết được vai trò và các thành tựu nổi bật của ngành <strong>Tin học</strong> đối với sự phát triển của xã hội hiện đại.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">1. Thiết Bị Thông Minh</h3>
+                        <div class="p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500 mb-3">
+                            <p class="font-semibold text-emerald-800 mb-1">Khái niệm:</p>
+                            <p class="text-slate-700 text-sm">Là các thiết bị điện tử có thể hoạt động tự chủ nhờ phần mềm điều khiển cài đặt sẵn, có khả năng tương tác với các thiết bị khác qua mạng không dây (Bluetooth, Wifi,...) để xử lý và truyền dữ liệu.</p>
+                        </div>
+                        <p class="font-semibold text-slate-700 mb-2">Đặc điểm chính:</p>
+                        <ul class="space-y-1 text-sm">
+                            <li>• Hoạt động <strong>tự chủ</strong>, không cần sự can thiệp liên tục của con người.</li>
+                            <li>• Có khả năng <strong>kết nối và trao đổi dữ liệu</strong>.</li>
+                            <li>• Một số tích hợp <strong>Trí tuệ nhân tạo (AI)</strong> để bắt chước hành vi con người (xe tự hành, robot giao tiếp).</li>
+                        </ul>
+                        <p class="mt-2 text-sm"><strong>Ví dụ:</strong> Smartphone, máy tính bảng, camera thông minh (phát hiện chuyển động), smartwatch.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">2. Vai Trò trong CMCN 4.0</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                                <p class="font-bold text-blue-700 mb-1">🌐 IoT</p>
+                                <p class="text-sm text-slate-600">Kết nối các thiết bị thông minh để thu thập và xử lý thông tin tự động, tức thời trên diện rộng.</p>
+                            </div>
+                            <div class="p-4 bg-purple-50 rounded-xl border border-purple-200">
+                                <p class="font-bold text-purple-700 mb-1">🔄 Hệ thống thực - ảo</p>
+                                <p class="text-sm text-slate-600">Xóa nhòa ranh giới giữa thế giới vật lý và không gian số (ví dụ: xe tự hành).</p>
+                            </div>
+                            <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+                                <p class="font-bold text-amber-700 mb-1">💡 Kinh tế tri thức</p>
+                                <p class="text-sm text-slate-600">Nền kinh tế dựa trên KH&CN cao, nơi giá trị tri thức chiếm tỷ trọng lớn trong sản phẩm.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">3. Thành Tựu và Vai Trò của Tin Học</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-start gap-2"><span class="text-emerald-500 font-bold">▶</span><span><strong>Quản lý:</strong> Xử lý quy trình nghiệp vụ nhanh, chính xác (ngân hàng, trường học).</span></div>
+                            <div class="flex items-start gap-2"><span class="text-emerald-500 font-bold">▶</span><span><strong>Tự động hóa:</strong> Robot làm việc trong môi trường nguy hiểm thay con người.</span></div>
+                            <div class="flex items-start gap-2"><span class="text-emerald-500 font-bold">▶</span><span><strong>Khoa học:</strong> Dự báo thời tiết, giải mã gen, mô phỏng công trình.</span></div>
+                            <div class="flex items-start gap-2"><span class="text-emerald-500 font-bold">▶</span><span><strong>Thành tựu kỹ thuật:</strong> Hệ điều hành, Internet (TCP/IP, WWW), ngôn ngữ lập trình bậc cao (Python, C, Java), hệ quản trị CSDL (SQL Server, Oracle).</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1: Nhận biết thiết bị thông minh</p>
+                        <p>Trong các thiết bị sau, thiết bị nào là thiết bị thông minh? Tại sao?</p>
+                        <ul class="mt-2 space-y-1 text-sm">
+                            <li>A. Cân điện tử thông thường</li>
+                            <li class="text-emerald-700 font-semibold">B. Đồng hồ kết nối điện thoại qua Bluetooth ✓</li>
+                            <li>C. Máy tính cầm tay (Casio)</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">💡 Gợi ý: Kiểm tra tính "tự chủ" và khả năng "kết nối, trao đổi dữ liệu". Chỉ đồng hồ Bluetooth mới đáp ứng cả hai tiêu chí.</div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 2: Liên hệ thực tế</p>
+                        <p>Tin học đã giúp em trong việc học tập và giải trí hằng ngày như thế nào? Nêu ít nhất 3 ứng dụng trực tuyến mà em đang sử dụng.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">💡 Gợi ý: Google Meet/Zoom (học online), YouTube (học kiến thức), Google Drive (lưu trữ tài liệu), Zalo (liên lạc)...</div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 3: Phân tích phần mềm văn phòng</p>
+                        <p>Các phần mềm tin học văn phòng (Word, Excel, PowerPoint) có tác dụng gì đối với các ngành nghề hành chính hiện nay?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">💡 Gợi ý: Tăng chất lượng văn bản (Word), quản lý dữ liệu bảng tính (Excel), thuyết trình chuyên nghiệp (PowerPoint).</div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 mb-2">🌟 Câu 4: Thảo luận về xe tự hành (Nâng cao)</p>
+                        <p class="text-slate-700">Tại sao xe tự hành được coi là thành tựu điển hình của CMCN 4.0? Nó giúp ích gì trong việc bảo vệ môi trường và giảm chi phí xã hội?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border text-indigo-700">💡 Gợi ý: Tích hợp IoT + AI + hệ thống thực-ảo. Giảm tai nạn, tối ưu hóa lộ trình giúp giảm khí thải, không cần trả lương tài xế...</div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3 text-sm text-slate-600">
+                    <p>📹 Video 1: Cuộc cách mạng công nghiệp 4.0 là gì?</p>
+                    <p>📹 Video 2: Giới thiệu về Internet vạn vật (IoT) trong đời sống</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+        `
+    },
+
+    // ===== BÀI 3 =====
+    {
+        title: "Bài 3: Một Số Kiểu Dữ Liệu và Dữ Liệu Văn Bản",
+        videoId: "",
+        desc: "Phân biệt các kiểu dữ liệu thường gặp, tìm hiểu bảng mã ASCII và Unicode, cùng quá trình số hóa văn bản trong tin học.",
+        downloadUrl: "#",
+        contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Nêu được các loại thông tin và các <strong>kiểu dữ liệu</strong> thường gặp.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Phân biệt các kiểu dữ liệu: <strong>văn bản, số, lôgic, đa phương tiện</strong>.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Biết và phân biệt được các bảng mã thông dụng: <strong>ASCII</strong> và <strong>Unicode</strong>.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Giải thích được sơ lược về quá trình <strong>số hóa văn bản</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">1. Phân Loại Dữ Liệu trong Máy Tính</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-200">
+                                <p class="font-bold text-blue-700">📝 Văn bản</p>
+                                <p class="text-sm text-slate-600 mt-1">Các ký tự, xâu ký tự. Ví dụ: họ tên, địa chỉ.</p>
+                            </div>
+                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+                                <p class="font-bold text-emerald-700">🔢 Số</p>
+                                <p class="text-sm text-slate-600 mt-1">Số nguyên, số thực. Ví dụ: điểm số, chiều cao.</p>
+                            </div>
+                            <div class="p-3 bg-orange-50 rounded-xl border border-orange-200">
+                                <p class="font-bold text-orange-700">✅ Lôgic</p>
+                                <p class="text-sm text-slate-600 mt-1">Chỉ nhận hai giá trị: Đúng (True) hoặc Sai (False).</p>
+                            </div>
+                            <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+                                <p class="font-bold text-purple-700">🎬 Đa phương tiện</p>
+                                <p class="text-sm text-slate-600 mt-1">Hình ảnh, âm thanh, video.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">2. Bảng Mã Ký Tự</h3>
+                        <div class="space-y-3">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <p class="font-bold text-slate-800 mb-2">a) Bảng mã ASCII</p>
+                                <ul class="text-sm space-y-1">
+                                    <li>• <strong>ASCII chuẩn:</strong> Dùng 7 bit → mã hóa $2^7 = 128$ ký tự (chủ yếu tiếng Anh).</li>
+                                    <li>• <strong>ASCII mở rộng:</strong> Dùng 8 bit (1 byte) → mã hóa $2^8 = 256$ ký tự. Phần mở rộng dùng cho ký tự riêng của từng quốc gia.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <p class="font-bold text-slate-800 mb-2">b) Bảng mã Unicode</p>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Bảng mã hợp nhất quốc tế, dùng chung cho <strong>mọi ngôn ngữ</strong> trên thế giới.</li>
+                                    <li>• Tiếng Việt dùng định dạng <strong>UTF-8</strong> (độ dài mã từ 1 đến 4 byte).</li>
+                                    <li>• Ký tự La tinh không dấu: 1 byte. Nguyên âm có dấu tiếng Việt: thường 2 byte.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">3. Số Hóa Văn Bản</h3>
+                        <div class="p-4 bg-emerald-50 rounded-xl border-l-4 border-emerald-500">
+                            <p class="text-sm text-slate-700">Là quá trình chuyển văn bản từ dạng tờ giấy, tiếng nói hoặc hình ảnh thành tệp dữ liệu số trong máy tính.</p>
+                            <p class="mt-2 text-sm"><strong>Công cụ:</strong> Phần mềm soạn thảo (Word, Writer), phần mềm nhận dạng tiếng nói, máy quét (Scanner).</p>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1: Nhận biết kiểu dữ liệu</p>
+                        <p>Ghép thông tin từ Giấy phép lái xe với kiểu dữ liệu tương ứng:</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            • Số thẻ (No) → Kiểu văn bản (không dùng để tính toán)<br>
+                            • Họ tên, Nơi cư trú → Kiểu văn bản<br>
+                            • Ngày sinh → Kiểu văn bản hoặc kiểu Ngày tháng<br>
+                            • Ảnh chân dung → Kiểu hình ảnh (đa phương tiện)
+                        </div>
+                        <p class="mt-2 text-xs text-slate-500">💡 Gợi ý: Thông tin nào dùng để tính toán số học mới ưu tiên để kiểu số.</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 2: Bảng mã ASCII</p>
+                        <p>Sử dụng bảng mã ASCII, hãy xác định mã thập phân và mã nhị phân của các ký tự: <strong>S, G, K</strong>.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            💡 Gợi ý: 'A' = 65 (01000001₂)<br>
+                            S = 83 (01010011₂) [A + 18]<br>
+                            G = 71 (01000111₂) [A + 6]<br>
+                            K = 75 (01001011₂) [A + 10]
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 3: Trắc nghiệm Unicode</p>
+                        <p>Trong bảng mã Unicode, mỗi ký tự Tiếng Việt theo UTF-8 được biểu diễn bởi bao nhiêu byte?</p>
+                        <ul class="mt-2 space-y-1 text-sm">
+                            <li>A. 1 byte.</li>
+                            <li>B. 2 byte.</li>
+                            <li>C. 4 byte.</li>
+                            <li class="text-emerald-700 font-semibold">D. Từ 1 đến 3 byte. ✓</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">💡 UTF-8 dùng độ dài thay đổi: ký tự La tinh 1 byte, tiếng Việt thường 2 byte, một số ký tự đặc biệt 3 byte.</div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 4: Thảo luận về Unicode</p>
+                        <p>Tại sao cần xây dựng bảng mã Unicode thay vì chỉ dùng ASCII?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">💡 ASCII chỉ 256 ký tự, không đủ cho các ngôn ngữ như tiếng Trung (hàng nghìn chữ tượng hình), tiếng Việt có dấu... Unicode cung cấp một bảng mã chung cho toàn thế giới, hỗ trợ đa ngôn ngữ đồng thời.</div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 mb-2">🌟 Câu 5: Vận dụng thực tế (Nâng cao)</p>
+                        <p class="text-slate-700">Ngoài phông Times New Roman, hãy tìm thêm ít nhất 3 phông chữ khác hỗ trợ đầy đủ tiếng Việt Unicode.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border text-indigo-700">💡 Gợi ý: Thử nghiệm trên Word: Arial, Calibri, Verdana, Tahoma. Tất cả đều hỗ trợ Unicode tiếng Việt đầy đủ.</div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3 text-sm text-slate-600">
+                    <p>📹 Video 1: Cách máy tính hiểu văn bản (ASCII và Unicode)</p>
+                    <p>📹 Video 2: Hướng dẫn gõ tiếng Việt và bảng mã Unicode</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+        `
+    },
+
+    // ===== BÀI 4 =====
+    {
+        title: "Bài 4: Hệ Nhị Phân và Dữ Liệu Số Nguyên",
+        videoId: "",
+        desc: "Nắm vững hệ nhị phân, thực hiện chuyển đổi giữa hệ thập phân và nhị phân, thực hiện các phép tính cộng và nhân trong hệ nhị phân.",
+        downloadUrl: "#",
+        contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Hiểu được khái niệm về <strong>hệ nhị phân</strong> và cách biểu diễn số nguyên trong máy tính.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Thực hiện thành thạo việc <strong>chuyển đổi</strong> giữa hệ thập phân và hệ nhị phân.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Thực hiện được các phép tính <strong>cộng, nhân</strong> trong hệ nhị phân.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Giải thích được sơ lược về quy trình thực hiện phép tính và ứng dụng của hệ nhị phân trong tin học.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">1. Hệ Nhị Phân và Biểu Diễn Số Nguyên</h3>
+                        <ul class="space-y-2 mb-3">
+                            <li><strong>Hệ nhị phân (Binary):</strong> Hệ đếm cơ số 2, chỉ dùng hai chữ số $0$ và $1$.</li>
+                            <li><strong>Giá trị vị trí:</strong> Chữ số ở vị trí thứ $k$ (từ phải sang, bắt đầu $k=1$) mang giá trị $2^{k-1}$.</li>
+                        </ul>
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-200 mb-3">
+                            <p class="font-semibold text-blue-800 mb-2">Chuyển đổi Thập phân → Nhị phân:</p>
+                            <p class="text-sm text-slate-700">Chia liên tiếp cho 2, lấy các số dư viết <em>ngược từ dưới lên</em>.</p>
+                            <div class="mt-2 font-mono text-xs bg-white p-2 rounded border">
+                                Ví dụ: 19 ÷ 2 = 9 dư 1<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9 ÷ 2 = 4 dư 1<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 ÷ 2 = 2 dư 0<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 ÷ 2 = 1 dư 0<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 ÷ 2 = 0 dư 1<br>
+                                → 19₁₀ = 10011₂
+                            </div>
+                        </div>
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                            <p class="font-semibold text-emerald-800 mb-2">Chuyển đổi Nhị phân → Thập phân:</p>
+                            <p class="text-sm text-slate-700">Tính tổng các luỹ thừa của 2 với hệ số tương ứng.</p>
+                            <div class="mt-1 text-xs text-slate-600">Ví dụ: $1101_2 = 1{\times}2^3 + 1{\times}2^2 + 0{\times}2^1 + 1{\times}2^0 = 8+4+0+1 = 13_{10}$</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">2. Phép Tính trong Hệ Nhị Phân</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <p class="font-bold text-slate-700 mb-2">Bảng cộng:</p>
+                                <pre class="text-xs font-mono text-slate-600">0 + 0 = 0
+0 + 1 = 1
+1 + 0 = 1
+1 + 1 = 10 (viết 0, nhớ 1)</pre>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <p class="font-bold text-slate-700 mb-2">Bảng nhân:</p>
+                                <pre class="text-xs font-mono text-slate-600">0 × 0 = 0
+0 × 1 = 0
+1 × 0 = 0
+1 × 1 = 1</pre>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border-l-4 border-red-500">
+                            <p class="font-semibold text-red-800 text-sm">⚠️ Lưu ý quan trọng:</p>
+                            <p class="text-sm text-slate-700 mt-1">Khi cộng hai số nhị phân, thực hiện từ phải sang trái. Nếu kết quả có nhớ thì cộng thêm vào hàng bên trái liền kề (giống hệ thập phân).</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">3. Biểu Diễn Số Nguyên trong Máy Tính</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><strong>Số nguyên không dấu:</strong> Đổi trực tiếp sang nhị phân, bổ sung bit $0$ bên trái cho đủ độ dài (8, 16, 32... bit).</li>
+                            <li><strong>Số nguyên có dấu:</strong> Dùng bit tận cùng bên trái làm bit dấu ($0$ là dương $+$, $1$ là âm $-$). Có 3 cách mã hóa: mã thuận, mã bù 1 và mã bù 2.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1a: Đổi sang hệ nhị phân</p>
+                        <p>Đổi các số sau sang hệ nhị phân: <strong>13; 155; 76</strong></p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            13₁₀  = 1101₂<br>
+                            155₁₀ = 10011011₂<br>
+                            76₁₀  = 1001100₂
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1b: Đổi sang hệ thập phân</p>
+                        <p>Đổi các số sau sang hệ thập phân: $110011_2; \ 10011011_2; \ 1001110_2$</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            110011₂   = 32+16+2+1 = 51₁₀<br>
+                            10011011₂ = 128+16+8+2+1 = 155₁₀<br>
+                            1001110₂  = 64+8+4+2 = 78₁₀
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 2: Tính toán trên hệ nhị phân</p>
+                        <p>Thực hiện trực tiếp trên hệ nhị phân:</p>
+                        <ul class="mt-1 space-y-1">
+                            <li>a) $101101_2 + 11001_2$</li>
+                            <li>b) $100111_2 \times 1011_2$</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            a) 101101 + 011001 = 1000110₂ (= 70₁₀)<br>
+                            b) 100111 × 1011 = 110011101₂ (= 413₁₀)<br>
+                            💡 Kiểm tra: 45 + 25 = 70 ✓ | 39 × 11 = 429... (tính lại cẩn thận từng bước)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 3: Quy trình 3 bước của máy tính</p>
+                        <p>Thực hiện theo quy trình: Mã hóa → Tính toán nhị phân → Giải mã</p>
+                        <ul class="mt-1 space-y-1">
+                            <li>a) $125 + 17$</li>
+                            <li>b) $15 \times 6$</li>
+                            <li>c) $11 \times 9$</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            a) 1111101₂ + 10001₂ = 10001110₂ = 142₁₀ ✓<br>
+                            b) 1111₂ × 110₂ = 1011010₂ = 90₁₀ ✓<br>
+                            c) 1011₂ × 1001₂ = 1100011₂ = 99₁₀ ✓
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 mb-2">🌟 Câu 4: Tìm hiểu nâng cao</p>
+                        <p class="text-slate-700">Hãy tìm hiểu cách đổi phần thập phân (số lẻ) sang hệ nhị phân. Và mã bù 2 được lập như thế nào?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border text-indigo-700">
+                            💡 Số lẻ: nhân liên tiếp với 2, lấy phần nguyên từ trên xuống.<br>
+                            Ví dụ: 0.625 × 2 = 1.25 → 1; 0.25 × 2 = 0.5 → 0; 0.5 × 2 = 1.0 → 1 ⇒ 0.101₂<br><br>
+                            💡 Mã bù 2: Đảo tất cả bit (bù 1) rồi cộng thêm 1. Máy tính dùng bù 2 vì phép trừ trở thành phép cộng với số bù 2, đơn giản hóa mạch điện.
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3 text-sm text-slate-600">
+                    <p>📹 Video 1: Hướng dẫn đổi hệ thập phân sang nhị phân</p>
+                    <p>📹 Video 2: Hướng dẫn các phép tính cộng, nhân nhị phân</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+        `
+    },
+
+    // ===== BÀI 5 =====
+    {
+        title: "Bài 5: Dữ Liệu Lôgic",
+        videoId: "",
+        desc: "Nắm vững các giá trị chân lý, thực hiện các phép toán lôgic cơ bản AND, OR, XOR, NOT và ứng dụng trong biểu thức lôgic và mạch điện tử.",
+        downloadUrl: "#",
+        contentHtml: `
+        <div class="space-y-6 mt-4 text-left">
+
+            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <ul class="space-y-2 list-none">
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Biết được các <strong>giá trị chân lý</strong> (Đúng/Sai) và cách biểu diễn trong tin học.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Hiểu và thực hiện được các <strong>phép toán lôgic</strong> cơ bản: AND, OR, XOR, NOT.</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">✦</span> Biết cách biểu diễn dữ liệu lôgic và ứng dụng trong <strong>biểu thức lôgic</strong> và <strong>mạch điện tử</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">1. Giá Trị Chân Lý và Phép Toán Lôgic</h3>
+                        <ul class="space-y-2 mb-4">
+                            <li><strong>Mệnh đề:</strong> Là khẳng định chỉ có thể là Đúng ($1$) hoặc Sai ($0$).</li>
+                            <li><strong>Đại lượng lôgic:</strong> Là đại lượng chỉ nhận một trong hai giá trị chân lý ($1$ hoặc $0$).</li>
+                        </ul>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-emerald-600 text-white">
+                                        <th class="p-3 text-left rounded-tl-lg">Phép toán</th>
+                                        <th class="p-3 text-left">Ký hiệu</th>
+                                        <th class="p-3 text-left rounded-tr-lg">Đặc điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-mono font-bold text-blue-700">AND</td><td class="p-3">Phép nhân lôgic (VÀ)</td><td class="p-3">Chỉ đúng khi cả hai đều đúng: $1 \text{ AND } 1 = 1$</td></tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-mono font-bold text-emerald-700">OR</td><td class="p-3">Phép cộng lôgic (HOẶC)</td><td class="p-3">Đúng khi có ít nhất một thành phần đúng.</td></tr>
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-mono font-bold text-orange-700">XOR</td><td class="p-3">Cộng loại trừ</td><td class="p-3">Chỉ đúng khi hai thành phần có giá trị khác nhau.</td></tr>
+                                    <tr class="hover:bg-slate-50"><td class="p-3 font-mono font-bold text-red-700">NOT</td><td class="p-3">Phép phủ định</td><td class="p-3">Đảo ngược giá trị: $NOT \ 1 = 0$; $NOT \ 0 = 1$</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3 p-4 bg-amber-50 rounded-xl border-l-4 border-amber-500">
+                            <p class="font-semibold text-amber-800 text-sm">⚡ Thứ tự ưu tiên (không có dấu ngoặc):</p>
+                            <p class="text-sm text-slate-700 mt-1">NOT → AND → OR (thực hiện từ trái sang phải trong cùng mức độ ưu tiên)</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">2. Biểu Diễn Dữ Liệu Lôgic</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li>• Chỉ cần <strong>1 bit</strong> để biểu diễn dữ liệu lôgic ($1$: Đúng, $0$: Sai).</li>
+                            <li>• Trong lập trình: dùng ký tự <code class="bg-slate-100 px-1 rounded">True</code> / <code class="bg-slate-100 px-1 rounded">False</code>. Python quy ước số $0$ là False, các số khác là True.</li>
+                            <li>• Trong đời sống: "Đóng/Mở", "Sáng/Tối", "Bật/Tắt" đều là dữ liệu lôgic.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">3. Ứng Dụng trong Mạch Điện</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+                                <p class="font-bold text-blue-800 mb-2">🔗 Mạch nối tiếp</p>
+                                <p class="text-sm text-slate-600">Đèn chỉ sáng khi cả $K_1$ <strong>VÀ</strong> $K_2$ cùng đóng.</p>
+                                <p class="mt-1 font-mono text-sm text-blue-700">→ Phép toán: $K_1$ AND $K_2$</p>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                                <p class="font-bold text-emerald-800 mb-2">⚡ Mạch song song</p>
+                                <p class="text-sm text-slate-600">Đèn sáng khi $K_1$ <strong>HOẶC</strong> $K_2$ đóng (hoặc cả hai).</p>
+                                <p class="mt-1 font-mono text-sm text-emerald-700">→ Phép toán: $K_1$ OR $K_2$</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC III: BÀI TẬP VẬN DỤNG -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Bài tập vận dụng</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 1: Diễn giải mệnh đề</p>
+                        <p>Cho $p$: "Hùng khéo tay", $q$: "Hùng chăm chỉ". Diễn giải bằng lời:</p>
+                        <ul class="mt-2 space-y-2">
+                            <li>• $p$ AND NOT $q$ = ?</li>
+                            <li>• $p$ OR $q$ = ?</li>
+                        </ul>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            • p AND NOT q: "Hùng khéo tay và KHÔNG chăm chỉ." (Khen năng khiếu, phê bình thái độ)<br>
+                            • p OR q: "Hùng khéo tay HOẶC Hùng chăm chỉ." (Có ít nhất một ưu điểm)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 2: Kiểm tra biểu thức lôgic</p>
+                        <p>Xác định phương án <strong>sai</strong> cho biểu thức $p$ AND NOT $q$:</p>
+                        <ul class="mt-2 space-y-1">
+                            <li>A. $p=0, q=0 \Rightarrow 0$ AND $1 = 0$ (Đúng)</li>
+                            <li>B. $p=1, q=1 \Rightarrow 1$ AND $0 = 0$ (Đúng)</li>
+                            <li class="text-red-600 font-semibold">C. $p=0, q=0 \Rightarrow 1$ ✗ (Sai – kết quả phải là 0)</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 3: Phân tích biểu thức đặc biệt</p>
+                        <p>Tại sao $p$ AND NOT $p$ luôn bằng $0$, còn $p$ OR NOT $p$ luôn bằng $1$?</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            💡 Vì p và NOT p luôn trái ngược nhau:<br>
+                            • Nếu p=1: p AND NOT p = 1 AND 0 = 0<br>
+                            • Nếu p=0: p AND NOT p = 0 AND 1 = 0<br>
+                            → Luôn = 0 (Luật mâu thuẫn)<br><br>
+                            • Nếu p=1: p OR NOT p = 1 OR 0 = 1<br>
+                            • Nếu p=0: p OR NOT p = 0 OR 1 = 1<br>
+                            → Luôn = 1 (Luật bài trung)
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="font-bold text-slate-800 mb-2">📝 Câu 4: Ứng dụng mạch điện</p>
+                        <p>Cho mạch điện có 3 công tắc $K_1$, $K_2$, $K_3$. Đèn sáng khi ($K_1$ VÀ $K_2$) HOẶC $K_3$ đóng. Viết biểu thức lôgic và lập bảng chân trị.</p>
+                        <div class="mt-2 text-xs font-mono bg-white p-2 rounded border">
+                            Biểu thức: (K1 AND K2) OR K3<br><br>
+                            K1 K2 K3 | Đèn<br>
+                            0  0  0  |  0<br>
+                            0  0  1  |  1<br>
+                            0  1  0  |  0<br>
+                            0  1  1  |  1<br>
+                            1  0  0  |  0<br>
+                            1  0  1  |  1<br>
+                            1  1  0  |  1<br>
+                            1  1  1  |  1
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <p class="font-bold text-indigo-800 mb-2">🌟 Câu 5: Vận dụng thực tế (Nâng cao)</p>
+                        <p class="text-slate-700">Trong Python, biểu thức <code class="bg-white px-1 rounded border">not 0 and 5 > 3</code> trả về giá trị gì? Giải thích theo thứ tự ưu tiên phép toán.</p>
+                        <pre class="bg-slate-900 text-blue-300 p-4 rounded-xl font-mono text-xs mt-2">
+# Python
+result = not 0 and 5 > 3
+# Bước 1: not 0 → True (vì 0 là False)
+# Bước 2: 5 > 3 → True
+# Bước 3: True and True → True
+print(result)  # True</pre>
+                    </div>
+
+                </div>
+            </details>
+
+            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
+            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
+                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="p-6 pt-4 border-t border-slate-100 space-y-3 text-sm text-slate-600">
+                    <p>📹 Video 1: Đại số Boole và các phép toán lôgic cơ bản</p>
+                    <p>📹 Video 2: Ứng dụng cổng lôgic trong mạch điện máy tính</p>
+                    <p class="text-sm text-slate-500 italic">Video đang được chuẩn bị.</p>
+                </div>
+            </details>
+
+        </div>
+        `
+    }
         ]
     },
     {
