@@ -1,7 +1,46 @@
-📘 Hệ Thống Học Liệu Tin Học THPTChào mừng thầy đến với kho lưu trữ mã nguồn của hệ thống học tập trực tuyến. Hệ thống này được thiết kế theo kiến trúc Module giúp việc cập nhật bài giảng trở nên cực kỳ đơn giản mà không cần can thiệp sâu vào giao diện.📂 Cấu trúc các File chínhHệ thống của thầy được phân chia thành 3 tầng logic để tối ưu việc quản lý:1. Tầng Giao diện (Trang chủ)Tên file: index.htmlNhiệm vụ: Là "bộ khung" hiển thị website, xử lý trình phát video và logic nạp dữ liệu từ các vệ tinh.Lưu ý: Thầy không cần chỉnh sửa file này trừ khi muốn thay đổi thiết kế tổng thể.2. Tầng Điều hướng (Trạm trung chuyển)Tên file: data.jsNhiệm vụ: Quản lý danh mục 9 khóa học hiển thị ngoài dashboard.Khi nào cần sửa: Khi thầy muốn đổi tên khóa học, thay đổi Icon (sử dụng thư viện Lucide) hoặc thay đổi đường dẫn nạp dữ liệu của môn đó.3. Tầng Nội dung (Các vệ tinh bài học)Đây là nơi chứa bài giảng chi tiết của từng khóa học cụ thể.tin10.js: Bài giảng lớp 10.tin11.js: Bài giảng lớp 11.cpp10.js: Bài giảng lập trình C++.(Và các file .js khác tương ứng với từng môn học)Nhiệm vụ: Chứa thông tin chi tiết về từng bài học (Tiêu đề, Youtube ID, Tài liệu).🛠 Hướng dẫn cập nhật bài giảng mớiĐể thêm một bài giảng vào hệ thống (ví dụ môn Tin học 10), thầy thực hiện các bước sau:Mở file vệ tinh tương ứng (ví dụ tin10.js) trên GitHub.Nhấn vào biểu tượng Edit (Cái bút).Thêm một cụm bài học mới vào trong danh sách lessons theo mẫu chuẩn sau:{ 
-    title: "Tên bài học của thầy", 
-    videoId: "Mã_Youtube_ID", 
-    desc: "Mô tả ngắn gọn về bài giảng này", 
-    downloadUrl: "Link_PDF_hoặc_Google_Drive" 
+# Hệ thống học liệu Tin học THPT
+
+Website học liệu tĩnh dành cho học sinh Trường THPT Chuyên Bến Tre. Có thể triển khai trực tiếp bằng GitHub Pages hoặc bất kỳ máy chủ tĩnh nào.
+
+## Cấu trúc
+
+- `index.html`: khung HTML và các vùng giao diện.
+- `styles.css`: giao diện responsive, focus và reduced motion.
+- `app.js`: điều hướng bằng URL hash, tải dữ liệu khóa học, trình đọc PDF và các tương tác.
+- `data.js`: thông tin giáo viên, danh mục khóa học và công cụ dạy học.
+- `data-chinh-khoa/`, `data-chuyen/`, `data-khac/`: nội dung từng khóa học.
+
+## Phạm vi khóa học
+
+- `data-chinh-khoa/tin10.js`: chương trình Tin học 10 chính khóa, chuẩn hóa từ nội dung khóa hiện có.
+- `Bài 1: Thông tin và xử lí thông tin` dùng cấu trúc chi tiết theo từng đơn vị kiến thức, đối chiếu SGK Kết nối tri thức trang 6–10 và câu hỏi gợi mở theo ba mức.
+- `data-chinh-khoa/tin11.js`: 31 bài Tin học ứng dụng 11, chuyển đổi từ `KHBD/Giáo án Tin học 11-THUD -HKI.docx`.
+- Mỗi bài dùng cùng hành trình: Mục tiêu → Khởi động → Khám phá → Luyện tập → Vận dụng và tự đánh giá.
+- Nội dung tương tác phải dùng phần tử semantic, hoạt động bằng bàn phím và hướng tới WCAG 2.2 AA.
+
+## Cập nhật bài học
+
+Mở file dữ liệu tương ứng và thêm bài học vào mảng `lessons`:
+
+```js
+{
+    title: "Tên bài học",
+    videoId: "Mã_YouTube",
+    desc: "Mô tả ngắn",
+    downloadUrl: "Liên kết tài liệu"
 }
-Nhấn Commit changes để lưu lại. Hệ thống sẽ tự động cập nhật sau khoảng vài giây.⚠️ Lưu ý quan trọng cho giáo viênMã VideoId: Chỉ copy phần mã phía sau dấu v= trong đường link Youtube.Ví dụ: youtube.com/watch?v=dQw4w9WgXcQ -> Mã cần lấy là dQw4w9WgXcQ.Đồng bộ tên file: Tên file thực tế trên GitHub phải trùng khớp hoàn toàn với giá trị dataPath đã khai báo trong file data.js.Xử lý tài liệu: Nếu bài học không có tài liệu, thầy hãy đặt giá trị là null.Làm mới trang: Nếu cập nhật xong mà web chưa hiện, thầy hãy nhấn Ctrl + F5 trên trình duyệt để xóa bộ nhớ đệm (cache).Hệ thống được phát triển nhằm hỗ trợ giáo viên tối ưu hóa việc giảng dạy và chia sẻ tri thức số.
+```
+
+- `videoId` chỉ chứa phần mã sau `watch?v=` trong URL YouTube.
+- Dùng `pdfUrl` khi muốn hiển thị PDF trực tiếp trong trang.
+- Đặt trường không sử dụng thành `null`.
+- `dataPath` trong `data.js` phải trùng chính xác với đường dẫn file.
+- Đặt `available: false` cho khóa học chưa có file nội dung; giao diện sẽ hiển thị trạng thái “Chưa khả dụng” và không gửi yêu cầu lỗi.
+
+## Chạy cục bộ
+
+```bash
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+Mở `http://127.0.0.1:8765`.

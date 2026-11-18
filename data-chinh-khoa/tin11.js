@@ -1,628 +1,95 @@
-// File dữ liệu bài học Tin học 11 - Định hướng Tin học ứng dụng (Kết nối tri thức)
-window.courseContent = [
-    {
-        chapterName: "Chương 0: Sách",
-        lessons: [
-            {    
-                title: "Sách Giáo Khoa Tin học 11",
-                videoId: "", 
-                desc: "Sách giáo khóa - Kết nối Tri thức và Cuộc sống",
-                downloadUrl: "https://drive.google.com/file/d/1kuWgKPERcCXQU13OUndYyUm05w1oPKRB/view?usp=sharing" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 1: Máy tính và xã hội tri thức",
-        lessons: [
-            { title: "Bài 1: Hệ điều hành", videoId: "", desc: "Khái niệm, vai trò và các loại hệ điều hành phổ biến.", downloadUrl: "#" },
-            { title: "Bài 2: Thực hành sử dụng hệ điều hành", videoId: "", desc: "Các thao tác cơ bản và nâng cao với hệ điều hành.", downloadUrl: "#" },
-            { title: "Bài 3: Phần mềm nguồn mở và phần mềm chạy trên Internet", videoId: "", desc: "Tìm hiểu về bản quyền phần mềm và dịch vụ trực tuyến.", downloadUrl: "#" },
-            { title: "Bài 4: Bên trong máy tính", videoId: "", desc: "Kiến trúc máy tính và các thành phần phần cứng.", downloadUrl: "#" },
-            { title: "Bài 5: Kết nối máy tính với các thiết bị số", videoId: "", desc: "Cách thức giao tiếp và truyền dữ liệu giữa các thiết bị.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 2: Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
-        lessons: [
-            { title: "Bài 6: Lưu trữ và chia sẻ tệp tin trên Internet", videoId: "", desc: "Sử dụng các dịch vụ lưu trữ đám mây.", downloadUrl: "#" },
-            { title: "Bài 7: Thực hành tìm kiếm thông tin trên Internet", videoId: "", desc: "Kỹ thuật tìm kiếm nâng cao và đánh giá nguồn tin.", downloadUrl: "#" },
-            { title: "Bài 8: Thực hành nâng cao sử dụng thư điện tử và mạng xã hội", videoId: "", desc: "Giao tiếp chuyên nghiệp và an toàn trên môi trường số.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 3: Đạo đức, pháp luật và văn hoá trong môi trường số",
-        lessons: [
-            { title: "Bài 9: Giao tiếp an toàn trên Internet", videoId: "", desc: "Bảo mật thông tin và ứng xử văn minh mạng.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 4: Giới thiệu các hệ cơ sở dữ liệu",
-        lessons: [
-            { title: "Bài 10: Lưu trữ dữ liệu và khai thác thông tin phục vụ quản lí", videoId: "", desc: "Tầm quan trọng của CSDL trong quản lý.", downloadUrl: "#" },
-            { title: "Bài 11: Cơ sở dữ liệu", videoId: "", desc: "Khái niệm và đặc điểm của hệ cơ sở dữ liệu.", downloadUrl: "#" },
-            { title: "Bài 12: Hệ quản trị cơ sở dữ liệu và hệ cơ sở dữ liệu", videoId: "", desc: "Phân biệt DBMS và CSDL.", downloadUrl: "#" },
-            { title: "Bài 13: Cơ sở dữ liệu quan hệ", videoId: "", desc: "Mô hình dữ liệu quan hệ và các ràng buộc.", downloadUrl: "#" },
-            { title: "Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc", videoId: "", desc: "Làm quen với ngôn ngữ SQL.", downloadUrl: "#" },
-            { title: "Bài 15: Bảo mật và an toàn hệ cơ sở dữ liệu", videoId: "", desc: "Các giải pháp bảo vệ dữ liệu.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 5: Hướng nghiệp với tin học",
-        lessons: [
-            { title: "Bài 16: Công việc quản trị cơ sở dữ liệu", videoId: "", desc: "Tìm hiểu về nghề nghiệp DBA.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 6: Thực hành tạo và khai thác cơ sở dữ liệu",
-        lessons: [
-            { title: "Bài 17: Quản trị cơ sở dữ liệu trên máy tính", videoId: "", desc: "Cài đặt và sử dụng phần mềm quản trị CSDL.", downloadUrl: "#" },
-            { title: "Bài 18: Thực hành xác định cấu trúc bảng và các trường khoá", videoId: "", desc: "Thiết kế bảng dữ liệu và xác định khóa chính.", downloadUrl: "#" },
-            { title: "Bài 19: Thực hành tạo lập cơ sở dữ liệu và các bảng", videoId: "", desc: "Thực thi các lệnh tạo CSDL và Table.", downloadUrl: "#" },
-            {     
-                 title: "Bài 20: Thực hành tạo lập các bảng có khoá ngoài", 
-                videoId: "", 
-                desc: "Thiết lập mối quan hệ giữa các bảng thông qua khóa ngoài và chỉ mục.",
-                downloadUrl: "#",
-                contentHtml: `
-                    <div class="space-y-6 mt-4 text-left">
-                        <!-- Mục I: Mục tiêu bài học -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-3 leading-relaxed text-sm md:text-base">
-                                <p class="font-bold text-blue-700 underline underline-offset-4 decoration-2">Kiến thức và kỹ năng:</p>
-                                <ul class="list-disc ml-5 space-y-2">
-                                    <li>Biết cách tạo mới các bảng có khóa ngoài trong hệ quản trị cơ sở dữ liệu.</li>
-                                    <li>Hiểu và thực hiện được việc thiết lập các thuộc tính cho trường dữ liệu như $INT$, $VARCHAR$, $AUTO\\_INCREMENT$.</li>
-                                    <li>Thành thạo thao tác khai báo khóa chính ($PRIMARY$), khóa chống trùng lặp ($UNIQUE$) và khóa ngoài ($Foreign Key$).</li>
-                                </ul>
-                            </div>
-                        </details>
+// Tin học ứng dụng 11 — chuyển đổi từ KHBD cả năm trong thư mục KHBD.
+(() => {
+    "use strict";
+    const L = window.createInteractiveLesson;
+    const mk = (title, overview, points, warmup, warmupAnswer, check, checkAnswer, task, criteria = [], resources = []) => L({
+        title,
+        overview,
+        goals: [overview, "Hoàn thành nhiệm vụ học tập và giải thích được kết quả.", "Tạo được minh chứng hoặc sản phẩm phù hợp yêu cầu KHBD."],
+        warmup: { question: warmup, answer: warmupAnswer, feedback: "Đối chiếu với dữ kiện, thuật ngữ và tình huống trong KHBD." },
+        concepts: [{ heading: "Kiến thức và thao tác trọng tâm", points }],
+        practice: [
+            { question: check, answer: checkAnswer, feedback: "Nếu chưa đúng, xác định khái niệm hoặc bước thao tác đang bị nhầm rồi thử lại." },
+            { question: "Hãy tóm tắt bài học bằng ba ý và nêu một minh chứng thực hành.", answer: `${points.slice(0, 3).join("; ")}. Minh chứng phải là câu trả lời, tệp hoặc kết quả thao tác quan sát được.`, feedback: "Không chỉ chép định nghĩa; cần gắn kiến thức với minh chứng." }
+        ],
+        application: {
+            task,
+            criteria: criteria.length ? criteria : ["Đúng yêu cầu và thuật ngữ.", "Có kết quả hoặc sản phẩm kiểm chứng được.", "Trình bày rõ ràng, bảo vệ dữ liệu và tôn trọng bản quyền."],
+            support: ["Đọc lại kiến thức trọng tâm.", "Chia nhiệm vụ thành từng bước.", "Dùng dữ liệu mẫu hoặc phương án ngoại tuyến khi thiếu tài khoản/mạng."]
+        },
+        resources
+    });
 
-                        <!-- Mục II: Lý thuyết trọng tâm -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 text-sm md:text-base">
-                                <div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 italic">
-                                    <strong>Khái niệm khóa ngoài:</strong> Là một hoặc một nhóm trường trong một bảng tham chiếu đến khóa chính của một bảng khác, dùng để thiết lập mối liên kết giữa dữ liệu của hai bảng.
-                                </div>
-                                <p class="font-bold text-emerald-800 underline underline-offset-4 decoration-2">Quy tắc khai báo khóa ngoài:</p>
-                                <ul class="list-decimal ml-5 space-y-2">
-                                    <li>Trường được chọn làm khóa ngoài phải có kiểu dữ liệu <strong>tương thích</strong> với trường khóa chính mà nó tham chiếu đến.</li>
-                                    <li>Cần xác định chính xác bảng tham chiếu ($Reference table$) và trường tham chiếu tương ứng.</li>
-                                </ul>
-                                <p class="bg-slate-100 p-3 rounded-lg border-l-4 border-slate-400">
-                                    <strong>Khóa chống trùng lặp ($UNIQUE$):</strong> Sử dụng khi một cặp giá trị (ví dụ: $tenBannhac, idNhacsi$) cần duy nhất trong toàn bộ bảng để đảm bảo tính toàn vẹn dữ liệu.
-                                </p>
-                            </div>
-                        </details>
-
-                        <!-- Mục III: Thực hành -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Thực hành</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base">
-                                <div class="bg-orange-50 p-4 rounded-xl mt-4">
-                                    <p class="font-bold text-orange-800">Nhiệm vụ: Tạo lập bảng $bannhac$</p>
-                                    <p class="italic">Cấu trúc: $bannhac (idBannhac, tenBannhac, idNhacsi)$</p>
-                                </div>
-
-                                <div class="space-y-6">
-                                    <div class="border-b pb-4">
-                                        <p class="font-bold text-slate-900 mb-3 uppercase text-xs tracking-widest text-orange-600">Các bước thực hiện khai báo khóa:</p>
-                                        <div class="space-y-4">
-                                            <!-- Bước a -->
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">a</div>
-                                                <div>
-                                                    <p class="font-bold text-slate-800">Khai báo khóa chính:</p>
-                                                    <p class="text-slate-600">Nháy nút phải chuột vào ô $idBannhac$, chọn <span class="text-blue-600 font-semibold">Create new index</span>, chọn <span class="text-blue-600 font-semibold">PRIMARY</span>.</p>
-                                                </div>
-                                            </div>
-
-                                            <!-- Bước b -->
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">b</div>
-                                                <div class="w-full">
-                                                    <p class="font-bold text-slate-800">Khai báo khóa chống trùng lặp ($UNIQUE$):</p>
-                                                    <p class="text-slate-600 mb-2">Đánh dấu cả hai trường $tenBannhac$ và $idNhacsi$, nháy nút phải chuột vào vùng đánh dấu, chọn <span class="text-blue-600 font-semibold">Create new index</span>, chọn <span class="text-blue-600 font-semibold">UNIQUE</span>.</p>
-                                                    <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400 text-xs italic text-blue-800">
-                                                        <strong>Lưu ý quan trọng:</strong> Ta phải chọn cả 2 trường này để tạo khóa $UNIQUE$ (thay vì từng trường riêng lẻ) vì trong thực tế, nhiều nhạc sĩ có thể cùng có bài hát trùng tên nhau. Việc gộp chung đảm bảo tính duy nhất của bài hát gắn liền với nhạc sĩ đó.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Bước c -->
-                                            <div class="flex items-start gap-3">
-                                                <div class="w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">c</div>
-                                                <div>
-                                                    <p class="font-bold text-slate-800">Khai báo khóa ngoài:</p>
-                                                    <p class="text-slate-600">Chọn thẻ <span class="text-blue-600 font-semibold">Foreign Key</span>. Chọn trường tham chiếu $idNhacsi$ trong bảng $nhacsi$ để thiết lập liên kết.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Bổ sung Luyện tập & Vận dụng -->
-                                <div class="mt-8 space-y-4">
-                                    <div class="p-4 bg-slate-900 text-white rounded-xl shadow-md">
-                                        <div class="flex items-center gap-2 mb-2 text-orange-400">
-                                            <i data-lucide="dumbbell" class="w-5 h-5"></i>
-                                            <span class="font-black uppercase tracking-tighter">LUYỆN TẬP</span>
-                                        </div>
-                                        <p class="text-sm">Hãy thực hiện các bước tương tự để tạo lập bảng <code class="text-blue-300">banthuam</code> với các thuộc tính khóa phù hợp.</p>
-                                    </div>
-
-                                    <div class="p-4 bg-indigo-900 text-white rounded-xl shadow-md">
-                                        <div class="flex items-center gap-2 mb-2 text-indigo-300">
-                                            <i data-lucide="lightbulb" class="w-5 h-5"></i>
-                                            <span class="font-black uppercase tracking-tighter">VẬN DỤNG</span>
-                                        </div>
-                                        <p class="text-sm">Hãy thiết lập bảng <strong>Quận/Huyện</strong> trong một CSDL quản lý hành chính. Bảng này cần lưu trữ tên Quận/Huyện và liên kết với bảng <strong>Tỉnh/Thành phố</strong> thông qua khóa ngoài.</p>
-                                    </div>
-                                </div>
-                                <p class="text-center font-bold text-green-600 italic mt-4">Nhấn "Lưu" để hoàn tất toàn bộ thao tác!</p>
-                            </div>
-                        </details>
-
-                        <!-- Mục IV: Học liệu kèm theo -->
-                        <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                            <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                                <div class="flex items-center gap-3">
-                                    <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
-                                    <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
-                                </div>
-                                <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                            </summary>
-                            <div class="p-6 pt-0 border-t border-slate-100">
-                                <div class="aspect-video w-full rounded-xl overflow-hidden shadow-lg border-4 border-slate-100 mt-4 bg-slate-100 flex items-center justify-center">
-                                    <p class="text-slate-400 italic text-sm">Nội dung video đang được cập nhật...</p>
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-                `
-            },
-            { title: "Bài 21: Thực hành cập nhật và truy xuất dữ liệu các bảng", videoId: "", desc: "Thêm, sửa, xóa và truy vấn dữ liệu đơn giản.", downloadUrl: "#" },
-            { title: "Bài 22: Thực hành cập nhật bảng dữ liệu có tham chiếu", videoId: "", desc: "Đảm bảo tính toàn vẹn dữ liệu khi cập nhật.", downloadUrl: "#" },
-            { title: "Bài 23: Thực hành truy xuất dữ liệu qua liên kết các bảng", videoId: "", desc: "Truy vấn dữ liệu từ nhiều bảng (Join).", downloadUrl: "#" },
-            { title: "Bài 24: Thực hành sao lưu dữ liệu", videoId: "", desc: "Quy trình Backup và Restore dữ liệu.", downloadUrl: "#" }
-        ]
-    },
-    {
-        chapterName: "Chủ đề 7: Phần mềm chỉnh sửa ảnh và làm video",
-        lessons: [
-            {
-    title: "Bài 25: Phần mềm chỉnh sửa ảnh",
-    videoId: "",
-    desc: "Làm quen với GIMP, các khái niệm ảnh số, điểm ảnh, độ phân giải và các thao tác chỉnh sửa ảnh cơ bản.",
-    downloadUrl: "#",
-    contentHtml: `
-        <div class="space-y-6 mt-4 text-left">
-
-            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
-                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
-                        <li>Làm quen với phần mềm chỉnh sửa ảnh chuyên nghiệp (GIMP).</li>
-                        <li>Hiểu được các khái niệm cơ bản về ảnh số, độ phân giải và điểm ảnh.</li>
-                        <li>Thực hiện thành thạo các thao tác cơ bản: mở tệp, phóng to/thu nhỏ, xoay và cắt ảnh.</li>
-                        <li>Biết cách thay đổi kích thước, độ phân giải và xuất ảnh sang các định dạng phổ biến.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
-
-                    <!-- Phần 1: Ảnh số -->
-                    <div class="space-y-3">
-                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Giới thiệu ảnh số
-                        </p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 space-y-1">
-                                <p class="font-bold text-blue-800">Ảnh số</p>
-                                <p class="text-xs">Là biểu diễn số của hình ảnh. Ảnh bitmap là phổ biến nhất với các định dạng: <code>.bmp, .jpeg, .png, .gif, .psd,...</code></p>
-                            </div>
-                            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 space-y-1">
-                                <p class="font-bold text-emerald-800">Điểm ảnh (Pixel)</p>
-                                <p class="text-xs">Ảnh bitmap là tập hợp các pixel hình vuông nhỏ. Mỗi pixel xác định bởi tọa độ $(x, y)$ và mang giá trị màu sắc cụ thể.</p>
-                            </div>
-                            <div class="p-4 bg-orange-50 rounded-xl border border-orange-100 space-y-1">
-                                <p class="font-bold text-orange-800">Megapixel</p>
-                                <p class="text-xs">Đơn vị đo tổng số điểm ảnh. Ví dụ: Ảnh $2560 \times 1920 \approx 5$ triệu pixel (camera 5 Megapixel).</p>
-                            </div>
-                        </div>
-
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                            <p class="font-bold text-slate-800 mb-2">Độ phân giải</p>
-                            <p>Xác định bởi số điểm ảnh trên một inch (đơn vị: $dpi$ hoặc $ppi$).</p>
-                            <ul class="list-disc ml-5 mt-2 space-y-1 text-xs">
-                                <li>Ảnh in ấn thường cần tối thiểu $300 \ dpi$.</li>
-                                <li>Công thức: $\t{Số pixel} = \t{ Kích thước (inch) } x \t{ Độ phân giải (dpi)}$.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <hr class="border-slate-100">
-
-                    <!-- Phần 2: GIMP -->
-                    <div class="space-y-4">
-                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Phần mềm chỉnh sửa ảnh (GIMP)
-                        </p>
-
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                            <p class="font-bold text-slate-800 mb-3">a) Giao diện của GIMP</p>
-                            <p class="text-xs text-slate-600 mb-3">GIMP có thể làm việc ở chế độ nhiều cửa sổ hoặc một cửa sổ (<code>Windows → Single-window Mode</code>). Các thành phần chính:</p>
-                            <div class="overflow-hidden rounded-xl border border-slate-200">
-                                <table class="w-full text-xs">
-                                    <thead class="bg-slate-100">
-                                        <tr>
-                                            <th class="p-2 text-left font-bold text-slate-700">Thành phần</th>
-                                            <th class="p-2 text-left font-bold text-slate-700">Chức năng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-slate-100">
-                                        <tr><td class="p-2 font-semibold text-blue-700">Thanh bảng chọn</td><td class="p-2">Chứa các lệnh hệ thống (File, Edit, Select,...)</td></tr>
-                                        <tr><td class="p-2 font-semibold text-blue-700">Bảng công cụ</td><td class="p-2">Chứa các nút lệnh như di chuyển, cắt, xoay, thêm chữ...</td></tr>
-                                        <tr><td class="p-2 font-semibold text-blue-700">Hộp tuỳ chọn công cụ</td><td class="p-2">Hiển thị thuộc tính của công cụ đang chọn</td></tr>
-                                        <tr><td class="p-2 font-semibold text-blue-700">Vùng hiển thị ảnh</td><td class="p-2">Nơi thực hiện chỉnh sửa trực tiếp trên ảnh</td></tr>
-                                        <tr><td class="p-2 font-semibold text-blue-700">Các hộp chức năng</td><td class="p-2">Quản lý lớp (Layers), kênh màu (Channels), cọ vẽ (Brushes)...</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-                            <p class="font-bold text-emerald-800 mb-3">b) Một số thao tác cơ bản</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
-                                    <p class="font-bold text-slate-800 mb-1">📂 Mở tệp</p>
-                                    <p><code>File → Open</code> hoặc kéo thả ảnh vào phần mềm.</p>
-                                </div>
-                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
-                                    <p class="font-bold text-slate-800 mb-1">🔍 Phóng to / Thu nhỏ</p>
-                                    <p>Dùng công cụ Zoom hoặc giữ $Ctrl$ + lăn chuột.</p>
-                                </div>
-                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
-                                    <p class="font-bold text-slate-800 mb-1">✂️ Cắt ảnh (Crop)</p>
-                                    <p>Dùng công cụ Crop, kéo khung chọn và nhấn $Enter$.</p>
-                                </div>
-                                <div class="p-3 bg-white rounded-lg border border-emerald-100">
-                                    <p class="font-bold text-slate-800 mb-1">🔄 Xoay ảnh (Rotate)</p>
-                                    <p>Nhấn $Shift + R$, nhập góc xoay hoặc kéo chuột trực tiếp.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-            <!-- MỤC III: THỰC HÀNH -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Thực hành</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 mt-4">
-
-                    <!-- Nhiệm vụ 1 -->
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p class="font-bold text-slate-900 flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full">Nhiệm vụ 1</span> Thao tác hiển thị ảnh
-                        </p>
-                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
-                            <li>Khởi động GIMP, mở một tệp ảnh bất kỳ.</li>
-                            <li>Chọn công cụ <strong>Zoom</strong>. Trong hộp tùy chọn, tích vào <code>Zoom in</code> (phóng to) hoặc <code>Zoom out</code> (thu nhỏ).</li>
-                            <li>Nháy chuột vào vị trí cần quan sát chi tiết.</li>
-                        </ol>
-                    </div>
-
-                    <!-- Nhiệm vụ 2 -->
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p class="font-bold text-slate-900 flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-emerald-600 text-white text-xs rounded-full">Nhiệm vụ 2</span> Thay đổi kích thước và độ phân giải ($Scale \ Image$)
-                        </p>
-                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
-                            <li>Chọn <code>Image → Scale Image</code>.</li>
-                            <li>Điều chỉnh các thông số:
-                                <ul class="list-disc ml-5 mt-1 space-y-1 text-xs text-slate-600">
-                                    <li><strong>Width/Height:</strong> Thay đổi kích thước vật lý của ảnh.</li>
-                                    <li><strong>X/Y resolution:</strong> Thay đổi độ phân giải (thường dùng cho in ấn).</li>
-                                </ul>
-                            </li>
-                            <li>Nhấn <code>Scale</code> để áp dụng.</li>
-                        </ol>
-                    </div>
-
-                    <!-- Nhiệm vụ 3 -->
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p class="font-bold text-slate-900 flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">Nhiệm vụ 3</span> Xoay, cắt và xuất ảnh
-                        </p>
-                        <ol class="list-decimal ml-5 mt-3 space-y-2 text-sm text-slate-700">
-                            <li>Dùng công cụ <strong>Rotate</strong> ($Shift + R$) để chỉnh các ảnh bị nghiêng. Kéo chuột để xoay và nhấn <code>Rotate</code>.</li>
-                            <li>Dùng công cụ <strong>Crop</strong> ($Shift + C$) để loại bỏ phần thừa. Nhấn $Enter$ để hoàn tất.</li>
-                            <li>Xuất ảnh (Export):
-                                <ul class="list-disc ml-5 mt-1 space-y-1 text-xs text-slate-600">
-                                    <li>Chọn <code>File → Export As</code>.</li>
-                                    <li>Chọn định dạng đuôi <code>.jpg</code> hoặc <code>.png</code>.</li>
-                                    <li>Nhấn <code>Export</code>, điều chỉnh chất lượng và nhấn <code>Export</code> lần nữa.</li>
-                                </ul>
-                            </li>
-                        </ol>
-                        <div class="mt-3 p-3 bg-red-50 rounded-xl border-l-4 border-red-500">
-                            <p class="text-red-800 text-xs font-medium italic"><b>Lưu ý:</b> Lệnh <code>Save</code> trong GIMP chỉ lưu tệp dự án đuôi <code>.xcf</code>, không phải tệp ảnh thông thường. Muốn xuất ảnh phải dùng <code>Export As</code>.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
-                    <p class="text-sm text-slate-500 italic">Video bài giảng và tệp thực hành đang được chuẩn bị.</p>
-                </div>
-            </details>
-
-        </div>
-    `
-},
-            {
-    title: "Bài 26: Công cụ tinh chỉnh màu sắc và công cụ chọn",
-    videoId: "",
-    desc: "Tìm hiểu các tham số màu sắc ảnh số, công cụ chỉnh màu và các công cụ tạo vùng chọn trong GIMP.",
-    downloadUrl: "#",
-    contentHtml: `
-        <div class="space-y-6 mt-4 text-left">
-
-            <!-- MỤC I: MỤC TIÊU BÀI HỌC -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" open>
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-blue-600 text-white rounded-lg shadow-md"><i data-lucide="target" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">I. Mục tiêu bài học</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 leading-relaxed text-sm md:text-base">
-                    <ul class="list-disc ml-5 space-y-2 mt-4 font-medium">
-                        <li>Biết các tham số biểu diễn màu cơ bản của ảnh số (Độ sáng, độ tương phản, tông màu, độ bão hòa).</li>
-                        <li>Biết và sử dụng thành thạo các công cụ chọn đơn giản: <strong>Rectangle Select</strong>, <strong>Ellipse Select</strong>, <strong>Free Select</strong>.</li>
-                        <li>Thực hiện được các lệnh chỉnh màu cơ bản để cải thiện chất lượng hình ảnh thông qua phần mềm GIMP.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- MỤC II: LÝ THUYẾT TRỌNG TÂM -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-emerald-600 text-white rounded-lg shadow-md"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">II. Lý thuyết trọng tâm</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-6 text-sm md:text-base mt-4">
-
-                    <!-- Phần 1: Tinh chỉnh màu sắc -->
-                    <div class="space-y-4">
-                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 1. Công cụ tinh chỉnh màu sắc
-                        </p>
-
-                        <!-- Brightness-Contrast -->
-                        <div class="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
-                            <p class="font-bold text-yellow-800 mb-2">a) Chỉnh độ sáng và tương phản — <code>Colors → Brightness-Contrast</code></p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                                <div class="p-3 bg-white rounded-lg border border-yellow-100">
-                                    <p class="font-bold text-slate-700">☀️ Brightness (Độ sáng)</p>
-                                    <p class="mt-1 text-slate-600">Giá trị càng lớn, ảnh càng sáng.</p>
-                                </div>
-                                <div class="p-3 bg-white rounded-lg border border-yellow-100">
-                                    <p class="font-bold text-slate-700">🔲 Contrast (Tương phản)</p>
-                                    <p class="mt-1 text-slate-600">Điều chỉnh sự khác biệt giữa vùng sáng và vùng tối.</p>
-                                </div>
-                            </div>
-                            <p class="text-xs text-yellow-700 mt-2 italic">Có thể chuyển sang công cụ <strong>Levels</strong> để chỉnh chi tiết hơn bằng nút <code>Edit this Settings as Levels</code>.</p>
-                        </div>
-
-                        <!-- Color Balance -->
-                        <div class="p-4 bg-pink-50 rounded-xl border border-pink-100">
-                            <p class="font-bold text-pink-800 mb-2">b) Cân bằng màu — <code>Colors → Color Balance</code></p>
-                            <p class="text-xs mb-2">Hiệu chỉnh các màu nổi trội trong ba dải độ sáng:</p>
-                            <div class="grid grid-cols-3 gap-2 text-xs text-center">
-                                <div class="p-2 bg-slate-700 text-white rounded-lg font-bold">Shadows<br><span class="font-normal opacity-75">Vùng tối</span></div>
-                                <div class="p-2 bg-slate-400 text-white rounded-lg font-bold">Midtones<br><span class="font-normal opacity-75">Vùng trung bình</span></div>
-                                <div class="p-2 bg-yellow-200 text-slate-800 rounded-lg font-bold">Highlights<br><span class="font-normal opacity-75">Vùng sáng</span></div>
-                            </div>
-                        </div>
-
-                        <!-- Hue-Saturation -->
-                        <div class="p-4 bg-purple-50 rounded-xl border border-purple-100">
-                            <p class="font-bold text-purple-800 mb-2">c) Chỉnh màu sắc — <code>Colors → Hue-Saturation</code></p>
-                            <div class="overflow-hidden rounded-xl border border-purple-100">
-                                <table class="w-full text-xs">
-                                    <thead class="bg-purple-100">
-                                        <tr>
-                                            <th class="p-2 text-left font-bold text-purple-800">Tham số</th>
-                                            <th class="p-2 text-left font-bold text-purple-800">Ý nghĩa</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-purple-50 bg-white">
-                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Hue</td><td class="p-2">Thay đổi tông màu trên vòng tròn màu</td></tr>
-                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Lightness</td><td class="p-2">Thay đổi độ sáng của màu</td></tr>
-                                        <tr><td class="p-2 font-mono font-bold text-purple-700">Saturation</td><td class="p-2">Thay đổi độ bão hoà (đậm/nhạt) của màu</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p class="text-xs text-purple-700 mt-2 italic">Cho phép chỉnh sửa trên từng kênh màu riêng biệt ($Red, Green, Blue, Cyan, Magenta, Yellow$) hoặc toàn bộ ($Master$).</p>
-                        </div>
-                    </div>
-
-                    <hr class="border-slate-100">
-
-                    <!-- Phần 2: Vùng chọn -->
-                    <div class="space-y-4">
-                        <p class="font-bold text-emerald-700 flex items-center gap-2 text-lg">
-                            <span class="w-2 h-6 bg-emerald-500 rounded-full"></span> 2. Vai trò và cách thiết lập vùng chọn
-                        </p>
-                        <p>Vùng chọn giúp chia nhỏ hình ảnh để xử lý riêng biệt từng phần, <strong>tránh ảnh hưởng đến toàn bộ bức ảnh</strong>.</p>
-
-                        <!-- Công cụ chọn -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                            <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-center">
-                                <p class="text-2xl mb-1">▭</p>
-                                <p class="font-bold text-blue-800">Rectangle Select</p>
-                                <p class="text-slate-600 mt-1">Phím tắt: <code class="bg-blue-100 px-1 rounded">R</code></p>
-                                <p class="text-slate-600 mt-1">Tạo vùng chọn hình chữ nhật</p>
-                            </div>
-                            <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-center">
-                                <p class="text-2xl mb-1">⬭</p>
-                                <p class="font-bold text-emerald-800">Ellipse Select</p>
-                                <p class="text-slate-600 mt-1">Phím tắt: <code class="bg-emerald-100 px-1 rounded">E</code></p>
-                                <p class="text-slate-600 mt-1">Tạo vùng chọn hình tròn hoặc elip</p>
-                            </div>
-                            <div class="p-3 bg-orange-50 rounded-xl border border-orange-100 text-center">
-                                <p class="text-2xl mb-1">✏️</p>
-                                <p class="font-bold text-orange-800">Free Select</p>
-                                <p class="text-slate-600 mt-1">Kéo thả tự do</p>
-                                <p class="text-slate-600 mt-1">Tạo vùng chọn tự do bao quanh đối tượng</p>
-                            </div>
-                        </div>
-
-                        <!-- Thao tác kết hợp -->
-                        <div class="overflow-hidden rounded-xl border border-slate-200">
-                            <table class="w-full text-xs">
-                                <thead class="bg-slate-50">
-                                    <tr>
-                                        <th class="p-3 text-left font-bold text-slate-700">Thao tác</th>
-                                        <th class="p-3 text-left font-bold text-slate-700">Phím kết hợp</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-100">
-                                    <tr><td class="p-3">Mở rộng vùng chọn</td><td class="p-3 font-mono font-bold text-blue-600">Shift + kéo chọn mới</td></tr>
-                                    <tr><td class="p-3">Trừ bớt vùng chọn</td><td class="p-3 font-mono font-bold text-red-600">Ctrl + kéo chọn mới</td></tr>
-                                    <tr><td class="p-3">Cắt và di chuyển</td><td class="p-3 font-mono font-bold text-orange-600">Alt + Ctrl + kéo thả</td></tr>
-                                    <tr><td class="p-3">Sao chép và di chuyển</td><td class="p-3 font-mono font-bold text-emerald-600">Alt + Shift + kéo thả</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-            <!-- MỤC III: THỰC HÀNH -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-orange-500 text-white rounded-lg shadow-md"><i data-lucide="pen-tool" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">III. Thực hành</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-slate-700 space-y-4 mt-4">
-
-                    <!-- Nhiệm vụ 1 -->
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p class="font-bold text-slate-900 flex items-center gap-2 mb-3">
-                            <span class="px-2 py-0.5 bg-yellow-500 text-white text-xs rounded-full">Nhiệm vụ 1</span> Chỉnh độ sáng, tương phản và màu sắc cho ảnh phong cảnh
-                        </p>
-                        <ol class="list-decimal ml-5 space-y-2 text-sm text-slate-700">
-                            <li>Vào menu <code>Colors → Brightness-Contrast</code>. Tăng <strong>Brightness</strong> và <strong>Contrast</strong> (ví dụ: 42 và 59) để ảnh rõ nét hơn.</li>
-                            <li>Lưu thiết lập (nếu cần) bằng nút <code>+</code> tại ô <strong>Presets</strong>.</li>
-                            <li>Vào <code>Colors → Color Balance</code>. Chọn dải màu trung bình (<strong>Midtones</strong>) và điều chỉnh các thanh trượt $Red, Green, Blue$ để làm ấm tông màu bình minh.</li>
-                        </ol>
-                    </div>
-
-                    <!-- Nhiệm vụ 2 -->
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                        <p class="font-bold text-slate-900 flex items-center gap-2 mb-3">
-                            <span class="px-2 py-0.5 bg-purple-600 text-white text-xs rounded-full">Nhiệm vụ 2</span> Tạo vùng chọn và chỉnh sửa cục bộ
-                        </p>
-                        <ol class="list-decimal ml-5 space-y-2 text-sm text-slate-700">
-                            <li>Dùng <code>Brightness-Contrast</code> để tăng sáng tổng thể cho ảnh chụp bị tối.</li>
-                            <li>Sử dụng <strong>Rectangle Select Tool</strong> (<code>R</code>) khoanh vùng đối tượng thứ nhất. Vào <code>Colors → Hue-Saturation</code> để tăng độ tươi cho màu sắc vùng này.</li>
-                            <li>Sử dụng <strong>Free Select Tool</strong> để bao quanh đối tượng thứ hai. Vào <code>Colors → Color Balance</code>, chọn dải <strong>Midtones</strong> và tăng kênh <strong>Blue</strong> để làm đậm sắc tím.</li>
-                            <li>Nhấn <code>OK</code> và bỏ vùng chọn để xem kết quả tổng thể.</li>
-                        </ol>
-                        <div class="mt-3 p-3 bg-red-50 rounded-xl border-l-4 border-red-500">
-                            <p class="text-red-800 text-xs font-medium italic"><b>Lưu ý:</b> Khi có vùng chọn đang hoạt động, mọi thao tác chỉnh màu chỉ ảnh hưởng đến vùng được chọn. Nhấn <code>Select → None</code> hoặc <code>Shift + Ctrl + A</code> để bỏ chọn.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </details>
-
-            <!-- MỤC IV: HỌC LIỆU KÈM THEO -->
-            <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2 bg-red-600 text-white rounded-lg shadow-md"><i data-lucide="play-circle" class="w-5 h-5"></i></div>
-                        <span class="font-black text-slate-800 uppercase tracking-tight text-sm md:text-base">IV. Học liệu kèm theo</span>
-                    </div>
-                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform"></i>
-                </summary>
-                <div class="p-6 pt-0 border-t border-slate-100 text-center py-8">
-                    <p class="text-sm text-slate-500 italic">Video bài giảng và tệp thực hành đang được chuẩn bị.</p>
-                </div>
-            </details>
-
-        </div>
-    `
-},
-            { title: "Bài 27: Công cụ vẽ và một số ứng dụng", videoId: "", desc: "Vẽ và thiết kế trên phần mềm chỉnh sửa ảnh.", downloadUrl: "#" },
-            { title: "Bài 28: Tạo ảnh động", videoId: "", desc: "Thiết kế các tệp ảnh động (GIF).", downloadUrl: "#" },
-            { title: "Bài 29: Khám phá phần mềm làm phim", videoId: "", desc: "Giao diện và các thành phần của phần mềm dựng video.", downloadUrl: "#" },
-            { title: "Bài 30: Biên tập phim", videoId: "", desc: "Cắt ghép và chèn hiệu ứng cho video.", downloadUrl: "#" },
-            { title: "Bài 31: Thực hành tạo phim hoạt hình", videoId: "", desc: "Sáng tạo nội dung video hoạt hình đơn giản.", downloadUrl: "#" }
-        ]
-    }
-];
+    window.courseContent = [
+        {
+            chapterName: "Chương 0: Sách",
+            lessons: [{ title: "Sách Giáo Khoa Tin học 11", videoId: "", desc: "Sách giáo khoa Kết nối tri thức với cuộc sống.", downloadUrl: "https://drive.google.com/file/d/1kuWgKPERcCXQU13OUndYyUm05w1oPKRB/view?usp=sharing" }]
+        },
+        {
+            chapterName: "Chủ đề 1: Máy tính và xã hội tri thức",
+            lessons: [
+                mk("Bài 1: Hệ điều hành", "Trình bày chức năng, lịch sử phát triển và đặc điểm hệ điều hành máy tính cá nhân, thiết bị di động.", ["Năm nhóm chức năng: quản lí thiết bị, lưu trữ, môi trường chạy ứng dụng, giao tiếp người dùng và tiện ích.", "Windows là hệ điều hành thương mại; Linux có nguồn gốc UNIX và là hệ điều hành nguồn mở phổ biến.", "Hệ điều hành di động ưu tiên giao diện cảm biến, kết nối không dây và tiện ích cá nhân.", "Hệ điều hành là môi trường trung gian giữa phần cứng, ứng dụng và người dùng."], "Hãy kể một số công việc hệ điều hành thực hiện khi máy tính khởi động và hoạt động.", "Khởi động/điều phối thiết bị, quản lí tệp và ứng dụng, cung cấp giao diện và tiện ích.", "Nhóm chức năng nào thể hiện rõ tính thân thiện của máy tính cá nhân?", "Cung cấp môi trường giao tiếp với người sử dụng.", "Lập sơ đồ Phần cứng – Hệ điều hành – Ứng dụng – Người dùng; đối chiếu thông tin hệ điều hành tìm bằng công cụ số/AI với SGK.", ["Đúng vai trò từng tầng.", "Nguồn tìm kiếm được đối chiếu.", "Nêu rõ AI chỉ hỗ trợ, người học kiểm chứng kết luận."]),
+                mk("Bài 2: Thực hành sử dụng hệ điều hành", "Sử dụng giao diện, quản lí tệp/thư mục và một số tiện ích trên máy tính, thiết bị di động.", ["Nhận diện màn hình nền, cửa sổ, thanh công việc và biểu tượng.", "Tạo, đổi tên, sao chép, di chuyển, xóa tệp/thư mục và khởi động ứng dụng.", "Kiểm tra đĩa; chỉ hợp mảnh ổ đĩa từ, không áp dụng như vậy cho SSD.", "Quản lí danh bạ, lịch, hẹn giờ và ứng dụng trên thiết bị di động."], "Windows và Ubuntu có những điểm giao diện nào tương đồng?", "Đều có biểu tượng, cửa sổ, vùng khởi chạy ứng dụng và công cụ quản lí tệp.", "Vì sao không nên hợp mảnh SSD như ổ đĩa từ?", "SSD không dùng đầu từ và hợp mảnh không mang lại lợi ích tương tự, còn có thể tăng ghi không cần thiết.", "Tạo cấu trúc thư mục học tập, thao tác sao chép/di chuyển và lập phiếu kết quả; thực hành bằng dữ liệu mẫu, không dùng dữ liệu cá nhân thật.", ["Đúng cấu trúc và thao tác.", "Không làm mất dữ liệu.", "Có ảnh/chứng cứ hoặc mô tả kết quả."]),
+                mk("Bài 3: Phần mềm nguồn mở và phần mềm chạy trên Internet", "Phân biệt phần mềm thương mại, nguồn mở và phần mềm chạy trên Internet; hiểu quyền sử dụng.", ["Phần mềm nguồn mở công bố mã nguồn theo giấy phép tương ứng.", "Miễn phí không đồng nghĩa nguồn mở; nguồn mở không có nghĩa được dùng không điều kiện.", "Phần mềm chạy trên Internet cung cấp dịch vụ qua trình duyệt/mạng.", "Cần xem giấy phép, dữ liệu đưa lên dịch vụ và khả năng làm việc ngoại tuyến."], "Một phần mềm miễn phí có chắc chắn là phần mềm nguồn mở không?", "Không. Miễn phí nói về chi phí; nguồn mở liên quan quyền truy cập và giấy phép mã nguồn.", "Khi chọn phần mềm trực tuyến cho lớp cần đánh giá gì?", "Chức năng, giấy phép, quyền riêng tư, tài khoản/mạng, khả năng xuất dữ liệu và phương án dự phòng.", "So sánh một phần mềm cài đặt với một dịch vụ web cùng mục đích theo năm tiêu chí."),
+                mk("Bài 4: Bên trong máy tính", "Nhận biết các thành phần phần cứng và quan hệ giữa bộ xử lí, bộ nhớ, lưu trữ, thiết bị vào/ra.", ["CPU thực hiện lệnh và điều khiển hoạt động.", "RAM lưu tạm dữ liệu/chương trình đang chạy; mất dữ liệu khi mất điện.", "Thiết bị lưu trữ giữ dữ liệu lâu dài.", "Bo mạch chủ và cổng kết nối liên kết các thành phần."], "Vì sao máy có ổ lưu trữ lớn nhưng RAM ít vẫn có thể chạy chậm khi mở nhiều ứng dụng?", "Ứng dụng đang chạy cần RAM; thiếu RAM làm hệ thống phải trao đổi dữ liệu với lưu trữ chậm hơn.", "RAM và ổ lưu trữ khác nhau ở điểm nào?", "RAM nhanh, tạm thời; ổ lưu trữ lâu dài và thường chậm hơn.", "Quan sát cấu hình một máy tính mẫu; lập bảng Thành phần – Chức năng – Thông số – Ảnh hưởng."),
+                mk("Bài 5: Kết nối máy tính với các thiết bị số", "Lựa chọn cổng, giao thức và quy trình kết nối thiết bị số an toàn.", ["Thiết bị có thể kết nối có dây qua USB/HDMI và không dây qua Bluetooth/Wi-Fi.", "Cần đúng cổng, cáp, trình điều khiển và chế độ thiết bị.", "Thiết bị vào, ra hoặc vừa vào vừa ra có hướng truyền dữ liệu khác nhau.", "Ngắt kết nối và cấp quyền truy cập dữ liệu đúng cách."], "Vì sao không có một loại cáp chung phù hợp mọi thiết bị?", "Thiết bị khác nhau về cổng, chuẩn tín hiệu, nguồn và chức năng.", "Máy quét là thiết bị vào hay ra?", "Thiết bị vào vì chuyển ảnh/tài liệu thành dữ liệu cho máy tính.", "Lập hướng dẫn kết nối điện thoại hoặc loa Bluetooth với máy tính, có bước xử lí khi không nhận thiết bị.")
+            ]
+        },
+        {
+            chapterName: "Chủ đề 2: Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin",
+            lessons: [
+                mk("Bài 6: Lưu trữ và chia sẻ tệp tin trên Internet", "Sử dụng ổ đĩa trực tuyến để lưu trữ, tổ chức và chia sẻ tệp đúng quyền.", ["Ổ đĩa trực tuyến hỗ trợ tải lên, tải xuống, đồng bộ và cộng tác.", "Tổ chức thư mục và tên tệp giúp tìm kiếm, quản lí phiên bản.", "Quyền thường gồm xem, nhận xét và chỉnh sửa.", "Không chia sẻ công khai dữ liệu cá nhân hoặc tệp không có quyền."], "Nhóm cùng làm một tài liệu nên gửi nhiều bản qua email hay dùng một tệp chia sẻ?", "Một tệp chia sẻ giúp cộng tác và tránh nhiều phiên bản, nếu quyền được thiết lập đúng.", "Quyền xem và quyền chỉnh sửa khác nhau thế nào?", "Xem chỉ đọc; chỉnh sửa cho phép thay đổi nội dung.", "Tải tệp mẫu lên, tổ chức thư mục và thử ba mức quyền với tài khoản lớp hoặc mô phỏng ngoại tuyến.", ["Tệp đúng vị trí/tên.", "Quyền đúng đối tượng.", "Không dùng dữ liệu thật nhạy cảm."]),
+                mk("Bài 7: Thực hành tìm kiếm thông tin trên Internet", "Tạo truy vấn, dùng bộ lọc, so sánh máy tìm kiếm và đánh giá nguồn.", ["Từ khóa cụ thể, dấu ngoặc kép và toán tử giúp thu hẹp kết quả.", "Bộ lọc thời gian, loại tệp, ngôn ngữ và miền hỗ trợ truy vấn.", "Đánh giá tác giả, bằng chứng, thời điểm và mục đích nguồn.", "Tìm kiếm bằng giọng nói cần kiểm tra lại truy vấn nhận dạng."], "Vì sao hai người tìm cùng chủ đề có thể nhận kết quả khác nhau?", "Khác từ khóa, bộ lọc, công cụ, ngữ cảnh và cá nhân hóa kết quả.", "Một nguồn đứng đầu có mặc nhiên đáng tin nhất không?", "Không; thứ hạng không thay thế đánh giá nguồn và đối chiếu.", "Tìm một thông tin bằng hai truy vấn và hai công cụ; lập bảng kết quả, tiêu chí và kết luận.", ["Truy vấn có chủ đích.", "Ít nhất hai nguồn được đối chiếu.", "Ghi nguồn và lí do chọn."]),
+                mk("Bài 8: Thực hành nâng cao sử dụng thư điện tử và mạng xã hội", "Phân loại thư, tìm kiếm hiệu quả và thiết lập quyền riêng tư trên mạng xã hội.", ["Nhãn, bộ lọc và toán tử tìm kiếm giúp quản lí thư.", "Tiêu đề, người gửi, thời gian và tệp đính kèm là tiêu chí tìm kiếm.", "Quyền riêng tư quyết định người xem bài viết và thông tin tài khoản.", "Cần kiểm tra phiên đăng nhập, xác thực và ứng dụng được cấp quyền."], "Hộp thư nhiều năm có thể tìm thư cũ bằng cách nào?", "Dùng từ khóa, người gửi, thời gian, nhãn và loại tệp đính kèm.", "Thiết lập công khai mọi bài viết có rủi ro gì?", "Lộ thông tin, bị thu thập dữ liệu hoặc tiếp cận ngoài mong muốn.", "Tạo hệ thống nhãn thư học tập trên dữ liệu mẫu và lập checklist quyền riêng tư mạng xã hội.")
+            ]
+        },
+        {
+            chapterName: "Chủ đề 3: Đạo đức, pháp luật và văn hóa trong môi trường số",
+            lessons: [
+                mk("Bài 9: Giao tiếp an toàn trên Internet", "Nhận diện tình huống bất thường và áp dụng quy tắc ứng xử, phòng chống lừa đảo.", ["Ba nguyên tắc: chậm lại, kiểm tra ngay, dừng lại không gửi.", "Không chuyển tiền/cung cấp mã khi chưa xác minh qua kênh độc lập.", "Tôn trọng, không phát tán thông tin sai hoặc làm tổn thương người khác.", "Lưu bằng chứng, chặn và báo cáo khi cần."], "Tài khoản mang tên bạn nhắn xin chuyển tiền gấp: em làm gì trước?", "Không chuyển; liên hệ bạn bằng kênh khác để xác minh và báo cáo tài khoản nếu giả mạo.", "Áp dụng ba nguyên tắc chống lừa đảo vào tin nhắn khẩn cấp.", "Chậm lại để không bị thúc ép; kiểm tra người gửi/nội dung; dừng giao dịch và không cung cấp thông tin.", "Xử lí ba tình huống số theo bảng Dấu hiệu – Rủi ro – Hành động – Người cần báo.")
+            ]
+        },
+        {
+            chapterName: "Chủ đề 4: Giới thiệu các hệ cơ sở dữ liệu",
+            lessons: [
+                mk("Bài 10: Lưu trữ dữ liệu và khai thác thông tin phục vụ quản lí", "Giải thích nhu cầu thu thập, cập nhật và khai thác dữ liệu trong bài toán quản lí.", ["Quản lí cần dữ liệu về đối tượng và hoạt động.", "Cập nhật phản ánh thay đổi; truy xuất tạo thông tin phục vụ quyết định.", "Dữ liệu có thể thu thập thủ công hoặc tự động.", "Chỉ thu thập dữ liệu cần thiết và bảo vệ dữ liệu cá nhân."], "Quản lí điểm học tập cần lưu những dữ liệu nào?", "Học sinh, môn, loại điểm, giá trị, thời điểm và thông tin cần thiết theo quy định.", "Điểm trung bình nên lưu hay có thể tính từ dữ liệu thành phần?", "Có thể tính khi cần nếu công thức và dữ liệu thành phần đầy đủ.", "Chọn một bài toán quản lí, xác định đối tượng, dữ liệu cần thu thập và thông tin cần khai thác."),
+                mk("Bài 11: Cơ sở dữ liệu", "Hiểu CSDL, yêu cầu tổ chức dữ liệu và tính độc lập giữa dữ liệu với phần mềm.", ["CSDL là tập dữ liệu có liên quan, được tổ chức để lưu trữ và khai thác.", "Dữ liệu cần cấu trúc nhất quán, hạn chế dư thừa và mâu thuẫn.", "Lưu dữ liệu độc lập giúp nhiều ứng dụng cùng khai thác.", "Không lưu dữ liệu suy ra nếu có thể tính đáng tin cậy từ dữ liệu gốc."], "Chuyển hồ sơ giấy thành nhiều tệp văn bản rời đã tạo CSDL tốt chưa?", "Chưa; cần cấu trúc, quan hệ và cơ chế khai thác nhất quán.", "Vì sao không nhất thiết lưu cột điểm trung bình?", "Có thể tính từ các điểm thành phần theo công thức đã định.", "Thiết kế cấu trúc dữ liệu đơn giản cho quản lí sách hoặc điểm, chỉ rõ dữ liệu gốc và dữ liệu tính được."),
+                mk("Bài 12: Hệ quản trị cơ sở dữ liệu và hệ cơ sở dữ liệu", "Phân biệt CSDL, hệ QTCSDL và hệ CSDL; hiểu chức năng, mô hình tập trung/phân tán.", ["Hệ QTCSDL hỗ trợ định nghĩa, cập nhật/truy xuất và bảo mật/an toàn dữ liệu.", "Hệ CSDL gồm CSDL, hệ QTCSDL, ứng dụng, người dùng và hạ tầng liên quan.", "Hệ tập trung lưu tại một nơi; hệ phân tán lưu trên nhiều nút phối hợp.", "Mỗi mô hình có đánh đổi về quản lí, sẵn sàng và đồng bộ."], "Người dùng có cần biết cấu trúc tệp vật lí để tra cứu CSDL không?", "Không; hệ QTCSDL và ứng dụng cung cấp giao diện, ngôn ngữ khai thác.", "Ba nhóm chức năng chính của hệ QTCSDL?", "Định nghĩa dữ liệu; cập nhật/truy xuất; bảo mật và an toàn.", "Phân tích một hệ CSDL thực tế, chỉ rõ thành phần và chọn tập trung hay phân tán."),
+                mk("Bài 13: Cơ sở dữ liệu quan hệ", "Mô tả bảng, bản ghi, trường, khóa và quan hệ trong CSDL quan hệ.", ["Bảng gồm hàng/bản ghi và cột/trường.", "Khóa chính xác định duy nhất bản ghi.", "Khóa ngoài tham chiếu khóa chính của bảng khác.", "Tách bảng giảm lặp dữ liệu và tăng tính nhất quán."], "Vì sao website âm nhạc không nên lặp đầy đủ tên nhạc sĩ trong mọi bản thu?", "Dễ dư thừa và mâu thuẫn; nên lưu nhạc sĩ ở bảng riêng và tham chiếu bằng khóa.", "Khóa chính cần đặc điểm gì?", "Giá trị duy nhất, không rỗng và ổn định trong phạm vi bảng.", "Từ dữ liệu âm nhạc, xác định bốn bảng, khóa chính và quan hệ khóa ngoài."),
+                mk("Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc", "Dùng SQL để tạo cấu trúc, cập nhật, truy xuất và kiểm soát quyền ở mức nhập môn.", ["CREATE tạo CSDL/bảng; kiểu dữ liệu và ràng buộc mô tả cấu trúc.", "INSERT/UPDATE/DELETE cập nhật dữ liệu.", "SELECT truy xuất; JOIN kết hợp bảng theo quan hệ.", "Quyền truy cập phải theo vai trò và nguyên tắc tối thiểu."], "Vì sao SQL thuận lợi hơn việc mỗi ứng dụng tự đọc tệp dữ liệu?", "SQL cung cấp ngôn ngữ thống nhất để hệ QTCSDL kiểm soát và tối ưu thao tác.", "Câu lệnh nào lấy dữ liệu từ bảng?", "SELECT.", "Viết truy vấn tạo bảng bản thu và truy vấn liên kết lấy mã, tên bản nhạc; dùng dữ liệu mẫu, không dữ liệu cá nhân.", ["Cú pháp phù hợp hệ QTCSDL được học.", "Khóa và kiểu dữ liệu đúng.", "Truy vấn trả đúng cột."]),
+                mk("Bài 15: Bảo mật và an toàn hệ cơ sở dữ liệu", "Áp dụng phân quyền, sao lưu và trách nhiệm người dùng để bảo vệ CSDL.", ["Xác thực và phân quyền giới hạn người được phép và thao tác được phép.", "Mỗi người dùng phải bảo vệ tài khoản và chịu trách nhiệm hành động.", "Sao lưu, nhật kí và kế hoạch phục hồi giảm thiệt hại sự cố.", "Bảo mật cần con người, quy trình và công nghệ phối hợp."], "Mật khẩu mạnh có đủ bảo vệ CSDL nếu cấp quyền quá rộng không?", "Không; cần phân quyền tối thiểu, giám sát và quy trình an toàn.", "Vì sao người vận hành cần quy định trách nhiệm riêng?", "Họ có quyền cao; sai sót hoặc lạm dụng có thể ảnh hưởng toàn hệ thống.", "Lập ma trận Vai trò – Dữ liệu – Quyền cho hệ quản lí nhỏ, kèm kế hoạch sao lưu."),
+            ]
+        },
+        {
+            chapterName: "Chủ đề 5: Hướng nghiệp với tin học",
+            lessons: [
+                mk("Bài 16: Công việc quản trị cơ sở dữ liệu", "Tìm hiểu nhiệm vụ, năng lực, phẩm chất và cơ hội nghề quản trị CSDL.", ["DBA cài đặt, cấu hình, phân quyền, theo dõi, sao lưu và phục hồi CSDL.", "Cần kiến thức hệ QTCSDL, hệ điều hành, mạng, bảo mật và xử lí sự cố.", "Cần trách nhiệm, cẩn trọng, giao tiếp và học liên tục.", "Thông tin nghề/tuyển dụng phải được kiểm tra thời điểm và nguồn."], "Ai đảm bảo CSDL luôn sẵn sàng và phục hồi khi có sự cố?", "Nhà quản trị CSDL phối hợp với các vai trò vận hành liên quan.", "Nêu ba nhóm nhiệm vụ của DBA.", "Vận hành/giám sát; bảo mật/phân quyền; sao lưu/phục hồi và tối ưu.", "Tìm hai mô tả tuyển dụng DBA, lập bảng nhiệm vụ – năng lực – minh chứng học tập và ghi nguồn.")
+            ]
+        },
+        {
+            chapterName: "Chủ đề 6: Thực hành tạo và khai thác cơ sở dữ liệu",
+            lessons: [
+                mk("Bài 17: Quản trị cơ sở dữ liệu trên máy tính", "Làm quen MySQL và HeidiSQL để quản trị CSDL trên máy tính.", ["MySQL là hệ QTCSDL; HeidiSQL là công cụ giao diện kết nối và thao tác.", "Cần thông tin máy chủ, cổng, tài khoản và quyền phù hợp.", "Môi trường thực hành chỉ dùng dữ liệu mẫu.", "Kiểm tra kết nối trước khi tạo hoặc sửa dữ liệu."], "HeidiSQL có phải là CSDL không?", "Không; đó là công cụ khách để làm việc với hệ QTCSDL và CSDL.", "Cần những thông tin gì để kết nối?", "Máy chủ, cổng, tài khoản, mật khẩu/cơ chế xác thực và CSDL nếu có.", "Kết nối môi trường mẫu và lập phiếu xác nhận máy chủ – phiên – quyền, không ghi mật khẩu.", ["Kết nối đúng môi trường.", "Không lộ thông tin xác thực.", "Mô tả được vai trò MySQL/HeidiSQL."]),
+                mk("Bài 18: Thực hành xác định cấu trúc bảng và các trường khóa", "Phân tích bài toán âm nhạc để xác định bảng, trường, kiểu dữ liệu và khóa.", ["Tách thực thể nhạc sĩ, ca sĩ, bản nhạc, bản thu âm thành bảng.", "Chọn trường và kiểu dữ liệu theo giá trị cần lưu.", "Khóa chính định danh; khóa ngoài tạo liên kết.", "Chuẩn hóa giúp hạn chế lặp và bất nhất."], "Vì sao bản thu âm cần tham chiếu bản nhạc và ca sĩ?", "Một bản thu gắn với bản nhạc và người thể hiện; khóa ngoài biểu diễn quan hệ đó.", "Nếu thêm nơi sinh của nhạc sĩ nên thay đổi thế nào?", "Có thể thêm bảng tỉnh/thành và trường khóa ngoài phù hợp để tránh lặp.", "Thiết kế lược đồ mymusic gồm bảng, trường, kiểu, khóa chính và khóa ngoài."),
+                mk("Bài 19: Thực hành tạo lập cơ sở dữ liệu và các bảng", "Tạo CSDL mymusic và các bảng theo cấu trúc đã thiết kế.", ["Tạo CSDL đúng tên và bộ kí tự phù hợp.", "Tạo bảng với tên trường, kiểu và ràng buộc.", "Tạo khóa chính trước khi thiết lập quan hệ.", "Kiểm tra cấu trúc sau mỗi bảng."], "Vì sao nên thiết kế cấu trúc trước khi thao tác trên HeidiSQL?", "Giảm sửa sai, bảo đảm kiểu/khóa nhất quán và dễ kiểm tra.", "Sau khi tạo bảng cần kiểm tra gì?", "Tên trường, kiểu, cho phép rỗng, mặc định và khóa.", "Tạo mymusic và các bảng từ lược đồ Bài 18; nộp ảnh/cấu trúc xuất, không nộp thông tin đăng nhập.", ["Đủ bảng/trường.", "Kiểu đúng.", "Khóa chính đúng."]),
+                mk("Bài 20: Thực hành tạo lập bảng có khóa ngoài", "Thiết lập khóa ngoài và chỉ mục để liên kết bảng đúng toàn vẹn tham chiếu.", ["Kiểu trường khóa ngoài phải tương thích khóa được tham chiếu.", "Chọn đúng bảng/trường tham chiếu.", "UNIQUE có thể áp dụng cho tổ hợp trường cần duy nhất.", "Kiểm tra quan hệ sau khi lưu cấu trúc."], "Vì sao chỉ đặt UNIQUE riêng cho tên bản nhạc có thể không phù hợp?", "Nhiều nhạc sĩ có thể có bài trùng tên; tổ hợp tên bản nhạc và mã nhạc sĩ mới cần duy nhất theo bài toán.", "Điều kiện kiểu dữ liệu của khóa ngoài?", "Phải tương thích với khóa chính được tham chiếu.", "Tạo bảng bannhac có khóa chính, UNIQUE tổ hợp và khóa ngoài tới nhacsi.", ["Đúng trường và kiểu.", "UNIQUE đúng tổ hợp.", "Khóa ngoài đúng bảng/trường."]),
+                mk("Bài 21: Thực hành cập nhật và truy xuất dữ liệu các bảng", "Thêm, sửa, xóa và truy xuất dữ liệu ở bảng đơn giản.", ["INSERT hoặc giao diện thêm bản ghi.", "UPDATE sửa đúng bản ghi với điều kiện.", "DELETE cần điều kiện để tránh xóa diện rộng.", "SELECT và bộ lọc dùng truy xuất/kiểm tra dữ liệu."], "Vì sao phải xem điều kiện trước khi UPDATE hoặc DELETE?", "Điều kiện sai hoặc thiếu có thể thay đổi/xóa nhiều bản ghi ngoài ý muốn.", "Cách kiểm tra an toàn trước DELETE?", "Chạy SELECT với cùng điều kiện và sao lưu khi cần.", "Cập nhật bảng nhacsi/casi bằng dữ liệu mẫu rồi truy xuất theo ba tiêu chí.", ["Dữ liệu đúng.", "Điều kiện giới hạn đúng bản ghi.", "Có truy vấn kiểm tra."]),
+                mk("Bài 22: Thực hành cập nhật bảng dữ liệu có tham chiếu", "Cập nhật bảng có khóa ngoài và bảo đảm toàn vẹn tham chiếu.", ["Giá trị khóa ngoài phải tồn tại ở bảng tham chiếu hoặc được phép rỗng theo thiết kế.", "Nhập dữ liệu theo thứ tự bảng cha trước, bảng con sau.", "Hệ QTCSDL từ chối tham chiếu không hợp lệ.", "Không xóa bản ghi cha khi còn bản ghi con nếu chính sách không cho phép."], "Vì sao thêm bản nhạc với mã nhạc sĩ chưa tồn tại bị từ chối?", "Vi phạm toàn vẹn tham chiếu của khóa ngoài.", "Thứ tự nhập dữ liệu hợp lí?", "Nhập nhạc sĩ/ca sĩ trước, rồi bản nhạc và bản thu tham chiếu.", "Cập nhật bannhac và banthuam bằng dữ liệu mẫu, ghi lại một lỗi tham chiếu và cách sửa."),
+                mk("Bài 23: Thực hành truy xuất dữ liệu qua liên kết các bảng", "Dùng JOIN để lấy thông tin từ nhiều bảng theo quan hệ khóa.", ["JOIN kết hợp dòng dựa trên điều kiện liên kết.", "Dùng bí danh giúp truy vấn rõ và tránh trùng tên cột.", "Chọn đúng chuỗi quan hệ từ bản thu → bản nhạc/ca sĩ/nhạc sĩ.", "WHERE lọc sau khi xác định bảng và liên kết."], "Tên bản nhạc và tên ca sĩ nằm ở hai bảng khác nhau, cần thao tác gì?", "JOIN các bảng qua khóa chính/khóa ngoài rồi SELECT các cột cần.", "Nếu thiếu điều kiện JOIN có thể xảy ra gì?", "Tích Descartes tạo rất nhiều kết hợp sai.", "Viết truy vấn lấy id bản thu, tên bản nhạc, ca sĩ và tác giả; kiểm tra số dòng bằng dữ liệu mẫu.", ["JOIN đúng khóa.", "Đúng cột và bí danh.", "Kết quả không lặp sai."]),
+                mk("Bài 24: Thực hành sao lưu dữ liệu", "Sao lưu và phục hồi CSDL theo quy trình an toàn.", ["Sao lưu tạo bản dự phòng độc lập với dữ liệu đang vận hành.", "Ghi rõ thời điểm, phạm vi, phiên bản và nơi lưu.", "Phục hồi cần thử trên môi trường an toàn trước khi ghi đè.", "Một bản sao lưu chưa được thử phục hồi chưa đủ bằng chứng tin cậy."], "Sao lưu thành công nhưng chưa từng thử phục hồi có đủ an toàn không?", "Chưa; phải kiểm tra tệp và thử phục hồi để chứng minh sử dụng được.", "Hai thao tác cốt lõi của bài?", "Backup CSDL và restore từ bản sao.", "Sao lưu mymusic, phục hồi vào CSDL thử nghiệm và đối chiếu số bảng/bản ghi.", ["Tệp sao lưu được tạo.", "Phục hồi không ghi đè dữ liệu gốc.", "Đối chiếu cấu trúc và dữ liệu."])
+            ]
+        },
+        {
+            chapterName: "Chủ đề 7: Phần mềm chỉnh sửa ảnh và làm video",
+            lessons: [
+                mk("Bài 25: Phần mềm chỉnh sửa ảnh", "Làm quen ảnh số, độ phân giải và thao tác cơ bản trong GIMP.", ["Ảnh bitmap gồm các điểm ảnh; kích thước và độ phân giải ảnh hưởng chất lượng/sử dụng.", "GIMP là phần mềm chỉnh sửa ảnh; giao diện gồm vùng ảnh, hộp công cụ và bảng tùy chọn.", "Các thao tác cơ bản: mở, phóng/thu, xoay, cắt, đổi kích thước và xuất.", "Giữ tệp nguồn để tiếp tục chỉnh sửa."], "Ảnh 2560×1920 có xấp xỉ bao nhiêu megapixel?", "Khoảng 4,9 triệu điểm ảnh, thường gọi xấp xỉ 5 MP.", "Đổi kích thước và đổi độ phân giải có giống nhau không?", "Không; kích thước pixel và mật độ in liên quan nhưng là các thuộc tính khác.", "Mở ảnh mẫu, cắt/xoay/đổi kích thước và xuất bản sao; giữ nguyên ảnh gốc.", ["Đúng thao tác.", "Không ghi đè ảnh gốc.", "Định dạng xuất phù hợp."]),
+                mk("Bài 26: Công cụ tinh chỉnh màu sắc và công cụ chọn", "Điều chỉnh màu và tạo vùng chọn phù hợp trong GIMP.", ["Brightness/Contrast, Levels, Curves và Hue/Saturation tác động khác nhau.", "Vùng chọn giới hạn khu vực chịu tác động.", "Công cụ chọn chữ nhật, elip, tự do hoặc theo màu phù hợp từng biên.", "Feather làm mềm biên để ghép/chỉnh tự nhiên hơn."], "Vì sao cần tạo vùng chọn trước khi chỉnh một phần ảnh?", "Để giới hạn hiệu ứng, tránh thay đổi vùng không mong muốn.", "Một vùng có màu tương đối đồng nhất nên thử công cụ chọn nào?", "Chọn theo màu, rồi tinh chỉnh ngưỡng và biên.", "Chỉnh màu một đối tượng trong ảnh mẫu mà giữ nền gần như không đổi; nộp trước/sau."),
+                mk("Bài 27: Công cụ vẽ và một số ứng dụng", "Sử dụng lớp ảnh, công cụ vẽ và thiết lập màu để tạo/chỉnh sản phẩm.", ["Lớp ảnh cho phép chỉnh từng phần độc lập và sắp xếp chồng lớp.", "Cọ, bút chì, tẩy, tô màu và đường dẫn phục vụ mục đích khác nhau.", "Màu tiền cảnh/nền, kích thước và độ cứng cọ ảnh hưởng nét.", "Tạo lớp mới trước khi vẽ giúp sửa dễ hơn."], "Vì sao nên vẽ trên lớp mới thay vì trực tiếp lên ảnh gốc?", "Dễ chỉnh, ẩn, xóa hoặc thay đổi mà không phá dữ liệu gốc.", "Độ cứng cọ ảnh hưởng gì?", "Mức sắc/mềm của biên nét cọ.", "Tạo sản phẩm có ít nhất ba lớp, hai công cụ vẽ và bảng màu có chủ đích."),
+                mk("Bài 28: Tạo ảnh động", "Tạo GIF từ các lớp ảnh và thiết lập trình tự, thời gian khung hình.", ["Mỗi lớp có thể trở thành một khung hình.", "Thứ tự lớp quyết định thứ tự phát.", "Thời gian trễ ảnh hưởng nhịp chuyển động.", "Xuất GIF cần chọn chế độ ảnh động và lặp phù hợp."], "Vì sao tệp ảnh động thường lớn hơn ảnh tĩnh tương tự?", "Chứa nhiều khung hình và thông tin thời gian thay vì một ảnh.", "Muốn một khung dừng lâu hơn cần thay đổi gì?", "Tăng thời gian trễ của khung đó.", "Tạo GIF ngắn 4–8 khung, có chuyển động rõ và tốc độ dễ quan sát."),
+                mk("Bài 29: Khám phá phần mềm làm phim", "Nhận biết giao diện và tạo đoạn phim từ ảnh/video có sẵn.", ["Dự án phim tổ chức tư liệu, dòng thời gian, màn hình xem trước và công cụ xuất.", "Tư liệu cần có quyền sử dụng và định dạng phù hợp.", "Kéo tư liệu lên timeline, sắp xếp và xem thử.", "Lưu dự án khác với xuất tệp video."], "Tệp dự án có phải là tệp video hoàn chỉnh không?", "Không; dự án lưu cấu trúc biên tập, cần xuất/render để tạo video.", "Ba vùng giao diện chính của phần mềm làm phim?", "Kho tư liệu, timeline và màn hình xem trước; tên có thể khác theo phần mềm.", "Tạo dự án 30–60 giây từ tư liệu được cung cấp và lưu đúng cấu trúc thư mục."),
+                mk("Bài 30: Biên tập phim", "Cắt ghép, sắp xếp, thêm chuyển cảnh, chữ và âm thanh có chủ đích.", ["Cắt bỏ phần thừa và sắp xếp theo kịch bản.", "Chuyển cảnh dùng tiết chế để hỗ trợ mạch nội dung.", "Chữ cần đủ thời gian đọc và tương phản.", "Âm thanh phải cân bằng, có bản quyền và không che lời thoại."], "Có nên dùng một hiệu ứng khác nhau cho mọi lần chuyển cảnh không?", "Không; quá nhiều hiệu ứng làm phân tán và giảm tính nhất quán.", "Điều gì quyết định điểm cắt tốt?", "Mạch nội dung, hành động, nhịp và khả năng người xem hiểu liên tục.", "Biên tập đoạn phim ngắn có mở–thân–kết, tiêu đề và âm thanh phù hợp."),
+                mk("Bài 31: Thực hành tạo phim hoạt hình", "Xây dựng kịch bản, chuẩn bị tư liệu, tạo hoạt hình, phụ đề và hội thoại.", ["Kịch bản xác định chủ đề, nhân vật, cảnh và thông điệp.", "Tư liệu cần đồng nhất phong cách, đúng quyền sử dụng.", "Tạo cảnh theo kịch bản rồi bổ sung phụ đề/hội thoại.", "Xem thử, sửa lỗi và xuất bản theo tiêu chí."], "Vì sao nên hoàn thiện kịch bản trước khi tạo các cảnh?", "Giúp xác định tư liệu, thứ tự, thời lượng và tránh làm lại không cần thiết.", "Phụ đề tốt cần đặc điểm gì?", "Đúng nội dung, đủ thời gian đọc, tương phản và không che thông tin quan trọng.", "Tạo phim hoạt hình ngắn theo một chủ đề gợi ý trong KHBD và trình bày quyết định thiết kế.", ["Có kịch bản và thông điệp.", "Cảnh liên tục, dễ hiểu.", "Phụ đề/hội thoại dễ tiếp cận.", "Tư liệu đúng bản quyền."])
+            ]
+        }
+    ];
+})();

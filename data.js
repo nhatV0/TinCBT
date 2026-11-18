@@ -16,31 +16,32 @@ window.courses = {
     chinhKhoa: [
         { 
             id: 'tin10', 
-            title: 'Tin học 10', 
-            icon: 'monitor', 
-            dataPath: 'data-chinh-khoa/tin10.js', 
-            description: 'Chương trình Tin học 10 - Bộ sách Kết nối tri thức với cuộc sống.' 
+            title: 'Tin học 10',
+            icon: 'monitor',
+            dataPath: 'data-chinh-khoa/tin10.js',
+            description: 'Chương trình Tin học 10 - Bộ sách Kết nối tri thức với cuộc sống.'
         },
         { 
             id: 'tin11', 
-            title: 'Tin học 11', 
-            icon: 'database', 
-            dataPath: 'data-chinh-khoa/tin11.js', 
-            description: 'Chương trình Tin học 11 - Bộ sách Kết nối tri thức với cuộc sống.' 
+            title: 'Tin học 11 – THUD',
+            icon: 'database',
+            dataPath: 'data-chinh-khoa/tin11.js',
+            description: 'Chương trình Tin học ứng dụng 11 cả năm - Bộ sách Kết nối tri thức với cuộc sống.'
         },
         { 
-            id: 'tin12', 
-            title: 'Tin học 12', 
-            icon: 'network', 
-            dataPath: 'data-chinh-khoa/tin12.js', 
-            description: 'Chương trình Tin học 12 - Bộ sách Kết nối tri thức với cuộc sống.' 
+            id: 'tin12',
+            title: 'Tin học 12',
+            icon: 'network',
+            dataPath: 'data-chinh-khoa/tin12.js',
+            description: 'Chương trình Tin học 12 - Bộ sách Kết nối tri thức với cuộc sống.',
+            available: false
         },
         { 
             id: 'tin12plus', 
-            title: 'tin học THPT', 
+            title: 'Tin học THPT',
             icon: 'flame', // Sử dụng icon ngọn lửa thay vì award
-            dataPath: 'data-chinh-khoa/tin12plus.js', 
-            description: 'Chiến dịch ôn thi cuối cùng. Hệ thống đề thi thử mô phỏng 100% cấu trúc thật của Bộ GD&ĐT.' 
+            dataPath: 'data-chinh-khoa/tin12plus.js',
+            description: 'Chiến dịch ôn thi cuối cùng. Hệ thống đề thi thử mô phỏng 100% cấu trúc thật của Bộ GD&ĐT.'
         }
     ],
 
@@ -55,49 +56,50 @@ window.courses = {
         },
         { 
             id: 'cpp-avanced', 
-            title: 'Avanced', 
-            icon: 'code-2', 
-            dataPath: 'data-chuyen/cpp_avanced.js', 
-            description: 'bắt đầu học, đọc hiểu về các kỹ thuật lập trình.' 
+            title: 'Advanced',
+            icon: 'code-2',
+            dataPath: 'data-chuyen/cpp_avanced.js',
+            description: 'Bắt đầu học và tìm hiểu các kỹ thuật lập trình.'
         },
         { 
             id: 'aldesaan', 
-            title: 'Algorithm Design and Analysis', 
-            icon: 'cpu', 
-            dataPath: 'data-chuyen/aldesaan.js', 
-            description: 'tìm hiểu về các thuật toán và giải thuật trong lập trình' 
+            title: 'Algorithm Design and Analysis',
+            icon: 'cpu',
+            dataPath: 'data-chuyen/aldesaan.js',
+            description: 'Tìm hiểu về các thuật toán và giải thuật trong lập trình.'
         },
         { 
             id: 'datastruc', 
             title: 'Data Structure', 
-            icon: 'layers', 
-            dataPath: 'data-chuyen/datastruc.js', 
-            description: 'Tìm hiểu về cấu trúc dữ liệu, tìm kiếm, ngăn xếp và cây' 
+            icon: 'layers',
+            dataPath: 'data-chuyen/datastruc.js',
+            description: 'Tìm hiểu về cấu trúc dữ liệu, tìm kiếm, ngăn xếp và cây.'
         },
         { 
             id: 'graph', 
             title: 'Graph theory', 
-            icon: 'share-2', 
-            dataPath: 'data-chuyen/graph.js', 
-            description: 'Tìm hiểu về lý thuyết đồ thị các cách duyệt của đồ thị' 
+            icon: 'share-2',
+            dataPath: 'data-chuyen/graph.js',
+            description: 'Tìm hiểu lý thuyết đồ thị và các cách duyệt đồ thị.'
         },
         { 
             id: 'oop', 
             title: 'Object-Oriented Programming', 
-            icon: 'box', 
-            dataPath: 'data-chuyen/oop.js', 
-            description: 'Lập trình hướng đối tượng sẽ không nằm trong chương trình nhưng là phần giúp các bạn hiểu về hướng đối tượng' 
+            icon: 'box',
+            dataPath: 'data-chuyen/oop.js',
+            description: 'Lập trình hướng đối tượng không nằm trong chương trình nhưng giúp các bạn hiểu sâu hơn về hướng đối tượng.'
         }
     ],
 
     // Nhóm 3: Chuyên đề tự chọn
     chuyenDe: [
-        { 
-            id: 'web-design', 
-            title: 'Thiết kế Website', 
-            icon: 'layout', 
-            dataPath: 'data-chuyen-de/web.js', 
-            description: 'Hướng dẫn xây dựng website cá nhân với HTML, CSS và JavaScript.' 
+        {
+            id: 'web-design',
+            title: 'Thiết kế Website',
+            icon: 'layout',
+            dataPath: 'data-chuyen-de/web.js',
+            description: 'Hướng dẫn xây dựng website cá nhân với HTML, CSS và JavaScript.',
+            available: false
         }
     ],
 
@@ -110,12 +112,13 @@ window.courses = {
             dataPath: 'data-khac/mos.js', // Thầy đã đổi sang data-khac
             description: 'Luyện thi chứng chỉ Microsoft Office Specialist.' 
         }, // <--- PHẢI CÓ DẤU PHẨY Ở ĐÂY ĐỂ NGĂN CÁCH
-        { 
+        {
             id: 'office-tips', // ID duy nhất cho Thủ thuật
-            title: 'Thủ thuật Tin học', 
-            icon: 'mouse-pointer-2', 
-            dataPath: 'data-khac/tips.js', 
-            description: 'Các mẹo hay giúp xử lý công việc văn phòng hiệu quả.' 
+            title: 'Thủ thuật Tin học',
+            icon: 'mouse-pointer-2',
+            dataPath: 'data-khac/tips.js',
+            description: 'Các mẹo hay giúp xử lý công việc văn phòng hiệu quả.',
+            available: false
         },
         { 
             id: 'vex-robotics', 
