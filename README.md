@@ -16,6 +16,7 @@ Website học liệu tĩnh dành cho học sinh Trường THPT Chuyên Bến Tre
 - `Bài 1: Thông tin và xử lí thông tin` dùng cấu trúc chi tiết theo từng đơn vị kiến thức, đối chiếu SGK Kết nối tri thức trang 6–10 và câu hỏi gợi mở theo ba mức.
 - `data-chinh-khoa/tin11.js`: 31 bài Tin học ứng dụng 11, chuyển đổi từ `KHBD/Giáo án Tin học 11-THUD -HKI.docx`.
 - Mỗi bài dùng cùng hành trình: Mục tiêu → Khởi động → Khám phá → Luyện tập → Vận dụng và tự đánh giá.
+- `Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc` có 4 đơn vị kiến thức, đánh giá cuối bài và bảng đối chiếu KHBD–SGK trang 69–72.
 - Nội dung tương tác phải dùng phần tử semantic, hoạt động bằng bàn phím và hướng tới WCAG 2.2 AA.
 
 ## Cập nhật bài học

@@ -77,12 +77,46 @@
             ${answer("Mở đáp án và phản hồi", item.answer, item.feedback || "Đối chiếu câu trả lời với kiến thức trọng tâm rồi sửa phần chưa chính xác.")}
         </section>`).join("");
 
+    const table = (headers, rows) => `
+        <div class="mt-4 overflow-x-auto">
+            <table class="w-full min-w-[720px] border-collapse text-left text-sm">
+                <thead><tr>${headers.map((header) => `<th class="border border-slate-300 bg-slate-100 p-3 font-bold text-slate-900">${escapeHtml(header)}</th>`).join("")}</tr></thead>
+                <tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td class="border border-slate-300 p-3 align-top">${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+            </table>
+        </div>`;
+
+    const assessment = (config = {}) => {
+        const items = Array.isArray(config.items) ? config.items : [];
+        if (!items.length) return "";
+        return `${items.map((item, index) => `
+            <section class="rounded-xl border border-cyan-200 bg-cyan-50 p-4">
+                <h3 class="font-bold text-cyan-950">Đánh giá ${index + 1} · ${escapeHtml(item.target)}</h3>
+                <p class="mt-2">${escapeHtml(item.question)}</p>
+                ${item.answer ? answer("Mở đáp án, tiêu chí và phản hồi", item.answer, item.feedback || "Đối chiếu minh chứng với mục tiêu được đo.") : ""}
+                ${item.evidence ? `<p class="mt-3 text-sm text-slate-700"><strong>Minh chứng đạt:</strong> ${escapeHtml(item.evidence)}</p>` : ""}
+            </section>`).join("")}
+            <section class="mt-4 rounded-xl border border-slate-200 bg-white p-4">
+                <h3 class="font-bold text-slate-900">Quy tắc kết luận</h3>
+                ${config.threshold ? `<p class="mt-2"><strong>Ngưỡng đạt chung:</strong> ${escapeHtml(config.threshold)}</p>` : ""}
+                ${config.rules?.length ? `<div class="mt-3">${list(config.rules)}</div>` : ""}
+                ${config.retry?.length ? `<h4 class="mt-4 font-bold text-slate-900">Lộ trình học lại</h4>${list(config.retry, "mt-3 space-y-2")}` : ""}
+            </section>`;
+    };
+
+    const traceability = (config = {}) => {
+        const goalRows = Array.isArray(config.goals) ? config.goals : [];
+        const unitRows = Array.isArray(config.units) ? config.units : [];
+        if (!goalRows.length && !unitRows.length) return "";
+        return `${goalRows.length ? `<h3 class="font-bold text-slate-900">Mục tiêu → hoạt động → minh chứng</h3>${table(["Mục tiêu/YCCĐ", "Hoạt động KHBD", "Đơn vị/chặng", "Minh chứng", "Thời lượng"], goalRows)}` : ""}
+            ${unitRows.length ? `<h3 class="mt-6 font-bold text-slate-900">Đơn vị bài học → nguồn → mức nhận thức</h3>${table(["Đơn vị", "Vị trí KHBD", "SGK", "Nội dung triển khai", "Mức cao nhất", "Độ lệch"], unitRows)}` : ""}`;
+    };
+
     window.createInteractiveLesson = (config) => {
         const periods = Number.isFinite(config.periods) && config.periods > 0 ? config.periods : null;
         const warmup = config.warmup || {};
         const application = config.application || {};
         const resources = config.resources?.length
-            ? `<div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4"><h3 class="font-bold text-slate-900">Tư liệu và điều kiện</h3>${list(config.resources, "mt-3 space-y-2")}</div>`
+            ? `<div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4"><h3 class="font-bold text-slate-900">Tư liệu, nguồn và điều kiện</h3>${list(config.resources, "mt-3 space-y-2")}</div>`
             : "";
 
         const contentHtml = `<div class="space-y-5 text-left">
@@ -106,6 +140,14 @@
                 title: "V. Vận dụng và tự đánh giá", icon: "rocket", color: "bg-violet-700",
                 body: `<section class="rounded-xl border border-violet-200 bg-violet-50 p-4"><h3 class="font-bold text-violet-950">Sản phẩm vận dụng</h3><p class="mt-2">${escapeHtml(application.task)}</p><h4 class="mt-4 font-bold text-slate-900">Tiêu chí hoàn thành</h4>${list(application.criteria)}${application.support?.length ? `<h4 class="mt-4 font-bold text-slate-900">Hỗ trợ khi gặp khó khăn</h4>${list(application.support)}` : ""}</section><section class="mt-4 rounded-xl border border-slate-200 p-4"><h3 class="font-bold text-slate-900">Tự đánh giá</h3>${list(["Tôi giải thích được kiến thức chính bằng lời của mình.", "Tôi hoàn thành nhiệm vụ và kiểm tra lại sản phẩm.", "Tôi biết bước cần luyện thêm nếu chưa đạt."])}</section>`
             })}
+            ${config.assessment?.items?.length ? panel({
+                title: "VI. Đánh giá cuối bài", icon: "clipboard-check", color: "bg-cyan-700",
+                body: `<div class="space-y-4">${assessment(config.assessment)}</div>`
+            }) : ""}
+            ${(config.traceability?.goals?.length || config.traceability?.units?.length) ? panel({
+                title: `${config.assessment?.items?.length ? "VII" : "VI"}. Đối chiếu KHBD – SGK – bài học`, icon: "table-properties", color: "bg-slate-700",
+                body: traceability(config.traceability)
+            }) : ""}
         </div>`;
 
         return {

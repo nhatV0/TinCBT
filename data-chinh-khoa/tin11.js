@@ -56,7 +56,360 @@
                 mk("Bài 11: Cơ sở dữ liệu", "Hiểu CSDL, yêu cầu tổ chức dữ liệu và tính độc lập giữa dữ liệu với phần mềm.", ["CSDL là tập dữ liệu có liên quan, được tổ chức để lưu trữ và khai thác.", "Dữ liệu cần cấu trúc nhất quán, hạn chế dư thừa và mâu thuẫn.", "Lưu dữ liệu độc lập giúp nhiều ứng dụng cùng khai thác.", "Không lưu dữ liệu suy ra nếu có thể tính đáng tin cậy từ dữ liệu gốc."], "Chuyển hồ sơ giấy thành nhiều tệp văn bản rời đã tạo CSDL tốt chưa?", "Chưa; cần cấu trúc, quan hệ và cơ chế khai thác nhất quán.", "Vì sao không nhất thiết lưu cột điểm trung bình?", "Có thể tính từ các điểm thành phần theo công thức đã định.", "Thiết kế cấu trúc dữ liệu đơn giản cho quản lí sách hoặc điểm, chỉ rõ dữ liệu gốc và dữ liệu tính được."),
                 mk("Bài 12: Hệ quản trị cơ sở dữ liệu và hệ cơ sở dữ liệu", "Phân biệt CSDL, hệ QTCSDL và hệ CSDL; hiểu chức năng, mô hình tập trung/phân tán.", ["Hệ QTCSDL hỗ trợ định nghĩa, cập nhật/truy xuất và bảo mật/an toàn dữ liệu.", "Hệ CSDL gồm CSDL, hệ QTCSDL, ứng dụng, người dùng và hạ tầng liên quan.", "Hệ tập trung lưu tại một nơi; hệ phân tán lưu trên nhiều nút phối hợp.", "Mỗi mô hình có đánh đổi về quản lí, sẵn sàng và đồng bộ."], "Người dùng có cần biết cấu trúc tệp vật lí để tra cứu CSDL không?", "Không; hệ QTCSDL và ứng dụng cung cấp giao diện, ngôn ngữ khai thác.", "Ba nhóm chức năng chính của hệ QTCSDL?", "Định nghĩa dữ liệu; cập nhật/truy xuất; bảo mật và an toàn.", "Phân tích một hệ CSDL thực tế, chỉ rõ thành phần và chọn tập trung hay phân tán."),
                 mk("Bài 13: Cơ sở dữ liệu quan hệ", "Mô tả bảng, bản ghi, trường, khóa và quan hệ trong CSDL quan hệ.", ["Bảng gồm hàng/bản ghi và cột/trường.", "Khóa chính xác định duy nhất bản ghi.", "Khóa ngoài tham chiếu khóa chính của bảng khác.", "Tách bảng giảm lặp dữ liệu và tăng tính nhất quán."], "Vì sao website âm nhạc không nên lặp đầy đủ tên nhạc sĩ trong mọi bản thu?", "Dễ dư thừa và mâu thuẫn; nên lưu nhạc sĩ ở bảng riêng và tham chiếu bằng khóa.", "Khóa chính cần đặc điểm gì?", "Giá trị duy nhất, không rỗng và ổn định trong phạm vi bảng.", "Từ dữ liệu âm nhạc, xác định bốn bảng, khóa chính và quan hệ khóa ngoài."),
-                mk("Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc", "Dùng SQL để tạo cấu trúc, cập nhật, truy xuất và kiểm soát quyền ở mức nhập môn.", ["CREATE tạo CSDL/bảng; kiểu dữ liệu và ràng buộc mô tả cấu trúc.", "INSERT/UPDATE/DELETE cập nhật dữ liệu.", "SELECT truy xuất; JOIN kết hợp bảng theo quan hệ.", "Quyền truy cập phải theo vai trò và nguyên tắc tối thiểu."], "Vì sao SQL thuận lợi hơn việc mỗi ứng dụng tự đọc tệp dữ liệu?", "SQL cung cấp ngôn ngữ thống nhất để hệ QTCSDL kiểm soát và tối ưu thao tác.", "Câu lệnh nào lấy dữ liệu từ bảng?", "SELECT.", "Viết truy vấn tạo bảng bản thu và truy vấn liên kết lấy mã, tên bản nhạc; dùng dữ liệu mẫu, không dữ liệu cá nhân.", ["Cú pháp phù hợp hệ QTCSDL được học.", "Khóa và kiểu dữ liệu đúng.", "Truy vấn trả đúng cột."]),
+                L({
+                    title: "Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc",
+                    periods: 2,
+                    overview: "Hiểu ở mức nguyên lí cách SQL định nghĩa, cập nhật, truy xuất và kiểm soát quyền trên cơ sở dữ liệu quan hệ; đọc, giải thích và viết được các câu truy vấn cơ bản trên dữ liệu âm nhạc mẫu.",
+                    goals: [
+                        "MT1 — Giải thích được lợi ích của ngôn ngữ truy vấn và phân biệt vai trò của DDL, DML, DCL.",
+                        "MT2 — Đọc và viết được câu lệnh cơ bản để tạo cơ sở dữ liệu, bảng, khóa chính và khóa ngoài.",
+                        "MT3 — Đọc, dự đoán kết quả và viết được câu lệnh SELECT, INSERT, UPDATE, DELETE; liên kết bảng bằng INNER JOIN.",
+                        "MT4 — Giải thích được mục đích của GRANT, REVOKE và lựa chọn quyền theo nguyên tắc chỉ cấp đủ dùng.",
+                        "MT5 — Phân tích, kiểm thử và sửa được truy vấn liên kết ba bảng, kể cả khi truy vấn do công cụ AI đề xuất."
+                    ],
+                    resources: [
+                        "Nguồn KHBD: KHBD/Giáo án Tin học 11-THUD -HKI.docx, Bài 14, các hoạt động Khởi động, Hình thành kiến thức 1–4, Luyện tập và Vận dụng.",
+                        "Nguồn SGK: Tin học 11 – Định hướng Tin học ứng dụng, Kết nối tri thức với cuộc sống, Bài 14, trang 69–72.",
+                        "Thời lượng đề xuất: 2 tiết (90 phút). KHBD nguồn không ghi số tiết; phân bổ này cần được giáo viên điều chỉnh theo kế hoạch nhà trường.",
+                        "Điều kiện: trình duyệt; giấy nháp hoặc hệ quản trị CSDL trong môi trường thực hành. Chỉ dùng dữ liệu mẫu, không nhập dữ liệu cá nhân.",
+                        "Điểm lệch nguồn: KHBD ghi Sid là INT nhưng bài chèn dữ liệu dùng các mã 'TK', 'QD', 'YM'. Bài học dùng CHAR(4) để kiểu dữ liệu thống nhất với dữ liệu mẫu và yêu cầu học sinh giải thích quyết định."
+                    ],
+                    warmup: {
+                        question: "Cần lấy tên các bản nhạc của nhạc sĩ có Aid = 1. Cách A: viết chương trình mở tệp, đọc từng bản ghi, tự kiểm tra Aid rồi lấy TenBN. Cách B: gửi yêu cầu SELECT TenBN FROM bannhac WHERE Aid = 1; cho hệ QTCSDL. Hai cách khác nhau ở điều người dùng phải mô tả như thế nào?",
+                        answer: "Cách A mô tả cả thủ tục thực hiện: mở tệp, đọc, tách và kiểm tra từng bản ghi. Cách B chủ yếu mô tả kết quả cần lấy; hệ QTCSDL quyết định cách truy cập và thực hiện.",
+                        feedback: "Không kết luận rằng SQL không cần thuật toán. Thuật toán truy xuất vẫn tồn tại nhưng do hệ QTCSDL lựa chọn và thực hiện thay cho người viết truy vấn."
+                    },
+                    concepts: [
+                        {
+                            id: "DV1",
+                            heading: "Lợi ích của ngôn ngữ truy vấn và ba thành phần SQL",
+                            time: "13 phút",
+                            source: "KHBD Hoạt động Thảo luận về hai cách truy xuất dữ liệu; SGK mục 1, trang 69–70.",
+                            lead: "Nếu mỗi yêu cầu dữ liệu đều buộc người dùng biết cấu trúc tệp và tự viết thuật toán đọc tệp, việc khai thác dữ liệu sẽ phụ thuộc chặt vào cách lưu vật lí.",
+                            sections: [
+                                {
+                                    heading: "SQL mô tả yêu cầu thay vì mô tả toàn bộ thủ tục",
+                                    paragraphs: [
+                                        "SQL (Structured Query Language) là ngôn ngữ truy vấn chuẩn dùng với cơ sở dữ liệu quan hệ. Người dùng nêu dữ liệu hoặc thao tác mong muốn; hệ quản trị cơ sở dữ liệu tiếp nhận câu truy vấn, kiểm tra quyền, chọn cách thực hiện và trả kết quả.",
+                                        "Cùng một dạng yêu cầu có thể áp dụng cho nhiều cơ sở dữ liệu mà không phải viết lại thuật toán đọc từng tệp. SQL vì vậy làm giảm phụ thuộc vào cách dữ liệu được lưu vật lí, nhưng người viết vẫn phải hiểu bảng, trường, khóa và quan hệ để diễn đạt đúng yêu cầu."
+                                    ]
+                                },
+                                {
+                                    heading: "Ba nhóm chức năng",
+                                    points: [
+                                        "DDL — Data Definition Language: định nghĩa cấu trúc, ví dụ CREATE DATABASE, CREATE TABLE, ALTER TABLE, PRIMARY KEY, FOREIGN KEY.",
+                                        "DML — Data Manipulation Language: truy xuất và cập nhật dữ liệu, ví dụ SELECT, INSERT, UPDATE, DELETE.",
+                                        "DCL — Data Control Language: kiểm soát quyền người dùng, ví dụ GRANT và REVOKE."
+                                    ]
+                                }
+                            ],
+                            examples: [
+                                {
+                                    title: "Đối chứng từ SGK",
+                                    text: "SELECT TenBN FROM bannhac WHERE Aid = 1 chỉ nêu cột cần lấy, bảng nguồn và điều kiện chọn. Nó không mô tả cách mở tệp, duyệt bản ghi hay tổ chức bộ nhớ."
+                                }
+                            ],
+                            questions: [
+                                {
+                                    level: "Quan sát",
+                                    question: "Trong câu SELECT TenBN FROM bannhac WHERE Aid = 1, phần nào cho biết kết quả cần lấy và phần nào giới hạn các dòng?",
+                                    hint: "Tách câu lệnh theo SELECT, FROM và WHERE.",
+                                    answer: "SELECT TenBN chỉ cột kết quả; FROM bannhac chỉ bảng nguồn; WHERE Aid = 1 giới hạn các dòng có Aid bằng 1.",
+                                    feedback: "Nếu chỉ nêu SELECT, em chưa giải thích được nguồn dữ liệu và điều kiện chọn."
+                                },
+                                {
+                                    level: "Giải thích",
+                                    question: "Vì sao cách dùng SQL ít phụ thuộc cấu trúc tệp vật lí hơn cách tự viết chương trình đọc tệp?",
+                                    hint: "Ai chịu trách nhiệm chọn cách truy cập dữ liệu?",
+                                    answer: "Người dùng mô tả yêu cầu logic; hệ QTCSDL chịu trách nhiệm ánh xạ yêu cầu đó sang cách truy cập dữ liệu vật lí.",
+                                    feedback: "Cần nêu rõ sự chuyển giao trách nhiệm cho hệ QTCSDL, không chỉ nói SQL ngắn hơn."
+                                },
+                                {
+                                    level: "Áp dụng",
+                                    question: "Xếp CREATE TABLE, SELECT và GRANT lần lượt vào DDL, DML hay DCL và giải thích theo tác động của từng câu lệnh.",
+                                    hint: "Xét câu lệnh tác động lên cấu trúc, dữ liệu hay quyền.",
+                                    answer: "CREATE TABLE thuộc DDL vì tạo cấu trúc; SELECT thuộc DML vì truy xuất dữ liệu; GRANT thuộc DCL vì cấp quyền.",
+                                    feedback: "Không phân loại chỉ theo vị trí trong bài; hãy dựa vào đối tượng mà câu lệnh tác động."
+                                }
+                            ],
+                            recap: [
+                                "SQL diễn đạt yêu cầu logic; hệ QTCSDL tổ chức việc thực hiện.",
+                                "DDL tác động cấu trúc, DML tác động dữ liệu, DCL tác động quyền."
+                            ]
+                        },
+                        {
+                            id: "DV2",
+                            heading: "Định nghĩa cơ sở dữ liệu, bảng và khóa bằng DDL",
+                            time: "20 phút",
+                            source: "KHBD Hoạt động 2; SGK mục 2, Bảng 14.1–14.2 và ví dụ trang 70–71.",
+                            lead: "Trước khi thêm hay truy xuất dữ liệu, hệ QTCSDL cần biết các bảng gồm những trường nào, mỗi trường nhận kiểu giá trị gì và trường nào định danh hoặc tham chiếu bản ghi.",
+                            sections: [
+                                {
+                                    heading: "Từ cơ sở dữ liệu đến bảng",
+                                    paragraphs: [
+                                        "CREATE DATABASE tạo một cơ sở dữ liệu. CREATE TABLE tạo bảng và khai báo danh sách trường cùng kiểu dữ liệu. ALTER TABLE thay đổi định nghĩa bảng sau khi bảng đã được tạo.",
+                                        "Kiểu dữ liệu là cam kết về dạng giá trị: CHAR(n) dành cho chuỗi có độ dài cố định, VARCHAR(n) cho chuỗi có độ dài thay đổi, INT cho số nguyên, REAL cho số thực, DATE cho ngày và TIME cho thời gian. Chọn kiểu phải dựa trên giá trị thực sự cần lưu, không dựa vào vẻ ngoài của mã."
+                                    ]
+                                },
+                                {
+                                    heading: "Khóa duy trì định danh và liên kết",
+                                    paragraphs: [
+                                        "PRIMARY KEY khai báo trường hoặc nhóm trường định danh duy nhất mỗi bản ghi. FOREIGN KEY ... REFERENCES ... khai báo trường tham chiếu khóa của bảng khác. Khóa ngoài giúp hệ QTCSDL kiểm tra rằng giá trị tham chiếu có tồn tại.",
+                                        "Tên cơ sở dữ liệu, bảng và trường trong phạm vi bài học dùng chữ La-tinh, chữ số, không có khoảng trắng hay kí tự đặc biệt. Mỗi câu truy vấn trong ví dụ kết thúc bằng dấu chấm phẩy."
+                                    ]
+                                }
+                            ],
+                            examples: [
+                                {
+                                    title: "Bảng ca sĩ nhất quán với dữ liệu mẫu",
+                                    text: "CREATE TABLE casi (Sid CHAR(4), TenCS VARCHAR(128)); ALTER TABLE casi ADD PRIMARY KEY (Sid); Dùng CHAR(4) vì các mã mẫu 'TK', 'QD', 'YM' là chuỗi, không phải số nguyên."
+                                }
+                            ],
+                            questions: [
+                                {
+                                    level: "Quan sát",
+                                    question: "Trong khai báo bảng casi, trường nào phù hợp làm khóa chính và kiểu nào phù hợp với các giá trị 'TK', 'QD', 'YM'?",
+                                    hint: "Xét trường định danh và dạng giá trị thực tế.",
+                                    answer: "Sid phù hợp làm khóa chính; CHAR(4) phù hợp vì mã gồm kí tự và có độ dài ngắn, giới hạn.",
+                                    feedback: "INT không lưu trực tiếp được các mã có chữ; TenCS không ổn định và có thể trùng."
+                                },
+                                {
+                                    level: "Giải thích",
+                                    question: "Vì sao cần khai báo khóa ngoài Mid trong banthuam tham chiếu bannhac(Mid) thay vì chỉ đặt hai trường cùng tên?",
+                                    hint: "Tên giống nhau có tự tạo ra ràng buộc không?",
+                                    answer: "Hai trường cùng tên chưa tạo ràng buộc. Khóa ngoài yêu cầu mỗi Mid ở banthuam phải tham chiếu một Mid hợp lệ ở bannhac, giúp bảo đảm toàn vẹn liên kết.",
+                                    feedback: "Cần nêu tác dụng kiểm tra dữ liệu, không chỉ nói để JOIN được."
+                                },
+                                {
+                                    level: "Áp dụng",
+                                    question: "Một bạn khai báo Sid INT nhưng sau đó chèn Sid = 'TK'. Hãy chỉ ra lỗi thiết kế và đề xuất cách sửa mà không làm mất ý nghĩa mã ca sĩ.",
+                                    hint: "Ưu tiên sửa kiểu hay đổi toàn bộ mã?",
+                                    answer: "Kiểu INT không phù hợp mã chứa chữ. Nên đổi Sid thành CHAR(4) hoặc VARCHAR với độ dài phù hợp rồi giữ các mã 'TK', 'QD', 'YM'.",
+                                    feedback: "Đổi 'TK' thành một số tùy ý làm thay đổi hệ mã; sửa kiểu dữ liệu là quyết định nhất quán hơn với dữ liệu mẫu."
+                                }
+                            ],
+                            recap: [
+                                "Cấu trúc bảng phải phù hợp dữ liệu sẽ lưu.",
+                                "Khóa chính định danh; khóa ngoài bảo vệ liên kết tham chiếu."
+                            ]
+                        },
+                        {
+                            id: "DV3",
+                            heading: "Cập nhật, truy xuất và liên kết dữ liệu bằng DML",
+                            time: "25 phút",
+                            source: "KHBD Hoạt động 3; SGK mục 3, Bảng 14.3–14.4 và ví dụ trang 71–72.",
+                            lead: "Sau khi cấu trúc đã có, DML cho phép thêm, sửa, xóa và lấy dữ liệu. Điều kiện đúng quyết định câu lệnh tác động đến bản ghi nào.",
+                            sections: [
+                                {
+                                    heading: "Bốn thao tác cốt lõi",
+                                    points: [
+                                        "SELECT cột FROM bảng WHERE điều_kiện ORDER BY cột: chọn cột, lọc dòng và sắp xếp kết quả.",
+                                        "INSERT INTO bảng VALUES (...): thêm bản ghi theo thứ tự trường đã định nghĩa.",
+                                        "UPDATE bảng SET trường = giá_trị WHERE điều_kiện: sửa các dòng thỏa điều kiện.",
+                                        "DELETE FROM bảng WHERE điều_kiện: xóa các dòng thỏa điều kiện."
+                                    ]
+                                },
+                                {
+                                    heading: "JOIN kết hợp các bảng theo quan hệ",
+                                    paragraphs: [
+                                        "INNER JOIN ghép các dòng của hai bảng khi điều kiện sau ON đúng. Trong mô hình âm nhạc, bannhac.Aid là khóa ngoài tham chiếu nhacsi.Aid; vì vậy ON bannhac.Aid = nhacsi.Aid là điều kiện liên kết có căn cứ.",
+                                        "Thiếu điều kiện ON hoặc nối sai cặp khóa có thể tạo nhiều tổ hợp không có ý nghĩa. Trước UPDATE hoặc DELETE, nên chạy SELECT với cùng điều kiện để kiểm tra phạm vi tác động; đây là thói quen an toàn khi thực hành."
+                                    ]
+                                }
+                            ],
+                            examples: [
+                                {
+                                    title: "Truy xuất bản nhạc và tác giả",
+                                    text: "SELECT bannhac.TenBN, nhacsi.TenNS FROM bannhac INNER JOIN nhacsi ON bannhac.Aid = nhacsi.Aid; Kết quả chỉ gồm những cặp bản nhạc–nhạc sĩ có Aid khớp."
+                                },
+                                {
+                                    title: "Cập nhật có điều kiện",
+                                    text: "UPDATE nhacsi SET TenNS = 'Hoàng Hiệp' WHERE Aid = 6; Nếu bỏ WHERE, mọi dòng của bảng có thể bị đổi thành cùng một tên."
+                                }
+                            ],
+                            questions: [
+                                {
+                                    level: "Quan sát",
+                                    question: "Trong truy vấn JOIN ví dụ, hai trường nào được so sánh và chúng đại diện cho quan hệ gì?",
+                                    hint: "Đọc phần sau ON.",
+                                    answer: "bannhac.Aid được so sánh với nhacsi.Aid; đó là quan hệ khóa ngoài của bản nhạc tham chiếu khóa định danh nhạc sĩ.",
+                                    feedback: "Nếu chỉ nói hai trường cùng tên, em chưa xác định vai trò khóa của chúng."
+                                },
+                                {
+                                    level: "Giải thích",
+                                    question: "Vì sao nên chạy SELECT với cùng điều kiện trước khi thực hiện UPDATE hoặc DELETE?",
+                                    hint: "SELECT có làm thay đổi dữ liệu không?",
+                                    answer: "SELECT cho xem trước đúng tập bản ghi sẽ bị tác động mà chưa sửa hoặc xóa dữ liệu, giúp phát hiện điều kiện thiếu hoặc sai.",
+                                    feedback: "Đây là bước kiểm tra phạm vi; nó không thay thế sao lưu khi thao tác trên dữ liệu quan trọng."
+                                },
+                                {
+                                    level: "Áp dụng",
+                                    question: "Viết truy vấn lấy Mid, Sid và TenBN bằng cách liên kết banthuam với bannhac.",
+                                    hint: "Mid là trường nối hai bảng.",
+                                    answer: "SELECT a.Mid, a.Sid, b.TenBN FROM banthuam a INNER JOIN bannhac b ON a.Mid = b.Mid;",
+                                    feedback: "Cần đủ SELECT, FROM, JOIN và điều kiện ON đúng cặp khóa; bí danh chỉ giúp câu lệnh gọn hơn."
+                                }
+                            ],
+                            recap: [
+                                "WHERE giới hạn dòng; thiếu WHERE trong UPDATE hoặc DELETE có thể tác động toàn bảng.",
+                                "JOIN phải dựa trên quan hệ khóa và điều kiện ON chính xác."
+                            ]
+                        },
+                        {
+                            id: "DV4",
+                            heading: "Kiểm soát quyền truy cập bằng DCL",
+                            time: "10 phút",
+                            source: "KHBD Hoạt động 4; SGK mục 4, Bảng 14.5, trang 72.",
+                            lead: "Biết viết truy vấn không đồng nghĩa người dùng được phép thực hiện mọi truy vấn. Hệ QTCSDL phải kiểm soát ai được làm gì trên đối tượng nào.",
+                            sections: [
+                                {
+                                    heading: "Cấp và thu hồi quyền",
+                                    paragraphs: [
+                                        "GRANT cấp một hoặc nhiều quyền cho tài khoản; REVOKE thu hồi quyền đã cấp. Đối tượng có thể là toàn bộ bảng trong cơ sở dữ liệu hoặc một bảng cụ thể. Các quyền thường gặp trong bài gồm CREATE, SELECT, INSERT, UPDATE và DELETE.",
+                                        "Nguyên tắc chỉ cấp đủ dùng làm giảm thiệt hại do nhầm lẫn hoặc lạm dụng. Người chỉ lập báo cáo cần SELECT, không mặc nhiên cần UPDATE hay DELETE. Cú pháp chi tiết có thể khác giữa các hệ QTCSDL; khi thực hành phải đối chiếu đúng hệ đang dùng."
+                                    ]
+                                }
+                            ],
+                            examples: [
+                                {
+                                    title: "Quyền theo nhiệm vụ",
+                                    text: "GRANT SELECT ON music.* TO guest; cho guest đọc các bảng trong music. REVOKE DELETE ON music.nhacsi FROM mod; thu hồi quyền xóa trên bảng nhacsi của mod."
+                                }
+                            ],
+                            questions: [
+                                {
+                                    level: "Quan sát",
+                                    question: "Trong GRANT SELECT ON music.* TO guest, quyền, đối tượng và người nhận lần lượt là gì?",
+                                    hint: "Đọc ba phần sau GRANT, ON và TO.",
+                                    answer: "Quyền là SELECT; đối tượng là tất cả bảng trong music; người nhận là guest.",
+                                    feedback: "Cần chỉ đủ ba thành phần để tránh nhầm quyền với đối tượng."
+                                },
+                                {
+                                    level: "Giải thích",
+                                    question: "Vì sao tài khoản chỉ xem báo cáo không nên được cấp DELETE?",
+                                    hint: "So sánh nhiệm vụ cần làm với hậu quả quyền cho phép.",
+                                    answer: "Nhiệm vụ chỉ cần đọc dữ liệu; DELETE vượt quá nhu cầu và có thể gây mất dữ liệu nếu tài khoản bị dùng sai hoặc thao tác nhầm.",
+                                    feedback: "Lập luận phải gắn quyền với nhiệm vụ, không chỉ nói DELETE nguy hiểm."
+                                },
+                                {
+                                    level: "Áp dụng",
+                                    question: "Viết câu lệnh cấp UPDATE trên tất cả bảng của music cho mod và câu lệnh thu hồi DELETE trên music.nhacsi.",
+                                    hint: "Dùng GRANT ... ON ... TO ... và REVOKE ... ON ... FROM ....",
+                                    answer: "GRANT UPDATE ON music.* TO mod; REVOKE DELETE ON music.nhacsi FROM mod;",
+                                    feedback: "Kiểm tra đúng TO cho GRANT, FROM cho REVOKE và đúng phạm vi đối tượng."
+                                }
+                            ],
+                            recap: [
+                                "GRANT cấp quyền; REVOKE thu hồi quyền.",
+                                "Chỉ cấp những quyền cần thiết cho vai trò thực tế."
+                            ]
+                        }
+                    ],
+                    practice: [
+                        {
+                            question: "Phân loại các câu lệnh sau: CREATE TABLE, INSERT, SELECT, GRANT, REVOKE.",
+                            answer: "DDL: CREATE TABLE. DML: INSERT, SELECT. DCL: GRANT, REVOKE.",
+                            feedback: "Phân loại theo đối tượng bị tác động: cấu trúc, dữ liệu hay quyền."
+                        },
+                        {
+                            question: "Chọn khai báo nhất quán nhất cho Sid khi dữ liệu mẫu là 'TK', 'QD', 'YM'.",
+                            options: ["Sid INT", "Sid REAL", "Sid CHAR(4)", "Sid DATE"],
+                            answer: "C. Sid CHAR(4).",
+                            feedback: "Mã có chữ nên không dùng kiểu số; CHAR(4) đủ chứa các mã mẫu và thể hiện đây là mã, không phải đại lượng để tính toán."
+                        },
+                        {
+                            question: "Truy vấn UPDATE nhacsi SET TenNS = 'Hoàng Hiệp'; có rủi ro gì và sửa thế nào nếu chỉ muốn đổi dòng Aid = 6?",
+                            answer: "Truy vấn thiếu WHERE nên có thể đổi TenNS của mọi dòng. Sửa thành UPDATE nhacsi SET TenNS = 'Hoàng Hiệp' WHERE Aid = 6;",
+                            feedback: "Trước khi UPDATE, có thể chạy SELECT * FROM nhacsi WHERE Aid = 6; để kiểm tra đúng phạm vi."
+                        },
+                        {
+                            question: "Viết câu lệnh tạo bảng banthuam gồm Mid CHAR(4), Sid CHAR(4), sau đó thêm hai khóa ngoài tham chiếu bannhac(Mid) và casi(Sid).",
+                            answer: "CREATE TABLE banthuam (Mid CHAR(4), Sid CHAR(4)); ALTER TABLE banthuam ADD FOREIGN KEY (Mid) REFERENCES bannhac(Mid); ALTER TABLE banthuam ADD FOREIGN KEY (Sid) REFERENCES casi(Sid);",
+                            feedback: "Kiểu của khóa ngoài phải tương thích với khóa được tham chiếu; cần tạo các bảng cha trước."
+                        },
+                        {
+                            question: "Một truy vấn dùng INNER JOIN nhưng không có điều kiện ON. Hãy dự đoán lỗi logic và nêu cách sửa.",
+                            answer: "Các dòng có thể bị kết hợp không theo quan hệ khóa, tạo nhiều cặp sai hoặc truy vấn không hợp lệ tùy hệ. Phải thêm ON khóa_ngoài = khóa_chính, ví dụ ON banthuam.Mid = bannhac.Mid.",
+                            feedback: "Không sửa bằng WHERE tùy ý; trước hết phải xác định đúng quan hệ giữa hai bảng."
+                        }
+                    ],
+                    application: {
+                        task: "Tạo truy vấn lấy Mid, Sid từ banthuam, TenBN từ bannhac và TenCS từ casi. Nếu dùng công cụ AI để gợi ý, hãy lưu lại truy vấn ban đầu, chỉ ra từng cặp khóa dùng để JOIN, kiểm thử trên dữ liệu mẫu và ghi ít nhất một xác nhận hoặc chỉnh sửa do nhóm tự thực hiện.",
+                        criteria: [
+                            "SELECT đúng bốn cột và ghi rõ bảng hoặc bí danh.",
+                            "Liên kết banthuam.Mid = bannhac.Mid và banthuam.Sid = casi.Sid.",
+                            "Giải thích được khác biệt giữa INNER JOIN và LEFT JOIN trong trường hợp có bản thu thiếu dữ liệu tham chiếu.",
+                            "Kiểm thử bằng dữ liệu mẫu; không dùng dữ liệu cá nhân hoặc thông tin đăng nhập thật.",
+                            "Nếu có dùng AI, nêu bằng chứng đã kiểm chứng cú pháp, logic và kết quả thay vì sao chép thụ động."
+                        ],
+                        support: [
+                            "Tầng 1: vẽ ba bảng và nối các trường cùng biểu diễn Mid, Sid.",
+                            "Tầng 2: viết JOIN bannhac trước, kiểm tra kết quả rồi thêm JOIN casi.",
+                            "Tầng 3: dùng mẫu SELECT ... FROM banthuam a INNER JOIN ... ON ...; và thay đúng bảng, bí danh, cặp khóa."
+                        ]
+                    },
+                    assessment: {
+                        items: [
+                            {
+                                target: "MT1 · DV1",
+                                question: "Giải thích bằng 2–3 câu vì sao SQL giảm phụ thuộc vào cách lưu tệp và phân loại CREATE TABLE, SELECT, GRANT.",
+                                answer: "SQL cho phép mô tả yêu cầu logic để hệ QTCSDL chọn cách truy cập vật lí. CREATE TABLE thuộc DDL, SELECT thuộc DML, GRANT thuộc DCL.",
+                                feedback: "Đạt khi giải thích được vai trò hệ QTCSDL và phân loại đúng cả ba câu lệnh.",
+                                evidence: "Lời giải có quan hệ nguyên nhân–kết quả và 3/3 phân loại đúng."
+                            },
+                            {
+                                target: "MT2 · DV2",
+                                question: "Viết khai báo bảng casi có Sid phù hợp các mã 'TK', 'QD', 'YM', TenCS tối đa 128 kí tự và khóa chính Sid; giải thích lựa chọn kiểu.",
+                                answer: "CREATE TABLE casi (Sid CHAR(4), TenCS VARCHAR(128)); ALTER TABLE casi ADD PRIMARY KEY (Sid); CHAR phù hợp mã có chữ, VARCHAR phù hợp tên có độ dài thay đổi.",
+                                feedback: "Đạt khi cấu trúc, kiểu và khóa thống nhất với dữ liệu mẫu.",
+                                evidence: "Câu lệnh hợp lí và giải thích được ít nhất hai lựa chọn kiểu/khóa."
+                            },
+                            {
+                                target: "MT3, MT5 · DV3",
+                                question: "Viết và giải thích truy vấn liên kết banthuam, bannhac, casi để lấy Mid, Sid, TenBN, TenCS.",
+                                answer: "SELECT a.Mid, a.Sid, b.TenBN, c.TenCS FROM banthuam a INNER JOIN bannhac b ON a.Mid = b.Mid INNER JOIN casi c ON a.Sid = c.Sid;",
+                                feedback: "Đạt khi đúng cột, đủ hai JOIN và giải thích đúng hai điều kiện ON. Chấp nhận LEFT JOIN nếu giải thích đúng mục đích giữ dòng chưa khớp.",
+                                evidence: "Truy vấn chạy được trên dữ liệu mẫu hoặc được đối chiếu cú pháp và logic từng mệnh đề."
+                            },
+                            {
+                                target: "MT4 · DV4",
+                                question: "Vai trò báo cáo chỉ cần xem dữ liệu music. Hãy chọn quyền và viết câu cấp quyền phù hợp; nêu một quyền không nên cấp.",
+                                answer: "GRANT SELECT ON music.* TO report_user; Không nên cấp DELETE hoặc UPDATE vì vượt quá nhiệm vụ chỉ đọc.",
+                                feedback: "Đạt khi quyền phù hợp nhiệm vụ và có lập luận theo nguyên tắc chỉ cấp đủ dùng.",
+                                evidence: "Câu GRANT đúng vai trò và nêu được rủi ro của ít nhất một quyền vượt nhu cầu."
+                            }
+                        ],
+                        threshold: "Hoàn thành đúng ít nhất 3/4 nhiệm vụ và bắt buộc đạt nhiệm vụ MT3–MT5 về truy vấn liên kết; không có lỗi làm UPDATE/DELETE tác động ngoài phạm vi dự kiến.",
+                        rules: [
+                            "MT1 đạt khi giải thích đúng lợi ích SQL và phân loại đủ DDL/DML/DCL.",
+                            "MT2 đạt khi kiểu dữ liệu, khóa và dữ liệu mẫu nhất quán.",
+                            "MT3–MT5 đạt khi truy vấn liên kết đúng cặp khóa, đúng cột và người học giải thích/kiểm chứng được kết quả.",
+                            "MT4 đạt khi quyền được chọn theo nhiệm vụ và câu lệnh đúng đối tượng."
+                        ],
+                        retry: [
+                            "Chưa đạt MT1: quay lại DV1 và phân loại câu lệnh theo cấu trúc–dữ liệu–quyền.",
+                            "Chưa đạt MT2: lập bảng Giá trị mẫu → Kiểu dữ liệu → Ràng buộc rồi viết lại DDL.",
+                            "Chưa đạt MT3–MT5: kiểm thử từng JOIN với hai bảng trước khi ghép bảng thứ ba.",
+                            "Chưa đạt MT4: lập ma trận Vai trò → Nhiệm vụ → Quyền cần thiết và loại quyền dư thừa."
+                        ]
+                    },
+                    traceability: {
+                        goals: [
+                            ["MT1", "Khởi động; Hoạt động thảo luận hai cách truy xuất", "Khởi động, DV1", "Giải thích lợi ích; phân loại DDL/DML/DCL", "20 phút"],
+                            ["MT2", "Hoạt động 2: Khởi tạo CSDL", "DV2", "DDL tạo casi/banthuam, kiểu và khóa nhất quán", "20 phút"],
+                            ["MT3", "Hoạt động 3; Luyện tập 1–3", "DV3, Luyện tập", "DML và JOIN đúng cột, điều kiện", "30 phút"],
+                            ["MT4", "Hoạt động 4: Kiểm soát quyền", "DV4", "GRANT/REVOKE theo vai trò", "10 phút"],
+                            ["MT5", "Hoạt động Vận dụng có kiểm chứng AI", "Vận dụng, Đánh giá", "Truy vấn ba bảng và biên bản kiểm chứng", "10 phút"]
+                        ],
+                        units: [
+                            ["DV1", "Hình thành kiến thức: thảo luận hai cách truy xuất", "Mục 1, tr. 69–70", "Lợi ích SQL; DDL, DML, DCL", "Áp dụng/phân loại", "Không"],
+                            ["DV2", "Hoạt động 2", "Mục 2, Bảng 14.1–14.2, tr. 70", "CREATE, ALTER, kiểu, khóa", "Phân tích lỗi kiểu", "KHBD ghi Sid INT nhưng dữ liệu mẫu là chuỗi; đã nêu và dùng CHAR(4)."],
+                            ["DV3", "Hoạt động 3; Luyện tập", "Mục 3, Bảng 14.3–14.4, tr. 71–72", "SELECT, INSERT, UPDATE, DELETE, JOIN", "Tạo và kiểm chứng truy vấn", "SGK nêu nguyên lí; bài học thêm bước SELECT kiểm tra an toàn trước UPDATE/DELETE."],
+                            ["DV4", "Hoạt động 4", "Mục 4, Bảng 14.5, tr. 72", "GRANT, REVOKE, quyền tối thiểu", "Lựa chọn và bảo vệ quyết định", "Bài học làm rõ cú pháp DCL có thể khác theo hệ QTCSDL."],
+                            ["Vận dụng", "Hoạt động Vận dụng", "Vận dụng, tr. 72", "JOIN ba bảng; kiểm chứng gợi ý AI", "Đánh giá/kiểm thử", "Yêu cầu kiểm chứng AI lấy từ KHBD, không phải yêu cầu cốt lõi của SGK."]
+                        ]
+                    }
+                }),
                 mk("Bài 15: Bảo mật và an toàn hệ cơ sở dữ liệu", "Áp dụng phân quyền, sao lưu và trách nhiệm người dùng để bảo vệ CSDL.", ["Xác thực và phân quyền giới hạn người được phép và thao tác được phép.", "Mỗi người dùng phải bảo vệ tài khoản và chịu trách nhiệm hành động.", "Sao lưu, nhật kí và kế hoạch phục hồi giảm thiệt hại sự cố.", "Bảo mật cần con người, quy trình và công nghệ phối hợp."], "Mật khẩu mạnh có đủ bảo vệ CSDL nếu cấp quyền quá rộng không?", "Không; cần phân quyền tối thiểu, giám sát và quy trình an toàn.", "Vì sao người vận hành cần quy định trách nhiệm riêng?", "Họ có quyền cao; sai sót hoặc lạm dụng có thể ảnh hưởng toàn hệ thống.", "Lập ma trận Vai trò – Dữ liệu – Quyền cho hệ quản lí nhỏ, kèm kế hoạch sao lưu."),
             ]
         },
