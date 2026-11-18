@@ -6,9 +6,9 @@
     const MATHJAX_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js";
     const FOCUSABLE = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
     const SAFE_CONTENT_TAGS = new Set([
-        "A", "B", "BR", "CODE", "DETAILS", "DIV", "EM", "H3", "H4", "HR", "I", "IFRAME",
-        "LI", "OL", "P", "PRE", "SPAN", "STRONG", "SUMMARY", "TABLE", "TBODY", "TD", "TH",
-        "THEAD", "TR", "U", "UL"
+        "A", "ARTICLE", "B", "BR", "CODE", "DETAILS", "DIV", "EM", "FIGCAPTION", "FIGURE",
+        "H2", "H3", "H4", "H5", "HR", "I", "IFRAME", "LI", "OL", "P", "PRE", "SECTION", "SPAN",
+        "STRONG", "SUMMARY", "TABLE", "TBODY", "TD", "TH", "THEAD", "TR", "U", "UL"
     ]);
     const DROP_WITH_CONTENT = new Set(["SCRIPT", "STYLE", "OBJECT", "EMBED", "FORM", "INPUT", "BUTTON", "LINK", "META"]);
     const courseCache = new Map();
@@ -410,6 +410,150 @@
         zone.append(link);
     }
 
+    function attachCheckHandler({ button, controls, status, maxAttempts, evaluate, correctFeedback, incorrectFeedback, answer }) {
+        const attemptLimit = Number.isInteger(maxAttempts) && maxAttempts >= 1 && maxAttempts <= 5 ? maxAttempts : 2;
+        let attempts = 0;
+        button.addEventListener("click", () => {
+            const result = evaluate();
+            if (!result.valid) {
+                status.className = "check-feedback is-invalid";
+                status.textContent = result.message;
+                return;
+            }
+
+            attempts += 1;
+            if (result.correct) {
+                status.className = "check-feedback is-correct";
+                status.textContent = correctFeedback || "Chính xác. Em đã vận dụng đúng kiến thức vừa học.";
+                controls.forEach((control) => { control.disabled = true; });
+                button.disabled = true;
+                return;
+            }
+
+            const remaining = attemptLimit - attempts;
+            status.className = "check-feedback is-incorrect";
+            if (remaining > 0) {
+                status.textContent = `${incorrectFeedback || "Chưa đúng. Kiểm tra lại dữ kiện và thử lại."} Còn ${remaining} lượt.`;
+                return;
+            }
+
+            status.textContent = `${incorrectFeedback || "Chưa đúng."} Đáp án: ${answer}`;
+            controls.forEach((control) => { control.disabled = true; });
+            button.disabled = true;
+        });
+    }
+
+    function hydrateInteractiveChecks(target, checks) {
+        const configs = Array.isArray(checks) ? checks : [];
+        const placeholders = [...target.querySelectorAll(".lesson-check-placeholder")];
+        placeholders.forEach((placeholder, index) => {
+            const config = configs[index];
+            if (!config || !["single-choice", "number"].includes(config.type)) {
+                placeholder.remove();
+                return;
+            }
+
+            const fieldset = make("fieldset", "lesson-check");
+            fieldset.append(make("legend", "sr-only", config.inputLabel || config.question || "Tự kiểm tra"));
+            const status = make("p", "check-feedback");
+            status.setAttribute("role", "status");
+            status.setAttribute("aria-live", "polite");
+
+            if (config.type === "single-choice") {
+                const options = Array.isArray(config.options) ? config.options : [];
+                const correctIndex = Number(config.correctIndex);
+                if (!options.length || !Number.isInteger(correctIndex) || correctIndex < 0 || correctIndex >= options.length) {
+                    placeholder.remove();
+                    return;
+                }
+
+                const optionList = make("div", "lesson-check-options");
+                const groupName = `lesson-check-${state.activeChapter}-${state.activeLesson}-${index}`;
+                const controls = options.map((option, optionIndex) => {
+                    const label = make("label", "lesson-check-option");
+                    const input = make("input");
+                    input.type = "radio";
+                    input.name = groupName;
+                    input.value = String(optionIndex);
+                    label.append(input, make("span", "", option));
+                    optionList.append(label);
+                    return input;
+                });
+                const button = make("button", "lesson-check-button", "Tự kiểm tra");
+                button.type = "button";
+                fieldset.append(optionList, button, status);
+                attachCheckHandler({
+                    button,
+                    controls,
+                    status,
+                    maxAttempts: config.maxAttempts,
+                    correctFeedback: config.correctFeedback,
+                    incorrectFeedback: config.incorrectFeedback,
+                    answer: `${String.fromCharCode(65 + correctIndex)}. ${options[correctIndex]}`,
+                    evaluate: () => {
+                        const selected = controls.find((control) => control.checked);
+                        return selected
+                            ? { valid: true, correct: Number(selected.value) === correctIndex }
+                            : { valid: false, message: "Hãy chọn một phương án trước khi kiểm tra." };
+                    }
+                });
+            } else {
+                const expected = Number(config.expected);
+                if (!Number.isFinite(expected)) {
+                    placeholder.remove();
+                    return;
+                }
+
+                const label = make("label", "lesson-number-label");
+                label.append(make("span", "", config.inputLabel || "Nhập đáp án"));
+                const inputRow = make("span", "lesson-number-row");
+                const input = make("input", "lesson-number-input");
+                input.type = "text";
+                input.inputMode = "decimal";
+                input.autocomplete = "off";
+                input.setAttribute("aria-label", config.inputLabel || "Nhập đáp án số");
+                inputRow.append(input);
+                if (config.unit) inputRow.append(make("span", "lesson-number-unit", config.unit));
+                label.append(inputRow);
+
+                const button = make("button", "lesson-check-button", "Tự kiểm tra");
+                button.type = "button";
+                fieldset.append(label, button, status);
+                const absoluteTolerance = Number.isFinite(Number(config.tolerance)) && Number(config.tolerance) >= 0 ? Number(config.tolerance) : 0;
+                const relativeTolerance = Number.isFinite(Number(config.relativeTolerance)) && Number(config.relativeTolerance) >= 0 ? Number(config.relativeTolerance) : 0;
+                const allowedError = Math.max(absoluteTolerance, Math.abs(expected) * relativeTolerance);
+
+                attachCheckHandler({
+                    button,
+                    controls: [input],
+                    status,
+                    maxAttempts: config.maxAttempts,
+                    correctFeedback: config.correctFeedback,
+                    incorrectFeedback: config.incorrectFeedback,
+                    answer: `${expected}${config.unit ? ` ${config.unit}` : ""}${config.solution ? `. ${config.solution}` : ""}`,
+                    evaluate: () => {
+                        const normalized = input.value.trim().replace(",", ".");
+                        if (!normalized) return { valid: false, message: "Hãy nhập đáp án trước khi kiểm tra." };
+                        if (!/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(normalized)) {
+                            return { valid: false, message: "Đáp án phải là một số hợp lệ." };
+                        }
+                        const value = Number(normalized);
+                        if (!Number.isFinite(value)) return { valid: false, message: "Đáp án phải là một số hữu hạn." };
+                        if (Number.isFinite(Number(config.min)) && value < Number(config.min)) {
+                            return { valid: false, message: `Đáp án phải từ ${Number(config.min)} trở lên.` };
+                        }
+                        if (Number.isFinite(Number(config.max)) && value > Number(config.max)) {
+                            return { valid: false, message: `Đáp án không được vượt quá ${Number(config.max)}.` };
+                        }
+                        return { valid: true, correct: Math.abs(value - expected) <= allowedError };
+                    }
+                });
+            }
+
+            placeholder.replaceWith(fieldset);
+        });
+    }
+
     function renderLessonContent(lesson) {
         const target = byId("lesson-content");
         target.replaceChildren();
@@ -422,6 +566,7 @@
                 target.append(card);
             });
         }
+        hydrateInteractiveChecks(target, lesson.interactiveChecks);
         refreshIcons(target);
         if (needsMath(target.textContent)) typesetMath(target);
     }

@@ -59,6 +59,14 @@
                 L({
                     title: "Bài 14: SQL – Ngôn ngữ truy vấn có cấu trúc",
                     periods: 2,
+                    videoId: "2bu2F_gBSpc",
+                    journey: [
+                        { label: "1 · Nêu yêu cầu", text: "Phân biệt muốn lấy gì với phải làm từng bước như thế nào." },
+                        { label: "2 · Tạo cấu trúc", text: "Dùng DDL để tạo bảng, chọn kiểu và khai báo khóa." },
+                        { label: "3 · Làm việc với dữ liệu", text: "Dùng DML để thêm, sửa, xóa, lọc và liên kết." },
+                        { label: "4 · Kiểm soát quyền", text: "Dùng DCL để cấp đúng quyền và thu hồi quyền dư thừa." },
+                        { label: "5 · Kiểm thử", text: "Chạy từng phần, đọc kết quả và sửa truy vấn ba bảng." }
+                    ],
                     overview: "Hiểu ở mức nguyên lí cách SQL định nghĩa, cập nhật, truy xuất và kiểm soát quyền trên cơ sở dữ liệu quan hệ; đọc, giải thích và viết được các câu truy vấn cơ bản trên dữ liệu âm nhạc mẫu.",
                     goals: [
                         "MT1 — Giải thích được lợi ích của ngôn ngữ truy vấn và phân biệt vai trò của DDL, DML, DCL.",
@@ -70,11 +78,27 @@
                     resources: [
                         "Nguồn KHBD: KHBD/Giáo án Tin học 11-THUD -HKI.docx, Bài 14, các hoạt động Khởi động, Hình thành kiến thức 1–4, Luyện tập và Vận dụng.",
                         "Nguồn SGK: Tin học 11 – Định hướng Tin học ứng dụng, Kết nối tri thức với cuộc sống, Bài 14, trang 69–72.",
-                        "Thời lượng đề xuất: 2 tiết (90 phút). KHBD nguồn không ghi số tiết; phân bổ này cần được giáo viên điều chỉnh theo kế hoạch nhà trường.",
+                        "Phân bổ 2 tiết (90 phút): Khởi động 5; DV1 10; DV2 15; DV3 20; DV4 8; Luyện tập 10; Thực hành 12; Vận dụng và đánh giá 10 phút.",
                         "Điều kiện: trình duyệt; giấy nháp hoặc hệ quản trị CSDL trong môi trường thực hành. Chỉ dùng dữ liệu mẫu, không nhập dữ liệu cá nhân.",
-                        "Điểm lệch nguồn: KHBD ghi Sid là INT nhưng bài chèn dữ liệu dùng các mã 'TK', 'QD', 'YM'. Bài học dùng CHAR(4) để kiểu dữ liệu thống nhất với dữ liệu mẫu và yêu cầu học sinh giải thích quyết định."
+                        "Điểm lệch nguồn: KHBD ghi Sid là INT nhưng dữ liệu mẫu dùng các mã 'TK', 'QD', 'YM'. Bài học dùng CHAR(4) để kiểu dữ liệu nhất quán với dữ liệu mẫu và yêu cầu học sinh giải thích quyết định."
+                    ],
+                    videos: [
+                        {
+                            title: "SQL là gì? Database là gì?",
+                            publisher: "Vịt làm Data",
+                            url: "https://www.youtube.com/watch?v=2bu2F_gBSpc",
+                            language: "Tiếng Việt",
+                            duration: "15:28",
+                            segment: "0:00–3:45",
+                            purpose: "Hình dung SQL là ngôn ngữ để diễn đạt yêu cầu với cơ sở dữ liệu trước khi học DDL, DML và DCL.",
+                            before: "Theo em, SQL mô tả kết quả cần lấy hay mô tả toàn bộ thuật toán truy cập tệp?",
+                            after: "Nêu một điểm video giúp em hiểu vai trò của SQL và một điểm vẫn cần đối chiếu với SGK.",
+                            accessed: "18/11/2026",
+                            fallback: "Đọc tình huống hai cách truy xuất ở phần Khởi động và đối chiếu các bước người dùng phải mô tả."
+                        }
                     ],
                     warmup: {
+                        time: "5 phút",
                         question: "Cần lấy tên các bản nhạc của nhạc sĩ có Aid = 1. Cách A: viết chương trình mở tệp, đọc từng bản ghi, tự kiểm tra Aid rồi lấy TenBN. Cách B: gửi yêu cầu SELECT TenBN FROM bannhac WHERE Aid = 1; cho hệ QTCSDL. Hai cách khác nhau ở điều người dùng phải mô tả như thế nào?",
                         answer: "Cách A mô tả cả thủ tục thực hiện: mở tệp, đọc, tách và kiểm tra từng bản ghi. Cách B chủ yếu mô tả kết quả cần lấy; hệ QTCSDL quyết định cách truy cập và thực hiện.",
                         feedback: "Không kết luận rằng SQL không cần thuật toán. Thuật toán truy xuất vẫn tồn tại nhưng do hệ QTCSDL lựa chọn và thực hiện thay cho người viết truy vấn."
@@ -83,9 +107,19 @@
                         {
                             id: "DV1",
                             heading: "Lợi ích của ngôn ngữ truy vấn và ba thành phần SQL",
-                            time: "13 phút",
+                            time: "10 phút",
                             source: "KHBD Hoạt động Thảo luận về hai cách truy xuất dữ liệu; SGK mục 1, trang 69–70.",
                             lead: "Nếu mỗi yêu cầu dữ liệu đều buộc người dùng biết cấu trúc tệp và tự viết thuật toán đọc tệp, việc khai thác dữ liệu sẽ phụ thuộc chặt vào cách lưu vật lí.",
+                            visual: {
+                                type: "cards",
+                                title: "Ba nhánh của SQL — phân loại theo đối tượng bị tác động",
+                                items: [
+                                    { badge: "DDL", title: "Cấu trúc", text: "CREATE, ALTER và các khai báo khóa làm thay đổi định nghĩa cơ sở dữ liệu hoặc bảng." },
+                                    { badge: "DML", title: "Dữ liệu", text: "SELECT, INSERT, UPDATE, DELETE đọc hoặc thay đổi các dòng dữ liệu." },
+                                    { badge: "DCL", title: "Quyền", text: "GRANT và REVOKE quyết định tài khoản được phép làm gì trên đối tượng dữ liệu." }
+                                ],
+                                caption: "Câu hỏi đọc sơ đồ: câu lệnh tác động lên cấu trúc, dữ liệu hay quyền? Đó là tiêu chí phân loại, không phải vị trí câu lệnh trong bài."
+                            },
                             sections: [
                                 {
                                     heading: "SQL mô tả yêu cầu thay vì mô tả toàn bộ thủ tục",
@@ -95,11 +129,9 @@
                                     ]
                                 },
                                 {
-                                    heading: "Ba nhóm chức năng",
-                                    points: [
-                                        "DDL — Data Definition Language: định nghĩa cấu trúc, ví dụ CREATE DATABASE, CREATE TABLE, ALTER TABLE, PRIMARY KEY, FOREIGN KEY.",
-                                        "DML — Data Manipulation Language: truy xuất và cập nhật dữ liệu, ví dụ SELECT, INSERT, UPDATE, DELETE.",
-                                        "DCL — Data Control Language: kiểm soát quyền người dùng, ví dụ GRANT và REVOKE."
+                                    heading: "Phân loại bằng câu hỏi “tác động lên cái gì?”",
+                                    paragraphs: [
+                                        "Không cần học thuộc một danh sách rời. Hãy xác định đối tượng chính của câu lệnh: định nghĩa cấu trúc, thao tác dữ liệu hay kiểm soát quyền; từ đó suy ra DDL, DML hoặc DCL."
                                     ]
                                 }
                             ],
@@ -132,17 +164,34 @@
                                     feedback: "Không phân loại chỉ theo vị trí trong bài; hãy dựa vào đối tượng mà câu lệnh tác động."
                                 }
                             ],
-                            recap: [
-                                "SQL diễn đạt yêu cầu logic; hệ QTCSDL tổ chức việc thực hiện.",
-                                "DDL tác động cấu trúc, DML tác động dữ liệu, DCL tác động quyền."
-                            ]
+                            closure: {
+                                conclusion: "SQL cho phép người dùng diễn đạt yêu cầu logic; hệ QTCSDL chịu trách nhiệm chọn cách truy cập và thực hiện.",
+                                condition: "Muốn viết yêu cầu đúng vẫn phải hiểu bảng, trường, khóa và quan hệ của CSDL.",
+                                misconception: "SQL không loại bỏ thuật toán; thuật toán thực thi được chuyển cho hệ QTCSDL lựa chọn.",
+                                next: "Tiếp theo, dùng DDL để mô tả chính xác cấu trúc mà các truy vấn dữ liệu sẽ dựa vào."
+                            }
                         },
                         {
                             id: "DV2",
                             heading: "Định nghĩa cơ sở dữ liệu, bảng và khóa bằng DDL",
-                            time: "20 phút",
+                            time: "15 phút",
                             source: "KHBD Hoạt động 2; SGK mục 2, Bảng 14.1–14.2 và ví dụ trang 70–71.",
                             lead: "Trước khi thêm hay truy xuất dữ liệu, hệ QTCSDL cần biết các bảng gồm những trường nào, mỗi trường nhận kiểu giá trị gì và trường nào định danh hoặc tham chiếu bản ghi.",
+                            visual: {
+                                type: "schema",
+                                title: "Sơ đồ cấu trúc dữ liệu âm nhạc",
+                                nodes: [
+                                    { title: "nhacsi", fields: ["Aid INT · khóa chính", "TenNS VARCHAR(64)"] },
+                                    { title: "bannhac", fields: ["Mid CHAR(4) · khóa chính", "Aid INT · khóa ngoài", "TenBN VARCHAR(128)"] },
+                                    { title: "casi", fields: ["Sid CHAR(4) · khóa chính", "TenCS VARCHAR(128)"] },
+                                    { title: "banthuam", fields: ["Mid CHAR(4) · khóa ngoài", "Sid CHAR(4) · khóa ngoài"] }
+                                ],
+                                relations: [
+                                    "bannhac.Aid → nhacsi.Aid: mỗi bản nhạc tham chiếu một nhạc sĩ.",
+                                    "banthuam.Mid → bannhac.Mid và banthuam.Sid → casi.Sid: bản thu âm nối bản nhạc với ca sĩ."
+                                ],
+                                caption: "Mũi tên đi từ khóa ngoài tới khóa được tham chiếu. Kiểu dữ liệu hai đầu liên kết phải tương thích."
+                            },
                             sections: [
                                 {
                                     heading: "Từ cơ sở dữ liệu đến bảng",
@@ -188,25 +237,38 @@
                                     feedback: "Đổi 'TK' thành một số tùy ý làm thay đổi hệ mã; sửa kiểu dữ liệu là quyết định nhất quán hơn với dữ liệu mẫu."
                                 }
                             ],
-                            recap: [
-                                "Cấu trúc bảng phải phù hợp dữ liệu sẽ lưu.",
-                                "Khóa chính định danh; khóa ngoài bảo vệ liên kết tham chiếu."
-                            ]
+                            closure: {
+                                conclusion: "DDL tạo cấu trúc; kiểu dữ liệu mô tả dạng giá trị, khóa chính định danh và khóa ngoài bảo vệ liên kết tham chiếu.",
+                                condition: "Kiểu của khóa ngoài phải tương thích với khóa được tham chiếu; bảng cha phải tồn tại trước khi thêm ràng buộc.",
+                                misconception: "Hai trường cùng tên chưa tự tạo quan hệ và mã có chữ không thể khai báo là INT.",
+                                next: "Khi cấu trúc hợp lệ, DML mới có thể cập nhật và liên kết dữ liệu đúng quan hệ."
+                            }
                         },
                         {
                             id: "DV3",
                             heading: "Cập nhật, truy xuất và liên kết dữ liệu bằng DML",
-                            time: "25 phút",
+                            time: "20 phút",
                             source: "KHBD Hoạt động 3; SGK mục 3, Bảng 14.3–14.4 và ví dụ trang 71–72.",
                             lead: "Sau khi cấu trúc đã có, DML cho phép thêm, sửa, xóa và lấy dữ liệu. Điều kiện đúng quyết định câu lệnh tác động đến bản ghi nào.",
+                            visual: {
+                                type: "flow",
+                                title: "Đọc một truy vấn SELECT có liên kết theo sáu bước",
+                                steps: [
+                                    { label: "SELECT", text: "Chọn các cột phải xuất hiện trong kết quả." },
+                                    { label: "FROM", text: "Xác định bảng xuất phát." },
+                                    { label: "JOIN", text: "Bổ sung bảng có dữ liệu cần lấy." },
+                                    { label: "ON", text: "Nối khóa ngoài với khóa chính tương ứng." },
+                                    { label: "WHERE", text: "Giới hạn những dòng cần giữ." },
+                                    { label: "ORDER BY", text: "Sắp xếp kết quả khi đề bài yêu cầu." }
+                                ],
+                                caption: "Không phải truy vấn nào cũng có đủ sáu phần; SELECT và FROM là lõi, các phần còn lại xuất hiện theo yêu cầu."
+                            },
                             sections: [
                                 {
-                                    heading: "Bốn thao tác cốt lõi",
-                                    points: [
-                                        "SELECT cột FROM bảng WHERE điều_kiện ORDER BY cột: chọn cột, lọc dòng và sắp xếp kết quả.",
-                                        "INSERT INTO bảng VALUES (...): thêm bản ghi theo thứ tự trường đã định nghĩa.",
-                                        "UPDATE bảng SET trường = giá_trị WHERE điều_kiện: sửa các dòng thỏa điều kiện.",
-                                        "DELETE FROM bảng WHERE điều_kiện: xóa các dòng thỏa điều kiện."
+                                    heading: "Bốn thao tác dữ liệu và phạm vi tác động",
+                                    paragraphs: [
+                                        "SELECT đọc dữ liệu; INSERT thêm dòng; UPDATE sửa dòng; DELETE xóa dòng. WHERE xác định phạm vi của SELECT, UPDATE hoặc DELETE, vì vậy một điều kiện thiếu hoặc sai có thể làm kết quả quá rộng.",
+                                        "Trước UPDATE hoặc DELETE, nên chạy SELECT với cùng điều kiện để xem trước tập bản ghi sẽ bị tác động."
                                     ]
                                 },
                                 {
@@ -250,17 +312,30 @@
                                     feedback: "Cần đủ SELECT, FROM, JOIN và điều kiện ON đúng cặp khóa; bí danh chỉ giúp câu lệnh gọn hơn."
                                 }
                             ],
-                            recap: [
-                                "WHERE giới hạn dòng; thiếu WHERE trong UPDATE hoặc DELETE có thể tác động toàn bảng.",
-                                "JOIN phải dựa trên quan hệ khóa và điều kiện ON chính xác."
-                            ]
+                            closure: {
+                                conclusion: "DML đọc hoặc thay đổi dữ liệu; JOIN chỉ có ý nghĩa khi ON nối đúng cặp khóa biểu diễn cùng quan hệ.",
+                                condition: "WHERE phải đủ chặt với UPDATE/DELETE; nên xem trước bằng SELECT và sao lưu khi dữ liệu quan trọng.",
+                                misconception: "Tên trường giống nhau không bảo đảm điều kiện JOIN đúng; phải xét vai trò khóa.",
+                                next: "Sau khi biết truy vấn có thể làm gì, cần giới hạn tài khoản nào được phép thực hiện từng thao tác."
+                            }
                         },
                         {
                             id: "DV4",
                             heading: "Kiểm soát quyền truy cập bằng DCL",
-                            time: "10 phút",
+                            time: "8 phút",
                             source: "KHBD Hoạt động 4; SGK mục 4, Bảng 14.5, trang 72.",
                             lead: "Biết viết truy vấn không đồng nghĩa người dùng được phép thực hiện mọi truy vấn. Hệ QTCSDL phải kiểm soát ai được làm gì trên đối tượng nào.",
+                            visual: {
+                                type: "table",
+                                title: "Ma trận quyền theo nhiệm vụ",
+                                headers: ["Vai trò", "Nhiệm vụ", "Quyền cần", "Quyền không nên cấp"],
+                                rows: [
+                                    ["Người xem báo cáo", "Đọc số liệu", "SELECT", "INSERT, UPDATE, DELETE"],
+                                    ["Người nhập dữ liệu", "Thêm bản ghi", "SELECT, INSERT", "DELETE nếu không có trách nhiệm xóa"],
+                                    ["Người hiệu chỉnh", "Sửa dữ liệu sai", "SELECT, UPDATE", "CREATE hoặc DELETE nếu không cần"]
+                                ],
+                                caption: "Cấp quyền theo nhiệm vụ thực tế. Quyền rộng hơn không làm công việc tốt hơn nhưng làm tăng hậu quả khi thao tác nhầm."
+                            },
                             sections: [
                                 {
                                     heading: "Cấp và thu hồi quyền",
@@ -299,41 +374,100 @@
                                     feedback: "Kiểm tra đúng TO cho GRANT, FROM cho REVOKE và đúng phạm vi đối tượng."
                                 }
                             ],
-                            recap: [
-                                "GRANT cấp quyền; REVOKE thu hồi quyền.",
-                                "Chỉ cấp những quyền cần thiết cho vai trò thực tế."
-                            ]
+                            closure: {
+                                conclusion: "GRANT cấp quyền, REVOKE thu hồi quyền; mỗi quyền phải gắn với tài khoản, đối tượng và nhiệm vụ cụ thể.",
+                                condition: "Cú pháp chi tiết có thể khác giữa các hệ QTCSDL nên phải đối chiếu đúng hệ đang dùng.",
+                                misconception: "Đăng nhập được không đồng nghĩa có toàn quyền trên mọi bảng.",
+                                next: "Dùng ma trận vai trò–quyền để kiểm tra các câu DCL trong phần luyện tập."
+                            }
                         }
                     ],
+                    practiceTime: "10 phút",
                     practice: [
                         {
-                            question: "Phân loại các câu lệnh sau: CREATE TABLE, INSERT, SELECT, GRANT, REVOKE.",
-                            answer: "DDL: CREATE TABLE. DML: INSERT, SELECT. DCL: GRANT, REVOKE.",
-                            feedback: "Phân loại theo đối tượng bị tác động: cấu trúc, dữ liệu hay quyền."
+                            label: "Ghép nhóm lệnh",
+                            question: "Phân loại CREATE TABLE, INSERT, SELECT, GRANT và REVOKE theo đối tượng bị tác động.",
+                            answer: "Cấu trúc/DDL: CREATE TABLE. Dữ liệu/DML: INSERT, SELECT. Quyền/DCL: GRANT, REVOKE.",
+                            feedback: "Dựa vào đối tượng bị tác động: cấu trúc, dữ liệu hay quyền."
                         },
                         {
-                            question: "Chọn khai báo nhất quán nhất cho Sid khi dữ liệu mẫu là 'TK', 'QD', 'YM'.",
+                            type: "single-choice",
+                            label: "Trắc nghiệm một đáp án",
+                            question: "Khai báo nào nhất quán nhất cho Sid khi dữ liệu mẫu là 'TK', 'QD', 'YM'?",
                             options: ["Sid INT", "Sid REAL", "Sid CHAR(4)", "Sid DATE"],
-                            answer: "C. Sid CHAR(4).",
-                            feedback: "Mã có chữ nên không dùng kiểu số; CHAR(4) đủ chứa các mã mẫu và thể hiện đây là mã, không phải đại lượng để tính toán."
+                            correctIndex: 2,
+                            maxAttempts: 2,
+                            correctFeedback: "Đúng. Sid là mã có chữ, không phải đại lượng dùng để tính toán.",
+                            incorrectFeedback: "Xét dạng giá trị thực tế của ba mã, không xét độ dài riêng lẻ."
                         },
                         {
+                            type: "number",
+                            label: "Ô nhập số · dự đoán kết quả",
+                            question: "Bảng bannhac có 5 dòng với Aid lần lượt là 1, 2, 1, 3, 1. Truy vấn SELECT Mid FROM bannhac WHERE Aid = 1; trả về bao nhiêu dòng?",
+                            inputLabel: "Số dòng kết quả",
+                            unit: "dòng",
+                            expected: 3,
+                            tolerance: 0,
+                            min: 0,
+                            max: 5,
+                            maxAttempts: 2,
+                            correctFeedback: "Đúng. Có ba dòng thỏa điều kiện Aid = 1.",
+                            incorrectFeedback: "Chỉ đếm các dòng có Aid đúng bằng 1.",
+                            solution: "Aid = 1 xuất hiện ở vị trí 1, 3 và 5."
+                        },
+                        {
+                            label: "Tìm và sửa lỗi",
                             question: "Truy vấn UPDATE nhacsi SET TenNS = 'Hoàng Hiệp'; có rủi ro gì và sửa thế nào nếu chỉ muốn đổi dòng Aid = 6?",
-                            answer: "Truy vấn thiếu WHERE nên có thể đổi TenNS của mọi dòng. Sửa thành UPDATE nhacsi SET TenNS = 'Hoàng Hiệp' WHERE Aid = 6;",
-                            feedback: "Trước khi UPDATE, có thể chạy SELECT * FROM nhacsi WHERE Aid = 6; để kiểm tra đúng phạm vi."
+                            answer: "Thiếu WHERE nên có thể đổi mọi dòng. Sửa thành UPDATE nhacsi SET TenNS = 'Hoàng Hiệp' WHERE Aid = 6;",
+                            feedback: "Chạy SELECT * FROM nhacsi WHERE Aid = 6; trước để kiểm tra phạm vi."
                         },
                         {
-                            question: "Viết câu lệnh tạo bảng banthuam gồm Mid CHAR(4), Sid CHAR(4), sau đó thêm hai khóa ngoài tham chiếu bannhac(Mid) và casi(Sid).",
-                            answer: "CREATE TABLE banthuam (Mid CHAR(4), Sid CHAR(4)); ALTER TABLE banthuam ADD FOREIGN KEY (Mid) REFERENCES bannhac(Mid); ALTER TABLE banthuam ADD FOREIGN KEY (Sid) REFERENCES casi(Sid);",
-                            feedback: "Kiểu của khóa ngoài phải tương thích với khóa được tham chiếu; cần tạo các bảng cha trước."
-                        },
-                        {
-                            question: "Một truy vấn dùng INNER JOIN nhưng không có điều kiện ON. Hãy dự đoán lỗi logic và nêu cách sửa.",
-                            answer: "Các dòng có thể bị kết hợp không theo quan hệ khóa, tạo nhiều cặp sai hoặc truy vấn không hợp lệ tùy hệ. Phải thêm ON khóa_ngoài = khóa_chính, ví dụ ON banthuam.Mid = bannhac.Mid.",
-                            feedback: "Không sửa bằng WHERE tùy ý; trước hết phải xác định đúng quan hệ giữa hai bảng."
+                            label: "Viết truy vấn liên kết",
+                            question: "Viết truy vấn lấy Mid, Sid và TenBN bằng cách liên kết banthuam với bannhac.",
+                            answer: "SELECT a.Mid, a.Sid, b.TenBN FROM banthuam a INNER JOIN bannhac b ON a.Mid = b.Mid;",
+                            feedback: "Kiểm tra đủ cột, hai bảng và điều kiện ON nối banthuam.Mid với bannhac.Mid."
                         }
                     ],
+                    handsOn: {
+                        title: "TH1 — Kiểm thử truy vấn JOIN hai bảng (12 phút)",
+                        product: "Một truy vấn lấy Mid, Sid, TenBN từ banthuam và bannhac, kèm ảnh/kết quả chạy hoặc bảng mô phỏng và một câu giải thích điều kiện ON.",
+                        preparation: [
+                            "Hệ QTCSDL có hai bảng mẫu hoặc phiếu dữ liệu giấy; không dùng dữ liệu cá nhân.",
+                            "Bảng bannhac có khóa chính Mid; banthuam có Mid tham chiếu bannhac(Mid)."
+                        ],
+                        prediction: "Nếu một Mid trong banthuam không tồn tại ở bannhac, INNER JOIN sẽ giữ hay loại dòng đó? Ghi dự đoán trước khi chạy.",
+                        steps: [
+                            ["1", "Vẽ hai bảng và đánh dấu Mid ở mỗi bảng.", "Xác định cặp khóa dùng để nối.", "Chỉ có một đường nối banthuam.Mid → bannhac.Mid.", "Nối theo Sid hoặc tên cột khác: quay lại sơ đồ khóa."],
+                            ["2", "Viết SELECT a.Mid, a.Sid, b.TenBN và FROM banthuam a.", "Khóa đúng cột đầu ra và bảng xuất phát.", "Ba cột đầu ra có nguồn rõ ràng.", "Tên cột mơ hồ: thêm bí danh a. hoặc b."],
+                            ["3", "Thêm INNER JOIN bannhac b ON a.Mid = b.Mid.", "Ghép các dòng theo quan hệ khóa.", "Câu lệnh có đủ JOIN và ON đúng cặp Mid.", "Không có kết quả: kiểm tra dữ liệu Mid ở hai bảng."],
+                            ["4", "Chạy truy vấn hoặc mô phỏng từng cặp dòng.", "Kiểm chứng dự đoán bằng kết quả.", "Mỗi dòng kết quả có Mid, Sid và TenBN khớp.", "Kết quả lặp bất thường: kiểm tra tính duy nhất của bannhac.Mid."],
+                            ["5", "Đổi INNER JOIN thành LEFT JOIN và so sánh.", "Nhận ra ảnh hưởng của kiểu JOIN.", "Giải thích được dòng không khớp được giữ hay loại.", "Hai kết quả giống nhau: thêm một dòng Mid chưa khớp để thử."]
+                        ],
+                        evidence: [
+                            "Câu SQL cuối cùng hoặc phiếu mô phỏng truy vấn.",
+                            "Kết quả chạy/ảnh chụp hoặc bảng kết quả viết tay.",
+                            "Một câu giải thích ON và một câu so sánh INNER JOIN với LEFT JOIN."
+                        ],
+                        criteria: [
+                            "Đúng ba cột đầu ra và đúng hai bảng.",
+                            "Điều kiện ON nối banthuam.Mid = bannhac.Mid.",
+                            "Kết quả hoặc mô phỏng khớp dữ liệu mẫu.",
+                            "Giải thích được tác động của kiểu JOIN."
+                        ],
+                        checklist: [
+                            "Tôi đã kiểm tra nguồn của từng cột.",
+                            "Tôi đã thử truy vấn trước khi kết luận.",
+                            "Tôi không đưa dữ liệu cá nhân hoặc thông tin đăng nhập vào công cụ."
+                        ],
+                        troubleshooting: [
+                            ["Báo cột không rõ ràng", "Thêm bí danh bảng trước tên cột, ví dụ a.Mid hoặc b.Mid."],
+                            ["Không có dòng kết quả", "So sánh giá trị Mid và kiểu dữ liệu ở hai bảng; thử SELECT từng bảng."],
+                            ["Có quá nhiều dòng", "Kiểm tra điều kiện ON và tính duy nhất của khóa chính Mid."]
+                        ],
+                        fallback: "Nếu không có hệ QTCSDL, dùng hai bảng dữ liệu in sẵn, nối từng dòng theo Mid và ghi bảng kết quả bằng tay."
+                    },
                     application: {
+                        time: "10 phút",
                         task: "Tạo truy vấn lấy Mid, Sid từ banthuam, TenBN từ bannhac và TenCS từ casi. Nếu dùng công cụ AI để gợi ý, hãy lưu lại truy vấn ban đầu, chỉ ra từng cặp khóa dùng để JOIN, kiểm thử trên dữ liệu mẫu và ghi ít nhất một xác nhận hoặc chỉnh sửa do nhóm tự thực hiện.",
                         criteria: [
                             "SELECT đúng bốn cột và ghi rõ bảng hoặc bí danh.",
@@ -395,11 +529,11 @@
                     },
                     traceability: {
                         goals: [
-                            ["MT1", "Khởi động; Hoạt động thảo luận hai cách truy xuất", "Khởi động, DV1", "Giải thích lợi ích; phân loại DDL/DML/DCL", "20 phút"],
-                            ["MT2", "Hoạt động 2: Khởi tạo CSDL", "DV2", "DDL tạo casi/banthuam, kiểu và khóa nhất quán", "20 phút"],
-                            ["MT3", "Hoạt động 3; Luyện tập 1–3", "DV3, Luyện tập", "DML và JOIN đúng cột, điều kiện", "30 phút"],
-                            ["MT4", "Hoạt động 4: Kiểm soát quyền", "DV4", "GRANT/REVOKE theo vai trò", "10 phút"],
-                            ["MT5", "Hoạt động Vận dụng có kiểm chứng AI", "Vận dụng, Đánh giá", "Truy vấn ba bảng và biên bản kiểm chứng", "10 phút"]
+                            ["MT1", "Khởi động; Hoạt động thảo luận hai cách truy xuất", "Khởi động, DV1", "Giải thích lợi ích; phân loại DDL/DML/DCL", "15 phút"],
+                            ["MT2", "Hoạt động 2: Khởi tạo CSDL", "DV2", "DDL tạo casi/banthuam, kiểu và khóa nhất quán", "15 phút"],
+                            ["MT3", "Hoạt động 3; Luyện tập 1–3", "DV3, Luyện tập, Thực hành", "DML và JOIN đúng cột, điều kiện", "30 phút"],
+                            ["MT4", "Hoạt động 4: Kiểm soát quyền", "DV4", "GRANT/REVOKE theo vai trò", "8 phút"],
+                            ["MT5", "Hoạt động Vận dụng có kiểm chứng AI", "Thực hành, Vận dụng, Đánh giá", "Truy vấn ba bảng và biên bản kiểm chứng", "22 phút"]
                         ],
                         units: [
                             ["DV1", "Hình thành kiến thức: thảo luận hai cách truy xuất", "Mục 1, tr. 69–70", "Lợi ích SQL; DDL, DML, DCL", "Áp dụng/phân loại", "Không"],
@@ -407,6 +541,9 @@
                             ["DV3", "Hoạt động 3; Luyện tập", "Mục 3, Bảng 14.3–14.4, tr. 71–72", "SELECT, INSERT, UPDATE, DELETE, JOIN", "Tạo và kiểm chứng truy vấn", "SGK nêu nguyên lí; bài học thêm bước SELECT kiểm tra an toàn trước UPDATE/DELETE."],
                             ["DV4", "Hoạt động 4", "Mục 4, Bảng 14.5, tr. 72", "GRANT, REVOKE, quyền tối thiểu", "Lựa chọn và bảo vệ quyết định", "Bài học làm rõ cú pháp DCL có thể khác theo hệ QTCSDL."],
                             ["Vận dụng", "Hoạt động Vận dụng", "Vận dụng, tr. 72", "JOIN ba bảng; kiểm chứng gợi ý AI", "Đánh giá/kiểm thử", "Yêu cầu kiểm chứng AI lấy từ KHBD, không phải yêu cầu cốt lõi của SGK."]
+                        ],
+                        media: [
+                            ["SQL là gì? Database là gì? — Vịt làm Data", "Khởi động, DV1", "Hình dung SQL là ngôn ngữ diễn đạt yêu cầu với CSDL", "https://www.youtube.com/watch?v=2bu2F_gBSpc", "0:00–3:45 / 15:28", "Tiếng Việt", "18/11/2026"]
                         ]
                     }
                 }),
